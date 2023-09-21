@@ -1,0 +1,337 @@
+<div id="layoutSidenav_content">
+    <main>
+
+        <div class="container-fluid px-4">
+            <h1 class="mt-4 tituloverde">Proveedores</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item active">Inventario / Proveedores</li>
+            </ol>
+            <div class="card mb-4">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="left-content">
+                        <i class="fas fa-table me-1"></i>
+                        Lista de Proveedores
+                    </div>
+                    <div>
+                        <button class="btn btncolor position-relative" data-toggle="modal"
+                            data-target="#proveedoresModal">
+                            <i class="fa-solid fa-list"></i>
+                            Agregar Proveedor
+                        </button>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="container-fluid body1">
+                        <style>
+                            .text-vertical-align {
+                                display: flex;
+                                align-items: center;
+                            }
+                        </style>
+                        <!--Modal de Proveedores-->
+                        <div class="modal" id="proveedoresModal">
+                            <div class="modal-dialog modal-dialog-centered modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header"
+                                        style="background-color: #4B4B4B;color: white;border-color: #4B4B4B;">
+                                        <h4 id="modalTitlePrv" class="modal-title">Agregar
+                                            Proveedor</h4>
+                                    </div>
+                                    <form action="" id="formPrv" class="needs-validation">
+                                        <div class="modal-body">
+                                            <div class="row align-items-center mb-2">
+                                                <div class="col-4">
+                                                    <label for="" class="">Nombre: </label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input type="text" class="form-control" maxlength="100" id="desprov"
+                                                        name="desprov" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn submitBtn" type="submit" id="btnPrv"
+                                                style="background-color: #FCAE01; color: white; border-color: #FCAE01;"><i
+                                                    class="fa-regular fa-floppy-disk"></i>
+                                                Grabar</button>
+                                            <button type="button" class="btn"
+                                                style="background-color: #4B4B4B;color: white;border-color: #4B4B4B;"
+                                                id="cerrar" data-dismiss="modal"> <i
+                                                    class="fa-solid fa-circle-xmark"></i>
+                                                Cerrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal" id="eproveedoresModal">
+                            <div class="modal-dialog modal-dialog-centered modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header"
+                                        style="background-color: #4B4B4B;color: white;border-color: #4B4B4B;">
+                                        <h4 id="modalTitlePrv" class="modal-title">Editar
+                                            Proveedor</h4>
+                                    </div>
+                                    <form action="" id="eformPrv" class="needs-validation">
+                                        <div class="modal-body">
+                                            <div class="row align-items-center mb-2">
+                                                <div class="col-4">
+                                                    <label for="" class="">Nombre: </label>
+                                                </div>
+                                                <div class="col-8">
+                                                    <input type="hidden" id="eidprv">
+                                                    <input type="text" class="form-control" maxlength="100"
+                                                        id="edesprov" name="desprov" required />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn submitBtn" type="submit" id="ebtnPrv"
+                                                style="background-color: #FCAE01; color: white; border-color: #FCAE01;"><i
+                                                    class="fa-regular fa-floppy-disk"></i>
+                                                Grabar</button>
+                                            <button type="button" class="btn"
+                                                style="background-color: #4B4B4B;color: white;border-color: #4B4B4B;"
+                                                id="cerrar" data-dismiss="modal"> <i
+                                                    class="fa-solid fa-circle-xmark"></i>
+                                                Cerrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Seccion de tabla-->
+                        <style>
+                            .table td {
+                                /*max-width: 60px;*/
+                                overflow-y: auto;
+                            }
+                        </style>
+                        <!--Buscar en la tabla-->
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="mb-2 mt-2">
+                                    <div class="form-inline">
+                                        <label for="searchInput">Buscar por descripción:</label>
+                                        <input type="text" id="searchInput" class="ms-2 form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive mt-2 scrollable-modal">
+                            <!--Tabla Proveedores-->
+                            <table
+                                class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeInDown"
+                                id="tablePrv">
+                                <thead class="thead sticky-top">
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbPrv">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="text-center" id="carga" style="display: none;">
+                            <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                                <lottie-player src="/img/jsonimg/cargaman.json" background="transparent" speed="2.5"
+                                    style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Scripts -->
+
+        <!-- Scripts de funcionalidad-->
+        <script>
+            //Funcion para guardar Proveedor
+            $('#formPrv').on('submit', function (e) {
+                e.preventDefault();
+                let desprov = $('#desprov');
+                ocultarTabla("tablePrv");
+                mostrarDiv("carga");
+                $('#proveedoresModal [data-dismiss="modal"]').trigger('click');
+                //console.log(desprov.val());
+                $.ajax({
+                    url: '/inventario/proveedores/nuevoproveedor',
+                    method: 'POST',
+                    data: {
+                        desprov: desprov.val(),
+                    },
+                    success: function (response) {
+                        if (response === 'correcto') {
+                            ocultarDiv("carga");
+                            mostrarTabla("tablePrv");
+
+                            mensaje('success', 'Guardado correctamente', 1500);
+                            tablaProveedores();
+                        } else {
+                            mensaje('error', 'Este proveedor ya fue registrado', 3000);
+                        }
+
+                    }
+                });
+            });
+            //Funcion para editar Proveedor
+            $('#eformPrv').on('submit', function (e) {
+                e.preventDefault();
+                let desprov = $('#edesprov');
+                let id = $('#eidprv');
+                ocultarTabla("tablePrv");
+                mostrarDiv("carga");
+                $('#eproveedoresModal [data-dismiss="modal"]').trigger('click');
+                $.ajax({
+                    url: '/inventario/proveedores/actualizarproveedor',
+                    method: 'POST',
+                    data: {
+                        id: id.val(),
+                        desprov: desprov.val(),
+                    },
+                    success: function (response) {
+                        //console.log(response);
+                        if (response === 'correcto') {
+                            ocultarDiv("carga");
+                            mostrarTabla("tablePrv");
+                            mensaje('success', 'Actualizado correctamente', 1500);
+                            tablaProveedores();
+                        } else {
+                            mensaje('error', 'Error al actualizar', 3000);
+                        }
+
+                    }
+                });
+            });
+            //llenar input editar proveedor
+            function editarProveedor(id1) {
+                //let id1 = $(event.target).val();
+                //console.log(id1);
+                document.getElementById('edesprov').value = "";
+                document.getElementById('eidprv').value = "";
+                $.ajax({
+                    url: '/inventario/proveedores/leproveedor',
+                    method: 'POST',
+                    data: {
+                        id: id1,
+                    },
+                    success: function (response) {
+                        //console.log(response);
+                        let desprov = document.getElementById('edesprov');
+                        desprov.value = response[0].descripcion;
+                        let id = document.getElementById('eidprv');
+                        id.value = response[0].id;
+                    }
+                });
+            }
+            //eliminar proveedor
+            function eliminarFila(id) {
+                //console.log(id);
+                ocultarTabla("tablePrv");
+                mostrarDiv("carga");
+                $.ajax({
+                    url: '/inventario/proveedores/eliminarproveedor',
+                    method: 'POST',
+                    data: {
+                        id: id,
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        if (response[0].response === 'correcto') {
+                            ocultarDiv("carga");
+                            mostrarTabla("tablePrv");
+                            var result = mensaje('success', 'Eliminado correctamente', 1500);
+                            $('[data-id="' + id + '"]').remove();
+                            tablaProveedores();
+                        } else {
+                            mensaje('error', 'Error al eliminar el proveedor', 3000);
+                        }
+                    }
+                });
+            }
+            //llenar tabla proveedores
+            function tablaProveedores() {
+                //$("#tbPrv").DataTable().destroy();
+                ocultarTabla("tablePrv");
+                mostrarDiv("carga");
+                $.ajax({
+                    url: '/inventario/proveedores/lproveedor',
+                    success: function (lista) {
+                        ocultarDiv("carga");
+                        mostrarTabla("tablePrv");
+                        //console.log(lista);
+                        let tbody = $('#tbPrv');
+                        tbody.html('');
+
+                        lista.forEach(list => {
+                            tbody.append(`
+                            <tr data-id="${list.id}"">                                
+                                <td>${list.descripcion}</td>
+                                <td>
+                                <button type="button" class="btn btn-info btn-circle btn-sm" value=${list.id} onclick="editarProveedor(${list.id})" data-toggle="modal" data-target="#eproveedoresModal" id='btnEPrv'><i class="fa-regular fa-pen-to-square"></i></button>
+                                <button type="button" class="btn btn-danger btn-circle btn-sm" value=${list.id} onclick="eliminarFila(${list.id})" ><i class="fa-solid fa-trash-can"></i></button>
+                                </td>
+                            </tr>
+                            `);
+                        });
+
+                        // Inicializar DataTables en la tabla actualizada
+                        //$('#tablePrv').DataTable();
+                    }
+                });
+            }
+            //Buscar proveedor
+            document.getElementById("searchInput").addEventListener("keydown", function (event) {
+                if (event.keyCode === 13) {
+                    buscartablaProveedores();
+                }
+            });
+            function buscartablaProveedores() {
+                //$("#tbPrv").DataTable().destroy();
+                let desprov = $('#searchInput');
+                ocultarTabla("tablePrv");
+                mostrarDiv("carga");
+                //console.log(desprov.val());
+                $.ajax({
+                    url: '/inventario/proveedores/bproveedor',
+                    type: 'POST',
+                    data: {
+                        desprov: desprov.val(),
+                    },
+                    success: function (lista) {
+                        ocultarDiv("carga");
+                        mostrarTabla("tablePrv");
+                        console.log(lista);
+                        let tbody = $('#tbPrv');
+                        tbody.html('');
+                        console.log(lista);
+                        lista.forEach(list => {
+                            tbody.append(`
+                            <tr data-id="${list.id}"">                                
+                                <td>${list.descripcion}</td>
+                                <td>
+                                <button type="button" class="btn btn-info btn-circle btn-sm" value=${list.id} onclick="editarProveedor(${list.id})" data-toggle="modal" data-target="#eproveedoresModal" id='btnEPrv'><i class="fa-regular fa-pen-to-square"></i></button>
+                                <button type="button" class="btn btn-danger btn-circle btn-sm" value=${list.id} onclick="eliminarFila(${list.id})" ><i class="fa-solid fa-trash-can"></i></button>
+                                </td>
+                            </tr>
+                            `);
+                        });
+                        let id = document.getElementById('searchInput');
+                        id.value = '';
+                        // Inicializar DataTables en la tabla actualizada
+                        //$('#tablePrv').DataTable();
+                    }
+                });
+            }
+            $(document).ready(function () {
+                tablaProveedores();
+            });
+        </script>
+    </main>
+    {{ footer }}
+</div>
+</div>
