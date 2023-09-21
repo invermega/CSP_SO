@@ -11,7 +11,7 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const Sequelize = require('sequelize');
 const MSSQLStore = require('express-session-sequelize')(session.Store);
-
+//a
 const app = express();
 require('./lib/passport');
 
