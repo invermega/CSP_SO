@@ -8,5 +8,9 @@ module.exports = {
     async getbienvenida(req, res) {
         res.render('inicio');
     },
+    //configuracion
+    async getroles(req, res) {
+        res.render('configuracion/roles', { layout: false });
+    },
 
 };
