@@ -32,4 +32,11 @@ module.exports = {
         res.redirect('/iniciarsesion');
     },
 
+    async postgrupousuario(req, res) {
+        const { nomrol } = req.body
+        estado = "S";
+        await pool.query(`insert into rol set `);
+        res.json('completado');
+    },
+
 };
