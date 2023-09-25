@@ -62,7 +62,7 @@
     <script src="/js/script.js"></script>
     <script>
         $(document).ready(function () {
-            mostrarmodulos();
+            //mostrarmodulos();
             abbreviateTextOnMobile();
             $(window).resize(abbreviateTextOnMobile);
             setTimeout(function () {
@@ -84,23 +84,6 @@
             }
         }
 
-        /*function mostrarmodulos() {
-            if ({{ user.idrol }} == '11') {
-            mostraretiqueta("indicadores");
-        } else {
-            mostraretiqueta("dashboard");
-            mostraretiqueta("crm");
-            //mostraretiqueta("reclamos");
-            mostraretiqueta("admision");
-            mostraretiqueta("gestionpaciente");
-            mostraretiqueta("farmacia");
-            mostraretiqueta("ticketsoporte");
-            mostraretiqueta("activosfijos");
-            mostraretiqueta("auditoriamedica");
-            mostraretiqueta("indicadores");
-            mostraretiqueta("gestionpersonal");
-            mostraretiqueta("opcionessistema");
-        }*/
         mostraretiqueta("opcionessistema");
 
         const contentContainer = $('#contenedoropciones');
@@ -109,7 +92,7 @@
             <lottie-player src="/img/jsonimg/loading.json" class="" background="transparent" speed="1"
             style="width: 250px; height: 250px;" loop autoplay></lottie-player>
         </div>
-    `;
+        `;
 
         const links = $('a.opcion');
         if (!links.data('eventAssigned')) {
@@ -163,7 +146,7 @@
                 }
 
             });
-        }
+        }else{
         }
 
 

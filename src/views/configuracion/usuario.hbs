@@ -1,0 +1,149 @@
+<div>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4 tituloverde">Opciones de sistema</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Nuevo usuario</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Ingrese un nuevo usuario al sistema
+            </div>
+            <div class="card-body">
+                <div class="container-fluid body1">
+                    <div class="container sec1">
+                        <form id="formusuarios" class="needs-validation" novalidate>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h6>IDENTIFICACIÓN DEL USUARIO</h6>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="control-label">Establecimiento:</label>
+                                    <select class="form-select form-control btn-sm" id="sede"
+                                        aria-label="Default select example" required>
+                                        <option value="CLINICA SAN PEDRO">CLINICA SAN PEDRO</option>
+                                        <option value="IPRESS SAN PEDRO">IPRESS SAN PEDRO</option>
+                                    </select>
+                                    <div class="invalid-feedback">Este campo es obligatorio</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">Fecha de nacimiento:</label>
+                                    <input type="date" class="form-control btn-sm" id="fecnac" min="1900-01-01"
+                                        max="2100-12-31" step="1" required>
+                                    <div class="invalid-feedback">Este campo es obligatorio</div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label class="control-label">Nombres y apellidos:</label>
+                                    <input type="text" id="fullname" class="form-control btn-sm"
+                                        placeholder="Nombres y apellidos" required>
+                                    <div class="invalid-feedback">Este campo es obligatorio</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">Código del médico:</label>
+                                    <input type="number" id="medcod" class="form-control btn-sm"
+                                        placeholder="Código del médico">
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label class="control-label">Username:</label>
+                                    <input type="text" id="usenam" class="form-control btn-sm"
+                                        placeholder="Nombre de usuario" required>
+                                    <div class="invalid-feedback">Este campo es obligatorio</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">Contraseña:</label>
+                                    <input type="password" id="passw" class="form-control btn-sm"
+                                        placeholder="Contraseña" required>
+                                    <div class="invalid-feedback">Este campo es obligatorio</div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-4">
+                                    <label class="control-label">Teléfono:</label>
+                                    <input type="number" id="contacto" class="form-control btn-sm"
+                                        placeholder="Teléfono">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label">Documento nacional de identidad:</label>
+                                    <input type="number" id="dni" class="form-control btn-sm"
+                                        placeholder="Número de documento">
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="control-label" for="email">Email:</label>
+                                    <input type="email" id="email" class="form-control btn-sm"
+                                        placeholder="ejemplo@clinicasanpedro.com" required>
+                                    <p id="email-error" style="color: red; display: none;">Por favor, usa una dirección
+                                        de correo
+                                        electrónico válida de clinicasanpedro.com</p>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-6">
+                                    <label class="control-label">Rol:</label>
+                                    <select class="form-select form-control btn-sm" id="idrol"
+                                        aria-label="Default select example" required></select>
+                                    <div class="invalid-feedback">Este campo es obligatorio</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="control-label">Sexo:</label>
+                                    <select class="form-select form-control btn-sm" id="sexo"
+                                        aria-label="Default select example" required>
+                                        <option value="MASCULINO">MASCULINO</option>
+                                        <option value="FEMENINO">FEMENINO</option>
+                                    </select>
+                                    <div class="invalid-feedback">Este campo es obligatorio</div>
+                                </div>
+                            </div>
+                            <div class="row mx-auto justify-content-end mt-3">
+                                <button class="btn btn2" type="submit" id="btn">
+                                    <span>Guardar</span>
+                                </button>
+                            </div>
+
+                        </form>
+
+
+                        <div class="col-md-12 mt-3">
+                            <h6>USUARIOS DEL SISTEMA</h6>
+                        </div>
+
+                        <button class="btn btn3 ml-3" id="getusuarios">
+                            <span>Ver usuarios</span>
+                        </button>
+
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="records_list table table-sm table-bordered table-hover letra"
+                                    id="mydatatable">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th class="col" scope="col">ID</th>
+                                            <th scope="col">USUARIO</th>
+                                            <th scope="col">NOMBRE DE USUARIO</th>
+                                            <th scope="col">ROL</th>
+                                            <th scope="col">ESTADO</th>
+                                            <th scope="col">ACCIÓN</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="usuario">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Scripts-->
