@@ -11,4 +11,6 @@ router.post('/iniciarsesion', isNotLoggedIn, controllersql.postiniciarSesion);
 router.get('/salir', isLoggedIn, controllersql.CerrarSesion);
 
 
+
+
 module.exports = router;
