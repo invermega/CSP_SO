@@ -1,10 +1,9 @@
 module.exports = {
     //render de Bienvenida
-    async getIniciarSesion(req, res) {
+    async renderIniciarSesion(req, res) {
         res.render('auth/iniciarsesion', { layout: false });
     },
-    //inicio
-    async getbienvenida(req, res) {
+    async renderbienvenida(req, res) {
         res.render('inicio');
     },
     //render de configuracion
@@ -12,8 +11,8 @@ module.exports = {
         res.render('configuracion/usuario');
     },
     //configuracion
-    async getroles(req, res) {
-        res.render('configuracion/roles', { layout: false });
+    async renderroles(req, res) {
+        res.render('configuracion/permisos', { layout: false });
     },
 
 };
