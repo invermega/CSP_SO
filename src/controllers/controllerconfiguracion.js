@@ -1,10 +1,5 @@
 const { getConnection } = require('../database/conexionsql');
-const sql = require('mssql');
-const helpers = require('../lib/helpers');
 const passport = require('passport');
-const fs = require('fs');
-const path = require('path');
-const sharp = require('sharp');
 
 module.exports = {
     async postiniciarSesion(req, res, next) {
@@ -33,9 +28,11 @@ module.exports = {
     },
 
     async postgrupousuario(req, res) {
-        const { nomrol } = req.body
-        estado = "S";
-        await pool.query(`insert into rol set `);
+        const { nomrol } = req.body;
+        const usenam = '';
+        const hostname = '';
+        const pool = await getConnection();
+        await pool.query(`sp_insRolsistema '${nomrol.toUpperCase()}','${usenam}','${hostname}'`);
         res.json('completado');
     },
 
