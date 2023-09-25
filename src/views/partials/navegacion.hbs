@@ -85,6 +85,9 @@
         }
 
         mostraretiqueta("opcionessistema");
+        function mostrarmodulos() {
+           
+            mostraretiqueta("configuracion");
 
         const contentContainer = $('#contenedoropciones');
         const loadingHtml = `
@@ -115,16 +118,10 @@
                         url: url,
                         method: 'GET',
                     });
-
-                    if (response.includes('login-card-description')) {
-                        alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
-                        window.location.href = '/iniciarsesion'; // Cambia a la ruta correcta
-                    } else {
                         contentContainer.animate({ opacity: 0 }, 1000, () => {
                             contentContainer.html(response);
                             contentContainer.animate({ opacity: 1 }, 500);
                         });
-                    }
                 } catch (error) {
                     console.error(error);
                     // Mostrar un mensaje de error al usuario si lo deseas
@@ -159,7 +156,5 @@
             }
         });
     </script>
-
-</body>
-
-</html>
+</body >
+</html >

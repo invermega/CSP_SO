@@ -11,4 +11,9 @@ module.exports = {
     async getconfiguracion(req, res) {
         res.render('configuracion/usuario');
     },
+    //configuracion
+    async getroles(req, res) {
+        res.render('configuracion/roles', { layout: false });
+    },
+
 };
