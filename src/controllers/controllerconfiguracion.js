@@ -35,5 +35,11 @@ module.exports = {
         await pool.query(`sp_insRolsistema '${nomrol.toUpperCase()}','${usenam}','${hostname}'`);
         res.json('completado');
     },
+    async getroles(req, res) {
+        const pool = await getConnection();
+        const roles = await pool.query(`sp_selrol`);
+        res.json(roles.recordset);
+    },
+    
 
 };
