@@ -1,0 +1,120 @@
+<div class="container-fluid px-4">
+  <h1 class="mt-4 tituloverde">Opciones de sistema</h1>
+  <ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+    <li class="breadcrumb-item active">Nuevo rol</li>
+  </ol>
+  <div class="card mb-4">
+    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+      <div class="left-content">
+        <i class="fas fa-table me-1"></i>
+        Asignar permisos a grupos de usuario
+      </div>
+      <div>
+        <button class="btn btn-primary position-relative" data-toggle="modal" data-target="#modalForm">
+          <i class="fa-solid fa-plus"></i>
+          Crear grupo de usuario
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="container-fluid body1">
+        <div class="row">
+          <div class="col-md-6 border-right ">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Grupos de usuario</h4>
+            </div>
+            <div class="table-responsive scrollable-modal" id="tablaaccesos">
+              <table class="records_list table table-sm table-striped table-bordered table-hover letra"
+                id="mydatatable">
+                <thead class="thead sticky-top">
+                  <tr>
+                    <th class="ocultar2" scope="col">ID</th>
+                    <th scope="col">NOMBRE DEL ROL</th>
+                    <th scope="col">ESTADO</th>
+                    <th scope="col">ACCIONES</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+            </div>
+            <div class="text-center" id="cargaacc" style="display: none;">
+              <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                  background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col-md-6 ">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Lista de accesos</h4>
+            </div>
+            <div class="table-responsive scrollable-modal" id="tablagrupousuario" style="display: none;">
+              <table
+                class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeInDown"
+                id="mydatatable1">
+                <thead class="sticky-top">
+                  <tr>
+                    <th scope="col">COD.</th>
+                    <th scope="col">ACCESOS</th>
+                    <th scope="col">CHECK</th>
+                    <th scope="col">ACCIÓN</th>
+                  </tr>
+                </thead>
+                <tbody id="tbodygrupousu">
+
+
+
+                </tbody>
+              </table>
+              <div class="mt-5 text-center"><button onclick="event.preventDefault();guardar()" class="btn btn2"
+                  type="submit" id="Guardar">
+                  <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
+                </button>
+              </div>
+            </div>
+            <div class="text-center" id="carga" style="display: none;">
+              <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                  background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <!--MODAL NUEVO GRUPO USUARIO-->
+      <div class="modal fade" id="modalForm" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+              <h4 class="modal-title" id="myModalLabel">CREAR NUEVO GRUPO DE USUARIO</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row mb-2">
+                <label class="col-sm-3 col-form-label" for="newrol">GRUPO DE USUARIO: </label>
+                <div class="col-sm-9">
+                  <input class="form-control obs" id="newrol" placeholder="Detallar el nombre del grupo de usuario."
+                    required></input>
+                </div>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn submitBtn" onclick="event.preventDefault();guardarrol()"
+                  style="background-color: #0FA0A7; color: white; border-color: #0FA0A7;"><i
+                    class="fa-regular fa-floppy-disk"></i> Grabar</button>
+                <button type="button" class="btn" style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                  id="cerrar" data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i> Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

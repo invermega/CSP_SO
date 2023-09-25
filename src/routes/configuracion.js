@@ -10,7 +10,7 @@ router.get('/iniciarsesion', isNotLoggedIn, controllerrender.getIniciarSesion);
 router.post('/iniciarsesion', isNotLoggedIn, controllersql.postiniciarSesion);
 router.get('/salir', isLoggedIn, controllersql.CerrarSesion);
 
-
+router.get('/roles', isNotLoggedIn, controllerrender.getroles);
 
 
 module.exports = router;

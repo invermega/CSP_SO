@@ -84,7 +84,7 @@ app.use((req, res, next) => {
 });
 
 app.use(require('./routes/'));
-app.use(require('./routes/configuracionsistema'));
+app.use(require('./routes/configuracion'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
