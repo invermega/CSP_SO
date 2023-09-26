@@ -15,6 +15,7 @@ router.post('/grupousuario', controllerCO.postgrupousuario);
 router.get('/listaroles', controllerCO.getroles);
 router.get('/accesos', controllerCO.getaccesos);
 router.post('/accesos', controllerCO.postaccesos);
+router.delete('/accesos', controllerCO.delaccesos);
 
 
 
