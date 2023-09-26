@@ -47,21 +47,31 @@ module.exports = {
         res.json(accesos.recordset);
     },
     async postaccesos(req, res) {
-        const data = req.body.data;
+        const datains = req.body.datains;
         const usenam = '';
         const hostname = '';
         const pool = await getConnection();
-        for (let i = 0; i < data.length; i++) {
-            const codrol = data[i].codrol;
-            const opcsis = data[i].opcsis;
-            const estado = data[i].estado;
-            const lectura = data[i].lectura;
-            const escritura = data[i].escritura;
+        for (let i = 0; i < datains.length; i++) {
+            const codrol = datains[i].codrol;
+            const opcsis = datains[i].opcsis;
+            const estado = datains[i].estado;
+            const lectura = datains[i].lectura;
+            const escritura = datains[i].escritura;
             await pool.query(`sp_insAccesos '${opcsis}','${codrol}','${estado}','${lectura}','${escritura}','${usenam}','${hostname}'`);
         }
         res.json('Completado');
     },
-
+    async delaccesos(req, res) {
+        const datadel = req.body.datadel;
+        const pool = await getConnection();
+        for (let i = 0; i < datadel.length; i++) {
+            const codrol = datadel[i].codrol;
+            const opcsis = datadel[i].opcsis;
+            await pool.query(`sp_delAccesos '${opcsis}','${codrol}'`);
+        }
+        res.json('Completado');
+    },
+    
 
 
 };

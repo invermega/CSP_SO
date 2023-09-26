@@ -76,11 +76,12 @@ function getaccesos(codrol) {
             <td>${acceso.desmod}</td>      
             <td>${acceso.opcsis}</td>
             <td>${acceso.desopc}</td>
-            <td><input id="acceso${acceso.opcsis}" type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor1}></td>
+            <td><input onclick="activarCheckbox('${acceso.opcsis}')" id="acceso${acceso.opcsis}" type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor1}></td>
             <td><input id="lectura${acceso.opcsis}" type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor2}></td>
             <td><input id="escritura${acceso.opcsis}" type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor3}></td>
           </tr>
         `);
+        activarCheckbox(acceso.opcsis);
       });
 
       mensaje('success', 'Accesos extraídos correctamente', 1000);
@@ -94,54 +95,67 @@ function getaccesos(codrol) {
 function guardar() {
   var table = document.getElementById('mydatatable1');
   var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-  var data = [];
+  var datains = [];
+  var datadel = [];
   for (var i = 0; i < rows.length; i++) {
-    var checkbox = rows[i].getElementsByTagName('input')[0];
-    var checkbox1 = rows[i].getElementsByTagName('input')[1];
-    var checkbox2 = rows[i].getElementsByTagName('input')[2];
-    if (checkbox.checked) {
-      var value = checkbox.value;
-      var valuesArray = value.split('_');
-      var opcsis = valuesArray[0];
-      var codrol = valuesArray[1];
-      var lectura = "";
-      var escritura = "";
-      if (checkbox1.checked) {
-        lectura = "S"
-      }
-      else {
-        lectura = "N"
-      }
-      if (checkbox2.checked) {
-        escritura = "S"
-      }
-      else {
-        escritura = "N"
-      }
-      var rowData = {
-        opcsis: opcsis,
-        codrol: codrol,
-        estado: "S",
-        lectura: lectura,
-        escritura: escritura
-      };
-      data.push(rowData);
+    var checkboxes = rows[i].getElementsByTagName('input');
+    var value = checkboxes[0].value;
+    var opcsis = value.split('_')[0];
+    var codrol = value.split('_')[1];
+    var lectura = checkboxes[1].checked ? 'S' : 'N';
+    var escritura = checkboxes[2].checked ? 'S' : 'N';
+    var rowData = {
+      opcsis: opcsis,
+      codrol: codrol,
+      estado: 'S',
+      lectura: lectura,
+      escritura: escritura
+    };
+    var rowDatadelete = {
+      opcsis: opcsis,
+      codrol: codrol
+    };
+    if (checkboxes[0].checked) {
+      datains.push(rowData);
+    } else {
+      datadel.push(rowDatadelete);
     }
   }
-
-  console.log('Datos capturados:', data);
-
   $.ajax({
     url: '/accesos',
-    method: "POST",
-    contentType: "application/json", // Agregar el encabezado para indicar que los datos son JSON
-    data: JSON.stringify({ data: data }), // Convertir el arreglo a JSON antes de enviarlo
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({ datains: datains }),
     success: function (lista) {
-      getaccesos(data[0].codrol);
-      mensaje('success', 'Guardado correctamente', 1000);
     },
     error: function () {
       alert('error');
     }
   });
+  $.ajax({
+    url: '/accesos',
+    method: 'DELETE',
+    contentType: 'application/json',
+    data: JSON.stringify({ datadel: datadel }),
+    success: function (lista) {
+      mensaje('success', 'Guardado correctamente', 1000);
+    },
+    error: function () {
+    }
+  });
+}
+
+function activarCheckbox(opcsis) {
+  var checkboxPrincipal = document.getElementById("acceso" + opcsis);
+  var checkboxlectura = document.getElementById("lectura" + opcsis);
+  var checkboxescritura = document.getElementById("escritura" + opcsis);
+  if (checkboxPrincipal.checked) {
+    checkboxlectura.disabled = false;
+    checkboxescritura.disabled = false;
+  } else {
+    checkboxlectura.disabled = true;
+    checkboxescritura.disabled = true;
+    checkboxlectura.checked = false;
+    checkboxescritura.checked = false;
+  }
 }
