@@ -41,11 +41,27 @@ module.exports = {
         res.json(roles.recordset);
     },
     async getaccesos(req, res) {
-        const {codrol} = req.query;
+        const { codrol } = req.query;
         const pool = await getConnection();
         const accesos = await pool.query(`sp_selAccesos '${codrol}'`);
         res.json(accesos.recordset);
     },
-    
+    async postaccesos(req, res) {
+        const data = req.body.data;
+        const usenam = '';
+        const hostname = '';
+        const pool = await getConnection();
+        for (let i = 0; i < data.length; i++) {
+            const codrol = data[i].codrol;
+            const opcsis = data[i].opcsis;
+            const estado = data[i].estado;
+            const lectura = data[i].lectura;
+            const escritura = data[i].escritura;
+            await pool.query(`sp_insAccesos '${opcsis}','${codrol}','${estado}','${lectura}','${escritura}','${usenam}','${hostname}'`);
+        }
+        res.json('Completado');
+    },
+
+
 
 };

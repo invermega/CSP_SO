@@ -63,7 +63,6 @@ function getaccesos(codrol) {
       codrol: codrol,
     },
     success: function (accesos) {
-      console.log(accesos);
       ocultarDiv('carga');
       mostrarDiv('tablagrupousuario');
       const tbodygrupousu = $('#tbodygrupousu');
@@ -73,12 +72,13 @@ function getaccesos(codrol) {
         const valor2 = acceso.lectura === 'S' ? 'checked' : '';
         const valor3 = acceso.escritura === 'S' ? 'checked' : '';
         tbodygrupousu.append(`
-          <tr>              
+          <tr>        
+            <td>${acceso.desmod}</td>      
             <td>${acceso.opcsis}</td>
             <td>${acceso.desopc}</td>
-            <td><input type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor1}></td>
-            <td><input type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor2}></td>
-            <td><input type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor3}></td>
+            <td><input id="acceso${acceso.opcsis}" type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor1}></td>
+            <td><input id="lectura${acceso.opcsis}" type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor2}></td>
+            <td><input id="escritura${acceso.opcsis}" type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor3}></td>
           </tr>
         `);
       });
@@ -88,5 +88,60 @@ function getaccesos(codrol) {
     error: function () {
       alert('Error en la solicitud AJAX');
     },
+  });
+}
+
+function guardar() {
+  var table = document.getElementById('mydatatable1');
+  var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+  var data = [];
+  for (var i = 0; i < rows.length; i++) {
+    var checkbox = rows[i].getElementsByTagName('input')[0];
+    var checkbox1 = rows[i].getElementsByTagName('input')[1];
+    var checkbox2 = rows[i].getElementsByTagName('input')[2];
+    if (checkbox.checked) {
+      var value = checkbox.value;
+      var valuesArray = value.split('_');
+      var opcsis = valuesArray[0];
+      var codrol = valuesArray[1];
+      var lectura = "";
+      var escritura = "";
+      if (checkbox1.checked) {
+        lectura = "S"
+      }
+      else {
+        lectura = "N"
+      }
+      if (checkbox2.checked) {
+        escritura = "S"
+      }
+      else {
+        escritura = "N"
+      }
+      var rowData = {
+        opcsis: opcsis,
+        codrol: codrol,
+        estado: "S",
+        lectura: lectura,
+        escritura: escritura
+      };
+      data.push(rowData);
+    }
+  }
+
+  console.log('Datos capturados:', data);
+
+  $.ajax({
+    url: '/accesos',
+    method: "POST",
+    contentType: "application/json", // Agregar el encabezado para indicar que los datos son JSON
+    data: JSON.stringify({ data: data }), // Convertir el arreglo a JSON antes de enviarlo
+    success: function (lista) {
+      getaccesos(data[0].codrol);
+      mensaje('success', 'Guardado correctamente', 1000);
+    },
+    error: function () {
+      alert('error');
+    }
   });
 }
