@@ -29,19 +29,19 @@ function getpermisos() {
 
   $.ajax({
     url: '/listaroles',
-    success: function (accesos) {
+    success: function (roles) {
       ocultarDiv("cargaacc");
       mostrarTabla("mydatatable");
       let tbody = $('tbody');
 
       tbody.html('');
-      accesos.forEach(acces => {
+      roles.forEach(rol => {
         tbody.append(`
             <tr>
-              <td class="rolcod ocultar2">${acces.codrol}</td>
-              <td class="nomrol">${acces.desrol}</td>
+              <td class="rolcod">${rol.codrol}</td>
+              <td class="nomrol">${rol.desrol}</td>
               <td>
-                <button class="btn btn-info btn-circle btn-sm" onclick="event.preventDefault();getreglas('${acces.codrol}')"><i class="fas fa-align-justify"></i></button>
+                <button class="btn btn-info btn-circle btn-sm" onclick="event.preventDefault();getaccesos('${rol.codrol}')"><i class="fas fa-align-justify"></i></button>
               </td>
             </tr>
             `)
@@ -50,5 +50,43 @@ function getpermisos() {
     error: function () { // Corregido: eliminé el parámetro "lista" innecesario
       alert('error');
     }
+  });
+}
+
+function getaccesos(codrol) {
+  mostrarDiv('carga');
+  ocultarDiv('tablagrupousuario');
+  $.ajax({
+    url: '/accesos',
+    method: 'GET',
+    data: {
+      codrol: codrol,
+    },
+    success: function (accesos) {
+      console.log(accesos);
+      ocultarDiv('carga');
+      mostrarDiv('tablagrupousuario');
+      const tbodygrupousu = $('#tbodygrupousu');
+      tbodygrupousu.empty(); // Limpia el contenido anterior en lugar de usar tbodygrupousu.html('')
+      accesos.forEach(acceso => {
+        const valor1 = acceso.acceso === 'S' ? 'checked' : '';
+        const valor2 = acceso.lectura === 'S' ? 'checked' : '';
+        const valor3 = acceso.escritura === 'S' ? 'checked' : '';
+        tbodygrupousu.append(`
+          <tr>              
+            <td>${acceso.opcsis}</td>
+            <td>${acceso.desopc}</td>
+            <td><input type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor1}></td>
+            <td><input type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor2}></td>
+            <td><input type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor3}></td>
+          </tr>
+        `);
+      });
+
+      mensaje('success', 'Accesos extraídos correctamente', 1000);
+    },
+    error: function () {
+      alert('Error en la solicitud AJAX');
+    },
   });
 }
