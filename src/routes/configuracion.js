@@ -13,6 +13,8 @@ router.get('/salir', isLoggedIn, controllerCO.CerrarSesion);
 router.get('/permisos', isNotLoggedIn, controllerrender.renderroles);
 router.post('/grupousuario', controllerCO.postgrupousuario);
 router.get('/listaroles', controllerCO.getroles);
+router.get('/accesos', controllerCO.getaccesos);
+
 
 
 
