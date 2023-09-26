@@ -7,10 +7,9 @@ module.exports = {
         res.render('inicio');
     },
     //render de configuracion
-    async getconfiguracion(req, res) {
+    async renderusuario(req, res) {
         res.render('configuracion/usuario');
     },
-    //configuracion
     async renderroles(req, res) {
         res.render('configuracion/permisos', { layout: false });
     },
