@@ -15,6 +15,8 @@ router.post('/grupousuario', controllerCO.postgrupousuario);
 router.get('/listaroles', controllerCO.getroles);
 router.get('/accesos', controllerCO.getaccesos);
 
+//usuarios
+router.get('/usuarios', isNotLoggedIn, controllerrender.renderusuario);
 
 
 
