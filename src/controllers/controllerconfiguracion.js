@@ -1,5 +1,6 @@
 const { getConnection } = require('../database/conexionsql');
 const passport = require('passport');
+const helpers = require('../lib/helpers');
 
 module.exports = {
     async postiniciarSesion(req, res, next) {
@@ -47,5 +48,46 @@ module.exports = {
         res.json(accesos.recordset);
     },
     
+    /************Usuario*******/
+    async postusuario(req, res) {//agregar usuario
+        const { usuario,contrasena,celular,app,apm,Nombres,fecnac,DNI,correo,direccion,sexo,codrol,iduser,opc} = req.body;
+        //console.log(req.body);
+        const passencrypt = await helpers.EncriptarPass(contrasena);
+        const usenam = '';
+        const hostname = '';
+        const codrolUser = 1;
+        
+        const pool = await getConnection();
+        await pool.query(`sp_insUsuario '${usuario.toUpperCase()}','${passencrypt}',${celular},'${app.toUpperCase()}','${apm.toUpperCase()}','${Nombres.toUpperCase()}','${DNI}','${fecnac}','${correo.toUpperCase()}','${direccion.toUpperCase()}','${codrol}', '${sexo.toUpperCase()}','${usenam}','${hostname}','${codrolUser}','${iduser}','${opc}'`);
+        res.json('completado');
+    },
+    async getusuarios(req, res) {//listar usuario para edicion
+        const {parametro} = req.query;
+        const codrolUser = 1;  
+        const pool = await getConnection();
+        const usuarios = await pool.query(`sp_selusuarios '${codrolUser}','${parametro}'`);
+        
+        res.json(usuarios.recordset);
+    },
+    async deleteusuarios(req, res) {//eliminar usuario
+        const {iduser} = req.body;
+        const codrolUser = 1;  
+        const pool = await getConnection();
+        const usuarios = await pool.query(`sp_delUsuario '${codrolUser}','${iduser}'`);
+        
+        res.json('completado');
+    },
+    async resetpass(req, res) {//resetear contraseña
+        const {iduser} = req.body;
+        console.log(iduser);
+        const codrolUser = 1;  
+        const pool = await getConnection();
+        const usuarios = await pool.query(`sp_editPassUser '${codrolUser}','${iduser}'`);
+        
+        res.json('completado'); 
+    },
+   
+    /*************************/
+
 
 };

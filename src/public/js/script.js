@@ -1,8 +1,6 @@
 
 
 
-
-
 window.addEventListener('DOMContentLoaded', event => {
   // Toggle the side navigation
   const sidebarToggle = document.body.querySelector('#sidebarToggle');
@@ -661,3 +659,7 @@ function obtenerContenidoGuiadet(cabeceraData, detalleData) {
   return contenidoGuia;
 }
 
+
+function limpiarImput(){
+  $('input').val('');
+}
