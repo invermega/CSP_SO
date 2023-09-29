@@ -1,0 +1,122 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4 tituloverde">Entidades</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active">Protocolo</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="left-content">
+                <i class="fas fa-table me-1"></i>
+                Configuración de protocolos
+            </div>
+        </div>
+        <div class="card-body body1">
+            <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1" role="tab"
+                        aria-controls="ex1-tabs-1" aria-selected="true">Datos</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="ex1-tab-2" data-bs-toggle="tab" href="#ex1-tabs-2" role="tab"
+                        aria-controls="ex1-tabs-2" aria-selected="false">Exámenes</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="ex1-content">
+                <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                    <div class="row mt-2">
+                        <div class="col-md-12"><label for="empresa" class="labels">Empresa</label>
+                            <input type="text" class="form-control form-control-sm" placeholder="Ingrese la empresa"
+                                id="empresa" value="" required>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            <label for="tipodoc" class="labels mr-5">
+                                Estado</label>
+                            <label class="form-check-label mr-4" for="inlineCheckbox1">Vigente</label>
+                            <input class="form-check-input" type="radio" id="remail1" name="remail" id="exampleRadios1"
+                                value="SI" required>
+                            <label class="form-check-label mr-4" for="inlineCheckbox1">Histórico</label>
+                            <input class="form-check-input" type="radio" id="remail1" name="remail" id="exampleRadios1"
+                                value="SI" required>
+                            <label class="form-check-label mr-4" for="inlineCheckbox1">Cotización</label>
+                            <input class="form-check-input" type="radio" id="remail1" name="remail" id="exampleRadios1"
+                                value="SI" required>
+                            <label class="form-check-label mr-4" for="inlineCheckbox1">Complementario</label>
+                            <input class="form-check-input" type="radio" id="remail1" name="remail" id="exampleRadios1"
+                                value="SI" required>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12"><label class="labels" for="situacioneducativa">Situación
+                                educativa</label><select class="form-select form-control form-control-sm"
+                                id="situacioneducativa" aria-label="Default select example" required>
+                            </select></div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12"><label class="labels" for="direccion">Dirección
+                            </label><input type="text" class="form-control form-control-sm" value="" id="direccion"
+                                placeholder="Ingrese la dirección " required>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels" for="celular">Celular</label><input type="text"
+                                id="celular" class="form-control btn-sm" oninput="limitarCaracteresNumericos(this, 9)"
+                                placeholder="Ingrese el número de celular">
+                        </div>
+
+                        <div class="col-md-6"><label class="labels" for="mail">Email</label><input type="email"
+                                class="form-control btn-sm" id="mail" name="mail" placeholder="correo@ejemplo.com"
+                                required>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12"><label class="labels" for="colegiatura">Número de
+                                colegiatura
+                            </label><textarea type="text" class="form-control form-control-sm" value="" id="colegiatura"
+                                placeholder="Ingrese el número de colegiatura" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels" for="situacioneducativa">Situación
+                                educativa</label><select class="form-select form-control form-control-sm"
+                                id="situacioneducativa" aria-label="Default select example" required>
+                            </select></div>
+                        <div class="col-md-6"><label class="labels" for="situacioneducativa">Situación
+                                educativa</label><input type="date" class="form-control btn-sm" id="fecvctohabilidad"
+                                min="1900-01-01" max="2100-12-31" step="1" required></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+                    <div class="table-responsive scrollable-modal" id="tablaaccesos">
+                        <table class="records_list table table-sm table-striped table-bordered table-hover letra"
+                            id="mydatatable">
+                            <thead class="thead sticky-top">
+                                <tr>
+                                    <th class="col" scope="col">ID</th>
+                                    <th scope="col">NOMBRE DEL ROL</th>
+                                    <th scope="col">ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center" id="cargaacc" style="display: none;">
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                background="transparent" speed="1" style="width: 300px; height: 300px;" loop
+                                autoplay></lottie-player>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/entidades/protocolo.js"> </script>
