@@ -1,0 +1,208 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4 tituloverde">Historia Clínica</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active">Paciente</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="left-content">
+                <i class="fas fa-table me-1"></i>
+                Recursos de la historia clínica del paciente
+            </div>
+            <div>
+                <button class="btn position-relative" style="background-color: #793B8E; color: white;" id="btnfiltros">
+                    <i class="fa-solid fa-sliders"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body body1">
+            <form id="formasistencias" class="mb-3">
+                <div class="row textos " id="filtros"
+                    style="display: none; border: 2px solid #D8D8D8; vertical-align: center; padding: 5px; border-radius: 7px;">
+                    <div class="col-md-8 form-inline col-sm-12 form-group mb-1 mt-1">
+                        <div class="input-group input-group-sm" style="width: 100%;">
+                            <label class="control-label input-group-text" for="codemp">Empresa</label>
+                            <input type="text" oninput="limitarCaracteresNumericos(this, 9);" id="codemp"
+                                class="form-control form-control-sm" placeholder="Código de empresa"
+                                aria-label="Username">
+                            <button type="button" data-toggle="modal" data-target="#modalFormempleado"
+                                class="btn input-group-text" id="empleado">
+                                <i class="fa-solid fa-building-user"></i>
+                            </button>
+                            <input type="text" style="width: 30%;" id="nomempleado" class="form-control form-control-sm"
+                                placeholder="Nombre de empresa" aria-label="Server" disabled>
+                            <button type="button" class="btn input-group-text" id="limpiarempleado">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-1 form-inline col-sm-12 form-group mb-0">
+                        <button class="btn btn3 " type="submit"> <span>Buscar</span> </button>
+                    </div>
+
+                </div>
+                <!--<div class="text-center" id="precarga" style="display: ;">
+                    <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                        <lottie-player src="/img/jsonimg/wall-e.json" background="transparent" speed="1"
+                            style="width: 600px; height: 600px;" loop autoplay></lottie-player>
+                    </div>
+                </div>-->
+
+            </form>
+            <!--MODAL EMPLEADO-->
+            <div class="modal fade" id="modalFormempleado" role="dialog">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                            <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE EMPRESA</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                                <label class="control-label input-group-text" for="empresas">EMPRESA</label>
+                                <input class="form-control form-control-sm " id="empresas"
+                                    placeholder="Ingrese el nombre de la empresa" required></input>
+                                <label class="input-group-text form-control-sm" for="empresas"><i
+                                        class="fa-solid fa-building"></i></label>
+                            </div>
+                            <div class="row mb-2 mt-2">
+                                <div class="table-responsive">
+                                    <table
+                                        class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                        id="tableempleadomodal" style="display: none;">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th scope="col">ACCIÓN</th>
+                                                <th scope="col">DNI</th>
+                                                <th scope="col">EMPLEADO</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bodyempleadomodal">
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="text-center" id="cargaempleadomodal" style="display: none;">
+                                    <div class="d-flex justify-content-center align-items-center"
+                                        style="min-height: 5vh;">
+                                        <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent"
+                                            speed="1" style="width: 200px; height: 200px;" loop
+                                            autoplay></lottie-player>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn"
+                                    style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                    id="cerrarempleado" data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
+                                    Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table
+                    class="records_list table table-sm table-striped table-bordered letra animate__animated animate__fadeInDown"
+                    id="mydatatable" style="display: ;">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col">DNI</th>
+                            <th scope="col">APELLIDOS Y NOMBRES</th>
+                            <th scope="col">EDAD</th>
+                            <th scope="col">FECHA VIGENCIA</th>
+                            <th scope="col">ESTADO</th>
+                            <th scope="col">ACCIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>77284861</th>
+                            <th>VELASQUEZ LAOS DANTE</th>
+                            <th>28 años</th>
+                            <th>31-11-2023</th>
+                            <th>SIN INICIAR</th>
+                            <th><button data-toggle="modal" data-target="#modalFormpaciente">abrir modal</button></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center" id="carga" style="display: none;">
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                    <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent" speed="1"
+                        style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-md-3" id="excel" style="display: none;">
+                    <button id="btnExport" class="btn btn-success btn-sm"><i class="fas fa-file-excel"></i>
+                        Exportar a
+                        excel</button>
+                </div>
+            </div>
+
+            <!--MODAL PACIENTE-->
+            <div class="modal fade" id="modalFormpaciente" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                            <h4 class="modal-title" id="myModalLabel">INGRESE RESULTADO DE </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                                <div class="col-md-5 form-inline col-sm-12 form-group mb-1 mt-1">
+                                    <div class="input-group input-group-sm" style="width: 100%;">
+                                        <label class="control-label input-group-text" for="dnipaciente"><i
+                                                class="fa-solid fa-id-card"></i></label>
+                                        <input type="text" oninput="limitarCaracteresNumericos(this, 9);" id="dnipaciente"
+                                            class="form-control form-control-sm" placeholder="DNI de paciente"
+                                            aria-label="Username" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-md-7 form-inline col-sm-12 form-group mb-1 mt-1">
+                                    <div class="input-group input-group-sm" style="width: 100%;">
+                                        <label class="control-label input-group-text" for="nombrepaciente"><i
+                                                class="fa-solid fa-user"></i></label>
+                                        <input type="text" oninput="limitarCaracteresNumericos(this, 9);" id="nombrepaciente"
+                                            class="form-control form-control-sm" placeholder="Nombre de paciente"
+                                            aria-label="Username" disabled>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="container mb-2 mt-2">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6>ADJUNTAR RESULTADO</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <div id="miniaturas"></div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <input type="file" class="form-control" name="archivos" id="archivos"
+                                            accept=".pdf" multiple>
+                                        <span class="mt-1" style="color: red;">*Solo está permitido documentos PDF.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn submitBtn"
+                                    onclick="submitContactForm(document.getElementById('valorRecibido').innerText)"
+                                    style="background-color: #0FA0A7; color: white; border-color: #0FA0A7;">GUARDAR</button>
+                                <button type="button" class="btn"
+                                    style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                    id="cerrarpaciente" data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
+                                    Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/historiaclinica/paciente.js"> </script>
