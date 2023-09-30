@@ -27,26 +27,24 @@
                 <div class="container-fluid body1">
                     <form id="formusuarios" class="needs-validation" novalidate>
                         <div class="row">
-                            <div class="col-md-4 border-right">
+                            <style>
+                                canvas {
+                                    max-width: 100%;
+                                    width: 300px;
+                                    height: 300px;
+                                }
+                            </style>
+                            <div class="col-md-3 border-right">
                                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                    <div class="">
-
-                                        <style>
-                                            canvas {
-                                                max-width: 100%;
-                                                width: 300px;
-                                                height: 300px;
-                                            }
-                                        </style>
-
-                                        <canvas id="" class="circle-canvas mt-2 mb-3" required></canvas>
-                                        <div class="button-container">
-                                            <input type="file" id="file-input" style="display:none">
-                                            <button id="reset-btn" class="btn btn4"><i
-                                                    class="fa-solid fa-circle-xmark"></i></button>
-                                            <button id="upload-btn" class="btn btn4"><i
-                                                    class="fa-solid fa-upload"></i></button>
-                                        </div>
+                                    <h4 class="text-right">Foto</h4>
+                                    <canvas id="canvas" width="300" height="300" class="circle-canvas mb-3"
+                                        required></canvas>
+                                    <div class="button-container">
+                                        <input type="file" id="file-input" style="display: none;">
+                                        <button id="reset-btn" class="btn btn4"><i
+                                                class="fa-solid fa-circle-xmark"></i></button>
+                                        <button id="upload-btn" class="btn btn4"><i
+                                                class="fa-solid fa-upload"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -184,7 +182,7 @@
                                             id="tablaususuariomodal" style="display: none;">
                                             <thead class="thead">
                                                 <tr>
-                                                    
+
                                                     <th scope="col">NOMBRES Y APELLIDOS</th>
                                                     <th scope="col">DNI</th>
                                                     <th scope="col">USUARIO</th>

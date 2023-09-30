@@ -17,7 +17,7 @@ router.get('/accesos', controllerCO.getaccesos);
 
 //usuarios
 router.get('/usuarios', isNotLoggedIn, controllerrender.renderusuario);
-router.post('/usuario',controllerCO.postusuario);
+    router.post('/usuario',controllerCO.postusuario);
 router.get('/listarusuarios',controllerCO.getusuarios)
 router.post('/editarPass',controllerCO.resetpass);
 router.delete('/deleteUser',controllerCO.deleteusuarios);
