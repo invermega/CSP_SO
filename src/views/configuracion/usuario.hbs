@@ -12,12 +12,12 @@
                     Ingrese un nuevo usuario al sistema
                 </div>
                 <div>
-                    <button class="btn btncolor position-relative" onclick="limpiarinputs();activarCampo();">
+                    <button class="btn position-relative" onclick="limpiarinputs();activarCampo();" style="background-color: #793B8E;color: white;border-color: #793B8E;">
                         <i class="fa-solid fa-plus"></i>
                         Nuevo
                     </button>
-                    <button class="btn btncolor position-relative" id="btneditarusu" data-toggle="modal"
-                        data-target="#modalFormusuario">
+                    <button class="btn position-relative" id="btneditarusu" data-toggle="modal"
+                        data-target="#modalFormusuario" style="background-color: #793B8E;color: white;border-color: #793B8E;">
                         <i class="fa-solid fa-plus"></i>
                         Editar usuario
                     </button>
@@ -41,9 +41,11 @@
                                         required></canvas>
                                     <div class="button-container">
                                         <input type="file" id="file-input" style="display: none;">
-                                        <button id="reset-btn" class="btn btn4"><i
+                                        <button id="reset-btn" class="btn btn4"
+                                            style="background-color: #793B8E;color: white;border-color: #793B8E;"><i
                                                 class="fa-solid fa-circle-xmark"></i></button>
-                                        <button id="upload-btn" class="btn btn4"><i
+                                        <button id="upload-btn" class="btn btn4"
+                                            style="background-color: #793B8E;color: white;border-color: #793B8E;"><i
                                                 class="fa-solid fa-upload"></i></button>
                                     </div>
                                 </div>
@@ -164,18 +166,25 @@
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                             <div class="modal-header"
-                                style="background-color: #4B4B4B;color: white;border-color: #4B4B4B;">
+                                style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
                                 <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE CLIENTE</h4>
                             </div>
                             <div class="modal-body">
-                                <div class="row mb-2">
+                                <div class="input-group input-group-sm" style="width: 100%;">
+                                    <label class="control-label input-group-text" for="clientemodal">USUARIO</label>
+                                    <input class="form-control form-control-sm " id="clientemodal"
+                                        placeholder="Ingrese los nombres o el DNI del usuario" required></input>
+                                    <label class="input-group-text form-control-sm"><i
+                                            class="fa-solid fa-user"></i></label>
+                                </div>
+                                <!--<div class="row mb-2">
                                     <label class="col-sm-3 col-form-label" for="clientemodal">BUSCAR: </label>
                                     <div class="col-sm-9">
                                         <input class="form-control obs" id="clientemodal"
                                             placeholder="Ingrese los nombres o el DNI del usuario" required></input>
                                     </div>
-                                </div>
-                                <div class="row mb-2">
+                                </div>-->
+                                <div class="row mb-2 mt-2">
                                     <div class="table-responsive">
                                         <table
                                             class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
@@ -206,7 +215,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn"
-                                        style="background-color: #4B4B4B;color: white;border-color: #4B4B4B;"
+                                        style="background-color: #793B8E;color: white;border-color: #793B8E;"
                                         id="cerrarcliente" data-dismiss="modal"> <i
                                             class="fa-solid fa-circle-xmark"></i>
                                         Cerrar</button>
