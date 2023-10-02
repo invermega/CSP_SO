@@ -26,67 +26,124 @@
             <div class="tab-content" id="ex1-content">
                 <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
                     <div class="row mt-2">
-                        <div class="col-md-12"><label for="empresa" class="labels">Empresa</label>
-                            <input type="text" class="form-control form-control-sm" placeholder="Ingrese la empresa"
-                                id="empresa" value="" required>
+                        <div class="col-md-12 form-inline col-sm-12 form-group mb-1 mt-1">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                                <label class="control-label input-group-text" for="codempresa">Empresa</label>
+                                <input type="text" oninput="limitarCaracteresNumericos(this, 9);" id="codempresa"
+                                    class="form-control form-control-sm" placeholder="Código de la empresa"
+                                    aria-label="Username" disabled>
+                                <button type="button" data-toggle="modal" data-target="#modalFormEmpresa"
+                                    class="btn input-group-text" id="empresa">
+                                    <i class="fa-solid fa-building mr-1"></i>
+                                </button>
+                                <input type="text" style="width: 30%;" id="nomempresa"
+                                    class="form-control form-control-sm" placeholder="Nombre de la empresa"
+                                    aria-label="Server" disabled>
+                                <button type="button" class="btn input-group-text" id="nomempresa">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
+
+                    <!--MODAL EMPLEADO-->
+                    <div class="modal fade" id="modalFormEmpresa" role="dialog">
+                        <div class="modal-dialog ">
+                            <div class="modal-content">
+                                <div class="modal-header"
+                                    style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                    <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE LAS EMPRESA</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group input-group-sm" style="width: 100%;">
+                                        <label class="control-label input-group-text" for="empresas">EMPRESA</label>
+                                        <input class="form-control form-control-sm " id="empleadomodal"
+                                            placeholder="Ingrese el nombre del empleado" required></input>
+                                        <label class="input-group-text form-control-sm"><i class="fa-solid fa-building mr-1"></i></label>
+                                    </div>
+                                    <div class="row mb-2 mt-2">
+                                        <div class="table-responsive">
+                                            <table
+                                                class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                                id="tableempleadomodal" style="display: none;">
+                                                <thead class="thead">
+                                                    <tr>
+                                                        <th scope="col">ACCIÓN</th>
+                                                        <th scope="col">DNI</th>
+                                                        <th scope="col">EMPLEADO</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="bodyempleadomodal">
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <div class="text-center" id="cargaempleadomodal" style="display: none;">
+                                            <div class="d-flex justify-content-center align-items-center"
+                                                style="min-height: 5vh;">
+                                                <lottie-player src="/img/jsonimg/Cargahealth.json"
+                                                    background="transparent" speed="1"
+                                                    style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn"
+                                            style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                            id="cerrarempleado" data-dismiss="modal"> <i
+                                                class="fa-solid fa-circle-xmark"></i>
+                                            Cerrar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                     <div class="row mt-2">
                         <div class="col-md-12">
                             <label for="tipodoc" class="labels mr-5">
                                 Estado</label>
                             <label class="form-check-label mr-4" for="inlineCheckbox1">Vigente</label>
-                            <input class="form-check-input" type="radio" id="remail1" name="remail" id="exampleRadios1"
-                                value="SI" required>
+                            <input class="form-check-input" type="radio" id="vigente" name="vigente" value="V" required>
                             <label class="form-check-label mr-4" for="inlineCheckbox1">Histórico</label>
-                            <input class="form-check-input" type="radio" id="remail1" name="remail" id="exampleRadios1"
-                                value="SI" required>
-                            <label class="form-check-label mr-4" for="inlineCheckbox1">Cotización</label>
-                            <input class="form-check-input" type="radio" id="remail1" name="remail" id="exampleRadios1"
-                                value="SI" required>
-                            <label class="form-check-label mr-4" for="inlineCheckbox1">Complementario</label>
-                            <input class="form-check-input" type="radio" id="remail1" name="remail" id="exampleRadios1"
-                                value="SI" required>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-12"><label class="labels" for="situacioneducativa">Situación
-                                educativa</label><select class="form-select form-control form-control-sm"
-                                id="situacioneducativa" aria-label="Default select example" required>
-                            </select></div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-12"><label class="labels" for="direccion">Dirección
-                            </label><input type="text" class="form-control form-control-sm" value="" id="direccion"
-                                placeholder="Ingrese la dirección " required>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels" for="celular">Celular</label><input type="text"
-                                id="celular" class="form-control btn-sm" oninput="limitarCaracteresNumericos(this, 9)"
-                                placeholder="Ingrese el número de celular">
-                        </div>
-
-                        <div class="col-md-6"><label class="labels" for="mail">Email</label><input type="email"
-                                class="form-control btn-sm" id="mail" name="mail" placeholder="correo@ejemplo.com"
+                            <input class="form-check-input" type="radio" id="historico" name="historico" value="H"
+                                required>
+                            <label class="form-check-label mr-4" for="cotizacion">Cotización</label>
+                            <input class="form-check-input" type="radio" id="cotizacion" name="cotizacion" value="C"
                                 required>
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-12"><label class="labels" for="colegiatura">Número de
-                                colegiatura
-                            </label><textarea type="text" class="form-control form-control-sm" value="" id="colegiatura"
-                                placeholder="Ingrese el número de colegiatura" required></textarea>
+                        <div class="col-md-12"><label class="labels" for="tipo">Tipo</label>
+                            <select class="form-select form-control form-control-sm" id="tipo"
+                                aria-label="Default select example" required>
+                            </select>
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels" for="situacioneducativa">Situación
-                                educativa</label><select class="form-select form-control form-control-sm"
-                                id="situacioneducativa" aria-label="Default select example" required>
-                            </select></div>
-                        <div class="col-md-6"><label class="labels" for="situacioneducativa">Situación
-                                educativa</label><input type="date" class="form-control btn-sm" id="fecvctohabilidad"
-                                min="1900-01-01" max="2100-12-31" step="1" required></div>
+                        <div class="col-md-12"><label class="labels" for="nombre">Nombre
+                            </label><input type="text" class="form-control form-control-sm" value="" id="nombre"
+                                placeholder="Ingrese el nombre" required>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12"><label class="labels" for="comentario">Comentarios
+                            </label><textarea type="text" class="form-control form-control-sm" value="" id="comentario"
+                                placeholder="Ingrese algún comentario" required></textarea>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6"><label class="labels" for="cadcer">Tiempo de caducidad de
+                                certificado de aptitud</label>
+                            <select class="form-select form-control form-control-sm" id="cadcer"
+                                aria-label="Default select example" required>
+                            </select>
+                        </div>
+                        <div class="col-md-6"><label class="labels" for="fecvcto">Fecha de vencimiento</label>
+                            <input type="date" class="form-control btn-sm" id="fecvcto" min="1900-01-01"
+                                max="2100-12-31" step="1" required>
+                        </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
