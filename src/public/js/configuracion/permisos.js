@@ -63,7 +63,6 @@ function getaccesos(codrol) {
       codrol: codrol,
     },
     success: function (accesos) {
-      console.log(accesos);
       ocultarDiv('carga');
       mostrarDiv('tablagrupousuario');
       const tbodygrupousu = $('#tbodygrupousu');
@@ -73,14 +72,16 @@ function getaccesos(codrol) {
         const valor2 = acceso.lectura === 'S' ? 'checked' : '';
         const valor3 = acceso.escritura === 'S' ? 'checked' : '';
         tbodygrupousu.append(`
-          <tr>              
+          <tr>        
+            <td>${acceso.desmod}</td>      
             <td>${acceso.opcsis}</td>
             <td>${acceso.desopc}</td>
-            <td><input type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor1}></td>
-            <td><input type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor2}></td>
-            <td><input type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor3}></td>
+            <td><input onclick="activarCheckbox('${acceso.opcsis}')" id="acceso${acceso.opcsis}" type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor1}></td>
+            <td><input id="lectura${acceso.opcsis}" type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor2}></td>
+            <td><input id="escritura${acceso.opcsis}" type="checkbox" class="mt-1" value="${acceso.opcsis}_${codrol}" ${valor3}></td>
           </tr>
         `);
+        activarCheckbox(acceso.opcsis);
       });
 
       mensaje('success', 'Accesos extraídos correctamente', 1000);
@@ -89,4 +90,72 @@ function getaccesos(codrol) {
       alert('Error en la solicitud AJAX');
     },
   });
+}
+
+function guardar() {
+  var table = document.getElementById('mydatatable1');
+  var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+  var datains = [];
+  var datadel = [];
+  for (var i = 0; i < rows.length; i++) {
+    var checkboxes = rows[i].getElementsByTagName('input');
+    var value = checkboxes[0].value;
+    var opcsis = value.split('_')[0];
+    var codrol = value.split('_')[1];
+    var lectura = checkboxes[1].checked ? 'S' : 'N';
+    var escritura = checkboxes[2].checked ? 'S' : 'N';
+    var rowData = {
+      opcsis: opcsis,
+      codrol: codrol,
+      estado: 'S',
+      lectura: lectura,
+      escritura: escritura
+    };
+    var rowDatadelete = {
+      opcsis: opcsis,
+      codrol: codrol
+    };
+    if (checkboxes[0].checked) {
+      datains.push(rowData);
+    } else {
+      datadel.push(rowDatadelete);
+    }
+  }
+  $.ajax({
+    url: '/accesos',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({ datains: datains }),
+    success: function (lista) {
+    },
+    error: function () {
+      alert('error');
+    }
+  });
+  $.ajax({
+    url: '/accesos',
+    method: 'DELETE',
+    contentType: 'application/json',
+    data: JSON.stringify({ datadel: datadel }),
+    success: function (lista) {
+      mensaje('success', 'Guardado correctamente', 1000);
+    },
+    error: function () {
+    }
+  });
+}
+
+function activarCheckbox(opcsis) {
+  var checkboxPrincipal = document.getElementById("acceso" + opcsis);
+  var checkboxlectura = document.getElementById("lectura" + opcsis);
+  var checkboxescritura = document.getElementById("escritura" + opcsis);
+  if (checkboxPrincipal.checked) {
+    checkboxlectura.disabled = false;
+    checkboxescritura.disabled = false;
+  } else {
+    checkboxlectura.disabled = true;
+    checkboxescritura.disabled = true;
+    checkboxlectura.checked = false;
+    checkboxescritura.checked = false;
+  }
 }

@@ -47,6 +47,7 @@ module.exports = {
     },
     async getaccesos(req, res) {
         const { codrol } = req.query;
+        
         const pool = await getConnection();
         const accesos = await pool.query(`sp_selAccesos '${codrol}'`);
         res.json(accesos.recordset);

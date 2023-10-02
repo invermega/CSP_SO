@@ -13,5 +13,14 @@ module.exports = {
     async renderroles(req, res) {
         res.render('configuracion/permisos', { layout: false });
     },
-
+    //historiaclinica
+    async renderpacientes(req, res) {
+        res.render('historiaclinica/paciente', { layout: false });
+    },
+    //entidades
+    async renderprotocolo(req, res) {
+        res.render('entidades/protocolo', { layout: false });
+    },
+    
+    
 };
