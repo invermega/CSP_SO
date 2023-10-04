@@ -153,7 +153,6 @@ function getusuarios(parametro) {
             const tbodyusu = $('#bodyususuariomodal');
             tbodyusu.empty();
             usuarios.forEach(usuario => {
-
                 tbodyusu.append(`
             <tr>             
               <td>${usuario.appm}</td>

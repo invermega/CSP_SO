@@ -21,6 +21,8 @@ module.exports = {
     async renderprotocolo(req, res) {
         res.render('entidades/protocolo', { layout: false });
     },
-    
+    async renderepaciente(req, res) {
+        res.render('entidades/paciente', { layout: false });
+    },
     
 };
