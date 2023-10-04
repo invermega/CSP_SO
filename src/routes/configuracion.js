@@ -9,7 +9,6 @@ const { } = require('../lib/permisos');
 router.get('/iniciarsesion', isNotLoggedIn, controllerrender.renderIniciarSesion);
 router.post('/iniciarsesion', isNotLoggedIn, controllerCO.postiniciarSesion);
 router.get('/salir', isLoggedIn, controllerCO.CerrarSesion);
-
 router.get('/permisos', isLoggedIn, controllerrender.renderroles);
 router.post('/grupousuario',isLoggedIn, controllerCO.postgrupousuario);
 router.get('/listaroles',isLoggedIn, controllerCO.getroles);

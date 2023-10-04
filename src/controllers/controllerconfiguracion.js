@@ -53,6 +53,7 @@ module.exports = {
         const accesos = await pool.query(`sp_selAccesos '${codrol}'`);
         res.json(accesos.recordset);
     },
+
     async postaccesos(req, res) {
         const datains = req.body.datains;
         const usenam = '';
@@ -78,7 +79,7 @@ module.exports = {
         }
         res.json('Completado');
     },
-    /****************************************************************/
+    
 
     /************Usuario*******/
     async postusuario(req, res) {//agregar usuario
