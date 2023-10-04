@@ -5,6 +5,22 @@ const sharp = require('sharp');
 const fs = require('fs');
 
 module.exports = {
+    async getexamenes(req, res) {
+        const pool = await getConnection();
+        const roles = await pool.query(`sp_selExamenes`);
+        res.json(roles.recordset);
+    },
+    async getempresas(req, res) {
+        const empresa = req.query.empresa;
+        const pool = await getConnection();
+        const roles = await pool.query(`sp_selEmpresa ${empresa}`);
+        res.json(roles.recordset);
+    },
+    async getTipoExamenes(req, res) {
+        const pool = await getConnection();
+        const roles = await pool.query(`sp_selTipoExamen`);
+        res.json(roles.recordset);
+    },
 
     /************Paciente*******/
     async getPacienteCombos(req, res) {//llenar los combos de formulario       
