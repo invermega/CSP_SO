@@ -11,7 +11,7 @@
                 Configuración de protocolos
             </div>
         </div>
-        <div class="card-body body1">
+        <div class="card-body ">
             <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
                 <li class="nav-item" role="presentation">
                     <a class="nav-link active" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1" role="tab"
@@ -39,33 +39,35 @@
                                 <input type="text" style="width: 30%;" id="nomempresa"
                                     class="form-control form-control-sm" placeholder="Nombre de la empresa"
                                     aria-label="Server" disabled>
-                                <button type="button" class="btn input-group-text" id="nomempresa">
+                                <button type="button" onclick="LimpiarEmpresa()" class="btn input-group-text"
+                                    id="nomempresa">
                                     <i class="fa-solid fa-pen"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <!--MODAL EMPLEADO-->
+                    <!--MODAL EMPRESA-->
                     <div class="modal fade" id="modalFormEmpresa" role="dialog">
                         <div class="modal-dialog ">
                             <div class="modal-content">
                                 <div class="modal-header"
                                     style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
-                                    <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE LAS EMPRESA</h4>
+                                    <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE EMPRESAS</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="input-group input-group-sm" style="width: 100%;">
-                                        <label class="control-label input-group-text" for="empresas">EMPRESA</label>
-                                        <input class="form-control form-control-sm " id="empleadomodal"
+                                        <label class="control-label input-group-text" for="empresamodal">EMPRESA</label>
+                                        <input class="form-control form-control-sm " id="empresamodal"
                                             placeholder="Ingrese el nombre del empleado" required></input>
-                                        <label class="input-group-text form-control-sm"><i class="fa-solid fa-building mr-1"></i></label>
+                                        <label class="input-group-text form-control-sm" for="empresamodal"><i
+                                                class="fa-solid fa-building mr-1"></i></label>
                                     </div>
                                     <div class="row mb-2 mt-2">
                                         <div class="table-responsive">
                                             <table
                                                 class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
-                                                id="tableempleadomodal" style="display: none;">
+                                                id="tableempresamodal" style="display: none;">
                                                 <thead class="thead">
                                                     <tr>
                                                         <th scope="col">ACCIÓN</th>
@@ -73,12 +75,12 @@
                                                         <th scope="col">EMPLEADO</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody id="bodyempleadomodal">
+                                                <tbody id="bodyempresamodal">
                                                 </tbody>
                                             </table>
 
                                         </div>
-                                        <div class="text-center" id="cargaempleadomodal" style="display: none;">
+                                        <div class="text-center" id="cargaempresamodal" style="display: none;">
                                             <div class="d-flex justify-content-center align-items-center"
                                                 style="min-height: 5vh;">
                                                 <lottie-player src="/img/jsonimg/Cargahealth.json"
@@ -90,7 +92,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn"
                                             style="background-color: #793B8E;color: white;border-color: #793B8E;"
-                                            id="cerrarempleado" data-dismiss="modal"> <i
+                                            id="cerrarempresa" data-dismiss="modal"> <i
                                                 class="fa-solid fa-circle-xmark"></i>
                                             Cerrar</button>
                                     </div>
@@ -100,64 +102,82 @@
 
                     </div>
 
-                    <div class="row mt-2">
+                    <div class="row mt-3">
                         <div class="col-md-12">
-                            <label for="tipodoc" class="labels mr-5">
+                            <label for="tipo" class="labels mr-5">
                                 Estado</label>
-                            <label class="form-check-label mr-4" for="inlineCheckbox1">Vigente</label>
-                            <input class="form-check-input" type="radio" id="vigente" name="vigente" value="V" required>
-                            <label class="form-check-label mr-4" for="inlineCheckbox1">Histórico</label>
-                            <input class="form-check-input" type="radio" id="historico" name="historico" value="H"
-                                required>
-                            <label class="form-check-label mr-4" for="cotizacion">Cotización</label>
-                            <input class="form-check-input" type="radio" id="cotizacion" name="cotizacion" value="C"
-                                required>
+                            <label class="form-check-label mr-4" for="estado1">Vigente</label>
+                            <input class="form-check-input" type="radio" id="estado1" name="estado" value="V" required>
+                            <label class="form-check-label mr-4" for="estado2">Histórico</label>
+                            <input class="form-check-input" type="radio" id="estado2" name="estado" value="H" required>
+                            <label class="form-check-label mr-4" for="estado3">Cotización</label>
+                            <input class="form-check-input" type="radio" id="estado3" name="estado" value="C" required>
+
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-12"><label class="labels" for="tipo">Tipo</label>
-                            <select class="form-select form-control form-control-sm" id="tipo"
-                                aria-label="Default select example" required>
+                        <div class="col-md-12 input-group input-group-sm">
+                            <label class="input-group-text" for="tipo">Tipo</label>
+                            <select class="form-select" id="tipo">
                             </select>
+                            <label class="input-group-text" for="tipo"><i class="fa-solid fa-list-ul"></i></label>
                         </div>
                     </div>
                     <div class="row mt-2">
-                        <div class="col-md-12"><label class="labels" for="nombre">Nombre
-                            </label><input type="text" class="form-control form-control-sm" value="" id="nombre"
+                        <div class="col-md-12 input-group input-group-sm">
+                            <label class="input-group-text" for="nombre">Nombre</label>
+                            <input type="text" class="form-control form-control-sm" value="" id="nombre"
+                                placeholder="Ingrese el nombre del protocolo" required>
+                            <label class="input-group-text" for="nombre"><i class="fa-solid fa-font"></i></label>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-12 input-group input-group-sm">
+                            <label class="input-group-text" for="nombre">Comentarios</label>
+                            <textarea type="text" class="form-control form-control-sm" value="" id="comentario"
+                                placeholder="Ingrese algún comentario" required></textarea>
+                            <label class="input-group-text" for="comentario"><i class="fa-solid fa-comment"></i></label>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-md-6 input-group input-group-sm">
+                            <label class="input-group-text" for="cadcer">Tiempo de caducidad de
+                                certificado de aptitud</label>
+                            <input type="text" class="form-control form-control-sm"
+                                oninput="limitarCaracteresNumericos(this, 9);" value="" id="cadcer"
+                                placeholder="Ingrese el tiempo en años" required>
+                            <label class="input-group-text" for="cadcer"><i
+                                    class="fa-solid fa-calendar-day"></i></label>
+                        </div>
+                        <div class="col-md-6 input-group input-group-sm">
+                            <label class="input-group-text" for="fecven">Fecha de vencimiento</label>
+                            <input type="date" class="form-control form-control-sm" value="" id="fecven"
                                 placeholder="Ingrese el nombre" required>
                         </div>
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-md-12"><label class="labels" for="comentario">Comentarios
-                            </label><textarea type="text" class="form-control form-control-sm" value="" id="comentario"
-                                placeholder="Ingrese algún comentario" required></textarea>
-                        </div>
+                    <div class="body1">
+                        <div class="mt-5 text-center"><button onclick="event.preventDefault();guardar()" class="btn btn2"
+                            type="submit" id="Guardar">
+                            <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
+                        </button>
                     </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6"><label class="labels" for="cadcer">Tiempo de caducidad de
-                                certificado de aptitud</label>
-                            <select class="form-select form-control form-control-sm" id="cadcer"
-                                aria-label="Default select example" required>
-                            </select>
-                        </div>
-                        <div class="col-md-6"><label class="labels" for="fecvcto">Fecha de vencimiento</label>
-                            <input type="date" class="form-control btn-sm" id="fecvcto" min="1900-01-01"
-                                max="2100-12-31" step="1" required>
-                        </div>
                     </div>
+                    
                 </div>
                 <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
                     <div class="table-responsive scrollable-modal" id="tablaaccesos">
-                        <table class="records_list table table-sm table-striped table-bordered table-hover letra"
-                            id="mydatatable">
+                        <table class="records_list table table-sm table-hover letra" id="mydatatable">
                             <thead class="thead sticky-top">
                                 <tr>
-                                    <th class="col" scope="col">ID</th>
-                                    <th scope="col">NOMBRE DEL ROL</th>
-                                    <th scope="col">ACCIONES</th>
+                                    <th scope="col">GRUPO</th>
+                                    <th scope="col">EXÁMEN</th>
+                                    <th scope="col">CHECK</th>
+                                    <th scope="col">GRUPO ETARIO</th>
+                                    <th scope="col">PRECIO UNITARIO</th>
+                                    <th scope="col">COMENTARIO</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tbodyexamen">
 
                             </tbody>
                         </table>
@@ -170,7 +190,9 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+
         </div>
     </div>
 </div>
