@@ -1,6 +1,6 @@
 const { getConnection } = require('../database/conexionsql');
 
-function permisos(parametro) {
+function permisos(parametro) {   
     return true;
 }
 
