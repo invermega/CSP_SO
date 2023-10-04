@@ -34,14 +34,8 @@ module.exports = {
             res.render('configuracion/401', { layout: false });
         }
     },
-<<<<<<< HEAD
     async renderepaciente(req, res) {
         res.render('entidades/paciente', { layout: false });
     },
     
 };
-=======
-};
-
-
->>>>>>> 83b8232854831b80bad01c4c2748dcc686da9e71
