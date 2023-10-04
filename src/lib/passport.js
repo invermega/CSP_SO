@@ -14,15 +14,15 @@ passport.use('local.iniciarsesion', new LocalStrategy({
         const pool = await getConnection();
         const result = await pool.request()
             .input('username', sql.VarChar, username)
-            .query(`SELECT * FROM Usuario WHERE dniusu = @username and estintrausu='S'`);
+            .query(`SELECT * FROM USUARIO WHERE usuario = @username and estado='S'`);
 
         const rows = result.recordsets[0];
         
         if (rows.length > 0) {
             const user = rows[0];
-            console.log(user);
-            const validPassword = await helpers.matchPassword(password, user.passusu);
+            const validPassword = await helpers.matchPassword(password, user.contraseña);
             if (validPassword) {
+
                 done(null, user);
                 //done(null, user, {message: 'Acceso correcto'});
             } else {
@@ -39,7 +39,7 @@ passport.use('local.iniciarsesion', new LocalStrategy({
 }));
 
 passport.serializeUser((user, done) => {
-    done(null, user.idusu);
+    done(null, user.iduser);
 });
 
 passport.deserializeUser(async (id, done) => {
@@ -47,7 +47,7 @@ passport.deserializeUser(async (id, done) => {
         const pool = await getConnection();
         const result = await pool.request()
             .input('id', sql.Int, id)
-            .query(`SELECT * FROM Usuario WHERE idusu = @id and estintrausu='S'`);
+            .query(`SELECT * FROM USUARIO WHERE iduser = @id and estado='S'`);
 
         const rows = result.recordsets[0];
         done(null, rows[0]);

@@ -3,7 +3,7 @@ const router = express.Router();
 const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 const controllerrender = require("../controllers/controllerrender");
 
-router.get('/',isLoggedIn, controllerrender.getbienvenida);
+router.get('/',isLoggedIn, controllerrender.renderbienvenida);
 
 module.exports = router;
 

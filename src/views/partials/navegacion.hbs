@@ -84,24 +84,11 @@
             }
         }
 
-        /*function mostrarmodulos() {
-            if ({{ user.idrol }} == '11') {
-            mostraretiqueta("indicadores");
-        } else {
-            mostraretiqueta("dashboard");
-            mostraretiqueta("crm");
-            //mostraretiqueta("reclamos");
-            mostraretiqueta("admision");
-            mostraretiqueta("gestionpaciente");
-            mostraretiqueta("farmacia");
-            mostraretiqueta("ticketsoporte");
-            mostraretiqueta("activosfijos");
-            mostraretiqueta("auditoriamedica");
-            mostraretiqueta("indicadores");
-            mostraretiqueta("gestionpersonal");
-            mostraretiqueta("opcionessistema");
-        }*/
-        mostraretiqueta("opcionessistema");
+        function mostrarmodulos() {
+           
+            mostraretiqueta("historiaclinica");
+            mostraretiqueta("entidades");
+            mostraretiqueta("configuracion");
 
         const contentContainer = $('#contenedoropciones');
         const loadingHtml = `
@@ -132,16 +119,10 @@
                         url: url,
                         method: 'GET',
                     });
-
-                    if (response.includes('login-card-description')) {
-                        alert('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.');
-                        window.location.href = '/iniciarsesion'; // Cambia a la ruta correcta
-                    } else {
                         contentContainer.animate({ opacity: 0 }, 1000, () => {
                             contentContainer.html(response);
                             contentContainer.animate({ opacity: 1 }, 500);
                         });
-                    }
                 } catch (error) {
                     console.error(error);
                     // Mostrar un mensaje de error al usuario si lo deseas
@@ -176,7 +157,5 @@
             }
         });
     </script>
-
-</body>
-
-</html>
+</body >
+</html >

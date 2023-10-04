@@ -10,23 +10,57 @@
                 </div>
                 Dashboard
             </a>-->
-            <a class="nav-link collapsed ocultaretiqueta" id="opcionessistema" href="#" data-bs-toggle="collapse"
-                data-bs-target="#collapsePagessss" aria-expanded="false" aria-controls="collapsePagessss">
-                <div class="sb-nav-link-icon"><i class="fas fa-cogs animate__animated animate__rollIn "></i>
+            <a class="nav-link collapsed ocultaretiqueta" id="historiaclinica" href="#" data-bs-toggle="collapse"
+                data-bs-target="#collapsePageshc" aria-expanded="false" aria-controls="collapsePageshc">
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-book-medical animate__animated animate__rollIn "></i>
                 </div>
-                Opciones de sistema
+                Historia Clínica
                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
             </a>
-            <div class="collapse" id="collapsePagessss" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+            <div class="collapse" id="collapsePageshc" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                    <a class="nav-link opcion collapsed" href="/paciente" data-bs-target="#pagesCollapseAuth"
+                        aria-expanded="false" aria-controls="pagesCollapseAuth">
+                        Pacientes
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+                </nav>
+            </div>
+
+            <a class="nav-link collapsed ocultaretiqueta" id="entidades" href="#" data-bs-toggle="collapse"
+                data-bs-target="#collapsePagesen" aria-expanded="false" aria-controls="collapsePagesen">
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-users-gear animate__animated animate__rollIn "></i>
+                </div>
+                Entidades
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapsePagesen" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                    <a class="nav-link opcion collapsed" href="/protocolo" data-bs-target="#pagesCollapseAuth"
+                        aria-expanded="false" aria-controls="pagesCollapseAuth">
+                        Protocolo
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+                </nav>
+            </div>
+
+            <a class="nav-link collapsed ocultaretiqueta" id="configuracion" href="#" data-bs-toggle="collapse"
+                data-bs-target="#collapsePagesco" aria-expanded="false" aria-controls="collapsePagesco">
+                <div class="sb-nav-link-icon"><i class="fas fa-cogs animate__animated animate__rollIn "></i>
+                </div>
+                Configuración
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapsePagesco" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                     <a class="nav-link opcion collapsed" href="/nuevousuario" data-bs-target="#pagesCollapseAuth"
                         aria-expanded="false" aria-controls="pagesCollapseAuth">
-                        Ingresar usuario
+                        Usuarios
                         <div class="sb-sidenav-collapse-arrow"></div>
                     </a>
-                    <a class="nav-link opcion collapsed" href="/nuevorol" data-bs-target="#pagesCollapseAuth"
+                    <a class="nav-link opcion collapsed" href="/permisos" data-bs-target="#pagesCollapseAuth"
                         aria-expanded="false" aria-controls="pagesCollapseAuth">
-                        Ingresar rol
+                        Permisos
                         <div class="sb-sidenav-collapse-arrow"></div>
                     </a>
                 </nav>
