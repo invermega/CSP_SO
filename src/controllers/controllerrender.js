@@ -1,7 +1,11 @@
+const { getConnection } = require('../database/conexionsql');
 
+function permisos(parametro) {
+    return true;
+}
 
 module.exports = {
-    //render de Bienvenida
+    //render de Bienvenida   
     async renderIniciarSesion(req, res) {
         res.render('auth/iniciarsesion', { layout: false });
     },
@@ -17,9 +21,14 @@ module.exports = {
         res.render('historiaclinica/paciente', { layout: false });
     },
     //entidades
-    async renderprotocolo(req, res) {
-        res.render('entidades/protocolo', { layout: false });
+    renderprotocolo(req, res) {
+        const parametro = "US";
+        if (permisos(parametro)) { 
+            res.render('entidades/protocolo', { layout: false });
+        } else {
+            res.render('configuracion/401', { layout: false });
+        }
     },
-    
-    
 };
+
+
