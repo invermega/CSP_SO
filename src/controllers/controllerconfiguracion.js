@@ -1,5 +1,10 @@
 const { getConnection } = require('../database/conexionsql');
 const passport = require('passport');
+const helpers = require('../lib/helpers');
+const path = require('path');
+const sharp = require('sharp');
+const fs = require('fs');
+
 
 module.exports = {
     async postiniciarSesion(req, res, next) {
@@ -42,36 +47,63 @@ module.exports = {
     },
     async getaccesos(req, res) {
         const { codrol } = req.query;
+        
         const pool = await getConnection();
         const accesos = await pool.query(`sp_selAccesos '${codrol}'`);
         res.json(accesos.recordset);
     },
-    async postaccesos(req, res) {
-        const datains = req.body.datains;
+
+    /************Usuario*******/
+    async postusuario(req, res) {//agregar usuario
+        const { usuario, contrasena, celular, app, apm, Nombres, fecnac, DNI, correo, direccion, sexo, codrol, iduser, opc, picuser } = req.body;
+        //console.log(req.body);
+        const passencrypt = await helpers.EncriptarPass(contrasena);
         const usenam = '';
         const hostname = '';
-        const pool = await getConnection();
-        for (let i = 0; i < datains.length; i++) {
-            const codrol = datains[i].codrol;
-            const opcsis = datains[i].opcsis;
-            const estado = datains[i].estado;
-            const lectura = datains[i].lectura;
-            const escritura = datains[i].escritura;
-            await pool.query(`sp_insAccesos '${opcsis}','${codrol}','${estado}','${lectura}','${escritura}','${usenam}','${hostname}'`);
+        const codrolUser = 1;
+        const imagenBase64 = picuser;
+        const rutaSalida = path.join(__dirname, '..', 'public', 'img', 'usuario', DNI + '.webp');
+        if (fs.existsSync(rutaSalida)) {
+            fs.unlinkSync(rutaSalida);
         }
-        res.json('Completado');
-    },
-    async delaccesos(req, res) {
-        const datadel = req.body.datadel;
+        const imagenBase64SinPrefijo = imagenBase64.replace(/^data:image\/png;base64,/, '');
+        const imagenBinaria = Buffer.from(imagenBase64SinPrefijo, 'base64');
+        await sharp(imagenBinaria)
+            .toFormat('webp')
+            .toFile(rutaSalida);
         const pool = await getConnection();
-        for (let i = 0; i < datadel.length; i++) {
-            const codrol = datadel[i].codrol;
-            const opcsis = datadel[i].opcsis;
-            await pool.query(`sp_delAccesos '${opcsis}','${codrol}'`);
-        }
-        res.json('Completado');
+        const response = await pool.query(`sp_insUsuario '${usuario.toUpperCase()}','${passencrypt}',${celular},'${app.toUpperCase()}','${apm.toUpperCase()}','${Nombres.toUpperCase()}','${DNI}','${fecnac}','${correo.toUpperCase()}','${direccion.toUpperCase()}','${codrol}', '${sexo.toUpperCase()}','${usenam}','${hostname}','${codrolUser}','${iduser}','${opc}'`);
+        console.log(response.recordset);
+        res.json(response.recordset);
     },
-    
+    async getusuarios(req, res) {//listar usuario para edicion
+        const { parametro } = req.query;
+        const codrolUser = 1;
+        const pool = await getConnection();
+        const response = await pool.query(`sp_selusuarios '${codrolUser}','${parametro}'`);
+
+        res.json(response.recordset);
+    },
+    async deleteusuarios(req, res) {//eliminar usuario
+        const { iduser } = req.body;
+        const codrolUser = 1;
+        const pool = await getConnection();
+        const response = await pool.query(`sp_delUsuario '${codrolUser}','${iduser}'`);
+
+        res.json(response.recordset);
+    },
+    async resetpass(req, res) {//resetear contraseña
+        const { iduser } = req.body;        
+        const codrolUser = 1;
+        const pool = await getConnection();
+        const user = req.user.usuario;
+        const passencrypt = await helpers.EncriptarPass(user);
+        const response = await pool.query(`sp_editPassUser '${codrolUser}','${iduser}','${passencrypt}'`);
+
+        res.json(response.recordset);
+    },
+
+    /*************************/
 
 
 };
