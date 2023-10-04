@@ -1,8 +1,10 @@
+
 const { getConnection } = require('../database/conexionsql');
 
 function permisos(parametro) {
     return true;
 }
+
 
 module.exports = {
     //render de Bienvenida   
@@ -12,7 +14,10 @@ module.exports = {
     async renderbienvenida(req, res) {
         res.render('inicio');
     },
-    //configuracion
+    //render de configuracion
+    async renderusuario(req, res) {
+        res.render('configuracion/usuario', { layout: false });
+    },
     async renderroles(req, res) {
         res.render('configuracion/permisos', { layout: false });
     },
