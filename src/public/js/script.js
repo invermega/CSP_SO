@@ -662,3 +662,27 @@ function obtenerContenidoGuiadet(cabeceraData, detalleData) {
 function limpiarImput(){
   $('input').val('');
 }
+
+function validarFormulario2(contenedor, incluirIds) {
+  let camposValidos = true;
+  $(contenedor).find('input, select, textarea').each(function () {
+    const id = $(this).attr('id');
+    if (incluirIds && incluirIds.includes(id)) {
+      $(this).removeClass('is-valid');
+      $(this).addClass('is-invalid');
+      return true;
+    } else {
+      if (!$(this).val()) {
+        camposValidos = false;
+        $(this).addClass('is-valid');
+      } else {
+        $(this).removeClass('is-valid');
+        $(this).addClass('is-invalid');
+      }
+    }
+  });
+  if (!camposValidos) {
+    mensaje('error', 'Por favor, complete todos los campos.', 1800);
+  }
+  return camposValidos;
+}

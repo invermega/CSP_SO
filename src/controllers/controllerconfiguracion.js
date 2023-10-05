@@ -34,7 +34,7 @@ module.exports = {
 
     async postgrupousuario(req, res) {
         const { nomrol } = req.body;
-        const usenam = '';
+        const usenam = req.user.usuario;
         const hostname = '';
         const pool = await getConnection();
         await pool.query(`sp_insRolsistema '${nomrol.toUpperCase()}','${usenam}','${hostname}'`);
@@ -55,7 +55,7 @@ module.exports = {
 
     async postaccesos(req, res) {
         const datains = req.body.datains;
-        const usenam = '';
+        const usenam = req.user.usuario;
         const hostname = '';
         const pool = await getConnection();
         for (let i = 0; i < datains.length; i++) {
@@ -85,7 +85,7 @@ module.exports = {
         const { usuario, contrasena, celular, app, apm, Nombres, fecnac, DNI, correo, direccion, sexo, codrol, iduser, opc, picuser } = req.body;
         //console.log(req.body);
         const passencrypt = await helpers.EncriptarPass(contrasena);
-        const usenam = '';
+        const usenam = req.user.usuario;
         const hostname = '';
         const codrolUser = 1;
         const imagenBase64 = picuser;

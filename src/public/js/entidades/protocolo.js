@@ -1,6 +1,7 @@
 $(document).ready(function () {
   getexamenes();
   getTipoExamen();
+  CalcularFecVen();
 });
 
 function getexamenes() {
@@ -18,7 +19,7 @@ function getexamenes() {
           const grupoetario = examen.grupoetario;
           var selectOptions = "";
           const grupoetarioArray = JSON.parse(grupoetario);
-          
+
           grupoetarioArray.forEach((item) => {
             selectOptions += `<option value="${item.raneta_id}">${item.desrango}</option>`;
           });
@@ -72,7 +73,6 @@ function activar(opcexa) {
   }
 }
 
-
 document.getElementById("empresamodal").addEventListener("keydown", function (event) {
   if (event.keyCode === 13) { // Verifica si se presionó la tecla Enter
     mostrarDiv('cargaempresamodal');
@@ -121,7 +121,7 @@ function AgregarEmpresa(btn) {
   var filaOrigen = $(btn).closest("tr");
   var codemp = filaOrigen.find("td:eq(1)").text();
   var razsoc = filaOrigen.find("td:eq(2)").text();
-  var codempresa = document.getElementById("codempresa");
+  var codempresa = document.getElementById("codemp");
   var nomempresa = document.getElementById("nomempresa");
   codempresa.value = codemp;
   nomempresa.value = razsoc;
@@ -134,7 +134,7 @@ function getTipoExamen() {
     url: '/tipoexamen',
     method: "GET",
     success: function (TipoExamenes) {
-      let combo = $('#tipo');
+      let combo = $('#tipexa_id');
       combo.html('');
       TipoExamenes.forEach(TipoExamen => {
         combo.append(`<option value="${TipoExamen.tipexa_id}">${TipoExamen.desexa}</option>
@@ -148,11 +148,112 @@ function getTipoExamen() {
   });
 }
 
-function LimpiarEmpresa(btn){
-  var codempresa = document.getElementById("codempresa");
+function LimpiarEmpresa(btn) {
+  var codempresa = document.getElementById("codemp");
   var nomempresa = document.getElementById("nomempresa");
   codempresa.value = "";
   nomempresa.value = "";
 }
-  
+
+function CalcularFecVen() {
+  var cadcer = parseInt(document.getElementById("tiemval_cermed").value, 10);
+  if (!isNaN(cadcer)) {
+    var fechaActual = new Date();
+    fechaActual.setFullYear(fechaActual.getFullYear() + cadcer);
+    var año = fechaActual.getFullYear();
+    var mes = (fechaActual.getMonth() + 1).toString().padStart(2, '0');
+    var dia = fechaActual.getDate().toString().padStart(2, '0');
+    var fechaFormateada = año + '-' + mes + '-' + dia;
+    document.getElementById("fecvcto_cermed").value = fechaFormateada;
+  } else {
+
+  }
+}
+
+function Guardar() {
+  var table = document.getElementById('mydatatable');
+  var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+  var datains = [];
+  for (var i = 0; i < rows.length; i++) {
+    var checkboxes = rows[i].getElementsByTagName('input');
+    var value = checkboxes[0].value;
+    var soexa = value.split('_')[0];
+    var codpru_id = value.split('_')[1];
+    var select = document.getElementById(`select_${soexa}_${codpru_id}`).value;
+    var precio = document.getElementById(`precio_${soexa}_${codpru_id}`).value;
+    var comen = document.getElementById(`comen_${soexa}_${codpru_id}`).value;
+    var rowData = {
+      codpru_id: codpru_id,
+      soexa: soexa,
+      raneta_id: select,
+      precio: precio,
+      obs: comen
+    };
+
+    if (checkboxes[0].checked) {
+      datains.push(rowData);
+    }
+  }
+
+  if (datains.length === 0) {
+    mensajecentral('error', 'No ha seleccionado ningún examen.');
+  } else {
+    const codemp = document.getElementById("codemp").value
+    const nompro = document.getElementById("nompro").value
+    const comentarios = document.getElementById("comentarios").value
+    const tipexa_id = document.getElementById("tipexa_id").value
+    var vigente = document.getElementById("vigente");
+    var historico = document.getElementById("historico");
+    var cotizacion = document.getElementById("cotizacion");
+    let estado;
+    if (vigente.checked === true) {
+      estado = vigente.value;
+    }
+    if (historico.checked === true) {
+      estado = historico.value;
+    }
+    if (cotizacion.checked === true) {
+      estado = cotizacion.value;
+    }
+    const tiemval_cermed = document.getElementById("tiemval_cermed").value
+    const fecvcto_cermed = document.getElementById("fecvcto_cermed").value
+
+    //console.log(codemp, nompro, comentarios, tipexa_id, estado, tiemval_cermed, fecvcto_cermed);
+    const datosCompletos = {
+      codemp: codemp,
+      nompro: nompro,
+      comentarios: comentarios,
+      tipexa_id: tipexa_id,
+      estado: estado,
+      tiemval_cermed: tiemval_cermed,
+      fecvcto_cermed: fecvcto_cermed,
+      datains: datains
+    };
+
+    fetch('/protocolo', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(datosCompletos)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Error en la solicitud');
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data[0]);
+        mensaje(data[0].icono, data[0].mensaje, 1500);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
+}
+
+
+
+
 

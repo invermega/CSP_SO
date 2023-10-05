@@ -6,9 +6,12 @@ const controllerrender = require("../controllers/controllerrender");
 const controllerCO = require("../controllers/controllerconfiguracion");
 const { } = require('../lib/permisos');
 
+//Login
 router.get('/iniciarsesion', isNotLoggedIn, controllerrender.renderIniciarSesion);
 router.post('/iniciarsesion', isNotLoggedIn, controllerCO.postiniciarSesion);
 router.get('/salir', isLoggedIn, controllerCO.CerrarSesion);
+
+//Permisos
 router.get('/permisos', isLoggedIn, controllerrender.renderroles);
 router.post('/grupousuario',isLoggedIn, controllerCO.postgrupousuario);
 router.get('/listaroles',isLoggedIn, controllerCO.getroles);

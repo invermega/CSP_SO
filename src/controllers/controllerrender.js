@@ -3,9 +3,8 @@ const { getConnection } = require('../database/conexionsql');
 async function permisos(opcsis, ruta, req, res) {
     const pool = await getConnection();
     const permiso = await pool.query(`sp_selVerificarPermisos '${req.user.codrol}','${opcsis}'`);
-   
     if (permiso.recordset[0].acceso === 1) {
-        
+
         res.render(ruta, { layout: false });
     } else {
         res.render('configuracion/401', { layout: false });
@@ -24,7 +23,6 @@ module.exports = {
     async renderusuario(req, res) {
         const parametro="US";
         permisos(parametro, 'configuracion/usuario',req,res)
-
     },
     async renderroles(req, res) {
         const parametro="PE"
@@ -34,12 +32,11 @@ module.exports = {
     async renderpacientes(req, res) {
         const parametro ="PC" ;
         permisos(parametro,'historiaclinica/paciente', req,res)
-
     },
     //entidades
     renderprotocolo(req, res) {
         const parametro = "PT";
-        permisos(parametro, 'entidades/protocolo', req, res)
+        permisos(parametro,'entidades/protocolo', req, res)
     },
 };
 
