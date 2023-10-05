@@ -11,7 +11,6 @@ async function permisos(opcsis, ruta, req, res) {
     }
 }
 
-
 module.exports = {
     //render de Bienvenida   
     async renderIniciarSesion(req, res) {
@@ -24,7 +23,6 @@ module.exports = {
     async renderusuario(req, res) {
         const parametro="US";
         permisos(parametro, 'configuracion/usuario',req,res)
-
     },
     async renderroles(req, res) {
         const parametro="PE"
@@ -34,16 +32,11 @@ module.exports = {
     async renderpacientes(req, res) {
         const parametro ="PC" ;
         permisos(parametro,'historiaclinica/paciente', req,res)
-
     },
     //entidades
     renderprotocolo(req, res) {
-        const parametro = "US";
-        if (permisos(parametro)) { 
-            res.render('entidades/protocolo', { layout: false });
-        } else {
-            res.render('configuracion/401', { layout: false });
-        }
+        const parametro = "PT";
+        permisos(parametro,'entidades/protocolo', req,res)
     },
 };
 

@@ -183,11 +183,11 @@ function Guardar() {
     var precio = document.getElementById(`precio_${soexa}_${codpru_id}`).value;
     var comen = document.getElementById(`comen_${soexa}_${codpru_id}`).value;
     var rowData = {
-      soexa: soexa,
       codpru_id: codpru_id,
-      select: select,
+      soexa: soexa,
+      raneta_id: select,
       precio: precio,
-      comen: comen
+      obs: comen
     };
 
     if (checkboxes[0].checked) {
@@ -244,7 +244,8 @@ function Guardar() {
         return response.json();
       })
       .then(data => {
-        console.log('Respuesta del servidor:', data);
+        console.log(data[0]);
+        mensaje(data[0].icono, data[0].mensaje, 1500);
       })
       .catch(error => {
         console.error('Error:', error);
