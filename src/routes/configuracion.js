@@ -6,9 +6,12 @@ const controllerrender = require("../controllers/controllerrender");
 const controllerCO = require("../controllers/controllerconfiguracion");
 const { } = require('../lib/permisos');
 
+//Login
 router.get('/iniciarsesion', isNotLoggedIn, controllerrender.renderIniciarSesion);
 router.post('/iniciarsesion', isNotLoggedIn, controllerCO.postiniciarSesion);
 router.get('/salir', isLoggedIn, controllerCO.CerrarSesion);
+
+//Permisos
 router.get('/permisos', isLoggedIn, controllerrender.renderroles);
 router.post('/grupousuario',isLoggedIn, controllerCO.postgrupousuario);
 router.get('/listaroles',isLoggedIn, controllerCO.getroles);
@@ -17,8 +20,8 @@ router.post('/accesos',isLoggedIn, controllerCO.postaccesos);
 router.delete('/accesos',isLoggedIn, controllerCO.delaccesos);
 
 //usuarios
-router.get('/usuarios', isNotLoggedIn, controllerrender.renderusuario);
-    router.post('/usuario',controllerCO.postusuario);
+router.get('/usuarios', isLoggedIn, controllerrender.renderusuario);
+router.post('/usuario',controllerCO.postusuario);
 router.get('/listarusuarios',controllerCO.getusuarios)
 router.post('/editarPass',controllerCO.resetpass);
 router.delete('/deleteUser',controllerCO.deleteusuarios);

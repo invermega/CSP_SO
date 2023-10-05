@@ -1,8 +1,15 @@
 
 const { getConnection } = require('../database/conexionsql');
 
-function permisos(parametro) {   
-    return true;
+async function permisos(opcsis, ruta, req, res) {
+    const pool = await getConnection();
+    const permiso = await pool.query(`sp_selVerificarPermisos '${req.user.codrol}','${opcsis}'`);
+    if (permiso.recordset[0].acceso === 1) {
+        console.log(ruta);
+        res.render(ruta, { layout: false });
+    } else {
+        res.render('configuracion/401', { layout: false });
+    }
 }
 
 
@@ -27,12 +34,8 @@ module.exports = {
     },
     //entidades
     renderprotocolo(req, res) {
-        const parametro = "US";
-        if (permisos(parametro)) { 
-            res.render('entidades/protocolo', { layout: false });
-        } else {
-            res.render('configuracion/401', { layout: false });
-        }
+        const opcsis = "PT";
+        permisos(opcsis, 'entidades/protocolo', req, res)
     },
 };
 

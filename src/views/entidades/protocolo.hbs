@@ -28,8 +28,8 @@
                     <div class="row mt-2">
                         <div class="col-md-12 form-inline col-sm-12 form-group mb-1 mt-1">
                             <div class="input-group input-group-sm" style="width: 100%;">
-                                <label class="control-label input-group-text" for="codempresa">Empresa</label>
-                                <input type="text" oninput="limitarCaracteresNumericos(this, 9);" id="codempresa"
+                                <label class="control-label input-group-text" for="codemp">Empresa</label>
+                                <input type="text" oninput="limitarCaracteresNumericos(this, 9);" id="codemp"
                                     class="form-control form-control-sm" placeholder="Código de la empresa"
                                     aria-label="Username" disabled>
                                 <button type="button" data-toggle="modal" data-target="#modalFormEmpresa"
@@ -103,66 +103,73 @@
                     </div>
 
                     <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label for="tipo" class="labels mr-5">
-                                Estado</label>
-                            <label class="form-check-label mr-4" for="estado1">Vigente</label>
-                            <input class="form-check-input" type="radio" id="estado1" name="estado" value="V" required>
-                            <label class="form-check-label mr-4" for="estado2">Histórico</label>
-                            <input class="form-check-input" type="radio" id="estado2" name="estado" value="H" required>
-                            <label class="form-check-label mr-4" for="estado3">Cotización</label>
-                            <input class="form-check-input" type="radio" id="estado3" name="estado" value="C" required>
+                        <div class="col-md-1">
+                            <label for="vigente" class="labels mr-5">
+                                Estado:</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-check-input" type="radio" id="vigente" name="estado" value="V" required
+                                checked>
+                            <label class="form-check-label mr-4" for="vigente">Vigente</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-check-input" type="radio" id="historico" name="estado" value="H" required>
+                            <label class="form-check-label mr-4" for="historico">Histórico</label>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-check-input" type="radio" id="cotizacion" name="estado" value="C" required>
+                            <label class="form-check-label mr-4" for="cotizacion">Cotización</label>
+                        </div>
+                    </div>
 
-                        </div>
-                    </div>
                     <div class="row mt-2">
                         <div class="col-md-12 input-group input-group-sm">
-                            <label class="input-group-text" for="tipo">Tipo</label>
-                            <select class="form-select" id="tipo">
+                            <label class="input-group-text" for="tipexa_id">Tipo</label>
+                            <select class="form-select" id="tipexa_id">
                             </select>
-                            <label class="input-group-text" for="tipo"><i class="fa-solid fa-list-ul"></i></label>
+                            <label class="input-group-text" for="tipexa_id"><i class="fa-solid fa-list-ul"></i></label>
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-12 input-group input-group-sm">
-                            <label class="input-group-text" for="nombre">Nombre</label>
-                            <input type="text" class="form-control form-control-sm" value="" id="nombre"
+                            <label class="input-group-text" for="nompro">Nombre</label>
+                            <input type="text" class="form-control form-control-sm" value="" id="nompro"
                                 placeholder="Ingrese el nombre del protocolo" required>
-                            <label class="input-group-text" for="nombre"><i class="fa-solid fa-font"></i></label>
+                            <label class="input-group-text" for="nompro"><i class="fa-solid fa-font"></i></label>
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-12 input-group input-group-sm">
-                            <label class="input-group-text" for="nombre">Comentarios</label>
-                            <textarea type="text" class="form-control form-control-sm" value="" id="comentario"
+                            <label class="input-group-text" for="comentarios">Comentarios</label>
+                            <textarea type="text" class="form-control form-control-sm" value="" id="comentarios"
                                 placeholder="Ingrese algún comentario" required></textarea>
-                            <label class="input-group-text" for="comentario"><i class="fa-solid fa-comment"></i></label>
+                            <label class="input-group-text" for="comentarios"><i class="fa-solid fa-comment"></i></label>
                         </div>
                     </div>
                     <div class="row mt-2">
                         <div class="col-md-6 input-group input-group-sm">
-                            <label class="input-group-text" for="cadcer">Tiempo de caducidad de
+                            <label class="input-group-text" for="tiemval_cermed">Tiempo de caducidad de
                                 certificado de aptitud</label>
                             <input type="text" class="form-control form-control-sm"
-                                oninput="limitarCaracteresNumericos(this, 9);" value="" id="cadcer"
-                                placeholder="Ingrese el tiempo en años" required>
-                            <label class="input-group-text" for="cadcer"><i
+                                oninput="limitarCaracteresNumericos(this, 2); CalcularFecVen(this);" value="1"
+                                id="tiemval_cermed" placeholder="Ingrese el tiempo en años" required>
+                            <label class="input-group-text" for="tiemval_cermed"><i
                                     class="fa-solid fa-calendar-day"></i></label>
                         </div>
                         <div class="col-md-6 input-group input-group-sm">
-                            <label class="input-group-text" for="fecven">Fecha de vencimiento</label>
-                            <input type="date" class="form-control form-control-sm" value="" id="fecven"
-                                placeholder="Ingrese el nombre" required>
+                            <label class="input-group-text" for="fecvcto_cermed">Fecha de vencimiento</label>
+                            <input type="date" class="form-control form-control-sm" value="" id="fecvcto_cermed"
+                                placeholder="Ingrese el nombre" required disabled>
                         </div>
                     </div>
                     <div class="body1">
-                        <div class="mt-5 text-center"><button onclick="event.preventDefault();guardar()" class="btn btn2"
-                            type="submit" id="Guardar">
-                            <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
-                        </button>
+                        <div class="mt-5 text-center"><button onclick="event.preventDefault();Guardar()"
+                                class="btn btn2" type="submit" id="Guardar">
+                                <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
+                            </button>
+                        </div>
                     </div>
-                    </div>
-                    
+
                 </div>
                 <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
                     <div class="table-responsive scrollable-modal" id="tablaaccesos">
@@ -183,9 +190,8 @@
                     </div>
                     <div class="text-center" id="cargaacc" style="display: none;">
                         <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
-                            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
-                                background="transparent" speed="1" style="width: 300px; height: 300px;" loop
-                                autoplay></lottie-player>
+                            <lottie-player src="../img/jsonimg/Cargahealth.json" background="transparent" speed="1"
+                                style="width: 300px; height: 300px;" loop autoplay></lottie-player>
                         </div>
                     </div>
                 </div>
@@ -193,6 +199,5 @@
         </div>
     </div>
 </div>
-
 
 <script src="/js/entidades/protocolo.js"> </script>

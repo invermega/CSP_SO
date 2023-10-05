@@ -1,6 +1,7 @@
 const { getConnection } = require('../database/conexionsql');
 
 module.exports = {
+    //Porotocolo
     async getexamenes(req, res) {
         const pool = await getConnection();
         const roles = await pool.query(`sp_selExamenes`);
@@ -13,6 +14,12 @@ module.exports = {
         res.json(roles.recordset);
     },
     async getTipoExamenes(req, res) {
+        const pool = await getConnection();
+        const roles = await pool.query(`sp_selTipoExamen`);
+        res.json(roles.recordset);
+    }, 
+    async postprotocolo(req, res) {
+        const data = req.body;
         const pool = await getConnection();
         const roles = await pool.query(`sp_selTipoExamen`);
         res.json(roles.recordset);
