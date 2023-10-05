@@ -1,4 +1,3 @@
-
 const { getConnection } = require('../database/conexionsql');
 
 async function permisos(opcsis, ruta, req, res) {
@@ -23,20 +22,28 @@ module.exports = {
     },
     //render de configuracion
     async renderusuario(req, res) {
-        res.render('configuracion/usuario', { layout: false });
+        const parametro="US";
+        permisos(parametro, 'configuracion/usuario',req,res)
+
     },
     async renderroles(req, res) {
-        res.render('configuracion/permisos', { layout: false });
+        const parametro="PE"
+        permisos(parametro,'configuracion/permisos',req,res);
     },
     //historiaclinica
     async renderpacientes(req, res) {
-        res.render('historiaclinica/paciente', { layout: false });
+        const parametro ="PC" ;
+        permisos(parametro,'historiaclinica/paciente', req,res)
+
     },
     //entidades
     renderprotocolo(req, res) {
-        const opcsis = "PT";
-        permisos(opcsis, 'entidades/protocolo', req, res)
+        const parametro = "US";
+        if (permisos(parametro)) { 
+            res.render('entidades/protocolo', { layout: false });
+        } else {
+            res.render('configuracion/401', { layout: false });
+        }
     },
 };
-
 
