@@ -21,6 +21,10 @@ router.delete('/accesos',isLoggedIn, controllerCO.delaccesos);
 
 //usuarios
 router.get('/usuarios', isLoggedIn, controllerrender.renderusuario);
+router.post('/usuario',isLoggedIn,controllerCO.postusuario);
+router.get('/listarusuarios',isLoggedIn,controllerCO.getusuarios)
+router.post('/editarPass',isLoggedIn,controllerCO.resetpass);
+router.delete('/deleteUser',isLoggedIn,controllerCO.deleteusuarios);
 router.post('/usuario',controllerCO.postusuario);
 router.get('/listarusuarios',controllerCO.getusuarios)
 router.post('/editarPass',controllerCO.resetpass);

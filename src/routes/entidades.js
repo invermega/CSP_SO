@@ -12,7 +12,15 @@ router.get('/empresas',isLoggedIn, controllerEN.getempresas);
 router.get('/tipoexamen',isLoggedIn, controllerEN.getTipoExamenes);
 router.post('/protocolo',isLoggedIn, controllerEN.postprotocolo);
 
+/*****************Paciente*****************/
+router.get('/paciente', isLoggedIn, controllerrender.renderepaciente);
+router.get('/listarCombosPac', isLoggedIn, controllerEN.getPacienteCombos);
+router.get('/listardistrito',isLoggedIn,controllerEN.getDistrito);
+router.get('/listarpais',isLoggedIn,controllerEN.getPais);
+router.post('/paciente',isLoggedIn,controllerEN.postpaciente);
+router.get('/listarpacientes',isLoggedIn,controllerEN.getpaciente)
 
 
+/******************************************/
 
 module.exports = router;
