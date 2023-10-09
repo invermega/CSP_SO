@@ -13,14 +13,19 @@ router.get('/tipoexamen',isLoggedIn, controllerEN.getTipoExamenes);
 router.post('/protocolo',isLoggedIn, controllerEN.postprotocolo);
 
 /*****************Paciente*****************/
-router.get('/paciente', isLoggedIn, controllerrender.renderepaciente);
+router.get('/paciente', isLoggedIn, controllerrender.renderpaciente);
 router.get('/listarCombosPac', isLoggedIn, controllerEN.getPacienteCombos);
 router.get('/listardistrito',isLoggedIn,controllerEN.getDistrito);
 router.get('/listarpais',isLoggedIn,controllerEN.getPais);
 router.post('/paciente',isLoggedIn,controllerEN.postpaciente);
 router.get('/listarpacientes',isLoggedIn,controllerEN.getpaciente)
+router.delete('/deletePac',controllerEN.deletepaciente);
 
 
 /******************************************/
+/*****************Citas*****************/
+router.get('/cita', isLoggedIn, controllerrender.rendercita);
 
+
+/******************************************/
 module.exports = router;
