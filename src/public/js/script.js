@@ -1,4 +1,60 @@
+function render() {
+  const contentContainer = $('#contenedoropciones');
+  const loadingHtml = `
+  <div class="jm-loadingpage">
+      <lottie-player src="/img/jsonimg/loading.json" class="" background="transparent" speed="1"
+      style="width: 250px; height: 250px;" loop autoplay></lottie-player>
+  </div>
+  `;
 
+  const links = $('a.opcionform');
+  if (!links.data('eventAssigned')) {
+    links.data('eventAssigned', true);
+
+    links.on('click', async (e) => {
+      e.preventDefault();
+
+      const url = e.currentTarget.getAttribute('href');
+      if (window.innerWidth <= 768) {
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        sidebarToggle.click();
+      }
+
+      contentContainer.html(loadingHtml);
+
+      try {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        const response = await $.ajax({
+          url: url,
+          method: 'GET',
+        });
+        contentContainer.animate({ opacity: 0 }, 1000, () => {
+          contentContainer.html(response);
+          contentContainer.animate({ opacity: 1 }, 500);
+        });
+      } catch (error) {
+        console.error(error);
+        // Mostrar un mensaje de error al usuario si lo deseas
+        contentContainer.html(`<div class="container">
+                                      <div class="row justify-content-center">
+                                          <div class="col-lg-6">
+                                              <div class="text-center mt-4">
+                                                  <img class="mb-4 img-error" src="/img/404logo.jpg" />
+                                                  <p class="lead">
+                                                      Esta URL solicitada no se encontró en este servidor.</p>
+                                                  <a href="/">
+                                                      <i class="fas fa-arrow-left me-1"></i>
+                                                      Regresar
+                                                  </a>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>`);
+      }
+
+    });
+  }
+}
 
 window.addEventListener('DOMContentLoaded', event => {
   // Toggle the side navigation
@@ -16,14 +72,14 @@ function filtrosMostrarOcultar(btnId, divId) {
   let isVisible = false;
 
   document.getElementById(btnId).addEventListener("click", function () {
-      // Si está oculto, lo mostramos; si está visible, lo ocultamos
-      if (isVisible) {
-          ocultarDiv(divId);
-      } else {
-          mostrarDiv(divId);
-      }
-      // Cambiamos el estado de visibilidad
-      isVisible = !isVisible;
+    // Si está oculto, lo mostramos; si está visible, lo ocultamos
+    if (isVisible) {
+      ocultarDiv(divId);
+    } else {
+      mostrarDiv(divId);
+    }
+    // Cambiamos el estado de visibilidad
+    isVisible = !isVisible;
   });
 }
 
@@ -659,7 +715,7 @@ function obtenerContenidoGuiadet(cabeceraData, detalleData) {
 }
 
 
-function limpiarImput(){
+function limpiarImput() {
   $('input').val('');
 }
 

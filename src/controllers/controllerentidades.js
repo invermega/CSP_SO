@@ -2,22 +2,33 @@ const { getConnection } = require('../database/conexionsql');
 const sql = require('mssql');
 
 module.exports = {
-    //Porotocolo
+    //Porotocolo   
+    async getprotocololist(req, res) {
+        const protocolo = req.query.protocolo;
+        const codrol = req.user.codrol;
+        if(protocolo.lenght===0){
+            protocolo ='%';
+        }
+        const pool = await getConnection();
+        const Protocolos = await pool.query(`sp_selProtocolo '${protocolo}','${codrol}'`);
+        res.json(Protocolos.recordset);
+    },
     async getexamenes(req, res) {
         const pool = await getConnection();
-        const roles = await pool.query(`sp_selExamenes`);
-        res.json(roles.recordset);
+        const Examenes = await pool.query(`sp_selExamenes`);
+        res.json(Examenes.recordset);
     },
     async getempresas(req, res) {
         const empresa = req.query.empresa;
+        const codrol = req.user.codrol;
         const pool = await getConnection();
-        const roles = await pool.query(`sp_selEmpresa ${empresa}`);
-        res.json(roles.recordset);
+        const empresas = await pool.query(`sp_selEmpresa '${empresa}','${codrol}'`);
+        res.json(empresas.recordset);
     },
     async getTipoExamenes(req, res) {
         const pool = await getConnection();
-        const roles = await pool.query(`sp_selTipoExamen`);
-        res.json(roles.recordset);
+        const TipoExamenes = await pool.query(`sp_selTipoExamen`);
+        res.json(TipoExamenes.recordset);
     },
     async postprotocolo(req, res) {
         try {
@@ -47,6 +58,14 @@ module.exports = {
             console.error(error);
             res.status(500).json({ error: error.message });
         }
-    }
+    },
+    async getprotocolooptions(req, res) {
+        const protocolo = req.query.protocolo;
+        const codrol = req.user.codrol;
+        const pool = await getConnection();
+        const ProtocoloOptions = await pool.query(`sp_selProtocoloOptions '${protocolo}','${codrol}'`);
+        res.json(ProtocoloOptions.recordset);
+    },
+    
 
 };

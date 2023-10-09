@@ -1,11 +1,10 @@
 const { getConnection } = require('../database/conexionsql');
 
-async function permisos(opcsis, ruta, req, res) {
+async function permisos(opcsis, ruta, req, res, id) {
     const pool = await getConnection();
     const permiso = await pool.query(`sp_selVerificarPermisos '${req.user.codrol}','${opcsis}'`);
     if (permiso.recordset[0].acceso === 1) {
-        console.log(ruta);
-        res.render(ruta, { layout: false });
+        res.render(ruta, { layout: false, id: id }); // Pasa el id si es necesario
     } else {
         res.render('configuracion/401', { layout: false });
     }
@@ -38,5 +37,17 @@ module.exports = {
         const parametro = "PT";
         permisos(parametro,'entidades/protocolo', req,res)
     },
+    renderprotocolocreate(req, res) {
+        const parametro = "PT";
+        permisos(parametro, 'entidades/protocoloCreate', req, res, 0);
+    },
+    renderprotocoloedit(req, res) {
+        const { id } = req.params;
+        const parametro = "PT";
+        permisos(parametro, 'entidades/protocoloCreate', req, res, id);
+      }
+      
+    
+    
 };
 
