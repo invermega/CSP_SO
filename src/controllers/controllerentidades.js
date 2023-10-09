@@ -4,6 +4,7 @@ const path = require('path');
 const sharp = require('sharp');
 const fs = require('fs');
 
+
 module.exports = {
     async getexamenes(req, res) {
         const pool = await getConnection();
@@ -45,52 +46,15 @@ module.exports = {
     },
 
 
-    async postpaciente(req, res) {//agregar usuario
-        const { usuario, contrasena, celular, app, apm, Nombres, fecnac, DNI, correo, direccion, sexo, codrol, iduser, opc, picuser } = req.body;
-        //console.log(req.body);
-        const passencrypt = await helpers.EncriptarPass(contrasena);
-        const usenam = '';
+    async postpaciente(req, res) {//agregar paciente
+        const { pachis, appaterno, apmaterno, nombres, fecnac, cod_ubigeo, docide, numdoc, dirpac, cod_ubigeo2 ,correo,telefono, celular, numhijos, numdep, pcd, foto, huella, firma, sexo_id, grainst_id, estciv_id, codtipcon,ippais} = req.body;
+        const usenam = req.user.usuario;
         const hostname = '';
-        const codrolUser = 1;
-        const imagenBase64 = picuser;
-        const rutaSalida = path.join(__dirname, '..', 'public', 'img', 'usuario', DNI + '.webp');
-        if (fs.existsSync(rutaSalida)) {
-            fs.unlinkSync(rutaSalida);
-        }
-        const imagenBase64SinPrefijo = imagenBase64.replace(/^data:image\/png;base64,/, '');
-        const imagenBinaria = Buffer.from(imagenBase64SinPrefijo, 'base64');
-        await sharp(imagenBinaria)
-            .toFormat('webp')
-            .toFile(rutaSalida);
-        const pool = await getConnection();
-        const response = await pool.query(`sp_insUsuario '${usuario.toUpperCase()}','${passencrypt}',${celular},'${app.toUpperCase()}','${apm.toUpperCase()}','${Nombres.toUpperCase()}','${DNI}','${fecnac}','${correo.toUpperCase()}','${direccion.toUpperCase()}','${codrol}', '${sexo.toUpperCase()}','${usenam}','${hostname}','${codrolUser}','${iduser}','${opc}'`);
-        console.log(response.recordset);
-        res.json(response.recordset);
-    },
-    async getusuarios(req, res) {//listar usuario para edicion
-        const { parametro } = req.query;
-        const codrolUser = 1;
-        const pool = await getConnection();
-        const response = await pool.query(`sp_selusuarios '${codrolUser}','${parametro}'`);
+        const codrolUser = req.user.codrol;
 
-        res.json(response.recordset);
-    },
-    async deleteusuarios(req, res) {//eliminar usuario
-        const { iduser } = req.body;
-        const codrolUser = 1;
         const pool = await getConnection();
-        const response = await pool.query(`sp_delUsuario '${codrolUser}','${iduser}'`);
-
-        res.json(response.recordset);
-    },
-    async resetpass(req, res) {//resetear contraseña
-        const { iduser } = req.body;        
-        const codrolUser = 1;
-        const pool = await getConnection();
-        const user = req.user.usuario;
-        const passencrypt = await helpers.EncriptarPass(user);
-        const response = await pool.query(`sp_editPassUser '${codrolUser}','${iduser}','${passencrypt}'`);
-
+        const response = await pool.query(`sp_insPaciente '${pachis.toUpperCase()}','${appaterno.toUpperCase()}',${apmaterno.toUpperCase()},'${nombres.toUpperCase()}','${fecnac}','${cod_ubigeo}','${docide}','${numdoc}','${dirpac}','${cod_ubigeo2}','${correo.toUpperCase()}','${telefono.trim()}', '${celular}','${numhijos}','${numdep}','${pcd}','','','','${sexo_id}','${grainst_id}','${estciv_id}','${codtipcon}','${ippais}','${usenam}','${codrolUser}'`);
+        
         res.json(response.recordset);
     },
     /*************************/

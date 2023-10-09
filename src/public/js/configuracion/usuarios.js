@@ -72,15 +72,17 @@ function getpermisos() {
         }
     });
 }
+
+
 function guardarusuario() {
     const canvas = document.getElementById('canvas');
     let opc = 0;
     let iduser = $('#iduser').val();
-    let camposValidos = validarCampos();
-    if (!camposValidos) {
-        mensaje('error', 'Por favor, complete todos los campos.', 5500);
+    let camposValidos = validarFormulario('','');
+    if (!camposValidos) {        
         return;
     }
+    
     if (iduser === '0') {
         opc = 0;//guardar
     } else {

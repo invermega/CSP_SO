@@ -12,9 +12,11 @@ router.get('/tipoexamen',isLoggedIn, controllerEN.getTipoExamenes);
 
 /*****************Paciente*****************/
 router.get('/paciente', isLoggedIn, controllerrender.renderepaciente);
-router.get('/listarCombosPac', isLoggedIn, controllerEn.getPacienteCombos);
-router.get('/listardistrito',isLoggedIn,controllerEn.getDistrito);
-router.get('/listarpais',isLoggedIn,controllerEn.getPais);
+router.get('/listarCombosPac', isLoggedIn, controllerEN.getPacienteCombos);
+router.get('/listardistrito',isLoggedIn,controllerEN.getDistrito);
+router.get('/listarpais',isLoggedIn,controllerEN.getPais);
+router.post('/paciente',isLoggedIn,controllerEN.postpaciente);
+
 
 /******************************************/
 

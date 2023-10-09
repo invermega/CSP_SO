@@ -83,7 +83,6 @@ module.exports = {
     /************Usuario*******/
     async postusuario(req, res) {//agregar usuario
         const { usuario, contrasena, celular, app, apm, Nombres, fecnac, DNI, correo, direccion, sexo, codrol, iduser, opc, picuser } = req.body;
-        //console.log(req.body);
         const passencrypt = await helpers.EncriptarPass(contrasena);
         const usenam = '';
         const hostname = '';
