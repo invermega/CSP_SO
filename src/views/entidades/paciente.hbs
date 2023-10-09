@@ -12,16 +12,16 @@
                     Ingrese un nuevo usuario al sistema
                 </div>
                 <div>
-                    <button class="btn position-relative" onclick=""
+                    <button class="btn position-relative" onclick="limpiar()"
                         style="background-color: #793B8E;color: white;border-color: #793B8E;">
                         <i class="fa-solid fa-plus"></i>
                         Nuevo
                     </button>
-                    <button class="btn position-relative" id="btneditarusu" data-toggle="modal"
-                        data-target="#modalFormusuario"
+                    <button class="btn position-relative" id="btneditarpac" data-toggle="modal"
+                        data-target="#modalFormpaciente"
                         style="background-color: #793B8E;color: white;border-color: #793B8E;">
                         <i class="fa-solid fa-plus"></i>
-                        Editar usuario
+                        Editar paciente
                     </button>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="col-md-4"><label for="pachis" class="labels">Cod.
                                                 historia</label><input type="text" class="form-control form-control-sm"
-                                                placeholder="(LOLCLI)" id="pachis" value=""></div>
+                                                placeholder="(LOLCLI)" id="pachis" value="" oninput="formatPhoneNumber(this);"></div>
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-md-3"><label for="nombres" class="labels">Nombres</label><input
@@ -166,7 +166,7 @@
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn"
                                                                 style="background-color: #793B8E;color: white;border-color: #793B8E;"
-                                                                id="cerrar" data-dismiss="modal"> <i
+                                                                id="cerrardistrito" data-dismiss="modal"> <i
                                                                     class="fa-solid fa-circle-xmark"></i>
                                                                 Cerrar</button>
                                                         </div>
@@ -349,6 +349,63 @@
                 </div>
 
             </div>
+            <!--MODAL Editar paciente-->
+                <div class="modal fade" id="modalFormpaciente" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header"
+                                style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE PACIENTE</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group input-group-sm" style="width: 100%;">
+                                    <label class="control-label input-group-text" for="pacientemodal">PACIENTE</label>
+                                    <input class="form-control form-control-sm " id="pacientemodal"
+                                        placeholder="Ingrese los nombres o el DNI del paciente" required></input>
+                                    <label class="input-group-text form-control-sm"><i
+                                            class="fa-solid fa-user"></i></label>
+                                </div>
+                                
+                                <div class="row mb-2 mt-2">
+                                    <div class="table-responsive">
+                                        <table
+                                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                            id="tablapacientemodal" style="display: none;">
+                                            <thead class="thead">
+                                                <tr>
+
+                                                    <th scope="col">APELLIDOS Y NOMBRES</th>
+                                                    <th scope="col">DNI</th>                                                    
+                                                    <th scope="col">ACCIONES</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="bodypacientemodal">
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="text-center" id="carga" style="display: none;">
+                                        <div class="d-flex justify-content-center align-items-center"
+                                            style="min-height: 5vh;">
+                                            <lottie-player
+                                                src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                                background="transparent" speed="1" style="width: 300px; height: 300px;"
+                                                loop autoplay></lottie-player>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn"
+                                        style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                        id="cerrarcliente" data-dismiss="modal"> <i
+                                            class="fa-solid fa-circle-xmark"></i>
+                                        Cerrar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 

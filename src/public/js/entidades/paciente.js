@@ -4,6 +4,14 @@ $(document).ready(function () {
     let nacionalidad = document.getElementById('nacionalidad');
     idPais.value = '9589';
     nacionalidad.value = 'PERÚ';
+    $('#numdoc').on('input', function () {
+        if ($('#docide').val() === '01') {
+            // Permitir solo números del 0 al 9
+            $(this).val($(this).val().replace(/[^0-9]/g, ''));
+        } else {
+
+        }
+    });
 });
 
 function getPacienteCombos() {
@@ -34,22 +42,23 @@ function getPacienteCombos() {
                     tipocontrato.append(option);
                 }
             });
-            $("#docide").val("01"); 
+            $("#docide").val("01");
             //pais.val('9589');
         },
         error: function () {
             alert('error');
         }
     });
-
 }
 document.getElementById("distritomodal").addEventListener("keyup", function (event) {
+    event.preventDefault();
     if (event.key === "Enter") {
         var parametro = this.value;
         getDistrito(parametro);
     }
 });
 function getDistrito(parametro) {
+    
     mostrarDiv('cargadistrito');
     ocultarDiv('tabledistritomodal');
     $.ajax({
@@ -59,7 +68,6 @@ function getDistrito(parametro) {
             parametro: parametro,
         },
         success: function (response) {
-
             ocultarDiv('cargadistrito');
             mostrarDiv('tabledistritomodal');
             const tbodydistrito = $('#bodyDistrio');
@@ -67,7 +75,7 @@ function getDistrito(parametro) {
             if (response.length === 0) {
                 tbodydistrito.append(`
                     <tr>
-                        <td colspan="2" class="text-center">No hay resultados disponibles a su búsqueda</td>
+                        <td colspan="2" class="text-center">No hay resultados disponibles </td>
                     </tr>
                 `);
             } else {
@@ -81,8 +89,8 @@ function getDistrito(parametro) {
                     </tr>
                 `);
                 });
+                mensaje(response[0].tipo, response[0].response, 1500);
             }
-
         },
         error: function () {
             alert('Error en la solicitud AJAX');
@@ -116,7 +124,7 @@ function getDistritoinput(codigo, descripcion) {
         des_ubigeo2.value = descripcion;
     }
     codigoDistrito = 0;
-    $('#modalFormDistrito [data-dismiss="modal"]').trigger('click');
+    //$('#modalFormDistrito [data-dismiss="modal"]').trigger('click');
 }
 
 /*Busqueda de Pais */
@@ -141,8 +149,15 @@ function getPais(parametro) {
             mostrarDiv('tablepaismodal');
             const tbodydistrito = $('#bodypais');
             tbodydistrito.empty();
-            response.forEach(lista => {
+            if (response.length === 0) {
                 tbodydistrito.append(`
+                    <tr>
+                        <td colspan="2" class="text-center">No hay resultados disponibles  </td>
+                    </tr>
+                `);
+            } else {
+                response.forEach(lista => {
+                    tbodydistrito.append(`
                     <tr>             
                     <td>${lista.nacionalidad}</td>                        
                     <td>
@@ -150,8 +165,9 @@ function getPais(parametro) {
                     </td>
                     </tr>
                 `);
-            });
-            mensaje(response[0].tipo, response[0].response, 1000);
+                });
+                mensaje(response[0].tipo, response[0].response, 1500);
+            }
         },
         error: function () {
             alert('Error en la solicitud AJAX');
@@ -173,8 +189,9 @@ function limpiarModal() {
     const tbodypais = $('#bodyPais');
     tbodypais.empty();
 }
-
+var opc = 0;
 function guardarpaciente() {
+
     let pachis = $('#pachis');
     let appaterno = $('#appaterno');
     let apmaterno = $('#apmaterno');
@@ -229,14 +246,17 @@ function guardarpaciente() {
             estciv_id: estciv_id.val(),
             codtipcon: codtipcon.val(),
             ippais: ippais.val(),
+            opc: opc.val(),
         },
         success: function (response) {
 
             $('input[type="text"]').val("");
-            mensaje(response[0].tipo, response[0].response, 5000);
+            opc = 0;
+            limpiar();
+            mensaje(response[0].tipo, response[0].response, 1500);
         },
         error: function () {
-            mensaje('error', 'Error al guardar, intente nuevamente', 5500);
+            mensaje('error', 'Error al guardar, intente nuevamente', 1500);
         }
     });
 }
@@ -246,8 +266,88 @@ function formatPhoneNumber(input) {
     input.value = formatted;
 }
 
-function limpiarModal(){
-
+function limpiar() {
+    $('input:not(#ippais, #nacionalidad)').val('');
 }
 
+document.getElementById("pacientemodal").addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+        var parametro = this.value;
+        getpacientes(parametro);
+    }
+});
+function getpacientes(parametro) {
+    mostrarDiv('carga');
+    ocultarDiv('tablapacientemodal');
+    $.ajax({
+        url: '/listarpacientes',
+        method: 'GET',
+        data: {
+            parametro: parametro,
+        },
+        success: function (pacientes) {
 
+            ocultarDiv('carga');
+            mostrarDiv('tablapacientemodal');
+            const tbodypac = $('#bodypacientemodal');
+            tbodypac.empty();
+            if (response.length === 0) {
+                tbodydistrito.append(`
+                    <tr>
+                        <td colspan="2" class="text-center">No hay resultados disponibles </td>
+                    </tr>
+                `);
+            } else {
+                pacientes.forEach(paciente => {
+                    tbodypac.append(`
+            <tr>             
+              <td>${paciente.appm_nom}</td>
+              <td>${paciente.numdoc}</td>
+              <td>
+              <a  type="button" class="btn btn-circle btn-sm btn-info mr-1" onclick=resetearPass("${paciente.pachis}")><i class="fa-solid fa-street-view"></i></a>
+              <button onclick="getpacientem('${paciente.docide}','${paciente.numdoc}','${paciente.pachis}','${paciente.nombres}','${paciente.appaterno}','${paciente.apmaterno}','${paciente.sexo_id}','${paciente.grainst_id}','${paciente.estciv_id}','${paciente.codtipcon}','${paciente.cod_ubigeo}','${paciente.des1}','${paciente.fecnac}','${paciente.ippais}','${paciente.nacionalidad}','${paciente.dirpac}','${paciente.cod_ubigeo2}','${paciente.des2}','${paciente.pcd}','${paciente.telefono}','${paciente.celular}','${paciente.correo}','${paciente.numhijos}','${paciente.numdep}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
+              <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarUser("${paciente.pachis}")><i class="fa-solid fa-trash-can"></i></a>
+              </td>
+            </tr>
+          `);
+                });
+                mensaje(paciente[0].tipo, paciente[0].response, 1500);
+            }
+        },
+        error: function () {
+            alert('Error en la solicitud AJAX');
+        },
+    });
+}
+
+function getpacientem(docideM, numdocM, pachisM, nombresM, appaternoM, apmaternoM, sexo_idM, grainst_idM, estciv_idM, codtipconM, cod_ubigeoM, des1M, fecnacM, ippaisM, nacionalidadM, dirpacM, cod_ubigeo2M, des2M, pcdM, telefonoM, celularM, correoM, numhijosM, numdepM) {
+    opc = 1;
+    $('#docide').val(docideM);
+    $('#numdoc').val(numdocM);
+    $('#pachis').val(pachisM);
+    $('#nombres').val(nombresM);
+    $('#appaterno').val(appaternoM);
+    $('#apmaterno').val(apmaternoM);
+    $('#sexo_id').val(sexo_idM);
+    $('#grainst_id').val(grainst_idM);
+    $('#estciv_id').val(estciv_idM);
+    $('#codtipcon').val(codtipconM);
+    $('#cod_ubigeo').val(cod_ubigeoM);
+    $('#des_ubigeo1').val(des1M);
+    $('#fecnac').val(fecnacM);
+    $('#ippais').val(ippaisM);
+    $('#nacionalidadM').val(nacionalidadM);
+    $('#dirpac').val(dirpacM);
+    $('#cod_ubigeo2').val(cod_ubigeo2M);
+    $('#des_ubigeo2').val(des2M);
+    $('#pcd').val(pcdM);
+    $('#telefono').val(telefonoM);
+    $('#celular').val(celularM);
+    $('#correo').val(correoM);
+    $('#numhijos').val(numhijosM);
+    $('#numdep').val(numdepM);
+    //$('#contrasena').val('123456789').prop('disabled', true);
+
+    $('#modalFormpaciente [data-dismiss="modal"]').trigger('click');
+    //$('#iduser').val(0);
+}

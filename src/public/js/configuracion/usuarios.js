@@ -216,34 +216,21 @@ function eliminarUser(iduser) {
     });
 }
 function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, fecnacM, correoM, direccionM, codrolM, sexoM) {
-    let iduser = document.getElementById('iduser');
-    iduser.value = iduserM;
-    let usuario = document.getElementById('usuario');
-    usuario.value = usuarioM;
-    let Nombres = document.getElementById('Nombres');
-    Nombres.value = NombresM;
-    let app = document.getElementById('app');
-    app.value = appM;
-    let apm = document.getElementById('apm');
-    apm.value = apmM;
-    let DNI = document.getElementById('DNI');
-    DNI.value = DNIM;
-    let celular = document.getElementById('celular');
-    celular.value = celularM;
-    let fecnac = document.getElementById('fecnac');
-    fecnac.value = fecnacM;
-    let correo = document.getElementById('correo');
-    correo.value = correoM;
-    let direccion = document.getElementById('direccion');
-    direccion.value = direccionM;
-    let codrol = document.getElementById('codrol');
-    codrol.value = codrolM;
-    let sexo = document.getElementById('sexo');
-    sexo.value = sexoM;
-    let contrasena = document.getElementById('contrasena');
-    contrasena.value = '123456789';
-    contrasena.disabled = true;
-    const canvas = document.getElementById('canvas');
+    $('#iduser').val(iduserM);
+    $('#usuario').val(usuarioM);
+    $('#Nombres').val(NombresM);
+    $('#app').val(appM);
+    $('#apm').val(apmM);
+    $('#DNI').val(DNIM);
+    $('#celular').val(celularM);
+    $('#fecnac').val(fecnacM);
+    $('#correo').val(correoM);
+    $('#direccion').val(direccionM);
+    $('#codrol').val(codrolM);
+    $('#sexo').val(sexoM);
+    $('#contrasena').val('123456789').prop('disabled', true);
+
+    const canvas = $('#canvas')[0];
     const image = new Image();
     const context = canvas.getContext('2d');
     image.onload = function () {
@@ -252,10 +239,11 @@ function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, f
         context.drawImage(image, 0, 0);
     };
     image.src = `./img/usuario/${DNIM}.webp`;
+
     $('#modalFormusuario [data-dismiss="modal"]').trigger('click');
-    //mensaje(usuarios[0].tipo, usuarios[0].response, 1800);
-    iduser.value = 0;
+    $('#iduser').val(0);
 }
+
 function validarCampos() {
     let campos = ['#usuario', '#contrasena', '#Nombres', '#app', '#apm', '#DNI', '#celular', '#fecnac', '#correo', '#direccion', '#codrol', '#sexo'];
     let camposValidos = true;
