@@ -23,4 +23,10 @@ router.get('/listarpacientes',isLoggedIn,controllerEN.getpaciente)
 
 /******************************************/
 
+/*****************Médico*******************/
+router.get('/medico', isLoggedIn, controllerrender.renderemedico);
+
+/******************************************/
+
+
 module.exports = router;

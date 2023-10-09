@@ -41,5 +41,7 @@ module.exports = {
     async renderepaciente(req, res) {
         res.render('entidades/paciente', { layout: false });
     },
-    
+    async renderemedico(req, res) {
+        res.render('entidades/medicos', { layout: false });
+    },
 };
