@@ -13,9 +13,21 @@ module.exports = {
         const Protocolos = await pool.query(`sp_selProtocolo '${protocolo}','${codrol}'`);
         res.json(Protocolos.recordset);
     },
+    async getprotocolodatos(req, res) {
+        const { id } = req.params;
+        const pool = await getConnection();
+        const Examenes = await pool.query(`sp_selProtocoloDatosId '${id}'`);
+        res.json(Examenes.recordset);
+    },
     async getexamenes(req, res) {
         const pool = await getConnection();
         const Examenes = await pool.query(`sp_selExamenes`);
+        res.json(Examenes.recordset);
+    },
+    async getexamenesid(req, res) {
+        const { id } = req.params;
+        const pool = await getConnection();
+        const Examenes = await pool.query(`sp_selExamenesid '${id}'`);
         res.json(Examenes.recordset);
     },
     async getempresas(req, res) {
@@ -32,7 +44,7 @@ module.exports = {
     },
     async postprotocolo(req, res) {
         try {
-            const { codemp, nompro, comentarios, tipexa_id, estado, tiemval_cermed, fecvcto_cermed, datains } = req.body;
+            const { codemp, nompro, comentarios, tipexa_id, estado, tiemval_cermed, fecvcto_cermed, id, datains } = req.body;
             const usenam = req.user.usuario;
             const hostname = '';
             const codrol = req.user.codrol;
@@ -47,8 +59,27 @@ module.exports = {
             request.input('estado', sql.Char(1), estado);
             request.input('tiemval_cermed', sql.Int, tiemval_cermed);
             request.input('fecvcto_cermed', sql.Date(), fecvcto_cermed);
+            request.input('codpro_id', sql.Int, id);
             request.input('usenam', sql.VarChar(30), usenam);
             request.input('hostname', sql.VarChar(20), hostname);
+            request.input('codrol', sql.Int, codrol);
+            request.input('DetalleProtocoloJson', sql.NVarChar(sql.MAX), detalleJson);
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
+    },
+    async delprotocolo(req, res) {
+        try {
+            const seleccionados = req.body;
+            const detalleJson = JSON.stringify(seleccionados);
+            const codrol = req.user.codrol;
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_DelProtocolo';
             request.input('codrol', sql.Int, codrol);
             request.input('DetalleProtocoloJson', sql.NVarChar(sql.MAX), detalleJson);
             const result = await request.execute(PROCEDURE_NAME);

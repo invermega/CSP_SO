@@ -9,14 +9,11 @@ const { } = require('../lib/permisos');
 router.get('/protocolo', isLoggedIn, controllerrender.renderprotocolo);
 router.get('/protocololist', isLoggedIn, controllerEN.getprotocololist);
 router.get('/protocolocreate', isLoggedIn, controllerrender.renderprotocolocreate);
-
 router.get('/protocoloedit/:id', isLoggedIn, controllerrender.renderprotocoloedit);
-
-
-
-
-
+router.get('/protocolodatos/:id', isLoggedIn, controllerEN.getprotocolodatos);
 router.get('/examenes',isLoggedIn, controllerEN.getexamenes);
+router.delete('/protocolodel',isLoggedIn, controllerEN.delprotocolo);
+router.get('/examenes/:id',isLoggedIn, controllerEN.getexamenesid);
 router.get('/empresas',isLoggedIn, controllerEN.getempresas);
 router.get('/tipoexamen',isLoggedIn, controllerEN.getTipoExamenes);
 router.post('/protocolo',isLoggedIn, controllerEN.postprotocolo);

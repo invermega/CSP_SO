@@ -35,17 +35,16 @@
                 </div>
                 <div class="col-md-5 form-inline col-sm-12 form-group mb-1 mt-1">
                     <div class="input-group input-group" style="width: 100%;">
-
                         <button type="button" class="btn input-group-text" id="refresh">
                             <i class="fa-solid fa-retweet"></i>
                         </button>
                         <a class="opcionform btn input-group-text" href="/protocolocreate"><i
                                 class="fa-solid fa-plus"></i>
                         </a>
-                        <a class="opcionform btn input-group-text" href="/protocoloedit/1">
-                         <i class="fa-solid fa-pen"></i>
-                        </a>
-                        <button type="button" class="btn input-group-text" id="delete">
+                        <button type="button" class="btn input-group-text" id="edit" onclick="navegaredit('mydatatable','protocoloedit')">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn input-group-text" id="delete" onclick="eliminar()">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                         <button type="button" class="btn input-group-text" id="download">
@@ -83,5 +82,7 @@
 </div>
 
 <script src="/js/entidades/protocolo.js"> </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
+
 
  

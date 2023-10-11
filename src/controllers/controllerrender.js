@@ -4,12 +4,7 @@ async function permisos(opcsis, ruta, req, res, id) {
     const pool = await getConnection();
     const permiso = await pool.query(`sp_selVerificarPermisos '${req.user.codrol}','${opcsis}'`);
     if (permiso.recordset[0].acceso === 1) {
-<<<<<<< HEAD
-        res.render(ruta, { layout: false, id: id }); // Pasa el id si es necesario
-=======
-
-        res.render(ruta, { layout: false });
->>>>>>> ffee14fbe91e4b09c1846a74b8e5bd7c62bb46c2
+        res.render(ruta, { layout: false, id: id }); 
     } else {
         res.render('configuracion/401', { layout: false });
     }
