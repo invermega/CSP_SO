@@ -33,7 +33,7 @@
                             <div class="col-md-12 border-right">
                                 <div class="p-3 py-5">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="text-right">Datos de la Empresa</h4>
+                                        <h4 class="text-right">Datos del Cliente</h4>
                                     </div>
                                     <div>
                                         <input type="hidden" id="iduser" value="0">
@@ -73,8 +73,6 @@
                                     <div class="row mt-2">
                                         <div class="col-md-12">
                                             <div class="row">
-
-
                                                 <div class="col-md-4"><label class="labels" for="telefono">Teléfono
                                                         Fijo</label><input type="text" id="telefono"
                                                         class="form-control btn-sm"
@@ -98,11 +96,7 @@
                                                         class="form-control btn-sm"
                                                         oninput="limitarCaracteresNumericos(this, 9)"
                                                         placeholder="Teléfono">
-                                                </div>
-
-                            
-
-
+                                                </div>                            
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -114,9 +108,9 @@
                                         <div class="col-md-12">
                                             <div class="row mt-2">
                                                 <div class="col-md-4">
-                                                    <label class="control-label">Especialidad:</label>
-                                                    <select class="form-select form-control form-control-sm" id="esp_id"
-                                                        data-toggle="modal" data-target="#modalFormespecialidad"
+                                                    <label class="control-label">Actividad Economica</label>
+                                                    <select class="form-select form-control form-control-sm" id="actividad_economica"
+                                                        data-toggle="modal" data-target="#modalFormacteconomica"
                                                         placeholder="--Seleccione--" aria-label="Default select example"
                                                         required>
                                                         <div class="invalid-feedback">Este campo es obligatorio</div>
@@ -125,16 +119,10 @@
                                                     </select>
                                                     <div class="invalid-feedback">Este campo es obligatorio</div>
                                                 </div>
-                                                <div class="col-md-4"><label class="labels" for="med_rne">Codigo de
-                                                        especialidad</label><input type="text" id="med_rne"
-                                                        class="form-control btn-sm"
-                                                        oninput="limitarCaracteresNumericos(this, 10)"
-                                                        placeholder="Ingrese su codigo">
-                                                    <div class="invalid-feedback">Este campo es obligatorio</div>
-                                                </div>
+                                                
                                                 <div class="col-md-4">
-                                                    <label class="labels" for="med_firma">Firma</label>
-                                                    <input type="file" class="form-control" id="med_firma">
+                                                    <label class="labels" for="logo">Logo</label>
+                                                    <input type="file" class="form-select form-control form-control-sm" id="logo">
                                                 </div>
                                             </div>
                                         </div>
@@ -155,18 +143,18 @@
             </div>
             <!--MODAL ESPECIALIDAD-->
 
-            <div class="modal fade" id="modalFormespecialidad" role="dialog">
+            <div class="modal fade" id="modalFormacteconomica" role="dialog">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
-                            <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE ESPECIALIDAD</h4>
+                            <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE ACTIVIDAD ECONOMICA</h4>
                         </div>
                         <div class="modal-body">
                             <div class="input-group input-group-sm" style="width: 100%;">
                                 <label class="control-label input-group-text"
-                                    for="especialidadmodal">Especialidad</label>
-                                <input class="form-control form-control-sm " id="especialidadmodal"
-                                    placeholder="Ingrese la especialidad" required></input>
+                                    for="acteconomicamodal">Actividad Economica</label>
+                                <input class="form-control form-control-sm " id="acteconomicamodal"
+                                    placeholder="Ingrese la Actividad Economica" required></input>
                                 <label class="input-group-text form-control-sm"><i class="fa-solid fa-user"></i></label>
                             </div>
                             <!--<div class="row mb-2">
