@@ -8,9 +8,9 @@ const { } = require('../lib/permisos');
 //protocolo
 router.get('/protocolo', isLoggedIn, controllerrender.renderprotocolo);
 router.get('/protocololist', isLoggedIn, controllerEN.getprotocololist);
-router.get('/protocolocreate', isLoggedIn, controllerrender.renderprotocolocreate);
+//router.get('/protocolocreate', isLoggedIn, controllerrender.renderprotocolocreate);
 
-router.get('/protocoloedit/:id', isLoggedIn, controllerrender.renderprotocoloedit);
+//router.get('/protocoloedit/:id', isLoggedIn, controllerrender.renderprotocoloedit);
 
 
 
@@ -38,7 +38,9 @@ router.get('/listarpacientes',isLoggedIn,controllerEN.getpaciente)
 /*****************Médico*******************/
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
 
+/****************Cliente******************/
+
+router.get('/cliente', isLoggedIn, controllerrender.rendercliente);
+
 /******************************************/
-
-
 module.exports = router;

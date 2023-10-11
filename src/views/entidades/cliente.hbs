@@ -3,7 +3,7 @@
         <h1 class="mt-4 tituloverde">Entidades</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-            <li class="breadcrumb-item active">Médico</li>
+            <li class="breadcrumb-item active">Empresa</li>
         </ol>
         <div class="card mb-4">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
@@ -33,7 +33,7 @@
                             <div class="col-md-12 border-right">
                                 <div class="p-3 py-5">
                                     <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="text-right">Datos del Médico</h4>
+                                        <h4 class="text-right">Datos de la Empresa</h4>
                                     </div>
                                     <div>
                                         <input type="hidden" id="iduser" value="0">
@@ -42,56 +42,57 @@
 
                                     <div class="row mt-2">
                                         <div class="col-md-4">
-                                            <label for="mednam" class="labels">Nombres</label><input type="text"
-                                                class="form-control form-control-sm" placeholder="Ingrese nombres"
-                                                id="mednam" value="" required>
+                                            <label for="razsoc" class="labels">Razón Social</label><input type="text"
+                                                class="form-control form-control-sm"
+                                                placeholder="Ingrese la razón social" id="razsoc" value="" required>
                                             <div class="invalid-feedback">Este campo es obligatorio</div>
                                         </div>
-
-
-                                        <div class="col-md-4">
-                                            <label class="labels" for="medap">Apellido paterno</label><input type="text"
-                                                class="form-control form-control-sm" value="" id="medap"
-                                                placeholder="Ingrese apellido paterno" required>
+                                        <div class="col-md-3"><label class="labels" for="docide">Tipo de
+                                                documento</label>
+                                            <select class="form-select form-control form-control-sm" id="docide"
+                                                aria-label="Default select example" required>
+                                                <option value="1">Doc. Nacional de Identidad(DNI)</option>
+                                                <option value="2">Carné de Extranjería</option>
+                                                <option value="3">Pasaporte</option>
+                                                <option value="4">Documento de Identidad Extranjero</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2"><label class="labels" for="NumDoc">Número de
+                                                documento</label><input type="text" id="NumDoc"
+                                                class="form-control btn-sm" placeholder="Número de documento"
+                                                oninput="limitarCaracteresNumericos(this, 9)" value="" required>
                                             <div class="invalid-feedback">Este campo es obligatorio</div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <label class="labels" for="medam">Apellido materno</label><input type="text"
-                                                class="form-control form-control-sm" value="" id="medam"
-                                                placeholder="Ingrese apellido materno" required>
-                                            <div class="invalid-feedback">Este campo es obligatorio</div>
+                                        <div class="col-md-3"><label class="labels"
+                                                for="Direccion">Dirección</label><input type="text"
+                                                class="form-control btn-sm" id="Direccion" value=""
+                                                placeholder="Dirección" required>
                                         </div>
-
-
                                     </div>
 
                                     <div class="row mt-2">
                                         <div class="col-md-12">
                                             <div class="row">
-                                                <div class="col-md-2"><label class="labels" for="docide">Tipo de
-                                                        documento</label>
-                                                    <select class="form-select form-control form-control-sm" id="docide"
-                                                        aria-label="Default select example" required>
-                                                        <option value="1">Doc. Nacional de Identidad(DNI)</option>
-                                                        <option value="2">Carné de Extranjería</option>
-                                                        <option value="3">Pasaporte</option>
-                                                        <option value="4">Documento de Identidad Extranjero</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2"><label class="labels" for="nundoc">Número de
-                                                        documento</label><input type="text" id="nundoc"
-                                                        class="form-control btn-sm" placeholder="Número de documento"
-                                                        oninput="limitarCaracteresNumericos(this, 9)" value = "" required>
-                                                    <div class="invalid-feedback">Este campo es obligatorio</div>
-                                                </div>
 
-                                                <div class="col-md-4"><label class="labels" for="med_cmp">N° de
-                                                        colegiatura</label><input type="text" id="med_cmp"
+
+                                                <div class="col-md-4"><label class="labels" for="telefono">Teléfono
+                                                        Fijo</label><input type="text" id="telefono"
                                                         class="form-control btn-sm"
                                                         oninput="limitarCaracteresNumericos(this, 10)"
-                                                        placeholder="Colegio de médicos del Perú">
-                                                    <div class="invalid-feedback">Este campo es obligatorio</div>
+                                                        placeholder="Teléfono Fijo">
                                                 </div>
+                                                <div class="col-md-4"><label class="labels"
+                                                        for="contacto">Contacto</label><input type="text" id="contacto"
+                                                        class="form-control btn-sm" placeholder="Contacto">
+                                                    <!--oninput="limitarCaracteresAlfanumericos(this, 50)"-->
+
+                                                </div>
+                                                <div class="col-md-4"><label class="labels" for="emailcon">Email de
+                                                        contacto</label><input type="text" id="emailcon"
+                                                        class="form-control btn-sm" value=""
+                                                        placeholder="correo@ejemplo.com">
+                                                </div>
+
                                                 <div class="col-md-4"><label class="labels"
                                                         for="medcel">Celular</label><input type="text" id="medcel"
                                                         class="form-control btn-sm"
@@ -99,22 +100,9 @@
                                                         placeholder="Teléfono">
                                                 </div>
 
-                                                <div class="col-md-4"><label class="labels" for="medTelfij">Teléfono
-                                                        Fijo</label><input type="text" id="medTelfij"
-                                                        class="form-control btn-sm"
-                                                        oninput="limitarCaracteresNumericos(this, 10)"
-                                                        placeholder="Teléfono Fijo">
-                                                </div>
-                                                <div class="col-md-4"><label class="labels"
-                                                        for="med_correo">Email</label><input type="text" id="med_correo"
-                                                        class="form-control btn-sm" value=""
-                                                        placeholder="correo@ejemplo.com">
-                                                </div>
-                                                <div class="col-md-4"><label class="labels"
-                                                        for="meddir">Dirección</label><input type="text"
-                                                        class="form-control btn-sm" id="meddir" value=""
-                                                        placeholder="Dirección" required>
-                                                </div>
+                            
+
+
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -232,4 +220,4 @@
 </div>
 
 <!--Scripts-->
-<script src="/js/entidades/medicos.js"> </script>
+<script src="/js/entidades/cliente.js"> </script>

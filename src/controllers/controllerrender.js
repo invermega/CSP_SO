@@ -33,23 +33,18 @@ module.exports = {
         permisos(parametro,'historiaclinica/paciente', req,res)
     },
     //entidades
-    renderprotocolo(req, res) {
+    async renderprotocolo(req, res) {
         const parametro = "PT";
         permisos(parametro,'entidades/protocolo', req, res)
     },
-    renderprotocolocreate(req, res) {
-        const parametro = "PT";
-        permisos(parametro, 'entidades/protocoloCreate', req, res, 0);
-    },
-    renderprotocoloedit(req, res) {
-        const { id } = req.params;
-        const parametro = "PT";
-        permisos(parametro, 'entidades/protocoloCreate', req, res, id);
-      }
+    
     async renderepaciente(req, res) {
         res.render('entidades/paciente', { layout: false });
     },
     async renderemedico(req, res) {
         res.render('entidades/medicos', { layout: false });
+    },
+    async rendercliente(req, res) {
+        res.render('entidades/cliente', { layout: false });
     },
 };

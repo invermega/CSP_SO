@@ -70,7 +70,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
 function filtrosMostrarOcultar(btnId, divId) {
   let isVisible = false;
-
+  
   document.getElementById(btnId).addEventListener("click", function () {
     // Si está oculto, lo mostramos; si está visible, lo ocultamos
     if (isVisible) {
