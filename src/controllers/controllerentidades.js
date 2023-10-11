@@ -8,8 +8,8 @@ const sql = require('mssql');
 const XLSX = require('xlsx');
 const xlsxPopulate = require('xlsx-populate');
 
-module.exports = {
-    //Porotocolo   
+module.exports = { 
+    /*****************Protocolo*****************/
     async getprotocololist(req, res) {
         const protocolo = req.query.protocolo;
         const codrol = req.user.codrol;
@@ -136,6 +136,7 @@ module.exports = {
             });
         });
     },
+    /******************************************/
 
     /************Paciente*******/
     async getPacienteCombos(req, res) {//llenar los combos de formulario       
@@ -177,4 +178,5 @@ module.exports = {
         //console.log(response.recordset);
         res.json(response.recordset);
     },
+    /******************************************/
 };
