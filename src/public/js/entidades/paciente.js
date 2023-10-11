@@ -190,9 +190,7 @@ function limpiarModal() {
     tbodypais.empty();
 }
 var opc = 0;
-function guardarpaciente() {
-
-    let pachis = $('#pachis');
+function guardarpaciente() {    
     let appaterno = $('#appaterno');
     let apmaterno = $('#apmaterno');
     let nombres = $('#nombres');
@@ -221,7 +219,6 @@ function guardarpaciente() {
         url: '/paciente',
         method: "POST",
         data: {
-            pachis: pachis.val(),
             appaterno: appaterno.val(),
             apmaterno: apmaterno.val(),
             nombres: nombres.val(),

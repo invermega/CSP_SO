@@ -14,9 +14,10 @@ module.exports = {
         res.json(roles.recordset);
     },
     async getempresas(req, res) {
-        const empresa = req.query.empresa;
+        const parametro = req.query.parametro;
         const pool = await getConnection();
-        const roles = await pool.query(`sp_selEmpresa ${empresa}`);
+        const codrolUser = req.user.codrol;
+        const roles = await pool.query(`sp_selEmpresa '${parametro}','${codrolUser}'`);
         res.json(roles.recordset);
     },
     async getTipoExamenes(req, res) {
@@ -82,7 +83,7 @@ module.exports = {
         const codrolUser = req.user.codrol;
 
         const pool = await getConnection();
-        const response = await pool.query(`sp_insPaciente '${pachis.toUpperCase()}','${appaterno.toUpperCase()}',${apmaterno.toUpperCase()},'${nombres.toUpperCase()}','${fecnac}','${cod_ubigeo}','${docide}','${numdoc}','${dirpac}','${cod_ubigeo2}','${correo.toUpperCase()}','${telefono.trim()}', '${celular}','${numhijos}','${numdep}','${pcd}','','','','${sexo_id}','${grainst_id}','${estciv_id}','${codtipcon}','${ippais}','${usenam}','${codrolUser}','${opc}'`);
+        const response = await pool.query(`sp_insPaciente '${appaterno.toUpperCase()}',${apmaterno.toUpperCase()},'${nombres.toUpperCase()}','${fecnac}','${cod_ubigeo}','${docide}','${numdoc}','${dirpac}','${cod_ubigeo2}','${correo.toUpperCase()}','${telefono.trim()}', '${celular}','${numhijos}','${numdep}','${pcd}','','','','${sexo_id}','${grainst_id}','${estciv_id}','${codtipcon}','${ippais}','${usenam}','${codrolUser}','${opc}'`);
         
         res.json(response.recordset);
     },
@@ -105,6 +106,18 @@ module.exports = {
 
     /*************************/
     /************Citas*******/
-
+    async getCitasCombos(req, res) {//llenar los combos de formulario       
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`sp_selCombosCita '${codrolUser}'`);
+        res.json(response.recordset);
+    },
+    async getProtocoloCombos(req, res) {//llenar los combos del formulario en base al protocolo
+        const { parametro } = req.query;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selcmbProtocolo '${codrolUser}','${parametro}'`);
+        res.json(response.recordset);
+    },
     /*************************/
 };

@@ -25,7 +25,9 @@ router.delete('/deletePac',controllerEN.deletepaciente);
 /******************************************/
 /*****************Citas*****************/
 router.get('/cita', isLoggedIn, controllerrender.rendercita);
-
+router.get('/listarCombosCitas', isLoggedIn, controllerEN.getCitasCombos);
+router.get('/listarprotocolo', isLoggedIn, controllerEN.getProtocoloCombos);
+router.post('/cita',isLoggedIn,controllerEN.postpaciente)
 
 /******************************************/
 module.exports = router;
