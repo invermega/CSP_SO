@@ -72,6 +72,8 @@ function llenarFormulario(id) {
 
 
 function getexamenes(id) {
+  var btncerrar = document.getElementById(`cerrarprotocolo`);
+  btncerrar.click();
   const ruta = (id === "0") ? '/examenes' : '/examenes/' + id;
   ocultarTabla("mydatatable");
   mostrarDiv("cargaacc");
@@ -114,6 +116,7 @@ function getexamenes(id) {
               </tr>
             `);
           activar(examen.soexa + '_' + examen.codpru_id);
+          
         });
       } else {
         // Manejar el caso de que "examenes" no sea un array, tal vez mostrar un mensaje de error
@@ -172,7 +175,7 @@ document.getElementById("empresamodal").addEventListener("keydown", function (ev
             bodyempleadomodal.append(`
         <tr>
           <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="AgregarEmpresa(this)"><i class="fa-solid fa-plus"></i></button></td>
-          <td style="vertical-align: middle;" class="text-left">${list.codemp}</td>
+          <td style="vertical-align: middle;" class="text-left">${list.cli_id}</td>
           <td style="vertical-align: middle;" class="text-left asignado">${list.razsoc}</td>
         </tr>
       `);
@@ -195,7 +198,7 @@ document.getElementById("protocolomodal").addEventListener("keydown", function (
     let protocolomodal = $('#protocolomodal').val();
     event.preventDefault();
     $.ajax({
-      url: '/protocolooptions',
+      url: '/protocololist',
       method: "GET",
       data: {
         protocolo: protocolomodal,
@@ -216,9 +219,9 @@ document.getElementById("protocolomodal").addEventListener("keydown", function (
           lista.forEach(list => {
             bodyprotocolomodal.append(`
         <tr>
-          <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="AgregarEmpresa(this)"><i class="fa-solid fa-plus"></i></button></td>
-          <td style="vertical-align: middle;" class="text-left">${list.codemp}</td>
-          <td style="vertical-align: middle;" class="text-left asignado">${list.razsoc}</td>
+          <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="getexamenes('${list.codpro_id}')"><i class="fa-solid fa-plus"></i></button></td>
+          <td style="vertical-align: middle;" class="text-left">${list.codpro_id}</td>
+          <td style="vertical-align: middle;" class="text-left asignado">${list.nompro}</td>
         </tr>
       `);
           });

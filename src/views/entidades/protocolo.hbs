@@ -12,9 +12,7 @@
                 Consulte las asistencias del personal
             </div>
             <div>
-                <button class="btn position-relative" style="background-color: #793B8E; color: white;" id="btnfiltros">
-                    <i class="fa-solid fa-sliders"></i>
-                </button>
+                
             </div>
         </div>
         
@@ -47,7 +45,7 @@
                         <button type="button" class="btn input-group-text" id="delete" onclick="eliminar()">
                             <i class="fa-solid fa-trash"></i>
                         </button>
-                        <button type="button" class="btn input-group-text" id="download">
+                        <button type="button" class="btn input-group-text" id="download" onclick="exportarprotocolo('mydatatable','exportarprotocolo')">
                             <i class="fa-solid fa-download"></i>
                         </button>
                     </div>
@@ -63,6 +61,7 @@
                             <th scope="col">CHECK</th>
                             <th scope="col">NOMBRE DE PROTOCOLO</th>
                             <th scope="col">EMPRESA</th>
+                            <th scope="col">CLIENTE</th>
                             <th scope="col">TIPO DE EXAMEN</th>
                             <th scope="col">ESTADO</th>
                         </tr>

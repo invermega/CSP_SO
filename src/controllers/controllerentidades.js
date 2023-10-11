@@ -1,13 +1,15 @@
 const { getConnection } = require('../database/conexionsql');
 const sql = require('mssql');
+const XLSX = require('xlsx');
+const xlsxPopulate = require('xlsx-populate');
 
 module.exports = {
     //Porotocolo   
     async getprotocololist(req, res) {
         const protocolo = req.query.protocolo;
         const codrol = req.user.codrol;
-        if(protocolo.lenght===0){
-            protocolo ='%';
+        if (protocolo.lenght === 0) {
+            protocolo = '%';
         }
         const pool = await getConnection();
         const Protocolos = await pool.query(`sp_selProtocolo '${protocolo}','${codrol}'`);
@@ -90,13 +92,43 @@ module.exports = {
             res.status(500).json({ error: error.message });
         }
     },
-    async getprotocolooptions(req, res) {
-        const protocolo = req.query.protocolo;
-        const codrol = req.user.codrol;
+    async getexportarprotocolo(req, res) {
+        const { id } = req.params;
         const pool = await getConnection();
-        const ProtocoloOptions = await pool.query(`sp_selProtocoloOptions '${protocolo}','${codrol}'`);
-        res.json(ProtocoloOptions.recordset);
-    },
-    
+        const cabecera = await pool.query(`sp_selProtocoloDatosIdexp '${id}'`);
+        const detalle = await pool.query(`sp_selExamenesidexp '${id}'`);
 
+        const cabeceraData = cabecera.recordset[0];
+        const detalleData = detalle.recordset;
+        xlsxPopulate.fromBlankAsync().then(workbook => {
+            const sheet = workbook.sheet(0);
+            sheet.cell('D1').value('DETALLE DEL PROTOCOLO').style('bold', true).style('fontSize', 20).style('fontColor', '800080').style('underline', true);
+            sheet.cell('A2').value('');
+            let rowIndex = 3;
+            for (const key in cabeceraData) {
+                sheet.cell(`A${rowIndex}`).value(key).style('bold', true);
+                sheet.cell(`B${rowIndex}`).value(cabeceraData[key]);
+                rowIndex++;
+            }
+            rowIndex++;
+
+            const data = detalleData.map(row => [row['COD. EXAMEN'], row['EXAMEN'], row['COD. PRUEBA'], row['PRUEBA'], row['GRUPO ETARIO'], row['PRECIO'], row['OBSERVACIÓN']]);
+            const dataTable = [['COD. EXAMEN', 'EXAMEN', 'COD. PRUEBA', 'PRUEBA', 'GRUPO ETARIO', 'PRECIO', 'OBSERVACIÓN'], ...data];
+            sheet.cell(`A${rowIndex}`).value(dataTable).style({ border: true });
+            sheet.range(`A11:G11`).style('bold', true).style('fontSize', 12).style('fontColor', 'FFFFFF').style('fill', '369EA6').style('border', true);
+
+            sheet.column('A').width(25);
+            sheet.column('B').width(25);
+            sheet.column('C').width(15);
+            sheet.column('D').width(40);
+            sheet.column('E').width(40);
+            sheet.column('F').width(15);
+            sheet.column('G').width(25);
+            workbook.outputAsync().then(buffer => {
+                res.setHeader('Content-Type', 'application/vnd.openxmlformats');
+                res.setHeader('Content-Disposition', `attachment; filename= REPORTE DE PROTOCOLO ${cabeceraData['NOMBRE DE PROTOCOLO']}.xlsx`);
+                res.end(buffer);
+            });
+        });
+    }
 };

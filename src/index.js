@@ -50,7 +50,7 @@ app.use(
       db: new Sequelize(dbSettings.database, dbSettings.user, dbSettings.password, {
         host: dbSettings.server,
         dialect: 'mssql',
-        port: 60089,
+        port: 10200,
         dialectOptions: {
           options: {
             encrypt: dbSettings.options.encrypt,

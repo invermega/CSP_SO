@@ -5,6 +5,7 @@ const controllerrender = require("../controllers/controllerrender");
 const controllerEN = require("../controllers/controllerentidades");
 const { } = require('../lib/permisos');
 
+
 //protocolo
 router.get('/protocolo', isLoggedIn, controllerrender.renderprotocolo);
 router.get('/protocololist', isLoggedIn, controllerEN.getprotocololist);
@@ -17,7 +18,7 @@ router.get('/examenes/:id',isLoggedIn, controllerEN.getexamenesid);
 router.get('/empresas',isLoggedIn, controllerEN.getempresas);
 router.get('/tipoexamen',isLoggedIn, controllerEN.getTipoExamenes);
 router.post('/protocolo',isLoggedIn, controllerEN.postprotocolo);
-router.get('/protocolooptions',isLoggedIn, controllerEN.getprotocolooptions);
+router.get('/exportarprotocolo/:id',isLoggedIn, controllerEN.getexportarprotocolo);
 
 
 
