@@ -1,0 +1,413 @@
+<div>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4 tituloverde">Opciones de sistema</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Nuevo usuario</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="left-content">
+                    <i class="fas fa-table me-1"></i>
+                    Ingrese un nuevo usuario al sistema
+                </div>
+                <div>
+                    <button class="btn position-relative" onclick="limpiar()"
+                        style="background-color: #793B8E;color: white;border-color: #793B8E;">
+                        <i class="fa-solid fa-plus"></i>
+                        Nuevo
+                    </button>
+                    <button class="btn position-relative" id="btneditarpac" data-toggle="modal"
+                        data-target="#modalFormpaciente"
+                        style="background-color: #793B8E;color: white;border-color: #793B8E;">
+                        <i class="fa-solid fa-plus"></i>
+                        Editar paciente
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid body1">
+                    <form id="formusuarios" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-12 border-right">
+                                <div class="p-3 py-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="text-right">Datos del paciente</h5>
+                                    </div>
+                                    <div>
+                                        <input type="hidden" id="iduser" value="0">
+                                    </div>
+                                    <div class="row mt-2">                                        
+                                        <div class="col-md-4">
+                                            <label class="labels" for="docide">Tipo de documento</label><select
+                                                class="form-select form-control form-control-sm" id="docide"
+                                                aria-label="Default select example" required>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4"><label for="numdoc"
+                                                class="labels">N°documento</label><input type="text"
+                                                class="form-control form-control-sm"
+                                                placeholder="Ingrese N° de documento" id="numdoc" value="" required>
+                                        </div>
+                                        <div class="col-md-4"><label for="pachis" class="labels">Cod.
+                                                historia</label><input type="text" class="form-control form-control-sm"
+                                                placeholder="(LOLCLI)" id="pachis" value="" oninput="formatPhoneNumber(this);"></div>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-3"><label for="nombres" class="labels">Nombres</label><input
+                                                type="text" class="form-control form-control-sm"
+                                                placeholder="Ingrese nombres" id="nombres" value="" required></div>
+                                        <div class="col-md-3"><label for="appaterno" class="labels">Ap.
+                                                paterno</label><input type="text" class="form-control form-control-sm"
+                                                placeholder="Ingrese apellido paterno" id="appaterno" value="" required>
+                                        </div>
+                                        <div class="col-md-3"><label for="apmaterno" class="labels">Ap.
+                                                materno</label><input type="text" class="form-control form-control-sm"
+                                                placeholder="Ingrese apellido materno" id="apmaterno" value="" required>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="labels" for="sexo_id">Sexo</label><select
+                                                class="form-select form-control form-control-sm" id="sexo_id"
+                                                aria-label="Default select example" required>
+
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-4">
+                                            <label class="labels" for="grainst_id">Grado inst</label><select
+                                                class="form-select form-control form-control-sm" id="grainst_id"
+                                                aria-label="Default select example" required>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="labels" for="estciv_id">Est. civil</label><select
+                                                class="form-select form-control form-control-sm" id="estciv_id"
+                                                aria-label="Default select example" required>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="labels" for="codtipcon">Tipo contrato laboral</label><select
+                                                class="form-select form-control form-control-sm" id="codtipcon"
+                                                aria-label="Default select example" required>
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 border-right">
+                                <div class="p-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="text-right">Lugar de nacimiento</h5>
+                                    </div>
+                                    <div class="row mt-2">
+
+                                        <div class="col-md-4 form-inline col-sm-12 form-group ">
+                                            <label class="labels mb-2">Distrito</label>
+                                            <div class="input-group input-group-sm" style="width: 100%;">
+                                                <input type="hidden" id="cod_ubigeo" value="0">
+                                                <input type="text" id="des_ubigeo1" class="form-control form-control-sm"
+                                                    placeholder="Nombre del distrito" aria-label="cod_ubigeo" disabled>
+                                                <button type="button" class="btn input-group-text" id="btnDistrito1"
+                                                    data-toggle="modal" data-target="#modalFormDistrito">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--MODAL Distrito-->
+                                        <div class="modal fade" id="modalFormDistrito" role="dialog">
+                                            <div class="modal-dialog ">
+                                                <div class="modal-content">
+                                                    <div class="modal-header"
+                                                        style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                                        <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE
+                                                            DISTRITO</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="input-group input-group-sm" style="width: 100%;">
+                                                            <label class="control-label input-group-text"
+                                                                for="distritos">DISTRITO</label>
+                                                            <input class="form-control form-control-sm "
+                                                                id="distritomodal"
+                                                                placeholder="Ingrese el nombre de distrito"
+                                                                required></input>
+                                                            <label class="input-group-text form-control-sm"><i class="fa-solid fa-magnifying-glass"></i></label>
+                                                        </div>
+                                                        <div class="row mb-2 mt-2">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                                                    id="tabledistritomodal" style="display: none;">
+                                                                    <thead class="thead">
+                                                                        <tr>
+                                                                            <th scope="col">ACCIÓN</th>
+                                                                            <th scope="col">NOMBRE</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="bodyDistrio">
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                            <div class="text-center" id="cargadistrito"
+                                                                style="display: none;">
+                                                                <div class="d-flex justify-content-center align-items-center"
+                                                                    style="min-height: 5vh;">
+                                                                    <lottie-player src="/img/jsonimg/Cargahealth.json"
+                                                                        background="transparent" speed="1"
+                                                                        style="width: 200px; height: 200px;" loop
+                                                                        autoplay></lottie-player>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn"
+                                                                style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                                                id="cerrardistrito" data-dismiss="modal"> <i
+                                                                    class="fa-solid fa-circle-xmark"></i>
+                                                                Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-4"><label class="labels" for="fecnac">Fecha
+                                                nac.</label><input type="date" class="form-control btn-sm" id="fecnac"
+                                                min="1900-01-01" max="2100-12-31" step="1" required>
+                                        </div>
+                                        <div class="col-md-4 form-inline col-sm-12 form-group ">
+                                            <label class="labels mb-2">País</label>
+                                            <div class="input-group input-group-sm" style="width: 100%;">
+                                                <input type="hidden" id="ippais" value="0">
+                                                <input type="text" id="nacionalidad"
+                                                    class="form-control form-control-sm" placeholder="Nombre del país"
+                                                    aria-label="idPais" disabled>
+                                                <button type="button" class="btn input-group-text" id="btnPais"
+                                                    data-toggle="modal" data-target="#modalFormPais">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--MODAL PAÍS-->
+                                        <div class="modal fade" id="modalFormPais" role="dialog">
+                                            <div class="modal-dialog ">
+                                                <div class="modal-content">
+                                                    <div class="modal-header"
+                                                        style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                                        <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE
+                                                            PAÍS</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="input-group input-group-sm" style="width: 100%;">
+                                                            <label class="control-label input-group-text"
+                                                                for="pais">PAÍS</label>
+                                                            <input class="form-control form-control-sm " id="paismodal"
+                                                                placeholder="Ingrese el nombre del país"
+                                                                required></input>
+                                                            <label class="input-group-text form-control-sm"><i class="fa-solid fa-magnifying-glass"></i></label>
+                                                        </div>
+                                                        <div class="row mb-2 mt-2">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                                                    id="tablepaismodal" style="display: none;">
+                                                                    <thead class="thead">
+                                                                        <tr>
+                                                                            <th scope="col">ACCIÓN</th>
+                                                                            <th scope="col">NOMBRE</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="bodypais">
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                            <div class="text-center" id="cargapais"
+                                                                style="display: none;">
+                                                                <div class="d-flex justify-content-center align-items-center"
+                                                                    style="min-height: 5vh;">
+                                                                    <lottie-player src="/img/jsonimg/Cargahealth.json"
+                                                                        background="transparent" speed="1"
+                                                                        style="width: 200px; height: 200px;" loop
+                                                                        autoplay></lottie-player>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn"
+                                                                style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                                                id="cerrar" data-dismiss="modal"> <i
+                                                                    class="fa-solid fa-circle-xmark"></i>
+                                                                Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 border-right">
+                                <div class="p-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="text-right">Domicilio</h5>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-6"><label for="dirpac" class="labels">Dirección</label><input
+                                                type="text" class="form-control form-control-sm"
+                                                placeholder="Ingrese dirección" id="dirpac" value="" required></div>
+                                        <div class="col-md-4 form-inline col-sm-12 form-group ">
+                                            <label class="labels mb-2">Distrito</label>
+                                            <div class="input-group input-group-sm" style="width: 100%;">
+                                                <input type="hidden" id="cod_ubigeo2" value="0">
+                                                <input type="text" id="des_ubigeo2" class="form-control form-control-sm"
+                                                    placeholder="Nombre del distrito" aria-label="cod_ubigeo" disabled>
+                                                <button type="button" class="btn input-group-text" id="btnDistrito2"
+                                                    data-toggle="modal" data-target="#modalFormDistrito">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="labels" for="sexo">PCD</label><select
+                                                class="form-select form-control form-control-sm" id="pcd"
+                                                aria-label="Default select example" required>
+                                                <option value="SI">SI</option>
+                                                <option value="NO" selected>NO</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-3"><label for="telefono"
+                                                class="labels">Teléfono</label><input type="text"
+                                                class="form-control form-control-sm" placeholder="Ingrese teléfono"
+                                                id="telefono" value="" maxlength="11" oninput="formatPhoneNumber(this);"></div>
+                                        <div class="col-md-3"><label for="celular" class="labels">Celular</label><input
+                                                type="text" class="form-control form-control-sm"
+                                                placeholder="Ingrese celular" id="celular" value="" maxlength="9" required oninput="this.value=this.value.replace(/\D/g,'')"></div>
+                                        <div class="col-md-6"><label for="correo" class="labels">Correo</label><input
+                                                type="text" class="form-control form-control-sm"
+                                                placeholder="Ingrese email" id="correo" value=""></div>
+
+
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-2"><label for="numhijos" class="labels">Nro.
+                                                hijos</label><input type="number" class="form-control form-control-sm"
+                                                placeholder="Ingrese nro de hijos" id="numhijos" value="0" required>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label for="numdep" class="labels">Nro dependientes</label>
+                                            <input type="number" class="form-control form-control-sm"
+                                                placeholder="Ingrese nro de dependientes" id="numdep" value="0"
+                                                required>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12 border-right">
+                                <div class="p-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="text-right">Datos adicionales</h5>
+                                    </div>
+                                    <div class="row mt-2">
+
+                                        <div class="col-md-3">
+                                            <label class="labels" for="foto">Foto</label>
+                                            <input type="file" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="labels" for="huella">Huella</label>
+                                            <input type="file" class="form-control">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="labels" for="firma">Firma</label>
+                                            <input type="file" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-5 text-center"><button class="btn btn2" type="button"
+                                        onclick="guardarpaciente()" id="btnPaciente">
+                                        <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+            <!--MODAL Editar paciente-->
+                <div class="modal fade" id="modalFormpaciente" role="dialog">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header"
+                                style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE PACIENTE</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group input-group-sm" style="width: 100%;">
+                                    <label class="control-label input-group-text" for="pacientemodal">PACIENTE</label>
+                                    <input class="form-control form-control-sm " id="pacientemodal"
+                                        placeholder="Ingrese los nombres o el DNI del paciente" required></input>
+                                    <label class="input-group-text form-control-sm"><i
+                                            class="fa-solid fa-user"></i></label>
+                                </div>
+                                
+                                <div class="row mb-2 mt-2">
+                                    <div class="table-responsive">
+                                        <table
+                                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                            id="tablapacientemodal" style="display: none;">
+                                            <thead class="thead">
+                                                <tr>
+
+                                                    <th scope="col">APELLIDOS Y NOMBRES</th>
+                                                    <th scope="col">DNI</th>                                                    
+                                                    <th scope="col">ACCIONES</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="bodypacientemodal">
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="text-center" id="carga" style="display: none;">
+                                        <div class="d-flex justify-content-center align-items-center"
+                                            style="min-height: 5vh;">
+                                            <lottie-player
+                                                src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                                background="transparent" speed="1" style="width: 300px; height: 300px;"
+                                                loop autoplay></lottie-player>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn"
+                                        style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                        id="cerrarcliente" data-dismiss="modal"> <i
+                                            class="fa-solid fa-circle-xmark"></i>
+                                        Cerrar</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <!--Scripts-->
+    <script src="/js/entidades/paciente.js"> </script>
