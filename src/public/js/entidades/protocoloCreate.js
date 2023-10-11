@@ -1,7 +1,12 @@
 $(document).ready(function () {
-  getexamenes();
+  const id = document.getElementById("inputid").value;
+  getexamenes(id);
   getTipoExamen();
-  CalcularFecVen();
+  if (id === "0") {
+    CalcularFecVen();
+  } else {
+    llenarFormulario(id);
+  }
   $('#ex1 a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
     var activeTabId = e.target.getAttribute('aria-controls');
     const btnAdherir = document.getElementById("btnAdherir");
@@ -11,16 +16,69 @@ $(document).ready(function () {
       btnAdherir.style.display = "none";
     }
   });
-  var id = document.getElementById("inputid");
-  console.log(id.value);
 });
-  
 
-function getexamenes() {
+function llenarFormulario(id) {
+  // Selecciona los elementos una sola vez y guárdalos en variables
+  var formElements = {
+    codemp: document.getElementById('codemp'),
+    nomempresa: document.getElementById('nomempresa'),
+    vigente: document.getElementById('vigente'),
+    historico: document.getElementById('historico'),
+    cotizacion: document.getElementById('cotizacion'),
+    anulado: document.getElementById('anulado'),
+    tipexa_id: document.getElementById('tipexa_id'),
+    nompro: document.getElementById('nompro'),
+    comentarios: document.getElementById('comentarios'),
+    tiemval_cermed: document.getElementById('tiemval_cermed'),
+    fecvcto_cermed: document.getElementById('fecvcto_cermed')
+  };
+
+  $.ajax({
+    url: '/protocolodatos/' + id,
+    success: function (datos) {
+      console.log(datos);
+      var data = datos[0];
+      formElements.codemp.value = data.codemp;
+      formElements.nomempresa.value = data.razsoc;
+      switch (data.estado) {
+        case "V":
+          formElements.vigente.checked = true;
+          break;
+        case "H":
+          formElements.historico.checked = true;
+          break;
+        case "C":
+          formElements.cotizacion.checked = true;
+          break;
+        case "A":
+          formElements.anulado.checked = true;
+          break;
+        default:
+          break;
+      }
+      formElements.tipexa_id.value = data.tipexa_id;
+      formElements.nompro.value = data.nompro;
+      formElements.comentarios.value = data.comentarios;
+      formElements.tiemval_cermed.value = data.tiemval_cermed;
+      formElements.fecvcto_cermed.value = new Date(data.fecvcto_cermed).toISOString().split('T')[0];
+    },
+    error: function (xhr, status, error) {
+      console.error('Error en la solicitud AJAX:', status, error);
+      alert('Error al cargar los datos');
+    }
+  });
+}
+
+
+function getexamenes(id) {
+  var btncerrar = document.getElementById(`cerrarprotocolo`);
+  btncerrar.click();
+  const ruta = (id === "0") ? '/examenes' : '/examenes/' + id;
   ocultarTabla("mydatatable");
   mostrarDiv("cargaacc");
   $.ajax({
-    url: '/examenes',
+    url: ruta,
     success: function (examenes) {
       ocultarDiv("cargaacc");
       mostrarTabla("mydatatable");
@@ -33,13 +91,15 @@ function getexamenes() {
           const grupoetarioArray = JSON.parse(grupoetario);
 
           grupoetarioArray.forEach((item) => {
-            selectOptions += `<option value="${item.raneta_id}">${item.desrango}</option>`;
+            const selectedAttr = (item.raneta_id === examen.raneta_id) ? 'selected' : '';
+            selectOptions += `<option value="${item.raneta_id}" ${selectedAttr}>${item.desrango}</option>`;
           });
+          const checked = (examen.checkbox === "S") ? 'checked' : '';
           tbody.append(`
               <tr>
                 <td class="text-left" style="vertical-align: middle;">${examen.desexa}</td>
                 <td class="text-left" style="vertical-align: middle;">${examen.desexadet}</td>
-                <td class="" style="vertical-align: middle;"><input onclick="activar('${examen.soexa}_${examen.codpru_id}')" id="check_${examen.soexa}_${examen.codpru_id}" type="checkbox" class="mt-1" value="${examen.soexa}_${examen.codpru_id}" ></td>
+                <td class="" style="vertical-align: middle;"><input onclick="activar('${examen.soexa}_${examen.codpru_id}')" id="check_${examen.soexa}_${examen.codpru_id}" type="checkbox" class="mt-1" value="${examen.soexa}_${examen.codpru_id}" ${checked}></td>
                 <td>
                   <select class="form-select form-control form-control-sm" name="" id="select_${examen.soexa}_${examen.codpru_id}">
                     ${selectOptions}
@@ -56,6 +116,7 @@ function getexamenes() {
               </tr>
             `);
           activar(examen.soexa + '_' + examen.codpru_id);
+          
         });
       } else {
         // Manejar el caso de que "examenes" no sea un array, tal vez mostrar un mensaje de error
@@ -114,16 +175,13 @@ document.getElementById("empresamodal").addEventListener("keydown", function (ev
             bodyempleadomodal.append(`
         <tr>
           <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="AgregarEmpresa(this)"><i class="fa-solid fa-plus"></i></button></td>
-          <td style="vertical-align: middle;" class="text-left">${list.codemp}</td>
+          <td style="vertical-align: middle;" class="text-left">${list.cli_id}</td>
           <td style="vertical-align: middle;" class="text-left asignado">${list.razsoc}</td>
         </tr>
       `);
           });
           mensaje(lista[0].icono, lista[0].mensaje, 1500);
         }
-
-
-
       },
       error: function () { // Corregido: eliminé el parámetro "lista" innecesario
         alert('error');
@@ -140,7 +198,7 @@ document.getElementById("protocolomodal").addEventListener("keydown", function (
     let protocolomodal = $('#protocolomodal').val();
     event.preventDefault();
     $.ajax({
-      url: '/protocolooptions',
+      url: '/protocololist',
       method: "GET",
       data: {
         protocolo: protocolomodal,
@@ -161,9 +219,9 @@ document.getElementById("protocolomodal").addEventListener("keydown", function (
           lista.forEach(list => {
             bodyprotocolomodal.append(`
         <tr>
-          <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="AgregarEmpresa(this)"><i class="fa-solid fa-plus"></i></button></td>
-          <td style="vertical-align: middle;" class="text-left">${list.codemp}</td>
-          <td style="vertical-align: middle;" class="text-left asignado">${list.razsoc}</td>
+          <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="getexamenes('${list.codpro_id}')"><i class="fa-solid fa-plus"></i></button></td>
+          <td style="vertical-align: middle;" class="text-left">${list.codpro_id}</td>
+          <td style="vertical-align: middle;" class="text-left asignado">${list.nompro}</td>
         </tr>
       `);
           });
@@ -232,6 +290,7 @@ function CalcularFecVen() {
 }
 
 function Guardar() {
+  const id = document.getElementById("inputid").value;
   var table = document.getElementById('mydatatable');
   var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
   var datains = [];
@@ -266,6 +325,7 @@ function Guardar() {
     var vigente = document.getElementById("vigente");
     var historico = document.getElementById("historico");
     var cotizacion = document.getElementById("cotizacion");
+    var anulado = document.getElementById("anulado");
     let estado;
     if (vigente.checked === true) {
       estado = vigente.value;
@@ -275,6 +335,9 @@ function Guardar() {
     }
     if (cotizacion.checked === true) {
       estado = cotizacion.value;
+    }
+    if (anulado.checked === true) {
+      estado = anulado.value;
     }
     const tiemval_cermed = document.getElementById("tiemval_cermed").value
     const fecvcto_cermed = document.getElementById("fecvcto_cermed").value
@@ -288,6 +351,7 @@ function Guardar() {
       estado: estado,
       tiemval_cermed: tiemval_cermed,
       fecvcto_cermed: fecvcto_cermed,
+      id: id,
       datains: datains
     };
 
@@ -305,8 +369,16 @@ function Guardar() {
         return response.json();
       })
       .then(data => {
-        console.log(data[0]);
-        mensaje(data[0].icono, data[0].mensaje, 1500);
+        MensajeSIyNO(data[0].icono, data[0].mensaje, '¿Desea volver?', function (respuesta) {
+          if (respuesta) {
+            rendersub('/protocolo');
+          } else {
+            if (data[0].mensaje === "Guardado correctamente") {
+              limpiarImput();
+            }
+            return;
+          }
+        });
       })
       .catch(error => {
         console.error('Error:', error);
