@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="container-fluid body1">
+                <div class="container-fluid body1" id="body1">
                     <form id="formusuarios" class="needs-validation" novalidate>
                         <div class="row">
                             <div class="col-md-12 border-right">
@@ -198,14 +198,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6" >
+                                        <div class="col-md-6">
                                             <label for="" class="labels">Fecha
                                                 Programada</label>
                                             <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <input type="date" class="form-control form-control-sm mr-2" id="fecprocitaDate"
-                                                    required>
-                                                <input type="time" class="form-control form-control-sm" id="fecprocitaTime"
-                                                    required>
+                                                <input type="date" class="form-control form-control-sm mr-2"
+                                                    id="fecprocitaDate" required>
+                                                <input type="time" class="form-control form-control-sm"
+                                                    id="fecprocitaTime" required>
                                             </div>
                                         </div>
 
@@ -213,9 +213,9 @@
                                     <div class="row mt-2">
                                         <div class="col-md-12">
                                             <label for="" class="labels">Observación</label>
-                                            <textarea class="form-control form-control-sm mr-2" placeholder="Ingresar observación" id="obscita"
-                                                    required></textarea>
-                                                    
+                                            <textarea class="form-control form-control-sm mr-2"
+                                                placeholder="Ingresar observación" id="obscita" required></textarea>
+
                                         </div>
                                     </div>
                                 </div>
@@ -231,7 +231,7 @@
                                                 type="text" class="form-control form-control-sm"
                                                 placeholder="Ingrese su cargo" id="cargo_actual" value="" required>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <label class="labels" for="fecing_cargo">Fecha de ingreso al
                                                 cargo</label><input type="date" class="form-control btn-sm"
                                                 id="fecing_cargo" min="1900-01-01" max="2100-12-31" step="1" required>
@@ -241,20 +241,21 @@
                                                 class="form-control form-control-sm" placeholder="Ingrese su área"
                                                 id="area_actual" value="" required>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-md-2">
                                             <label class="labels" for="fecing_area">Fecha de ingreso al
                                                 cargo</label><input type="date" class="form-control btn-sm"
                                                 id="fecing_area" min="1900-01-01" max="2100-12-31" step="1" required>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="labels" for="fecing_empresa">Fecha de ingreso a la
+                                                empresa</label><input type="date" class="form-control btn-sm"
+                                                id="fecing_empresa" min="1900-01-01" max="2100-12-31" step="1" required>
                                         </div>
 
 
                                     </div>
                                     <div class="row mt-4">
-                                        <div class="col-md-3">
-                                            <label class="labels" for="fecing_empresa">Fecha de ingreso a la
-                                                empresa</label><input type="date" class="form-control btn-sm"
-                                                id="fecing_empresa" min="1900-01-01" max="2100-12-31" step="1" required>
-                                        </div>
+
                                         <div class="col-md-3">
                                             <label class="labels" for="altilab_id">Altitud de la labor</label><select
                                                 class="form-select form-control form-control-sm" id="altilab_id"
@@ -273,62 +274,78 @@
                                                 aria-label="Default select example" required>
                                             </select>
                                         </div>
+                                        <div class="col-md-3">
+                                            <label class="labels" for="valapt_id">Aptitud</label><select
+                                                class="form-select form-control form-control-sm" id="valapt_id"
+                                                aria-label="Default select example" required>
+                                            </select>
+                                        </div>
 
                                     </div>
                                     <div class="row mt-4">
-                                        <div class="col-md-2 bloque" id="cond_vehiculo">
+
+                                        <div class="col bloque" id="cond_vehiculo">
                                             <label for="" class="labels">Conduce vehículo</label>
                                             <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S" name="cond_vehiculo"
                                                         required>SI</label>
-                                                <label for="" class=""><input type="radio" class="me-2" value="N"
-                                                        required>NO</label>
+                                                <label for="" class=""><input type="radio" class="me-2" value="N" name="cond_vehiculo"
+                                                        required checked>NO</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 bloque" id="ope_equipo_pesado">
+                                        <div class="col bloque" id="ope_equipo_pesado">
                                             <label class="labels" for="">Opera vehículo pesado</label>
                                             <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S" name="ope_equipo_pesado"
                                                         required>SI</label>
-                                                <label for="" class=""><input type="radio" class="me-2" value="N"
-                                                        required>NO</label>
+                                                <label for="" class=""><input type="radio" class="me-2" value="N" name="ope_equipo_pesado"
+                                                        required checked>NO</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 bloque" id="envresult_correo">
+                                        <div class="col bloque" id="envresult_correo">
                                             <label for="" class="labels">Enviar resultados por correo</label>
                                             <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S" name="envresult_correo"
                                                         required>SI</label>
 
-                                                <label for="" class=""><input type="radio" class="me-2" value="N"
-                                                        required>NO</label>
+                                                <label for="" class=""><input type="radio" class="me-2" value="N" name="envresult_correo"
+                                                        required checked>NO</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 bloque" id="com_info_medica">
+                                        <div class="col bloque" id="com_info_medica">
                                             <label for="" class="labels">Comparte información médica</label>
                                             <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S" name="com_info_medica"
                                                         required>SI</label>
-                                                <label for="" class=""><input type="radio" class="me-2" value="N"
-                                                        required>NO</label>
+                                                <label for="" class=""><input type="radio" class="me-2" value="N" name="com_info_medica"
+                                                        required checked>NO</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 bloque" id="ent_result_fisico">
+                                        <div class="col bloque" id="ent_result_fisico">
                                             <label for="" class="labels">Entrega de resultado en físico</label>
                                             <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S" name="ent_result_fisico"
                                                         required>SI</label>
-                                                <label for="" class=""><input type="radio" class="me-2" value="N"
-                                                        required>NO</label>
+                                                <label for="" class=""><input type="radio" class="me-2" value="N" name="ent_result_fisico"
+                                                        required checked>NO</label>
                                             </div>
                                         </div>
-                                        <div class="col-md-2 bloque" id="usa_firma_formatos">
+                                        <div class="col bloque" id="usa_firma_formatos">
                                             <label for="" class="labels">Usar firma escaneada en formatos</label>
                                             <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S" name="usa_firma_formatos"
                                                         required>SI</label>
-                                                <label for="" class=""><input type="radio" class="me-2" value="N"
-                                                        required>NO</label>
+                                                <label for="" class=""><input type="radio" class="me-2" value="N" name="usa_firma_formatos"
+                                                        required checked>NO</label>
+                                            </div>
+                                        </div>
+                                        <div class="col bloque" id="res_lugar_trabajo">
+                                            <label for="" class="labels">Reside en lugar de trabajo</label>
+                                            <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
+                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S" name="res_lugar_trabajo"
+                                                        required>SI</label>
+                                                <label for="" class=""><input type="radio" class="me-2" value="N" name="res_lugar_trabajo"
+                                                        required checked>NO</label>
                                             </div>
                                         </div>
 
@@ -337,11 +354,16 @@
                             </div>
 
                         </div>
+                        <div class="mt-5 text-center"><button class="btn btn2" type="button" onclick="guardarCita()"
+                                id="btnCita">
+                                <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
+                            </button>
+                        </div>
                     </form>
                 </div>
 
             </div>
-            <!--MODAL Editar paciente-->
+            <!--MODAL Editar paciente
             <div class="modal fade" id="modalFormpaciente" role="dialog">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -393,7 +415,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 

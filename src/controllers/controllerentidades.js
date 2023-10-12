@@ -119,5 +119,16 @@ module.exports = {
         const response = await pool.query(`pa_selcmbProtocolo '${codrolUser}','${parametro}'`);
         res.json(response.recordset);
     },
+    async postcita(req, res) {//agregar cita
+        const { cli_id, codpro_id, tipexa_id,valapt_id, pachis,fecprocitaDate, fecprocitaTime, obscita, cargo_actual, fecing_cargo, area_actual, fecing_area, fecing_empresa, altilab_id, superf_id, tipseg_id, cond_vehiculo, ope_equipo_pesado, envresult_correo, com_info_medica, ent_result_fisico, usa_firma_formatos, res_lugar_trabajo} = req.body;
+        const usenam = req.user.usuario;
+        const hostname = '';
+        const codrolUser = req.user.codrol;
+
+        const pool = await getConnection();
+        const response = await pool.query(`pa_InsCita '${pachis}', ${tipexa_id}, ${valapt_id}, ${cli_id}, ${codpro_id}, '${fecprocitaDate}','${fecprocitaTime}', '${area_actual}', '${fecing_area}', '${cargo_actual}', '${fecing_cargo}', '${fecing_empresa}', '${ope_equipo_pesado}', '${cond_vehiculo}', '${envresult_correo}', '${com_info_medica}', '${ent_result_fisico}', '${usa_firma_formatos}', '${res_lugar_trabajo}', ${altilab_id}, ${superf_id}, ${tipseg_id}, '${obscita}', ${codrolUser}, '${usenam}'`);
+        
+        res.json(response.recordset);
+    },
     /*************************/
 };

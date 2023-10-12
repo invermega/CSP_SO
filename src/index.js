@@ -89,7 +89,7 @@ app.use(require('./routes/'));
 app.use(require('./routes/configuracion'));
 app.use(require('./routes/historiaclinica'));
 app.use(require('./routes/entidades'));
-
+/*
 const auth = (req, res, next) => {
   const credentials = basicAuth(req);
 
@@ -100,7 +100,7 @@ const auth = (req, res, next) => {
 
   next();
 };
-app.use('/img/paciente', auth, express.static(path.join(__dirname, 'public', 'img', 'paciente')));
+app.use('/img/paciente', auth, express.static(path.join(__dirname, 'public', 'img', 'paciente')));*/
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), () => {
