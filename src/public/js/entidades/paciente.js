@@ -191,6 +191,7 @@ function limpiarModal() {
 }
 var opc = 0;
 function guardarpaciente() {    
+    $("#btnPaciente").prop("disabled", true);
     let appaterno = $('#appaterno');
     let apmaterno = $('#apmaterno');
     let nombres = $('#nombres');
@@ -251,9 +252,11 @@ function guardarpaciente() {
             opc = 0;
             limpiar();
             mensaje(response[0].tipo, response[0].response, 1500);
+            $("#btnCita").prop("disabled", false);
         },
         error: function () {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);
+            $("#btnCita").prop("disabled", false);
         }
     });
 }

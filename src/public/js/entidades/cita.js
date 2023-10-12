@@ -1,40 +1,33 @@
-
 $(document).ready(function () {
+    
+    $('#fecprocitaTime').clockpicker({
+        placement: 'bottom',
+        align: 'left',
+        autoclose: true,
+        'default': 'now',
+        donetext: 'Aceptar', 
+        twelvehour: false, 
+        vibrate: true,
+        afterDone: function() {
+            $('#fecprocitaTime').trigger('change');
+        }
+    });
     fechahoy('fecprocitaDate');
     fechahoy('fecing_cargo');
     fechahoy('fecing_area');
     fechahoy('fecing_empresa');
-
     horatime('fecprocitaTime');
-    getPacienteCombos();
-    /*const bloques = document.querySelectorAll('.bloque');
-
-    bloques.forEach(function (bloque) {
-        const radioButtons = bloque.querySelectorAll('input[type="radio"]');
-
-        radioButtons.forEach(function (radioButton) {
-            radioButton.addEventListener('change', function () {
-                // Desmarca los otros botones de radio en el mismo bloque
-                radioButtons.forEach(function (otherRadioButton) {
-                    if (otherRadioButton !== radioButton && otherRadioButton.name === radioButton.name) {
-                        otherRadioButton.checked = false;
-                    }
-                });
-            });
-        });
-    });*/
+    getPacienteCombos();    
 });
 function getPacienteCombos() {
     $.ajax({
         url: '/listarCombosCitas',
         success: function (lista) {
-            let tipexa_id = $('#tipexa_id'); // Selecionar el select de tipo de examen
+            
             let altilab_id = $('#altilab_id'); // Selecionar el select de altitud
             let superf_id = $('#superf_id'); // Selecionar el select superficie
             let tipseg_id = $('#tipseg_id'); // Selecionar el select de tipo de seguro
-            let valapt_id = $('#valapt_id'); // Selecionar el select de aptitud
-            
-            tipexa_id.html('');
+            let valapt_id = $('#valapt_id'); // Selecionar el select de aptitud            
             altilab_id.html('');
             superf_id.html('');
             tipseg_id.html('');
@@ -42,8 +35,7 @@ function getPacienteCombos() {
             lista.forEach(item => {
                 let option = `<option value="${item.id}">${item.descripcion}</option>`;
                 if (item.tabla === 'altitud_labor') {
-                    tipexa_id.append(option);
-                } else if (item.tabla === 'tipo_examen') {
+                    //altitud_labor
                     altilab_id.append(option);
                 } else if (item.tabla === 'superficie') {
                     superf_id.append(option);
@@ -109,6 +101,7 @@ document.getElementById("pacientemodal").addEventListener("keyup", function (eve
         getpacientes(parametro);
     }
 });
+
 function getpacientem(appm_nom, pachis) {
     $('#appm_nom').val(appm_nom);
     $('#pachis').val(pachis);
@@ -119,7 +112,6 @@ function getpacientem(appm_nom, pachis) {
 document.getElementById("empresamodal").addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         var parametro = this.value;
-        console.log(parametro)
         getclientes(parametro);
     }
 });
@@ -172,7 +164,7 @@ function getempresam(razsoc, cli_id) {
     getprotocolo(cli_id);
     event.preventDefault();
 }
-
+var tipoexamen;
 function getprotocolo(parametro) {
     $.ajax({
         url: '/listarprotocolo',
@@ -190,21 +182,40 @@ function getprotocolo(parametro) {
                 lista.forEach(item => {
                     let option = `<option value="${item.id}">${item.descripcion}</option>`;
                     codpro_id.append(option);
-
                 });
+                codpro_id.on('change', function() {                
+                    let tercerColumna = obtenerTerceraColumna(lista, $(this).val());                
+                    $('#tipexa_id').val(tercerColumna);
+                });
+                codpro_id.trigger('change');
             }
+            
         },
         error: function () {
             alert('Error en la solicitud AJAX');
         },
     });
 }
-
+function obtenerTerceraColumna(lista, idSeleccionado) {
+    let tercerColumnaValor = '';
+    lista.forEach(item => {
+        if (item.id === idSeleccionado) {
+            tercerColumnaValor = item.desexa;
+        }
+    });
+    return tercerColumnaValor;
+}
+document.getElementById("codpro_id").addEventListener("change", function (event) {
+    if (event.key === "Enter") {
+        var parametro = this.value;
+        console.log(parametro)
+        getclientes(parametro);
+    }
+});
 function guardarCita(){
     $("#btnCita").prop("disabled", true);
     let cli_id = $('#cli_id');
     let codpro_id = $('#codpro_id');
-    let tipexa_id = $('#tipexa_id');
     let pachis = $('#pachis');
     let fecprocitaDate = $('#fecprocitaDate');
     let fecprocitaTime = $('#fecprocitaTime');
@@ -232,7 +243,6 @@ function guardarCita(){
         data: {
             cli_id: cli_id.val(),
             codpro_id: codpro_id.val(),
-            tipexa_id: tipexa_id.val(),
             pachis: pachis.val(),
             fecprocitaDate: fecprocitaDate.val(),
             fecprocitaTime: fecprocitaTime.val(),

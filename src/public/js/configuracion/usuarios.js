@@ -75,6 +75,7 @@ function getpermisos() {
 
 
 function guardarusuario() {
+    $("#btnUsuario").prop("disabled", true);
     const canvas = document.getElementById('canvas');
     let opc = 0;
     let iduser = $('#iduser').val();
@@ -126,10 +127,12 @@ function guardarusuario() {
             limpiarinputs();
             activarCampo();
             $('input[type="text"]').val("");
-            mensaje(response[0].tipo, response[0].response, 5000);
+            mensaje(response[0].tipo, response[0].response, 1500);
+            $("#btnCita").prop("disabled", false);
         },
         error: function () {
-            mensaje('error', 'Error al guardar, intente nuevamente', 5500);
+            mensaje('error', 'Error al guardar, intente nuevamente', 1500);
+            $("#btnCita").prop("disabled", false);
         }
     });
 }
