@@ -11,10 +11,10 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const Sequelize = require('sequelize');
 const MSSQLStore = require('express-session-sequelize')(session.Store);
-
+const basicAuth = require('basic-auth');
+const app = express();
 
 //a
-const app = express();
 require('./lib/passport');
 
 // Manejo de uncaughtException
@@ -50,7 +50,7 @@ app.use(
       db: new Sequelize(dbSettings.database, dbSettings.user, dbSettings.password, {
         host: dbSettings.server,
         dialect: 'mssql',
-        port: 60089,
+        port: 10200,
         dialectOptions: {
           options: {
             encrypt: dbSettings.options.encrypt,
@@ -89,7 +89,18 @@ app.use(require('./routes/'));
 app.use(require('./routes/configuracion'));
 app.use(require('./routes/historiaclinica'));
 app.use(require('./routes/entidades'));
+/*
+const auth = (req, res, next) => {
+  const credentials = basicAuth(req);
 
+  if (!credentials || credentials.name !== 'usuario' || credentials.pass !== 'contraseña') {
+    res.set('WWW-Authenticate', 'Basic realm="example"');
+    return res.status(401).send('Authentication required.');
+  }
+
+  next();
+};
+app.use('/img/paciente', auth, express.static(path.join(__dirname, 'public', 'img', 'paciente')));*/
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), () => {
