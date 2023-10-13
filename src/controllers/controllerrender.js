@@ -52,5 +52,12 @@ module.exports = {
     async rendercita(req, res) {
         res.render('entidades/cita', { layout: false });
     },
-    
+
+    async renderemedico(req, res) {
+        res.render('entidades/medicos', { layout: false });
+    },
+    async rendercliente(req, res) {
+        res.render('entidades/cliente', { layout: false });
+    },
+
 };
