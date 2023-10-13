@@ -177,4 +177,10 @@ module.exports = {
         //console.log(response.recordset);
         res.json(response.recordset);
     },
+    /********************************/
+
+    /************MEDICOS*************/
+    /*************************/
+
 };
+
