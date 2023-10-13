@@ -26,15 +26,22 @@ router.get('/exportarprotocolo/:id',isLoggedIn, controllerEN.getexportarprotocol
 
 
 /*****************Paciente*****************/
-router.get('/paciente', isLoggedIn, controllerrender.renderepaciente);
+router.get('/paciente', isLoggedIn, controllerrender.renderpaciente);
 router.get('/listarCombosPac', isLoggedIn, controllerEN.getPacienteCombos);
 router.get('/listardistrito',isLoggedIn,controllerEN.getDistrito);
 router.get('/listarpais',isLoggedIn,controllerEN.getPais);
 router.post('/paciente',isLoggedIn,controllerEN.postpaciente);
 router.get('/listarpacientes',isLoggedIn,controllerEN.getpaciente)
+router.delete('/deletePac',controllerEN.deletepaciente);
 
 
 /******************************************/
+/*****************Citas*****************/
+router.get('/cita', isLoggedIn, controllerrender.rendercita);
+router.get('/listarCombosCitas', isLoggedIn, controllerEN.getCitasCombos);
+router.get('/listarprotocolo', isLoggedIn, controllerEN.getProtocoloCombos);
+router.post('/cita',isLoggedIn,controllerEN.postcita)
+
 
 /*****************Médico*******************/
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
@@ -42,6 +49,7 @@ router.get('/medico', isLoggedIn, controllerrender.renderemedico);
 /****************Cliente******************/
 
 router.get('/cliente', isLoggedIn, controllerrender.rendercliente);
+
 
 /******************************************/
 module.exports = router;
