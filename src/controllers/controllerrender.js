@@ -20,22 +20,34 @@ module.exports = {
     },
     //render de configuracion
     async renderusuario(req, res) {
-        const parametro="US";
-        permisos(parametro, 'configuracion/usuario',req,res)
+        const parametro = "US";
+        permisos(parametro, 'configuracion/usuario', req, res)
     },
     async renderroles(req, res) {
-        const parametro="PE"
-        permisos(parametro,'configuracion/permisos',req,res);
+        const parametro = "PE"
+        permisos(parametro, 'configuracion/permisos', req, res);
     },
     //historiaclinica
-    async renderpacientes(req, res) {
-        const parametro ="PC" ;
-        permisos(parametro,'historiaclinica/paciente', req,res)
+    async renderpacientescitados(req, res) {
+        const parametro = "PH";
+        permisos(parametro, 'historiaclinica/pacientescitados', req, res)
     },
+    async rendersignosvitales(req, res) {
+        const { soexa, id } = req.params;
+        console.log(soexa, id);
+        const parametro = "PH";
+        //permisosexamenes(parametro, 'entidades/protocoloCreate', req, res, id, soexa);
+        res.render('historiaclinica/examenes/signosvitales', { id, soexa, layout: false });
+    },
+    async rendersignosvitalesprueba(req, res) {
+        const parametro = "PH";
+        permisos(parametro, 'historiaclinica/pruebas/pbsignosvitales', req, res);
+    },
+
     //entidades
     async renderprotocolo(req, res) {
         const parametro = "PT";
-        permisos(parametro,'entidades/protocolo', req, res)
+        permisos(parametro, 'entidades/protocolo', req, res)
     },
     async renderprotocolocreate(req, res) {
         const parametro = "PT";
