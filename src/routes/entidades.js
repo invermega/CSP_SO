@@ -39,7 +39,10 @@ router.get('/cita', isLoggedIn, controllerrender.rendercita);
 router.get('/listarCombosCitas', isLoggedIn, controllerEN.getCitasCombos);
 router.get('/listarprotocolo', isLoggedIn, controllerEN.getProtocoloCombos);
 router.post('/cita',isLoggedIn,controllerEN.postcita)
-
+router.get('/listarcitas', isLoggedIn, controllerEN.getListaCitas);
+router.get('/citacreate', isLoggedIn, controllerrender.rendercitacreate);
+router.get('/citaedit/:id', isLoggedIn, controllerrender.rendercitaedit);
+router.delete('/citadel',isLoggedIn, controllerEN.delcita);
 
 /*****************Médico*******************/
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
