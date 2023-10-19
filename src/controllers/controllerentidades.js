@@ -1,19 +1,14 @@
 const { getConnection } = require('../database/conexionsql');
-const helpers = require('../lib/helpers');
-const path = require('path');
-const sharp = require('sharp');
-const fs = require('fs');
-
 const sql = require('mssql');
 const XLSX = require('xlsx');
 const xlsxPopulate = require('xlsx-populate');
 
 module.exports = {
-    //Porotocolo   
+    /*****************Protocolo*****************/
     async getprotocololist(req, res) {
-        const protocolo = req.query.protocolo;
+        let protocolo = req.query.protocolo;
         const codrol = req.user.codrol;
-        if (protocolo.lenght === 0) {
+        if (protocolo === '') {
             protocolo = '%';
         }
         const pool = await getConnection();
@@ -49,7 +44,7 @@ module.exports = {
         const TipoExamenes = await pool.query(`sp_selTipoExamen`);
         res.json(TipoExamenes.recordset);
     },
-  async postprotocolo(req, res) {
+    async postprotocolo(req, res) {
         try {
             const { codemp, nompro, comentarios, tipexa_id, estado, tiemval_cermed, fecvcto_cermed, id, datains } = req.body;
             const usenam = req.user.usuario;
@@ -136,6 +131,7 @@ module.exports = {
             });
         });
     },
+    /******************************************/
 
     /************Paciente*******/
     async getPacienteCombos(req, res) {//llenar los combos de formulario       
@@ -166,7 +162,6 @@ module.exports = {
 
         const pool = await getConnection();
         const response = await pool.query(`sp_insPaciente '${appaterno.toUpperCase()}',${apmaterno.toUpperCase()},'${nombres.toUpperCase()}','${fecnac}','${cod_ubigeo}','${docide}','${numdoc}','${dirpac}','${cod_ubigeo2}','${correo.toUpperCase()}','${telefono.trim()}', '${celular}','${numhijos}','${numdep}','${pcd}','','','','${sexo_id}','${grainst_id}','${estciv_id}','${codtipcon}','${ippais}','${usenam}','${codrolUser}','${opc}'`);
-        
         res.json(response.recordset);
     },
     async getpaciente(req, res) {//listar paciente para edicion
@@ -177,6 +172,7 @@ module.exports = {
         //console.log(response.recordset);
         res.json(response.recordset);
     },
+};
     async deletepaciente(req, res) {//eliminar usuario
         const { dni } = req.body;
         const codrolUser = req.user.codrol;
@@ -184,7 +180,6 @@ module.exports = {
         const response = await pool.query(`sp_delPaciente '${codrolUser}','${dni}'`);
         res.json(response.recordset);
     },
-
 
     /*************************/
     /************Citas*******/
@@ -219,5 +214,3 @@ module.exports = {
     /*************************/
 
 };
-
-

@@ -70,7 +70,6 @@ function llenarFormulario(id) {
   });
 }
 
-
 function getexamenes(id) {
   var btncerrar = document.getElementById(`cerrarprotocolo`);
   btncerrar.click();

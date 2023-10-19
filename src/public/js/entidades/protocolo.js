@@ -18,7 +18,6 @@ function getProtocolo() {
       protocolo: protocolo,
     },
     success: function (Protocolos) {
-      console.log(Protocolos);
       ocultarDiv('carga');
       mostrarTabla('mydatatable');
       let tablebody = $('tbody');
