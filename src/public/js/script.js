@@ -191,7 +191,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
 function filtrosMostrarOcultar(btnId, divId) {
   let isVisible = false;
-
+  
   document.getElementById(btnId).addEventListener("click", function () {
     // Si está oculto, lo mostramos; si está visible, lo ocultamos
     if (isVisible) {
@@ -503,7 +503,8 @@ function limpiarImput() {
 
 function validarFormulario(excluirIds) {
   let camposValidos = true;
-  $('input, select, textarea').each(function () {
+  let campoFaltante = '';
+  $('input, select, textarea').each(function() {
     const id = $(this).attr('id');
     if (excluirIds && excluirIds.includes(id)) {
       return true;
@@ -511,6 +512,7 @@ function validarFormulario(excluirIds) {
 
     if (!$(this).val()) {
       camposValidos = false;
+      campoFaltante = id;
       $(this).addClass('is-invalid');
     } else {
       $(this).removeClass('is-invalid');
@@ -520,6 +522,7 @@ function validarFormulario(excluirIds) {
 
   if (!camposValidos) {
     mensaje('error', 'Por favor, complete todos los campos.', 1800);
+    console.log('Campo faltante: ' + campoFaltante);
   }
 
   return camposValidos;
@@ -551,3 +554,11 @@ function validarFormulario2(contenedor, incluirIds) {
   }
   return camposValidos;
 }
+function horatime(input) {
+  var horaActual = new Date().toLocaleTimeString(navigator.language, {
+      hour: '2-digit',
+      minute: '2-digit'
+  }); 
+  document.getElementById(input).value = horaActual;
+}
+

@@ -155,14 +155,13 @@ module.exports = {
         res.json(response.recordset);
     },
     async postpaciente(req, res) {//agregar paciente
-        const { pachis, appaterno, apmaterno, nombres, fecnac, cod_ubigeo, docide, numdoc, dirpac, cod_ubigeo2, correo, telefono, celular, numhijos, numdep, pcd, foto, huella, firma, sexo_id, grainst_id, estciv_id, codtipcon, ippais } = req.body;
+        const { pachis, appaterno, apmaterno, nombres, fecnac, cod_ubigeo, docide, numdoc, dirpac, cod_ubigeo2 ,correo,telefono, celular, numhijos, numdep, pcd, foto, huella, firma, sexo_id, grainst_id, estciv_id, codtipcon,ippais,opc} = req.body;
         const usenam = req.user.usuario;
         const hostname = '';
         const codrolUser = req.user.codrol;
 
         const pool = await getConnection();
-        const response = await pool.query(`sp_insPaciente '${pachis.toUpperCase()}','${appaterno.toUpperCase()}',${apmaterno.toUpperCase()},'${nombres.toUpperCase()}','${fecnac}','${cod_ubigeo}','${docide}','${numdoc}','${dirpac}','${cod_ubigeo2}','${correo.toUpperCase()}','${telefono.trim()}', '${celular}','${numhijos}','${numdep}','${pcd}','','','','${sexo_id}','${grainst_id}','${estciv_id}','${codtipcon}','${ippais}','${usenam}','${codrolUser}'`);
-
+        const response = await pool.query(`sp_insPaciente '${appaterno.toUpperCase()}',${apmaterno.toUpperCase()},'${nombres.toUpperCase()}','${fecnac}','${cod_ubigeo}','${docide}','${numdoc}','${dirpac}','${cod_ubigeo2}','${correo.toUpperCase()}','${telefono.trim()}', '${celular}','${numhijos}','${numdep}','${pcd}','','','','${sexo_id}','${grainst_id}','${estciv_id}','${codtipcon}','${ippais}','${usenam}','${codrolUser}','${opc}'`);
         res.json(response.recordset);
     },
     async getpaciente(req, res) {//listar paciente para edicion
@@ -173,5 +172,45 @@ module.exports = {
         //console.log(response.recordset);
         res.json(response.recordset);
     },
-    /******************************************/
+};
+    async deletepaciente(req, res) {//eliminar usuario
+        const { dni } = req.body;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`sp_delPaciente '${codrolUser}','${dni}'`);
+        res.json(response.recordset);
+    },
+
+    /*************************/
+    /************Citas*******/
+    async getCitasCombos(req, res) {//llenar los combos de formulario       
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`sp_selCombosCita '${codrolUser}'`);
+        res.json(response.recordset);
+    },
+    async getProtocoloCombos(req, res) {//llenar los combos del formulario en base al protocolo
+        const { parametro } = req.query;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selcmbProtocolo '${codrolUser}','${parametro}'`);
+        res.json(response.recordset);
+    },
+    async postcita(req, res) {//agregar cita
+        const { cli_id, codpro_id,valapt_id, pachis,fecprocitaDate, fecprocitaTime, obscita, cargo_actual, fecing_cargo, area_actual, fecing_area, fecing_empresa, altilab_id, superf_id, tipseg_id, cond_vehiculo, ope_equipo_pesado, envresult_correo, com_info_medica, ent_result_fisico, usa_firma_formatos, res_lugar_trabajo} = req.body;
+        const usenam = req.user.usuario;
+        const hostname = '';
+        const codrolUser = req.user.codrol;
+
+        const pool = await getConnection();
+        const response = await pool.query(`pa_InsCita '${pachis}', ${valapt_id}, ${cli_id}, ${codpro_id}, '${fecprocitaDate}','${fecprocitaTime}', '${area_actual}', '${fecing_area}', '${cargo_actual}', '${fecing_cargo}', '${fecing_empresa}', '${ope_equipo_pesado}', '${cond_vehiculo}', '${envresult_correo}', '${com_info_medica}', '${ent_result_fisico}', '${usa_firma_formatos}', '${res_lugar_trabajo}', ${altilab_id}, ${superf_id}, ${tipseg_id}, '${obscita}', ${codrolUser}, '${usenam}'`);
+        
+        res.json(response.recordset);
+    },
+    /*************************/
+
+
+    /************MEDICOS*************/
+    /*************************/
+
 };

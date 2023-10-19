@@ -58,7 +58,7 @@ document.getElementById("distritomodal").addEventListener("keyup", function (eve
     }
 });
 function getDistrito(parametro) {
-    
+
     mostrarDiv('cargadistrito');
     ocultarDiv('tabledistritomodal');
     $.ajax({
@@ -190,9 +190,8 @@ function limpiarModal() {
     tbodypais.empty();
 }
 var opc = 0;
-function guardarpaciente() {
-
-    let pachis = $('#pachis');
+function guardarpaciente() {    
+    $("#btnPaciente").prop("disabled", true);
     let appaterno = $('#appaterno');
     let apmaterno = $('#apmaterno');
     let nombres = $('#nombres');
@@ -221,7 +220,6 @@ function guardarpaciente() {
         url: '/paciente',
         method: "POST",
         data: {
-            pachis: pachis.val(),
             appaterno: appaterno.val(),
             apmaterno: apmaterno.val(),
             nombres: nombres.val(),
@@ -246,7 +244,7 @@ function guardarpaciente() {
             estciv_id: estciv_id.val(),
             codtipcon: codtipcon.val(),
             ippais: ippais.val(),
-            opc: opc.val(),
+            opc: opc,
         },
         success: function (response) {
 
@@ -254,9 +252,11 @@ function guardarpaciente() {
             opc = 0;
             limpiar();
             mensaje(response[0].tipo, response[0].response, 1500);
+            $("#btnCita").prop("disabled", false);
         },
         error: function () {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);
+            $("#btnCita").prop("disabled", false);
         }
     });
 }
@@ -267,7 +267,9 @@ function formatPhoneNumber(input) {
 }
 
 function limpiar() {
+    $('#tituloEncabezado').text('Ingrese un nuevo paciente al sistema');
     $('input:not(#ippais, #nacionalidad)').val('');
+    opc = 0;
 }
 
 document.getElementById("pacientemodal").addEventListener("keyup", function (event) {
@@ -286,12 +288,11 @@ function getpacientes(parametro) {
             parametro: parametro,
         },
         success: function (pacientes) {
-
             ocultarDiv('carga');
             mostrarDiv('tablapacientemodal');
             const tbodypac = $('#bodypacientemodal');
             tbodypac.empty();
-            if (response.length === 0) {
+            if (pacientes.length === 0) {
                 tbodydistrito.append(`
                     <tr>
                         <td colspan="2" class="text-center">No hay resultados disponibles </td>
@@ -304,15 +305,17 @@ function getpacientes(parametro) {
               <td>${paciente.appm_nom}</td>
               <td>${paciente.numdoc}</td>
               <td>
-              <a  type="button" class="btn btn-circle btn-sm btn-info mr-1" onclick=resetearPass("${paciente.pachis}")><i class="fa-solid fa-street-view"></i></a>
+              
               <button onclick="getpacientem('${paciente.docide}','${paciente.numdoc}','${paciente.pachis}','${paciente.nombres}','${paciente.appaterno}','${paciente.apmaterno}','${paciente.sexo_id}','${paciente.grainst_id}','${paciente.estciv_id}','${paciente.codtipcon}','${paciente.cod_ubigeo}','${paciente.des1}','${paciente.fecnac}','${paciente.ippais}','${paciente.nacionalidad}','${paciente.dirpac}','${paciente.cod_ubigeo2}','${paciente.des2}','${paciente.pcd}','${paciente.telefono}','${paciente.celular}','${paciente.correo}','${paciente.numhijos}','${paciente.numdep}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
-              <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarUser("${paciente.pachis}")><i class="fa-solid fa-trash-can"></i></a>
+              <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarPaciente("${paciente.numdoc}")><i class="fa-solid fa-trash-can"></i></a>
               </td>
             </tr>
           `);
+                    
                 });
-                mensaje(paciente[0].tipo, paciente[0].response, 1500);
+
             }
+            mensaje(pacientes[0].tipo, pacientes[0].response, 1500);
         },
         error: function () {
             alert('Error en la solicitud AJAX');
@@ -347,7 +350,26 @@ function getpacientem(docideM, numdocM, pachisM, nombresM, appaternoM, apmaterno
     $('#numhijos').val(numhijosM);
     $('#numdep').val(numdepM);
     //$('#contrasena').val('123456789').prop('disabled', true);
-
+    $('#tituloEncabezado').text('Editar paciente del sistema');
     $('#modalFormpaciente [data-dismiss="modal"]').trigger('click');
     //$('#iduser').val(0);
+}
+function eliminarPaciente(dni) {
+    dni = parseInt(dni);
+    $.ajax({
+        url: '/deletePac',
+        method: "DELETE",
+        data: {
+            dni: dni,
+        },
+        success: function (pac) {
+            $('#modalFormpaciente [data-dismiss="modal"]').trigger('click');
+            const tbodypac = $('#bodypacientemodal');
+            tbodypac.empty();
+            mensaje(pac[0].tipo, pac[0].response, 1800);
+        },
+        error: function () {
+            alert('error');
+        }
+    });
 }
