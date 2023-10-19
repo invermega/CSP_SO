@@ -155,7 +155,7 @@ module.exports = {
         res.json(response.recordset);
     },
     async postpaciente(req, res) {//agregar paciente
-        const { pachis, appaterno, apmaterno, nombres, fecnac, cod_ubigeo, docide, numdoc, dirpac, cod_ubigeo2 ,correo,telefono, celular, numhijos, numdep, pcd, foto, huella, firma, sexo_id, grainst_id, estciv_id, codtipcon,ippais,opc} = req.body;
+        const { pachis, appaterno, apmaterno, nombres, fecnac, cod_ubigeo, docide, numdoc, dirpac, cod_ubigeo2, correo, telefono, celular, numhijos, numdep, pcd, foto, huella, firma, sexo_id, grainst_id, estciv_id, codtipcon, ippais, opc } = req.body;
         const usenam = req.user.usuario;
         const hostname = '';
         const codrolUser = req.user.codrol;
@@ -197,15 +197,43 @@ module.exports = {
         res.json(response.recordset);
     },
     async postcita(req, res) {//agregar cita
-        const { cli_id, codpro_id,valapt_id, pachis,fecprocitaDate, fecprocitaTime, obscita, cargo_actual, fecing_cargo, area_actual, fecing_area, fecing_empresa, altilab_id, superf_id, tipseg_id, cond_vehiculo, ope_equipo_pesado, envresult_correo, com_info_medica, ent_result_fisico, usa_firma_formatos, res_lugar_trabajo} = req.body;
+        const { inputid, cli_id, codpro_id, valapt_id, pachis, fecprocitaDate, fecprocitaTime, obscita, cargo_actual, fecing_cargo, area_actual, fecing_area, fecing_empresa, altilab_id, superf_id, tipseg_id, cond_vehiculo, ope_equipo_pesado, envresult_correo, com_info_medica, ent_result_fisico, usa_firma_formatos, res_lugar_trabajo } = req.body;
         const usenam = req.user.usuario;
         const hostname = '';
         const codrolUser = req.user.codrol;
 
         const pool = await getConnection();
-        const response = await pool.query(`pa_InsCita '${pachis}', ${valapt_id}, ${cli_id}, ${codpro_id}, '${fecprocitaDate}','${fecprocitaTime}', '${area_actual}', '${fecing_area}', '${cargo_actual}', '${fecing_cargo}', '${fecing_empresa}', '${ope_equipo_pesado}', '${cond_vehiculo}', '${envresult_correo}', '${com_info_medica}', '${ent_result_fisico}', '${usa_firma_formatos}', '${res_lugar_trabajo}', ${altilab_id}, ${superf_id}, ${tipseg_id}, '${obscita}', ${codrolUser}, '${usenam}'`);
-        
+        const response = await pool.query(`pa_InsCita '${pachis}', ${valapt_id}, ${cli_id}, ${codpro_id}, '${fecprocitaDate}','${fecprocitaTime}', '${area_actual}', '${fecing_area}', '${cargo_actual}', '${fecing_cargo}', '${fecing_empresa}', '${ope_equipo_pesado}', '${cond_vehiculo}', '${envresult_correo}', '${com_info_medica}', '${ent_result_fisico}', '${usa_firma_formatos}', '${res_lugar_trabajo}', ${altilab_id}, ${superf_id}, ${tipseg_id}, '${obscita}', ${codrolUser}, '${usenam}', '${inputid}'`);
         res.json(response.recordset);
+    },
+    async getListaCitas(req, res) {//listar las citas
+        let { fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6 } = req.query;
+        const codrolUser = req.user.codrol;
+        if (paciente === '') {
+            paciente = '%';
+        }
+        console.log(fecini,fecfin,paciente,parametro3,parametro4,parametro5,parametro6,codrolUser)
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`);
+        res.json(response.recordset);
+    },
+    async delcita(req, res) {
+        try {
+            const seleccionados = req.body;
+            const detalleJson = JSON.stringify(seleccionados);
+            const codrol = req.user.codrol;
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_DelCita';
+            request.input('codrol', sql.Int, codrol);
+            request.input('CitaJson', sql.NVarChar(sql.MAX), detalleJson);   
+            const result = await request.execute(PROCEDURE_NAME);            
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
     },
     /*************************/
 
