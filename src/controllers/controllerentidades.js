@@ -172,7 +172,6 @@ module.exports = {
         //console.log(response.recordset);
         res.json(response.recordset);
     },
-};
     async deletepaciente(req, res) {//eliminar usuario
         const { dni } = req.body;
         const codrolUser = req.user.codrol;
