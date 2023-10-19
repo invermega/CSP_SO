@@ -46,13 +46,34 @@ module.exports = {
         const parametro = "PT";
         permisos(parametro, 'entidades/protocoloCreate', req, res, id);
     },
-    async renderepaciente(req, res) {
-        res.render('entidades/paciente', { layout: false });
+    /*Paciente*/
+    async renderpaciente(req, res) {
+        const parametro = "PC";
+        permisos(parametro,'entidades/paciente', req, res);       
     },
+    async renderpacientecreate(req, res) {
+        const parametro = "PC";
+        permisos(parametro,'entidades/paciente', req, res,0);
+    },async renderpacienteedit(req, res) {
+        const { id } = req.params;
+        const parametro = "PC";
+        permisos(parametro,'entidades/paciente', req, res,id);
+    },
+    /*Cita */
     async rendercita(req, res) {
-        res.render('entidades/cita', { layout: false });
+        const parametro = "CT";
+        permisos(parametro,'entidades/cita', req, res)
     },
-
+    async rendercitacreate(req, res) {
+        const parametro = "CT";
+        //res.render('entidades/citaCreate', { layout: false, id: 0 });
+        permisos(parametro,'entidades/citaCreate', req, res,0)
+    },
+    async rendercitaedit(req, res) {
+        const { id } = req.params;
+        const parametro = "CT";
+        permisos(parametro,'entidades/citaCreate', req, res,id)
+    },
     async renderemedico(req, res) {
         res.render('entidades/medicos', { layout: false });
     },
