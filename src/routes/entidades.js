@@ -55,6 +55,9 @@ router.get('/cliente', isLoggedIn, controllerrender.rendercliente);
 /******************************************/
 /****************Examenes******************/
 router.get('/examen', isLoggedIn, controllerrender.renderexamen);
+router.get('/examencreate', isLoggedIn, controllerrender.renderexamencreate);
+router.get('/listarexamen', isLoggedIn, controllerEN.getListaExamenes);
+
 
 /******************************************/
 module.exports = router;

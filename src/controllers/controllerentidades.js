@@ -206,12 +206,11 @@ module.exports = {
         res.json(response.recordset);
     },
     async getListaCitas(req, res) {//listar las citas
-        let { fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6 } = req.query;
+        let { fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6 } = req.query;        
         const codrolUser = req.user.codrol;
         if (paciente === '') {
             paciente = '%';
         }
-        console.log(fecini,fecfin,paciente,parametro3,parametro4,parametro5,parametro6,codrolUser)
         const pool = await getConnection();
         const response = await pool.query(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`);
         res.json(response.recordset);
@@ -235,7 +234,15 @@ module.exports = {
         }
     },
     /*************************/
+    /************Examenes*************/
+    async getListaExamenes(req, res) {//listar los examenes        
+        const codrolUser = req.user.codrol;        
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selExamenes '${codrolUser}'`);
+        res.json(response.recordset);
+    },
 
+    /*************************/
 
     /************MEDICOS*************/
     /*************************/

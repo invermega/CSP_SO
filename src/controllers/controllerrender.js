@@ -78,7 +78,6 @@ module.exports = {
     },
     async rendercitacreate(req, res) {
         const parametro = "CT";
-        //res.render('entidades/citaCreate', { layout: false, id: 0 });
         permisos(parametro,'entidades/citaCreate', req, res,0)
     },
     async rendercitaedit(req, res) {
@@ -94,8 +93,12 @@ module.exports = {
     },
     /*Examen */
     async renderexamen(req, res) {
-        const parametro = "CT";
+        const parametro = "EX";
         permisos(parametro,'entidades/examen', req, res)
+    },
+    async renderexamencreate(req, res) {
+        const parametro = "EX";
+        permisos(parametro,'entidades/examenCreate', req, res,0)
     },
     
 };

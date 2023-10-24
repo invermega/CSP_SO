@@ -13,6 +13,8 @@ $(document).ready(function () {
 });
 
 function getcitas() {
+    ocultarDiv('mydatatable');
+    mostrarDiv('carga');
     let fecini = $('#fecini');//fecha inicio
     let fecfin = $('#fecfin');//fecha fin
     let paciente = $('#paciente');//busqueda por dni o nombre
@@ -47,7 +49,7 @@ function getcitas() {
             if (citas.length === 0) {
                 tbody.append(`
                     <tr>
-                        <td colspan="6" class="text-center">No hay resultados disponibles </td>
+                        <td colspan="13" class="text-center">No hay resultados disponibles </td>
                     </tr>
                 `);
             } else {
@@ -55,11 +57,18 @@ function getcitas() {
                     tbody.append(`
             <tr data-id="${cita.id}">
               <td class="align-middle"><input id="check_${cita.id}" value="id_${cita.id}" type="checkbox" class="mt-1" ></td>
+              <td>${cita.Fecha}</td>
+              <td>${cita.Hora}</td> 
+              <td>${cita.Turno}</td>
+
+              <td>${cita.razsoc}</td>
               <td>${cita.appm_nom}</td>
               <td>${cita.numdoc}</td>
-              <td>${cita.Fecha}</td>
-              <td>${cita.Hora}</td>
-              <td>${cita.Turno}</td>
+              <td>${cita.nompro}</td>
+              <td>${cita.dessta}</td> 
+              <td>${cita.desvalapt}</td>
+              <td>${cita.CERT}</td>
+              <td>${cita.INF}</td>
             </tr>
           `);
                 });
@@ -78,7 +87,7 @@ function getCitasCombo() {
         success: function (lista) {
             let stacita = $('#stacita');
             stacita.html('');
-            //stacita.append('<option value="%">TODOS</option>');
+            stacita.append('<option value="%">TODOS</option>');
             lista.forEach(item => {
                 let option = `<option value="${item.id}">${item.descripcion}</option>`;
                 if (item.tabla === 'so_estadocita') {
