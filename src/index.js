@@ -67,11 +67,7 @@ app.use(
 
 app.use(flash());
 
-app.use(
-  morgan('dev', {
-    skip: (req, res) => req.originalUrl === '/ruta-de-verificacion-de-sesion'
-  })
-);
+app.use(morgan('dev'));
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: false }));

@@ -31,7 +31,7 @@ router.get('/listardistrito',isLoggedIn,controllerEN.getDistrito);
 router.get('/listarpais',isLoggedIn,controllerEN.getPais);
 router.post('/paciente',isLoggedIn,controllerEN.postpaciente);
 router.get('/listarpacientes',isLoggedIn,controllerEN.getpaciente)
-router.delete('/deletePac',controllerEN.deletepaciente);
+router.delete('/deletePac',isLoggedIn,controllerEN.deletepaciente);
 
 /******************************************/
 /*****************Citas*****************/
@@ -51,6 +51,10 @@ router.get('/medico', isLoggedIn, controllerrender.renderemedico);
 
 router.get('/cliente', isLoggedIn, controllerrender.rendercliente);
 
+
+/******************************************/
+/****************Examenes******************/
+router.get('/examen', isLoggedIn, controllerrender.renderexamen);
 
 /******************************************/
 module.exports = router;

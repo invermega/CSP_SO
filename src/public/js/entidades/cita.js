@@ -78,7 +78,7 @@ function getCitasCombo() {
         success: function (lista) {
             let stacita = $('#stacita');
             stacita.html('');
-            stacita.append('<option value="%">TODOS</option>');
+            //stacita.append('<option value="%">TODOS</option>');
             lista.forEach(item => {
                 let option = `<option value="${item.id}">${item.descripcion}</option>`;
                 if (item.tabla === 'so_estadocita') {

@@ -92,5 +92,10 @@ module.exports = {
     async rendercliente(req, res) {
         res.render('entidades/cliente', { layout: false });
     },
-
+    /*Examen */
+    async renderexamen(req, res) {
+        const parametro = "CT";
+        permisos(parametro,'entidades/examen', req, res)
+    },
+    
 };
