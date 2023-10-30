@@ -553,6 +553,7 @@ function validarFormulario2(contenedor, incluirIds) {
   }
   return camposValidos;
 }
+
 function horatime(input) {
   var horaActual = new Date().toLocaleTimeString(navigator.language, {
       hour: '2-digit',

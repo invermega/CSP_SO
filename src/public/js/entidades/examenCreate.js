@@ -2,6 +2,7 @@ $(document).ready(function () {
     
 
 });
+var opc = 0;
 function guardarExamen() {
     $("#btnExamen").prop("disabled", true);
     let soexa = $('#soexa');
@@ -23,6 +24,7 @@ function guardarExamen() {
             starep: starep,            
             staaddfile: staaddfile,
             reg_cie10: reg_cie10,
+            opc:opc,
         },
         success: function (response) {
             opc = 0;
