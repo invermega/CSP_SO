@@ -7,7 +7,7 @@ const controllerCO = require("../controllers/controllerentidades");
 const { } = require('../lib/permisos');
 
 
-//protocolo
+/*****************Protocolo*****************/
 router.get('/protocolo', isLoggedIn, controllerrender.renderprotocolo);
 router.get('/protocololist', isLoggedIn, controllerEN.getprotocololist);
 //router.get('/protocolocreate', isLoggedIn, controllerrender.renderprotocolocreate);
@@ -23,19 +23,27 @@ router.get('/empresas',isLoggedIn, controllerEN.getempresas);
 router.get('/tipoexamen',isLoggedIn, controllerEN.getTipoExamenes);
 router.post('/protocolo',isLoggedIn, controllerEN.postprotocolo);
 router.get('/exportarprotocolo/:id',isLoggedIn, controllerEN.getexportarprotocolo);
-
-
+/******************************************/
 
 /*****************Paciente*****************/
-router.get('/paciente', isLoggedIn, controllerrender.renderepaciente);
+router.get('/paciente', isLoggedIn, controllerrender.renderpaciente);
 router.get('/listarCombosPac', isLoggedIn, controllerEN.getPacienteCombos);
 router.get('/listardistrito',isLoggedIn,controllerEN.getDistrito);
 router.get('/listarpais',isLoggedIn,controllerEN.getPais);
 router.post('/paciente',isLoggedIn,controllerEN.postpaciente);
 router.get('/listarpacientes',isLoggedIn,controllerEN.getpaciente)
-
+router.delete('/deletePac',controllerEN.deletepaciente);
 
 /******************************************/
+/*****************Citas*****************/
+router.get('/cita', isLoggedIn, controllerrender.rendercita);
+router.get('/listarCombosCitas', isLoggedIn, controllerEN.getCitasCombos);
+router.get('/listarprotocolo', isLoggedIn, controllerEN.getProtocoloCombos);
+router.post('/cita',isLoggedIn,controllerEN.postcita)
+router.get('/listarcitas', isLoggedIn, controllerEN.getListaCitas);
+router.get('/citacreate', isLoggedIn, controllerrender.rendercitacreate);
+router.get('/citaedit/:id', isLoggedIn, controllerrender.rendercitaedit);
+router.delete('/citadel',isLoggedIn, controllerEN.delcita);
 
 /*****************Médico*******************/
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
@@ -51,6 +59,7 @@ router.post('/cliente',isLoggedIn,controllerEN.postcliente);
 router.get('/listarcliente',isLoggedIn,controllerEN.getcliente);
 router.delete('/deleteCli',isLoggedIn,controllerCO.deletecliente);
 router.delete('/deleteCli',controllerCO.deletecliente);
+
 
 
 /******************************************/

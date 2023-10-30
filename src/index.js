@@ -20,10 +20,6 @@ require('./lib/passport');
 // Manejo de uncaughtException
 process.on('uncaughtException', (err) => {
   console.error('Uncaught Exception:', err);
-  // Realiza tareas de limpieza si es necesario
-  
-  // Detén el servidor para evitar que siga manejando solicitudes con problemas
-  //process.exit(1); // Código 1 indica que ocurrió un error
 });
 
 app.set('port', process.env.PORT || 3300);
@@ -66,13 +62,7 @@ app.use(
 );
 
 app.use(flash());
-
-app.use(
-  morgan('dev', {
-    skip: (req, res) => req.originalUrl === '/ruta-de-verificacion-de-sesion'
-  })
-);
-
+app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: false }));
 app.use(passport.initialize());
@@ -89,7 +79,7 @@ app.use(require('./routes/'));
 app.use(require('./routes/configuracion'));
 app.use(require('./routes/historiaclinica'));
 app.use(require('./routes/entidades'));
-
+/*
 const auth = (req, res, next) => {
   const credentials = basicAuth(req);
 
@@ -100,7 +90,7 @@ const auth = (req, res, next) => {
 
   next();
 };
-app.use('/img/paciente', auth, express.static(path.join(__dirname, 'public', 'img', 'paciente')));
+app.use('/img/paciente', auth, express.static(path.join(__dirname, 'public', 'img', 'paciente')));*/
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), () => {

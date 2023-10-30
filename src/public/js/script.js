@@ -1,3 +1,11 @@
+document.addEventListener('contextmenu', function (event) {
+  var target = event.target;
+  if (target.tagName === 'A') {
+    event.preventDefault();
+    alert("Acceso no permitido en nueva pestaña.");
+  }
+});
+
 function render() {
   const contentContainer = $('#contenedoropciones');
   const loadingHtml = `
@@ -6,22 +14,13 @@ function render() {
       style="width: 250px; height: 250px;" loop autoplay></lottie-player>
   </div>
   `;
-
   const links = $('a.opcionform');
   if (!links.data('eventAssigned')) {
     links.data('eventAssigned', true);
-
     links.on('click', async (e) => {
       e.preventDefault();
-
       const url = e.currentTarget.getAttribute('href');
-      /*if (window.innerWidth <= 768) {
-        const sidebarToggle = document.getElementById('sidebarToggle');
-        sidebarToggle.click();
-      }*/
-
       contentContainer.html(loadingHtml);
-
       try {
         await new Promise(resolve => setTimeout(resolve, 1000));
         const response = await $.ajax({
@@ -56,8 +55,56 @@ function render() {
   }
 }
 
+function renderprueba() {
+  const contentContainer = $('#contenedoropcionesprueba');
+  const loadingHtml = `
+<div class="jm-loadingpage">
+<lottie-player src="/img/jsonimg/loadingint.json" class="" background="transparent" speed="1"
+style="width: 250px; height: 250px;" loop autoplay></lottie-player>
+</div>
+`;
+  const links = $('a.opcionprueba');
+  if (!links.data('eventAssigned')) {
+    links.data('eventAssigned', true);
+    links.on('click', async (e) => {
+      e.preventDefault();
+      const url = e.currentTarget.getAttribute('href');
+      contentContainer.html(loadingHtml);
+      try {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        const response = await $.ajax({
+          url: url,
+          method: 'GET',
+        });
+        contentContainer.animate({ opacity: 0 }, 1000, () => {
+          contentContainer.html(response);
+          contentContainer.animate({ opacity: 1 }, 500);
+        });
+      } catch (error) {
+        console.error(error);
+        // Mostrar un mensaje de error al usuario si lo deseas
+        contentContainer.html(`<div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6">
+                                    <div class="text-center mt-4">
+                                        <img class="mb-4 img-error" src="/img/404logo.jpg" />
+                                        <p class="lead">
+                                            Esta URL solicitada no se encontró en este servidor.</p>
+                                        <a href="/">
+                                            <i class="fas fa-arrow-left me-1"></i>
+                                            Regresar
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`);
+      }
+
+    });
+  }
+}
+
 async function rendersub(ruta) {
-  console.log(ruta);
   const contentContainer = $('#contenedoropciones');
   const loadingHtml = `
   <div class="jm-loadingpage">
@@ -109,7 +156,7 @@ function navegaredit(iddatatableble, rutaparcial) {
 
   for (var i = 0; i < rows.length; i++) {
     var checkbox = rows[i].querySelector('input[type="checkbox"]');
-    
+
     if (checkbox && checkbox.checked) {
       var id = checkbox.value.split('_')[1];
       seleccionados.push(id); // Agregar el id al array de seleccionados
@@ -144,7 +191,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
 function filtrosMostrarOcultar(btnId, divId) {
   let isVisible = false;
-  
+
   document.getElementById(btnId).addEventListener("click", function () {
     // Si está oculto, lo mostramos; si está visible, lo ocultamos
     if (isVisible) {
@@ -456,23 +503,26 @@ function limpiarImput() {
 
 function validarFormulario(excluirIds) {
   let camposValidos = true;
-  $('input, select, textarea').each(function() {
-      const id = $(this).attr('id');
-      if (excluirIds && excluirIds.includes(id)) {
-          return true;
-      }
+  let campoFaltante = '';
+  $('input, select, textarea').each(function () {
+    const id = $(this).attr('id');
+    if (excluirIds && excluirIds.includes(id)) {
+      return true;
+    }
 
-      if (!$(this).val()) {
-          camposValidos = false;
-          $(this).addClass('is-invalid');
-      } else {
-          $(this).removeClass('is-invalid');
-          $(this).addClass('is-valid');
-      }
+    if (!$(this).val()) {
+      camposValidos = false;
+      campoFaltante = id;
+      $(this).addClass('is-invalid');
+    } else {
+      $(this).removeClass('is-invalid');
+      $(this).addClass('is-valid');
+    }
   });
 
   if (!camposValidos) {
-      mensaje('error', 'Por favor, complete todos los campos.', 1800);
+    mensaje('error', 'Por favor, complete todos los campos.', 1800);
+    console.log('Campo faltante: ' + campoFaltante);
   }
 
   return camposValidos;
@@ -481,26 +531,38 @@ function validarFormulario(excluirIds) {
 
 
 
-function validarFormulario2(contenedor, incluirIds) {
+function validarFormulario2(incluirIds) {
   let camposValidos = true;
-  $(contenedor).find('input, select, textarea').each(function () {
+  const idsToValidate = incluirIds.split(',').map(id => id.trim());
+
+  $('input, select, textarea').each(function () {
     const id = $(this).attr('id');
-    if (incluirIds && incluirIds.includes(id)) {
-      $(this).removeClass('is-valid');
-      $(this).addClass('is-invalid');
-      return true;
-    } else {
+
+    if (idsToValidate.includes(id)) {
       if (!$(this).val()) {
         camposValidos = false;
-        $(this).addClass('is-valid');
-      } else {
-        $(this).removeClass('is-valid');
         $(this).addClass('is-invalid');
+      } else {
+        $(this).removeClass('is-invalid');
+        $(this).addClass('is-valid');
       }
+    } else {
+      $(this).removeClass('is-invalid');
     }
   });
+
   if (!camposValidos) {
     mensaje('error', 'Por favor, complete todos los campos.', 1800);
   }
   return camposValidos;
 }
+
+
+function horatime(input) {
+  var horaActual = new Date().toLocaleTimeString(navigator.language, {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+  document.getElementById(input).value = horaActual;
+}
+
