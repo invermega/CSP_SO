@@ -23,9 +23,7 @@
         url: '/pacienteexamen/' + id,
         method: "GET",
         success: function (paciente) {
-            console.log(paciente);
             var data = paciente[0];
-            console.log(data);
             formElements.fecaten.value = new Date(data.fecprocita).toISOString().split('T')[0];
             formElements.dni.value = data.numdoc;
             formElements.nombres.value = data.appm_nom;

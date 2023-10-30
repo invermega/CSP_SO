@@ -1,6 +1,6 @@
 <div class="row mt-4">
     <div class="table-responsive scrollable-modal">
-        <table class="records_list table table-sm table-bordered letra">
+        <table class="records_list table table-sm table-bordered letra" id="tablecie10">
             <thead class="thead sticky-top">
                 <tr>
                     <th scope="col" colspan="4">IMPRESIÓN DIAGNÓSTICA</th>
@@ -13,39 +13,109 @@
                     <td style="width: 35%;">COMENTARIO</td>
                 </tr>
                 <tr>
-                    <td style="width: 10%;">
+                    <td style="width: 15%;">
                         <div class=" input-group input-group-sm">
-                            <input type="text" class="form-control form-control-sm" value="">
-                            <button class="input-group-text" style="width: 35px; color: #773C8D;" for="inptemp"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" class="form-control form-control-sm" id="1cie10" value="">
+                            <button class="input-group-text" style="width: 35px; color: #773C8D;" type="button"
+                                data-toggle="modal" data-target="#modalFormCIE10" data-accion="1cie10"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="input-group-text" style="width: 35px; color: #773C8D;" id="limpiar1cie10"
+                                type="button"><i class="fa-solid fa-pencil"></i></button>
+
+
+
                         </div>
                     </td>
-                    <td><input class="form-control form-control-sm" type="text" disabled></td>
-                    <td><input class="form-control form-control-sm" type="text" disabled></td>
-                    <td><input class="form-control form-control-sm" type="text"></td>
+                    <td><input class="form-control form-control-sm" id="1codcie10" type="text" disabled></td>
+                    <td><input class="form-control form-control-sm" id="1codcie10desc" type="text" disabled></td>
+                    <td><input class="form-control form-control-sm" id="1codcie10comen" type="text"></td>
                 </tr>
                 <tr>
                     <td>
                         <div class=" input-group input-group-sm">
-                            <input type="text" class="form-control form-control-sm" value="">
-                            <button class="input-group-text" style="width: 35px; color: #773C8D;" for="inptemp"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" class="form-control form-control-sm" id="2cie10" value="">
+                            <button class="input-group-text" style="width: 35px; color: #773C8D;" type="button"
+                                data-toggle="modal" data-target="#modalFormCIE10" data-accion="2cie10"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="input-group-text" style="width: 35px; color: #773C8D;" id="limpiar2cie10"
+                                type="button"><i class="fa-solid fa-pencil"></i></button>
                         </div>
                     </td>
-                    <td><input class="form-control form-control-sm" type="text" disabled></td>
-                    <td><input class="form-control form-control-sm" type="text" disabled></td>
-                    <td><input class="form-control form-control-sm" type="text"></td>
+                    <td><input class="form-control form-control-sm" id="2codcie10" type="text" disabled></td>
+                    <td><input class="form-control form-control-sm" id="2codcie10desc" type="text" disabled></td>
+                    <td><input class="form-control form-control-sm" id="2codcie10comen" type="text"></td>
                 </tr>
                 <tr>
                     <td>
                         <div class=" input-group input-group-sm">
-                            <input type="text" class="form-control form-control-sm" value="">
-                            <button class="input-group-text" style="width: 35px; color: #773C8D;" for="inptemp"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" class="form-control form-control-sm" id="3cie10" value="">
+                            <button class="input-group-text" style="width: 35px; color: #773C8D;" type="button"
+                                data-toggle="modal" data-target="#modalFormCIE10" data-accion="3cie10"><i
+                                    class="fa-solid fa-magnifying-glass"></i></button>
+                            <button class="input-group-text" style="width: 35px; color: #773C8D;" id="limpiar3cie10"
+                                type="button"><i class="fa-solid fa-pencil"></i></button>
                         </div>
                     </td>
-                    <td><input class="form-control form-control-sm" type="text" disabled></td>
-                    <td><input class="form-control form-control-sm" type="text" disabled></td>
-                    <td><input class="form-control form-control-sm" type="text"></td>
+                    <td><input class="form-control form-control-sm" id="3codcie10" type="text" disabled></td>
+                    <td><input class="form-control form-control-sm" id="3codcie10desc" type="text" disabled></td>
+                    <td><input class="form-control form-control-sm" id="3codcie10comen" type="text"></td>
                 </tr>
             </tbody>
         </table>
     </div>
+    <!--MODAL CIE10-->
+    <div class="modal fade" id="modalFormCIE10" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                    <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE CIE10 <p id="cie10id" style="display: none;">
+                        </p>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group input-group-sm" style="width: 100%;">
+                        <label class="control-label input-group-text" for="cie10modal">CIE10</label>
+                        <input class="form-control form-control-sm " id="cie10modal" placeholder="Ingrese el CIE10"
+                            required></input>
+                        <label class="input-group-text form-control-sm" for="cie10modal"><i
+                                class="fa-solid fa-passport"></i></label>
+                    </div>
+                    <div class="row mb-2 mt-2">
+                        <div class="table-responsive">
+                            <table
+                                class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                id="tablecie10modal" style="display: none;">
+                                <thead class="thead">
+                                    <tr>
+                                        <th scope="col">ACCIÓN</th>
+                                        <th scope="col">CÓDIGO</th>
+                                        <th scope="col">EMPRESA</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="bodycie10modal">
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="text-center" id="cargacie10modal" style="display: none;">
+                            <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                                <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent" speed="1"
+                                    style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn"
+                            style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrarcie10"
+                            data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
+                            Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script src="/js/historiaclinica/CIE10.js"></script>

@@ -20,6 +20,14 @@ router.get('/signosvitales/:soexa/:id', isLoggedIn, controllerrender.rendersigno
 router.get('/pbsignosvitales', isLoggedIn, controllerrender.rendersignosvitalesprueba);
 
 /************************************************/
+/*****************CIE 1O*****************/
+router.get('/cie10', isLoggedIn, controllerHI.getcie10);
+router.get('/cie10list', isLoggedIn, controllerHI.getcie10list);
 
+/************************************************/
+/*****************Documentos adicionales*****************/
+router.post('/subirdocumento', isLoggedIn, controllerHI.postdocumento);
+router.delete('/eliminardocumento', isLoggedIn, controllerHI.deldocumento);
 
+/************************************************/
 module.exports = router;
