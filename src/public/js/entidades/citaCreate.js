@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('#fecprocitaTime').clockpicker({
+    /*$('#fecprocitaTime').clockpicker({
         align: 'left',
         autoclose: true,
         'default': 'now',
@@ -8,10 +8,29 @@ $(document).ready(function () {
         afterDone: function () {
             $('#fecprocitaTime').trigger('change');
         }
-    });
+    });*/
     getPacienteCombos();
     const id = document.getElementById("inputid").value;
-    getcitas(id);
+    if (id === "0") {
+
+    } else {
+        getcitas(id);
+    }
+    
+    $('#fecprocitaTime').clockTimePicker({
+        duration: true,
+        durationNegative: false,
+        alwaysSelectHoursFirst:true,
+        afternoonHoursInOuterCircle:true,
+        precision: 10,
+        required:true,
+        i18n: {
+            cancelButton: 'Abbrechen'
+        },
+        onAdjust: function (newVal, oldVal) {
+            //...
+        }
+    });
 
 });
 function getcitas(id) {
@@ -23,6 +42,7 @@ function getcitas(id) {
     let parametro5 = '';//checked por auditar
     let parametro6 = '';
     parametro6 = id;
+
     $.ajax({
         url: '/listarcitas',
         method: 'GET',
@@ -135,7 +155,7 @@ function getpacientes(parametro) {
               <td>${paciente.pachis}</td>
               <td>
               
-              <button onclick="getpacientem('${paciente.appm_nom}','${paciente.pachis}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
+              <button onclick="getpacientem('${paciente.appm_nom}','${paciente.pachis}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
               
               </td>
             </tr>
@@ -198,7 +218,7 @@ function getclientes(parametro) {
               <td>${cliente.razsoc}</td>
               <td>${cliente.NumDoc}</td>
               <td>
-              <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
+              <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
               
               </td>
             </tr>
@@ -321,7 +341,7 @@ function guardarCita() {
         },
         success: function (response) {
             opc = 0;
-            if (response[0].tipo === 'success') {                
+            if (response[0].tipo === 'success') {
                 MensajeSIyNO(response[0].tipo, response[0].mensaje, '¿Desea volver?', function (respuesta) {
                     if (respuesta) {
                         $('input[type="text"]').val("");

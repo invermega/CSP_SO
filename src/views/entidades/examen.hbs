@@ -1,0 +1,76 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4 tituloverde">Gestión de exámenes</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active">Exámenes</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="left-content">
+                <i class="fas fa-table me-1"></i>
+                Consulta de exámenes
+            </div>
+            <div>
+            </div>
+        </div>
+        <div class="card-body body1">
+            <div class="row textos " id="filtros"
+                style="display: ; border: 2px solid #D8D8D8; vertical-align: center; padding: 5px; border-radius: 7px;">
+                <div class="col-md-4 form-inline col-sm-12 form-group mb-1 mt-1">
+                    <div class="input-group input-group-sm" style="width: 100%;">
+                        <label class="input-group-text form-control-sm" for="examen">Exámen</label>
+                        <input type="text" id="examen" class="form-control form-control-sm"
+                            placeholder="Nombre de examen">
+                        <button type="button" class="btn input-group-text" id="search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-5 form-inline col-sm-12 form-group mb-1 mt-1">
+                    <div class="input-group input-group" style="width: 100%;">
+                        <button type="button" class="btn input-group-text" id="refresh">
+                            <i class="fa-solid fa-retweet"></i>
+                        </button>
+                        <a class="opcionform btn input-group-text" href="/examencreate"><i
+                                class="fa-solid fa-plus"></i></a>
+                        <button type="button" class="btn input-group-text" id="edit"
+                            onclick="navegaredit('mydatatable','examenedit')">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn input-group-text" id="delete" onclick="eliminar()">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive mt-3" style="max-height: 500px;">
+                <table
+                    class="records_list table table-sm table-striped table-bordered letra animate__animated animate__fadeInDown"
+                    id="mydatatable" style="display: none;">
+                    <thead class="thead sticky-top pt-1">
+                        <tr>
+                            <th scope="col">CHECK</th>
+                            <th scope="col">NOMBRE DEL EXÁMEN</th>
+                            <th scope="col">ÓRDEN DE IMR.</th>
+                            <th scope="col">ÓRDEN DE PROT.</th>
+                            <th scope="col">ESTADO REP.</th>
+                            <th scope="col">ESTADO ARCH.</th>
+                            <th scope="col">REG. CIE10</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bodyExamen">
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center" id="carga" style="display: none;">
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                    <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent" speed="1"
+                        style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/entidades/examen.js"> </script>
