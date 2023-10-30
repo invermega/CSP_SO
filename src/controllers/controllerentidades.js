@@ -206,12 +206,11 @@ module.exports = {
         res.json(response.recordset);
     },
     async getListaCitas(req, res) {//listar las citas
-        let { fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6 } = req.query;
+        let { fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6 } = req.query;        
         const codrolUser = req.user.codrol;
         if (paciente === '') {
             paciente = '%';
         }
-        console.log(fecini,fecfin,paciente,parametro3,parametro4,parametro5,parametro6,codrolUser)
         const pool = await getConnection();
         const response = await pool.query(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`);
         res.json(response.recordset);
@@ -234,8 +233,39 @@ module.exports = {
             res.status(500).json({ error: error.message });
         }
     },
+    async getListaHojaRutaC(req, res) {//listar hoja de ruta cabecera
+        let { idcita } = req.body;        
+        const codrolUser = req.user.codrol;
+        console.log(idcita,codrolUser)
+        const pool = await getConnection();
+        const response = await pool.query(`pa_SelHojaRuta_Cab ${idcita},${codrolUser}`);
+        res.json(response.recordset);
+    },
+    async getListaHojaRutaD(req, res) {//listar hoja de ruta detalle
+        let { idcita } = req.body;        
+        console.log(idcita)
+        const pool = await getConnection();
+        const response = await pool.query(`pa_SelHojaRuta_det ${idcita}`);
+        res.json(response.recordset);
+    },   
+    
     /*************************/
-
+    /************Examenes*************/
+    async getListaExamenes(req, res) {//listar los examenes        
+        const codrolUser = req.user.codrol;        
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selExamenes '${codrolUser}'`);
+        res.json(response.recordset);
+    },
+    async postExamenes(req, res) {//insertar examenes
+        const { soexa,desexa,ordimp,ordprot,starep,staaddfile,reg_cie10,opc } = req.query;
+        const codrolUser = req.user.codrol;
+        const usenam = req.user.usuario;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_InsExamenes '${soexa}','${desexa}','${ordimp}','${ordprot}','${starep}','${staaddfile}','${reg_cie10}','${codrolUser}','${usenam}','${opc}'`);
+        res.json(response.recordset);
+    },
+    /*************************/
 
     /************MEDICOS*************/
 

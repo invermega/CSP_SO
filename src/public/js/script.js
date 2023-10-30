@@ -524,7 +524,6 @@ function validarFormulario(excluirIds) {
     mensaje('error', 'Por favor, complete todos los campos.', 1800);
     console.log('Campo faltante: ' + campoFaltante);
   }
-
   return camposValidos;
 }
 

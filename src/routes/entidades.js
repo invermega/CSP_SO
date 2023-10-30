@@ -32,7 +32,7 @@ router.get('/listardistrito',isLoggedIn,controllerEN.getDistrito);
 router.get('/listarpais',isLoggedIn,controllerEN.getPais);
 router.post('/paciente',isLoggedIn,controllerEN.postpaciente);
 router.get('/listarpacientes',isLoggedIn,controllerEN.getpaciente)
-router.delete('/deletePac',controllerEN.deletepaciente);
+router.delete('/deletePac',isLoggedIn,controllerEN.deletepaciente);
 
 /******************************************/
 /*****************Citas*****************/
@@ -44,7 +44,8 @@ router.get('/listarcitas', isLoggedIn, controllerEN.getListaCitas);
 router.get('/citacreate', isLoggedIn, controllerrender.rendercitacreate);
 router.get('/citaedit/:id', isLoggedIn, controllerrender.rendercitaedit);
 router.delete('/citadel',isLoggedIn, controllerEN.delcita);
-
+router.post('/listarhrc', isLoggedIn, controllerEN.getListaHojaRutaC);
+router.post('/listarhrd', isLoggedIn, controllerEN.getListaHojaRutaD);
 /*****************Médico*******************/
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
 router.post('/medico',isLoggedIn,controllerEN.postmedico);
@@ -60,6 +61,13 @@ router.get('/listarcliente',isLoggedIn,controllerEN.getcliente);
 router.delete('/deleteCli',isLoggedIn,controllerCO.deletecliente);
 router.delete('/deleteCli',controllerCO.deletecliente);
 
+
+
+/******************************************/
+/****************Examenes******************/
+router.get('/examen', isLoggedIn, controllerrender.renderexamen);
+router.get('/examencreate', isLoggedIn, controllerrender.renderexamencreate);
+router.get('/listarexamen', isLoggedIn, controllerEN.getListaExamenes);
 
 
 /******************************************/

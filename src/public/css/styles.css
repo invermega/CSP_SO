@@ -13424,3 +13424,10 @@ th {
   color: white;  
 }
 
+.disable-checkbox {
+  pointer-events: none;
+}
+.disable-checkbox input[type="checkbox"] + label {
+  color: #999;
+  cursor: not-allowed;
+}

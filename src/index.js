@@ -62,6 +62,7 @@ app.use(
 );
 
 app.use(flash());
+
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: false }));
