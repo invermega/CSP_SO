@@ -164,7 +164,7 @@ function getusuarios(parametro) {
               <td>${usuario.DNI}</td>
               <td>${usuario.usuario}</td>
               <td>
-              <a  type="button" class="btn btn-circle btn-sm btn-info mr-1" onclick=resetearPass("${usuario.iduser}")><i class="fa-solid fa-street-view"></i></a>
+              <a  type="button" class="btn btn-circle btn-sm btn-info mr-1" onclick=resetearPass(${usuario.iduser},'${usuario.usuario}')><i class="fa-solid fa-street-view"></i></a>
               <button onclick="getusuariosm('${usuario.iduser}','${usuario.usuario}','${usuario.Nombres}','${usuario.app}','${usuario.apm}','${usuario.DNI}','${usuario.celular}','${usuario.fecnac}','${usuario.correo}','${usuario.direccion}','${usuario.codrol}','${usuario.sexo}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
               <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarUser("${usuario.iduser}")><i class="fa-solid fa-trash-can"></i></a>
               </td>
@@ -180,13 +180,16 @@ function getusuarios(parametro) {
         },
     });
 }
-function resetearPass(iduser) {
+function resetearPass(iduser,usuario) {
     iduser = parseInt(iduser);
+    console.log(usuario)
+    
     $.ajax({
         url: '/editarPass',
         method: "POST",
         data: {
             iduser: iduser,
+            usuario:usuario,
         },
         success: function (user) {
             $('#modalFormusuario [data-dismiss="modal"]').trigger('click');

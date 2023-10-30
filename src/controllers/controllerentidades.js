@@ -236,14 +236,12 @@ module.exports = {
     async getListaHojaRutaC(req, res) {//listar hoja de ruta cabecera
         let { idcita } = req.body;        
         const codrolUser = req.user.codrol;
-        console.log(idcita,codrolUser)
         const pool = await getConnection();
         const response = await pool.query(`pa_SelHojaRuta_Cab ${idcita},${codrolUser}`);
         res.json(response.recordset);
     },
     async getListaHojaRutaD(req, res) {//listar hoja de ruta detalle
         let { idcita } = req.body;        
-        console.log(idcita)
         const pool = await getConnection();
         const response = await pool.query(`pa_SelHojaRuta_det ${idcita}`);
         res.json(response.recordset);

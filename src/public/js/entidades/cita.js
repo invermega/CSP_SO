@@ -241,7 +241,7 @@ function eliminar() {
         });
     }
 }
-function navegargetid(iddatatableble,tipo) {
+async function navegargetid(iddatatableble, tipo) {
     var table = document.getElementById(iddatatableble);
     var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
     var seleccionados = []; // Array para almacenar los elementos checkbox seleccionados
@@ -259,10 +259,15 @@ function navegargetid(iddatatableble,tipo) {
     } else if (seleccionados.length > 1) {
         mensajecentral('error', 'Debes seleccionar solo un registro.');
     } else {
-        const cabecera =  obtenerDatosCabecera(`${seleccionados[0]}`);
-        console.log(`${seleccionados[0]}`);
-        const detalle = obtenerDatosDetalle(`${seleccionados[0]}`);
-        imprimirHojaRuta(cabecera,detalle);
+        var detalle = await obtenerDatosDetalle(`${seleccionados[0]}`);
+        obtenerDatosCabecera(`${seleccionados[0]}`).then(function (cabeceraData) {     
+            imprimirHojaRuta(cabeceraData, detalle);
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
+
     }
 }
 /*
@@ -315,8 +320,8 @@ function obtenerCabercera(id) {
 }*/
 
 
-function imprimirHojaRuta(cabeceraData, detalleData) {    
-    
+function imprimirHojaRuta(cabeceraData, detalleData) {
+
     // Obtener el contenido de la guía
     const contenidoGuia = obtenerContenidoHojaRuta(cabeceraData, detalleData);
 
@@ -335,14 +340,17 @@ function imprimirHojaRuta(cabeceraData, detalleData) {
     };
 }
 function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
+
+    console.log(cabeceraData.numhoja, detalleData);
     // Construir el contenido del contenedor de imagen y título
-    var contenedorImagenTitulo = "<div style='display: flex; align-items: center; justify-content: center; margin-bottom: 200px;'>";
+    var contenedorImagenTitulo = "<div style='display: flex; align-items: center; justify-content: center; margin-bottom: 20px;'>";
     contenedorImagenTitulo += "<img src='/img/logo.png' alt='Logo' style='width: 120px; height: 75px; margin-right: 10px;'>";
 
-    contenedorImagenTitulo = "<h4 style='text-align: center; flex: 1;'>Hoja de ruta N°: " + cabeceraData.numhoja + "</h4>";
-    contenedorImagenTitulo = "<div style='text-align: right;'>";
-    contenedorImagenTitulo = "<p style='font-size: 10px;'><strong>Fecha:</strong> " + cabeceraData.fecha + "</p>";
-    contenedorImagenTitulo = "<p style='font-size: 10px;'><strong>Hora:</strong> " + cabeceraData.hora + "</p>";
+    contenedorImagenTitulo += "<h4 style='text-align: center; flex: 1;'>HOJA DE RUTA N°: " + cabeceraData.numhoja + "</h4>";
+    contenedorImagenTitulo += "<h4 style='text-align: center; flex: 1;'>Cita : " + cabeceraData.fechaprog + "</h4>";
+    contenedorImagenTitulo += "<div style='text-align: right;'>";
+    contenedorImagenTitulo += "<p style='font-size: 10px;'><strong>Fecha:</strong> " + cabeceraData.fecha + "</p>";
+    contenedorImagenTitulo += "<p style='font-size: 10px;'><strong>Hora:</strong> " + cabeceraData.hora + "</p>";
 
     contenedorImagenTitulo += "</div>";
     contenedorImagenTitulo += "</div>";
@@ -350,29 +358,29 @@ function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
 
     // Construir el contenido de la cabecera
     var contenidoCabecera = "<div style='display: flex;'>";
-    contenidoCabecera += "<div style='flex: 1;'>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Apellidos y Nombres:</strong> " + cabeceraData.nombres;
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Área de trabajo:</strong> " + cabeceraData.area + "</p>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Fecha cita:</strong> " + cabeceraData.fechaprog + "  <strong>Celular:</strong> " + cabeceraData.celular + "</p>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Edad:</strong> " + cabeceraData.edad + "</p>";
+    contenidoCabecera += "<div style='flex: 1;'>";  
+    contenidoCabecera += "<p style='font-size: 12px;'><strong>Apellidos y Nombres:</strong></p><p style='font-size: 10px;'>" + cabeceraData.nombres+"</p>";
+    contenidoCabecera += "<p style='font-size: 12px;'><strong>DNI:</strong> </p><p style='font-size: 10px;'>" + cabeceraData.numdoc + "</p><p style='font-size: 12px;'>   <strong>Celular:</strong></p><p style='font-size: 10px;'> " + cabeceraData.celular + "</p>";
+    contenidoCabecera += "<p style='font-size: 12px;'><strong>Fecha cita:</strong></p><p style='font-size: 10px;'>" + cabeceraData.fechaprog + "</p><p style='font-size: 12px;'><strong>Correo:</strong></p><p style='font-size: 10px;'> " + cabeceraData.correo + "</p>";
+    contenidoCabecera += "<p style='font-size: 12px;'><strong>Edad:</strong></p><p style='font-size: 10px;'> " + cabeceraData.edad + "</p>";
     contenidoCabecera += "</div>";
     contenidoCabecera += "<div style='flex: 1;'>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Empresa:</strong> " + cabeceraData.razsoc + "</p>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Puesto en el que trabaja o trabajará:</strong> " + cabeceraData.cargo + "</p>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>DNI:</strong> " + cabeceraData.numdoc + "  <strong>DNI:</strong> " + cabeceraData.correo + "</p>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Tipo de Exámen:</strong> " + cabeceraData.tipexa + "</p>";
+    contenidoCabecera += "<p style='font-size: 14px;'><strong>Empresa:</strong></p><p style='font-size: 10px;'>  " + cabeceraData.razsoc + "</p>";
+    contenidoCabecera += "<p style='font-size: 14px;'><strong>Puesto en el que trabaja o trabajará:</strong></p><p style='font-size: 10px;'> " + cabeceraData.cargo + "</p>";
+    contenidoCabecera += "<p style='font-size: 14px;'><strong>Área de trabajo:</strong></p><p style='font-size: 10px;'> " + cabeceraData.area + "</p>";
+    contenidoCabecera += "<p style='font-size: 14px;'><strong>Tipo de Exámen:</strong></p><p style='font-size: 10px;'> " + cabeceraData.tipexa + "</p>";
     contenidoCabecera += "</div>";
     contenidoCabecera += "</div>";
 
     // Construir el contenido del detalle (tabla)
-    var contenidoDetalle = "<table style='width: 100%; border-collapse: collapse;'>";
+    var contenidoDetalle = "<table style='width: 100%; border-collapse: collapse;border-color: black;'>";
     // Agregar encabezados de columna de la tabla
     contenidoDetalle += "<thead>";
     contenidoDetalle += "<tr style='background-color: #0FA0A7; color: white;'>";
-    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 10px;'>Exámen</th>";
-    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 10px;'>Firma y Sello</th>";
-    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 10px;'>Exámen</th>";
-    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 10px;'>Firma y Sello</th>";
+    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 14px;'>Exámen</th>";
+    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 14px;'>Firma y Sello</th>";
+    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 14px;'>Exámen</th>";
+    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 14px;'>Firma y Sello</th>";
     // ... Agregar más encabezados de columna según corresponda
     contenidoDetalle += "</tr>";
     contenidoDetalle += "</thead>";
@@ -380,11 +388,11 @@ function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
     // Agregar filas de datos de la tabla
     contenidoDetalle += "<tbody>";
     detalleData.forEach(function (detalle) {
-        contenidoDetalle += "<tr>";
-        contenidoDetalle += "<td style='border: 1px solid #ccc; padding: 5px; font-size: 10px;min-height: 40px;'>" + detalle.Exa + "<br>" + detalle.deta + "</td>";
-        contenidoDetalle += "<td style='border: 1px solid #ccc; padding: 5px; font-size: 10px;min-height: 40px;'>" + detalle.firma + "</td>";
-        contenidoDetalle += "<td style='border: 1px solid #ccc; padding: 5px; font-size: 10px;min-height: 40px;'>" + detalle.Exa + "<br>" + detalle.deta + "</td>";
-        contenidoDetalle += "<td style='border: 1px solid #ccc; padding: 5px; font-size: 10px;min-height: 40px;'>" + detalle.firma + "</td>";
+        contenidoDetalle += "<tr style='height: 120px;'>";
+        contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; padding-left: 14px; vertical-align: top;font-size: 12px;height: 120px;width: 250px;'>" + detalle.exa + "<br>" + detalle.deta + "</td>";
+        contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; padding-left: 12px; vertical-align: top;font-size: 10px;height: 120px;width: 400px;'>" + detalle.firma + "</td>";
+        contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; padding-left: 14px; vertical-align: top;font-size: 12px;height: 120px;width: 250px;'>" + detalle.exa1 + "<br>" + detalle.deta1 + "</td>";
+        contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; padding-left: 12px; vertical-align: top;font-size: 10px;height: 120px;width: 400px;'>" + detalle.firma + "</td>";
         // ... Agregar más columnas de datos según corresponda
         contenidoDetalle += "</tr>";
     });
@@ -413,7 +421,6 @@ function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
 
 function obtenerDatosCabecera(idcita) {
     return new Promise(function (resolve, reject) {
-        var cabeceraData;
         $.ajax({
             url: '/listarhrc',
             method: 'POST',
@@ -421,19 +428,22 @@ function obtenerDatosCabecera(idcita) {
                 idcita: idcita,
             },
             success: function (lista) {
-                cabeceraData.numhoja = lista[0].numhoja;
-                cabeceraData.nombres = lista[0].nombres;
-                cabeceraData.area = lista[0].area;
-                cabeceraData.fechaprog = lista[0].fechaprog;
-                cabeceraData.celular = lista[0].celular;
-                cabeceraData.edad = lista[0].edad;
-                cabeceraData.razsoc = lista[0].razsoc;
-                cabeceraData.cargo = lista[0].cargo;
-                cabeceraData.numdoc = lista[0].numdoc;
-                cabeceraData.correo = lista[0].correo;
-                cabeceraData.tipexa = lista[0].tipexa;
-                cabeceraData.fecha = lista[0].fecha;
-                cabeceraData.hora = lista[0].hora;                
+                var cabeceraData = {
+                    numhoja: lista[0].numhoja,
+                    nombres: lista[0].nombres,
+                    area: lista[0].area,
+                    fechaprog: lista[0].fechaprog,
+                    celular: lista[0].celular,
+                    edad: lista[0].edad,
+                    razsoc: lista[0].razsoc,
+                    cargo: lista[0].cargo,
+                    numdoc: lista[0].numdoc,
+                    correo: lista[0].correo,
+                    tipexa: lista[0].tipexa,
+                    fecha: lista[0].fecha,
+                    hora: lista[0].hora
+                }
+
                 resolve(cabeceraData);
             },
             error: function (error) {
@@ -444,22 +454,45 @@ function obtenerDatosCabecera(idcita) {
         });
     });
 }
+
 function obtenerDatosDetalle(idcita) {
     return new Promise(function (resolve, reject) {
+        var detalleData = [];
+
         $.ajax({
             url: '/listarhrd',
             method: 'POST',
             data: {
                 idcita: idcita,
             },
-            success: function (lista) {                             
-                resolve(lista);
+            success: function (empresas) {
+                empresas.forEach(empresa => {
+                    var detalleItem = {
+                        exa: empresa.Exa,
+                        exa1: empresa.Exa1,
+                        deta: empresa.deta,
+                        deta1: empresa.deta1,
+                        firma: empresa.firma,
+                        firma1: empresa.firma1,
+                    };
+
+                    detalleData.push(detalleItem);
+                });
+                resolve(detalleData);
             },
             error: function (error) {
-                // Manejo de errores aquí, si es necesario
-                // Rechaza la promesa en caso de error
                 reject(error);
             }
         });
     });
+}
+
+// Ejemplo de cómo usar la función con async/await
+async function obtenerYManipularDatos(idcita) {
+    try {
+        var datos = await obtenerDatosDetalle(idcita);
+        console.log(datos); // Hacer algo con los datos obtenidos
+    } catch (error) {
+        console.error(error);
+    }
 }

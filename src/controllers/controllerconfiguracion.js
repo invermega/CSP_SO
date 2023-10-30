@@ -143,11 +143,11 @@ module.exports = {
         res.json(response.recordset);
     },
     async resetpass(req, res) {//resetear contraseña
-        const { iduser } = req.body;        
+        const { iduser,usuario } = req.body;
         const codrolUser = req.user.codrol;
         const pool = await getConnection();
         const user = req.user.usuario;
-        const passencrypt = await helpers.EncriptarPass(user);
+        const passencrypt = await helpers.EncriptarPass(usuario);
         const response = await pool.query(`sp_editPassUser '${codrolUser}','${iduser}','${passencrypt}'`);
         res.json(response.recordset);
     }
