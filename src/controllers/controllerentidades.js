@@ -155,11 +155,11 @@ module.exports = {
         res.json(response.recordset);
     },
     async postpaciente(req, res) {//agregar paciente
+
         const { pachis, appaterno, apmaterno, nombres, fecnac, cod_ubigeo, docide, numdoc, dirpac, cod_ubigeo2, correo, telefono, celular, numhijos, numdep, pcd, foto, huella, firma, sexo_id, grainst_id, estciv_id, codtipcon, ippais, opc } = req.body;
         const usenam = req.user.usuario;
         const hostname = '';
         const codrolUser = req.user.codrol;
-
         const pool = await getConnection();
         const response = await pool.query(`sp_insPaciente '${appaterno.toUpperCase()}',${apmaterno.toUpperCase()},'${nombres.toUpperCase()}','${fecnac}','${cod_ubigeo}','${docide}','${numdoc}','${dirpac}','${cod_ubigeo2}','${correo.toUpperCase()}','${telefono.trim()}', '${celular}','${numhijos}','${numdep}','${pcd}','','','','${sexo_id}','${grainst_id}','${estciv_id}','${codtipcon}','${ippais}','${usenam}','${codrolUser}','${opc}'`);
         res.json(response.recordset);
@@ -238,6 +238,59 @@ module.exports = {
 
 
     /************MEDICOS*************/
-    /*************************/
 
+    async postmedico(req, res) {//agregar medico
+        const { medap, medam, mednam, docide, nundoc, med_cmp, med_rne, medTelfij, medcel, med_correo, meddir, med_firma, esp_id, opc } = req.body;
+        const usenam = req.user.usuario;
+        const hostname = '';
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_InsMedico '${medap.toUpperCase()}',${medam.toUpperCase()},'${mednam.toUpperCase()}','${docide}','${nundoc}','${med_cmp}','${med_rne}',
+        '${medTelfij.trim()}','${medcel}','${med_correo.toUpperCase()}','${meddir}','${med_firma}','${esp_id}','${usenam}','${hostname}','${codrolUser}','${opc}'`);
+
+        res.json(response.recordset);
+    },
+    async getmedico(req, res) {//listar medico para edicion
+        const { parametro } = req.query;
+        const codrolUser = req.user.codrol;
+        console.log(parametro)
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selMedico  '${codrolUser}','${parametro}'`);
+        //console.log(response.recordset);
+        res.json(response.recordset);
+        
+    },
+    async deletemedico(req, res) {//eliminar medico
+        const { med_id } = req.body;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_delMedico '${codrolUser}','${med_id}'`);
+        res.json(response.recordset);
+    },
+    /*************Cliente***************/
+    async postcliente(req, res) {//agregar cliente
+        const { docide, NumDoc, razsoc, actividad_economica,Direccion, logo, contacto, emailcon, celular, telefono, emailmedocu,cadcermed, incfirmmedexa, Incfirpacexa, Inchuepacexa, Incfordatper, incdecjur, Incfirhueforadi, creusucatocu, Encorvctocert, envcorusuexi, creusucatprev, notinfmed_medocu, notinfmedpac, opc } = req.body;
+        const usenam = req.user.usuario;
+        const hostname = '';
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_InsCliente '${razsoc.toUpperCase()}','${docide}','${NumDoc}','${Direccion}','${telefono}','${emailcon}','${contacto}','${celular}','${emailmedocu}','${usenam}','${cadcermed}','${incfirmmedexa}','${Incfirpacexa}','${Inchuepacexa}','${Incfordatper}','${incdecjur}','${Incfirhueforadi}','${creusucatocu}','${Encorvctocert}','${envcorusuexi}','${creusucatprev}','${notinfmed_medocu}','${notinfmedpac}','${actividad_economica}','${logo}','${codrolUser}','${opc}'`);
+
+        res.json(response.recordset);
+    },
+    async getcliente(req, res) {//listar cliente para edicion
+        const { parametro } = req.query;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selCliente  '${codrolUser}','${parametro}'`);
+        //console.log(response.recordset);
+        res.json(response.recordset);
+    },
+    async deletecliente(req, res) {//eliminar cliente
+        const { cli_id } = req.body;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_delCliente '${codrolUser}','${cli_id}'`);
+        res.json(response.recordset);
+    },
 };

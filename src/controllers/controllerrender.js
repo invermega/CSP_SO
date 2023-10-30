@@ -94,9 +94,13 @@ module.exports = {
         permisos(parametro,'entidades/citaCreate', req, res,id)
     },
     async renderemedico(req, res) {
+        const parametro = "PC";
+        permisos(parametro,'entidades/medicos', req,res)
         res.render('entidades/medicos', { layout: false });
     },
     async rendercliente(req, res) {
+        const parametro = "PC";
+        permisos(parametro,'entidades/cliente', req,res)
         res.render('entidades/cliente', { layout: false });
     },
 
