@@ -37,7 +37,15 @@ module.exports = {
         const parametro = "PT";
         permisos(parametro,'entidades/protocolo', req, res)
     },
-    
+    async renderprotocolocreate(req, res) {
+        const parametro = "PT";
+        permisos(parametro, 'entidades/protocoloCreate', req, res, 0);
+    },
+    async renderprotocoloedit(req, res) {
+        const { id } = req.params;
+        const parametro = "PT";
+        permisos(parametro, 'entidades/protocoloCreate', req, res, id);
+    },
     async renderepaciente(req, res) {
         res.render('entidades/paciente', { layout: false });
     },
