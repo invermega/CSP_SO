@@ -1,8 +1,8 @@
 document.addEventListener('contextmenu', function (event) {
   var target = event.target;
   if (target.tagName === 'A') {
-      event.preventDefault();
-      alert("Acceso no permitido en nueva pestaña.");
+    event.preventDefault();
+    alert("Acceso no permitido en nueva pestaña.");
   }
 });
 
@@ -191,7 +191,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
 function filtrosMostrarOcultar(btnId, divId) {
   let isVisible = false;
-  
+
   document.getElementById(btnId).addEventListener("click", function () {
     // Si está oculto, lo mostramos; si está visible, lo ocultamos
     if (isVisible) {
@@ -504,7 +504,7 @@ function limpiarImput() {
 function validarFormulario(excluirIds) {
   let camposValidos = true;
   let campoFaltante = '';
-  $('input, select, textarea').each(function() {
+  $('input, select, textarea').each(function () {
     const id = $(this).attr('id');
     if (excluirIds && excluirIds.includes(id)) {
       return true;
@@ -530,35 +530,38 @@ function validarFormulario(excluirIds) {
 
 
 
-function validarFormulario2(contenedor, incluirIds) {
+function validarFormulario2(incluirIds) {
   let camposValidos = true;
-  $(contenedor).find('input, select, textarea').each(function () {
+  const idsToValidate = incluirIds.split(',').map(id => id.trim());
+
+  $('input, select, textarea').each(function () {
     const id = $(this).attr('id');
-    if (incluirIds && incluirIds.includes(id)) {
-      $(this).removeClass('is-valid');
-      $(this).addClass('is-invalid');
-      return true;
-    } else {
+
+    if (idsToValidate.includes(id)) {
       if (!$(this).val()) {
         camposValidos = false;
-        $(this).addClass('is-valid');
-      } else {
-        $(this).removeClass('is-valid');
         $(this).addClass('is-invalid');
+      } else {
+        $(this).removeClass('is-invalid');
+        $(this).addClass('is-valid');
       }
+    } else {
+      $(this).removeClass('is-invalid');
     }
   });
+
   if (!camposValidos) {
     mensaje('error', 'Por favor, complete todos los campos.', 1800);
   }
   return camposValidos;
 }
 
+
 function horatime(input) {
   var horaActual = new Date().toLocaleTimeString(navigator.language, {
-      hour: '2-digit',
-      minute: '2-digit'
-  }); 
+    hour: '2-digit',
+    minute: '2-digit'
+  });
   document.getElementById(input).value = horaActual;
 }
 

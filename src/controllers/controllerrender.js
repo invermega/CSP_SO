@@ -9,6 +9,15 @@ async function permisos(opcsis, ruta, req, res, id) {
         res.render('configuracion/401', { layout: false });
     }
 }
+async function permisosprueba(opcsis, ruta, req, res, id) {
+    const pool = await getConnection();
+    const permiso = await pool.query(`sp_selVerificarPermisos '${req.user.codrol}','${opcsis}'`);
+    if (permiso.recordset[0].acceso === 1) {
+        res.render(ruta, { layout: false, id: id });
+    } else {
+        res.render('configuracion/401pb', { layout: false });
+    }
+}
 
 module.exports = {
     //render de Bienvenida   
@@ -35,13 +44,11 @@ module.exports = {
     async rendersignosvitales(req, res) {
         const { soexa, id } = req.params;
         console.log(soexa, id);
-        const parametro = "PH";
-        //permisosexamenes(parametro, 'entidades/protocoloCreate', req, res, id, soexa);
         res.render('historiaclinica/examenes/signosvitales', { id, soexa, layout: false });
     },
     async rendersignosvitalesprueba(req, res) {
-        const parametro = "PH";
-        permisos(parametro, 'historiaclinica/pruebas/pbsignosvitales', req, res);
+        const parametro = "SG";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbsignosvitales', req, res);
     },
 
     //entidades
@@ -86,9 +93,13 @@ module.exports = {
         permisos(parametro,'entidades/citaCreate', req, res,id)
     },
     async renderemedico(req, res) {
+        const parametro = "PC";
+        permisos(parametro,'entidades/medicos', req,res)
         res.render('entidades/medicos', { layout: false });
     },
     async rendercliente(req, res) {
+        const parametro = "PC";
+        permisos(parametro,'entidades/cliente', req,res)
         res.render('entidades/cliente', { layout: false });
     },
     /*Examen */

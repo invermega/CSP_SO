@@ -4,7 +4,6 @@ const passport = require('passport');
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 const controllerrender = require("../controllers/controllerrender");
 const controllerCO = require("../controllers/controllerconfiguracion");
-const { } = require('../lib/permisos');
 
 //Login
 router.get('/iniciarsesion', isNotLoggedIn, controllerrender.renderIniciarSesion);

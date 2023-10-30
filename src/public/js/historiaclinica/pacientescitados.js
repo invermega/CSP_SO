@@ -61,7 +61,6 @@ function getPacientesCitados() {
                 shouldConcatenate = true;
                 tablebody.append(`<td>${Paciente[key]}</td>`);
               } else if (shouldConcatenate && Paciente[key]) {
-                console.log(`${Paciente[key]}/${Paciente.ID}`);
                 tablebody.append(`<td class="text-center"><a style="color:white;background-color: cornflowerblue;" type="submit" href="${Paciente[key]}/${Paciente.ID}"  class="btn btn-circle btn-sm btn" target="_blank"><i class="fa-solid fa-file-lines"></i></a></td>`);
               } else {
                 tablebody.append(`<td>${Paciente[key]}</td>`);
