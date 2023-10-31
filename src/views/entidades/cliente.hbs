@@ -50,14 +50,14 @@
 
                                         <div class="col-md-4"><label class="labels" for="NumDoc">N° de
                                                 documento</label><input type="text" id="NumDoc"
-                                                class="form-control btn-sm" placeholder="Número de documento" value=""
-                                                required>
+                                                class="form-control btn-sm" placeholder="Número de documento"
+                                                oninput="limitarCaracteresNumericos(this, 20)" value="" required>
                                             <div class="invalid-feedback">Este campo es obligatorio</div>
                                         </div>
 
 
                                         <div class="col-md-5">
-                                            <label class="labels" for="razsoc">Razon Social</label><input type="text"
+                                            <label class="labels" for="razsoc">Razon </label><input type="text"
                                                 class="form-control form-control-sm" value="" id="razsoc"
                                                 placeholder="Ingrese razon social" required>
                                             <div class="invalid-feedback">Este campo es obligatorio</div>
@@ -66,14 +66,14 @@
                                         <div class="col-md-6">
                                             <label class="labels" for="actividad_economica">Actividad
                                                 Economica</label><input type="text" class="form-control form-control-sm"
-                                                value="" id="actividad_economica" placeholder="Ingrese razon social"
-                                                required>
-                                            <div class="invalid-feedback">Este campo es obligatorio</div>
+                                                value="" id="actividad_economica" placeholder="Ingrese razon social">
+
                                         </div>
                                         <div class="col-md-6"><label class="labels"
                                                 for="Direccion">Dirección</label><input type="text"
                                                 class="form-control btn-sm" id="Direccion" value=""
                                                 placeholder="Dirección" required>
+                                            <div class="invalid-feedback">Este campo es obligatorio</div>
                                         </div>
                                         <div class="col-md-12">
                                             <label class="labels" for="logo">Logo</label>
@@ -121,12 +121,14 @@
                                     <div class="row mt-2">
                                         <div class="col-md-5"><label class="labels" for="celular">Celular</label><input
                                                 type="text" id="celular" class="form-control btn-sm" value=""
-                                                placeholder="Número de celular">
+                                                placeholder="Número de celular"
+                                                oninput="limitarCaracteresNumericos(this, 30)" required>
                                         </div>
 
                                         <div class="col-md-5"><label class="labels"
                                                 for="telefono">Telefono</label><input type="text" id="telefono"
-                                                class="form-control btn-sm" placeholder="Telefono fijo">
+                                                class="form-control btn-sm" placeholder="Telefono fijo"
+                                                oninput="limitarCaracteresNumericos(this, 50)">
                                         </div>
                                     </div>
 
@@ -179,57 +181,58 @@
                                             <label for="cadcermed">¿Mostrar fecha de caducidad en certificado
                                                 médico?</label><br>
                                             <label><input type="radio" name="respuesta1" value="S" id="cadcermed">
-                                            <label for="cadcermed">Sí</label><br>
-                                            <input type="radio" name="respuesta1" value="N" id="cadcermed">
-                                            <label for="cadcermed">No</label><br>
+                                                <label for="cadcermed">Sí</label><br>
+                                                <input type="radio" name="respuesta1" value="N" id="cadcermed">
+                                                <label for="cadcermed">No</label><br>
 
-                                            <label for="incfirmmedexa">¿Incluir firma del médico en los
-                                                examenes?</label><br>
-                                            <input type="radio" name="respuesta2" value="S" id="incfirmmedexa">
-                                            <label for="incfirmmedexa">Sí</label><br>
-                                            <input type="radio" name="respuesta2" value="N" id="incfirmmedexa">
-                                            <label for="incfirmmedexa">No</label><br>
+                                                <label for="incfirmmedexa">¿Incluir firma del médico en los
+                                                    examenes?</label><br>
+                                                <input type="radio" name="respuesta2" value="S" id="incfirmmedexa">
+                                                <label for="incfirmmedexa">Sí</label><br>
+                                                <input type="radio" name="respuesta2" value="N" id="incfirmmedexa">
+                                                <label for="incfirmmedexa">No</label><br>
 
-                                            <label for="Incfirpacexa">¿Incluir firma del paciente en los
-                                                examenes?</label><br>
-                                            <input type="radio" name="respuesta3" value="S" id="Incfirpacexa">
-                                            <label for="Incfirpacexa">Sí</label><br>
-                                            <input type="radio" name="respuesta3" value="N" id="Incfirpacexa">
-                                            <label for="Incfirpacexa">No</label><br>
+                                                <label for="Incfirpacexa">¿Incluir firma del paciente en los
+                                                    examenes?</label><br>
+                                                <input type="radio" name="respuesta3" value="S" id="Incfirpacexa">
+                                                <label for="Incfirpacexa">Sí</label><br>
+                                                <input type="radio" name="respuesta3" value="N" id="Incfirpacexa">
+                                                <label for="Incfirpacexa">No</label><br>
 
-                                            <label for="Inchuepacexa">¿Incluir Huella del paciente en los
-                                                examenes?</label><br>
-                                            <input type="radio" name="respuesta31" value="S" id="Inchuepacexa">
-                                            <label for="Inchuepacexa">Sí</label><br>
-                                            <input type="radio" name="respuesta31" value="N" id="Inchuepacexa">
-                                            <label for="Inchuepacexa">No</label><br>
+                                                <label for="Inchuepacexa">¿Incluir Huella del paciente en los
+                                                    examenes?</label><br>
+                                                <input type="radio" name="respuesta31" value="S" id="Inchuepacexa">
+                                                <label for="Inchuepacexa">Sí</label><br>
+                                                <input type="radio" name="respuesta31" value="N" id="Inchuepacexa">
+                                                <label for="Inchuepacexa">No</label><br>
 
-                                            <label for="incfordatper">¿Incluir formatos de datos personales?</label><br>
-                                            <input type="radio" name="respuesta4" value="S" id="incfordatper">
-                                            <label for="incfordatper">Sí</label><br>
-                                            <input type="radio" name="respuesta4" value="N" id="incfordatper">
-                                            <label for="incfordatper">No</label><br>
+                                                <label for="incfordatper">¿Incluir formatos de datos
+                                                    personales?</label><br>
+                                                <input type="radio" name="respuesta4" value="S" id="incfordatper">
+                                                <label for="incfordatper">Sí</label><br>
+                                                <input type="radio" name="respuesta4" value="N" id="incfordatper">
+                                                <label for="incfordatper">No</label><br>
 
-                                            <label for="incdecjur">¿Incluir Declaración Jurada?</label><br>
-                                            <input type="radio" name="respuesta5" value="S" id="incdecjur">
-                                            <label for="incdecjur">Sí</label><br>
-                                            <input type="radio" name="respuesta5" value="N" id="incdecjur">
-                                            <label for="incdecjur">No</label><br>
+                                                <label for="incdecjur">¿Incluir Declaración Jurada?</label><br>
+                                                <input type="radio" name="respuesta5" value="S" id="incdecjur">
+                                                <label for="incdecjur">Sí</label><br>
+                                                <input type="radio" name="respuesta5" value="N" id="incdecjur">
+                                                <label for="incdecjur">No</label><br>
 
 
-                                            <label for="incfirhueforadi">¿Incluir firma y huella en formatos
-                                                adicionales?</label><br>
-                                            <input type="radio" name="respuesta6" value="S" id="incfirhueforadi">
-                                            <label for="incfirhueforadi">Sí</label><br>
-                                            <input type="radio" name="respuesta6" value="N" id="incfirhueforadi">
-                                            <label for="incfirhueforadi">No</label><br>
+                                                <label for="incfirhueforadi">¿Incluir firma y huella en formatos
+                                                    adicionales?</label><br>
+                                                <input type="radio" name="respuesta6" value="S" id="incfirhueforadi">
+                                                <label for="incfirhueforadi">Sí</label><br>
+                                                <input type="radio" name="respuesta6" value="N" id="incfirhueforadi">
+                                                <label for="incfirhueforadi">No</label><br>
 
-                                            <label for="creusucatocu">¿Crear usuarios para catgoria
-                                                ocupacional?</label><br>
-                                            <input type="radio" name="respuesta7" value="S" id="creusucatocu">
-                                            <label for="creusucatocu">Sí</label><br>
-                                            <input type="radio" name="respuesta7" value="N" id="creusucatocu">
-                                            <label for="creusucatocu">No</label><br>
+                                                <label for="creusucatocu">¿Crear usuarios para catgoria
+                                                    ocupacional?</label><br>
+                                                <input type="radio" name="respuesta7" value="S" id="creusucatocu">
+                                                <label for="creusucatocu">Sí</label><br>
+                                                <input type="radio" name="respuesta7" value="N" id="creusucatocu">
+                                                <label for="creusucatocu">No</label><br>
 
 
 
@@ -310,7 +313,7 @@
 
                             </div>
                             <div class="mt-5 text-center"><button class="btn btn2" type="button"
-                                    onclick="guardarcliente()" id="btn">
+                                    onclick="guardar();guardarcliente()" id="btn">
                                     <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
                                 </button>
                             </div>

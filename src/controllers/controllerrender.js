@@ -50,12 +50,12 @@ module.exports = {
         res.render('entidades/paciente', { layout: false });
     },
     async renderemedico(req, res) {
-        const parametro = "PC";
+        const parametro = "MD";
         permisos(parametro,'entidades/medicos', req,res)
         res.render('entidades/medicos', { layout: false });
     },
     async rendercliente(req, res) {
-        const parametro = "PC";
+        const parametro = "CL";
         permisos(parametro,'entidades/cliente', req,res)
         res.render('entidades/cliente', { layout: false });
     },
