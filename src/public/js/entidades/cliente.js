@@ -2,10 +2,8 @@
 $(document).ready(function () {
     getPacienteCombos();
 });
-/*function guardarCliente() {
-    validarFormulario('contacto,celular');
-}
-*/
+
+
 function getPacienteCombos() {
     $.ajax({
         url: '/listarCombosPac',
@@ -106,10 +104,43 @@ function eliminarCli() {
     });
 
 }
+/*function validarFormulariocli(excluirIds) {
+    let camposValidoscli = true;
+    $('input, select, textarea').each(function() {
+        const id = $(this).attr('id');
+        if (excluirIds && excluirIds.includes(id)) {
+            return true;
+        }
+  
+        if (!$(this).val()) {
+            camposValidoscli = false;
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+            $(this).addClass('is-valid');
+        }
+    });
+  
+    if (!camposValidoscli) {
+        mensaje('error', 'Por favor, complete todos los campos.', 1800);
+    }
+  
+    return camposValidoscli;
+  }*/
 
-var opc = 0;
 function guardarcliente() {
+    let cli_id = $('#cli_id');
+    let opc = 0;
+    let camposValidoscli = validarFormulariocli('NumDoc', 'razsoc','Direccion');
+    if (!camposValidoscli) {
+        return;
+    }
 
+    if (cli_id === '0') {
+        opc = 0;//guardar
+    } else {
+        opc = 1;//editar
+    }
 
     let razsoc = $('#razsoc');
     let docide = $('#docide');
@@ -212,6 +243,6 @@ function getclientem(docideM, NumDocM, razsocM, actividad_economicaM, DireccionM
     $('#notinfmedpac').val(notinfmedpacM);
 
     $('#modalFormactcliente [data-dismiss="modal"]').trigger('click');
-   
+
 }
 
