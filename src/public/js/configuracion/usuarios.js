@@ -75,11 +75,13 @@ function getpermisos() {
 
 
 function guardarusuario() {
+    $("#btnUsuario").prop("disabled", true);
     const canvas = document.getElementById('canvas');
     let opc = 0;
     let iduser = $('#iduser').val();
-    let camposValidos = validarFormulario('','');
+    let camposValidos = validarFormulario('file-input,clientemodal');
     if (!camposValidos) {        
+        $("#btnUsuario").prop("disabled", false);
         return;
     }
     
@@ -122,14 +124,16 @@ function guardarusuario() {
             picuser: picuser,
         },
         success: function (response) {
+            $("#btnCita").prop("disabled", false);
             getpermisos();
             limpiarinputs();
             activarCampo();
             $('input[type="text"]').val("");
-            mensaje(response[0].tipo, response[0].response, 5000);
+            mensaje(response[0].tipo, response[0].response, 1500);                        
         },
         error: function () {
-            mensaje('error', 'Error al guardar, intente nuevamente', 5500);
+            $("#btnCita").prop("disabled", false);
+            mensaje('error', 'Error al guardar, intente nuevamente', 1500);            
         }
     });
 }
@@ -264,4 +268,8 @@ function activarCampo() {
     let iduser = document.getElementById('iduser');
     iduser.value = 0;
 }
-
+function limpiarImputUser() {
+    $('input').val('');
+    $('textarea').val('');
+    $("#btnCita").prop("disabled", false);
+  }

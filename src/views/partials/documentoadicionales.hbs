@@ -1,0 +1,41 @@
+<div class="row mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6>ARCHIVOS ADJUNTOS</h6>
+                </div>
+                <div class="card-body">
+                    <div id="miniaturas" style="display: none;"></div>
+                </div>
+                <input type="text" id="doc_adic_id" style="display: none;" value="0">
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <input type="file" class="form-control" name="archivos" id="archivos" accept=".pdf"
+                                multiple>
+                        </div>
+                        <div class="row col-md-2">
+                            <div class="col-md-7 px-1">
+                                <button class="btn"
+                                    style="background-color: #793B8E; color: white; width: 100%; padding:0px"
+                                    id="btnSubir" onclick="SubirDocumento()" disabled><i class="fa-solid fa-upload"
+                                        style="margin: 8px 12px;"></i>
+                                </button>
+                            </div>
+                            <div class="col-md-5 px-1 ">
+                                <button class="btn"
+                                    style="background-color: #793B8E; color: white; width: 100%; padding:0px"
+                                    id="btnEliminar" onclick="EliminarDocumento()" disabled><i class="fa-solid fa-eraser"
+                                        style="margin: 8px 12px;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="mt-1" style="color: red;">*Solo está permitido las siguientes extensiones de
+                        archivo: (.pdf) </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/historiaclinica/documentosadicionales.js"></script>
