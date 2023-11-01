@@ -109,7 +109,7 @@ module.exports = {
 
     /************Usuario*******/
     async postusuario(req, res) {//agregar usuario
-        const { usuario, contrasena, celular, app, apm, Nombres, fecnac, DNI, correo, direccion, sexo, codrol, iduser, opc, picuser } = req.body;
+        const { usuario, contrasena, celular, app, apm, Nombres, fecnac, DNI, correo, direccion, sexo, codrol, iduser, opc, picuser,medid } = req.body;
         const passencrypt = await helpers.EncriptarPass(contrasena);
         const usenam = req.user.usuario;
         const hostname = '';
@@ -125,7 +125,7 @@ module.exports = {
             .toFormat('webp')
             .toFile(rutaSalida);
         const pool = await getConnection();
-        const response = await pool.query(`sp_insUsuario '${usuario.toUpperCase()}','${passencrypt}',${celular},'${app.toUpperCase()}','${apm.toUpperCase()}','${Nombres.toUpperCase()}','${DNI}','${fecnac}','${correo.toUpperCase()}','${direccion.toUpperCase()}','${codrol}', '${sexo.toUpperCase()}','${usenam}','${hostname}','${codrolUser}','${iduser}','${opc}'`);
+        const response = await pool.query(`sp_insUsuario '${usuario.toUpperCase()}','${passencrypt}',${celular},'${app.toUpperCase()}','${apm.toUpperCase()}','${Nombres.toUpperCase()}','${DNI}','${fecnac}','${correo.toUpperCase()}','${direccion.toUpperCase()}','${codrol}', '${sexo.toUpperCase()}','${usenam}','${hostname}','${codrolUser}','${iduser}','${opc}','${medid}'`);
         res.json(response.recordset);
     },
     async getusuarios(req, res) {//listar usuario para edicion

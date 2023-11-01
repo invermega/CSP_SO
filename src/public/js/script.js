@@ -557,11 +557,5 @@ function validarFormulario2(incluirIds) {
 }
 
 
-function horatime(input) {
-  var horaActual = new Date().toLocaleTimeString(navigator.language, {
-    hour: '2-digit',
-    minute: '2-digit'
-  });
-  document.getElementById(input).value = horaActual;
-}
+
 

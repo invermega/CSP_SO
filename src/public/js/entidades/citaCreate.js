@@ -16,21 +16,21 @@ $(document).ready(function () {
     } else {
         getcitas(id);
     }
-    
-    $('#fecprocitaTime').clockTimePicker({
+
+    /*$('#fecprocitaTime').clockTimePicker({
         duration: true,
         durationNegative: false,
-        alwaysSelectHoursFirst:true,
-        afternoonHoursInOuterCircle:true,
+        alwaysSelectHoursFirst: true,
+        afternoonHoursInOuterCircle: true,
         precision: 10,
-        required:true,
+        required: true,
         i18n: {
             cancelButton: 'Abbrechen'
         },
         onAdjust: function (newVal, oldVal) {
             //...
         }
-    });
+    });*/
 
 });
 function getcitas(id) {
@@ -126,73 +126,70 @@ function getPacienteCombos() {
             alert('error');
         }
     });
-}
-function getpacientes(parametro) {
-    mostrarDiv('carga');
-    ocultarDiv('tablapacientemodal');
-    $.ajax({
-        url: '/listarpacientes',
-        method: 'GET',
-        data: {
-            parametro: parametro,
-        },
-        success: function (pacientes) {
-            ocultarDiv('carga');
-            mostrarDiv('tablapacientemodal');
-            const tbodypac = $('#bodypacientemodal');
-            tbodypac.empty();
-            if (pacientes.length === 0) {
-                tbodydistrito.append(`
+}/*
+document.getElementById("pacientemodal").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+        var parametro = $('#pacientemodal').val();
+        mostrarDiv('carga');
+        ocultarDiv('tablapacientemodal');
+        $.ajax({
+            url: '/listarpacientes',
+            method: 'GET',
+            data: {
+                parametro: parametro,
+            },
+            success: function (pacientes) {
+                ocultarDiv('carga');
+                mostrarDiv('tablapacientemodal');
+                const tbodypac = $('#bodypacientemodal');
+                tbodypac.empty();
+                if (pacientes.length === 0) {
+                    tbodypac.append(`
                     <tr>
-                        <td colspan="2" class="text-center">No hay resultados disponibles </td>
+                        <td colspan="3" class="text-center">No hay resultados disponibles </td>
                     </tr>
                 `);
-            } else {
-                pacientes.forEach(paciente => {
-                    tbodypac.append(`
-            <tr>             
-              <td>${paciente.appm_nom}</td>
-              <td>${paciente.pachis}</td>
-              <td>
-              
-              <button onclick="getpacientem('${paciente.appm_nom}','${paciente.pachis}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
-              
-              </td>
-            </tr>
-          `);
-                });
+                } else {
+                    pacientes.forEach(paciente => {
+                        tbodypac.append(`
+                        <tr>  
+                        <td>              
+                            <button onclick="getpacientem(this)" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>              
+                        </td>           
+                        <td>${paciente.appm_nom}</td>
+                        <td>${paciente.pachis}</td>
+                        </tr>
+                    `);
+                    });
 
-            }
-            mensaje(pacientes[0].tipo, pacientes[0].response, 1500);
-        },
-        error: function () {
-            alert('Error en la solicitud AJAX');
-        },
-    });
-}
-document.getElementById("pacientemodal").addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-        var parametro = this.value;
-        getpacientes(parametro);
+                }
+            },
+            error: function () {
+                alert('Error en la solicitud AJAX');
+            },
+        });
+
     }
-});
+});*/
 
-function getpacientem(appm_nom, pachis) {
-    $('#appm_nom').val(appm_nom);
-    $('#pachis').val(pachis);
-    $('#modalFormpaciente [data-dismiss="modal"]').trigger('click');
-
+function getpacientem(btn) {
     event.preventDefault();
+    var filaorigen = $(btn).closest("tr");    
+    var appm_nom = filaorigen.find("td:eq(1)").text();
+    var  pachis = filaorigen.find("td:eq(2)").text();
+    $('#appm_nom').val(appm_nom);
+    $('#pachis').val(pachis);    
 }
 document.getElementById("empresamodal").addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         var parametro = this.value;
+        console.log(parametro);
         getclientes(parametro);
     }
 });
 function getclientes(parametro) {
-    mostrarDiv('cargaEmpresa');
-    ocultarDiv('tableEmpresamodal');
+    mostrarDiv('cargaempresamodal');
+    ocultarDiv('tableempresamodal');
     console.log(parametro);
     $.ajax({
         url: '/empresas',
@@ -201,9 +198,9 @@ function getclientes(parametro) {
             empresa: parametro,
         },
         success: function (clientes) {
-            ocultarDiv('cargaEmpresa');
-            mostrarDiv('tableEmpresamodal');
-            const tbodycli = $('#bodyEmpresa');
+            ocultarDiv('cargaempresamodal');
+            mostrarDiv('tableempresamodal');
+            const tbodycli = $('#bodyempresamodal');
             tbodycli.empty();
             if (clientes.length === 0) {
                 tbodycli.append(`
@@ -218,7 +215,7 @@ function getclientes(parametro) {
               <td>${cliente.razsoc}</td>
               <td>${cliente.NumDoc}</td>
               <td>
-              <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
+              <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
               
               </td>
             </tr>
@@ -226,6 +223,7 @@ function getclientes(parametro) {
                 });
 
             }
+            //mensaje(clientes[0].icono, clientes[0].mensaje, 1500);
         },
         error: function () {
             alert('Error en la solicitud AJAX');
@@ -235,6 +233,7 @@ function getclientes(parametro) {
 function getempresam(razsoc, cli_id) {
     $('#razsoc').val(razsoc);
     $('#cli_id').val(cli_id);
+    //$('#modalFormEmpresa [data-dismiss="modal"]').trigger('click');
     getprotocolo(cli_id);
     event.preventDefault();
 }
@@ -286,7 +285,7 @@ document.getElementById("codpro_id").addEventListener("change", function (event)
     }
 });
 function guardarCita() {
-    $("#btnCita").prop("disabled", true);
+    //$("#btnCita").prop("disabled", true);
     let inputid = $('#inputid');
     let cli_id = $('#cli_id');
     let codpro_id = $('#codpro_id');
@@ -310,7 +309,11 @@ function guardarCita() {
     let ent_result_fisico = document.querySelector("input[name='ent_result_fisico']:checked").value;
     let usa_firma_formatos = document.querySelector("input[name='usa_firma_formatos']:checked").value;
     let res_lugar_trabajo = document.querySelector("input[name='res_lugar_trabajo']:checked").value;
-    validarFormulario('empresamodal,pacientemodal');
+    validarFormulario('empresamodal,pacientemodal,obscita');
+    if (validarFormulario) {
+        mensaje('error', 'Complete los campos requeridos, porfavor', 1500);
+        return;
+    }
     $.ajax({
         url: '/cita',
         method: "POST",
@@ -356,23 +359,14 @@ function guardarCita() {
             } else {
                 mensaje(response[0].tipo, response[0].response, 1500);
             }
-            $("#btnCita").prop("disabled", false);
+            //$("#btnCita").prop("disabled", false);
         },
         error: function () {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);
-            $("#btnCita").prop("disabled", false);
+            //$("#btnCita").prop("disabled", false);
         }
     });
 }
-var input = document.getElementById('fecprocitaTime');
-function bloquearEntradaTeclado(event) {
-    event.preventDefault();
-}
-input.addEventListener('keydown', bloquearEntradaTeclado);
-input.addEventListener('mousedown', function (event) {
-    event.preventDefault();
-    input.blur();
-});
 
 
 

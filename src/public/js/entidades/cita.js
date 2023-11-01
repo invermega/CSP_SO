@@ -260,7 +260,7 @@ async function navegargetid(iddatatableble, tipo) {
         mensajecentral('error', 'Debes seleccionar solo un registro.');
     } else {
         var detalle = await obtenerDatosDetalle(`${seleccionados[0]}`);
-        obtenerDatosCabecera(`${seleccionados[0]}`).then(function (cabeceraData) {     
+        obtenerDatosCabecera(`${seleccionados[0]}`).then(function (cabeceraData) {
             imprimirHojaRuta(cabeceraData, detalle);
         }).catch(function (error) {
             console.log(error);
@@ -346,7 +346,7 @@ function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
     var contenedorImagenTitulo = "<div style='display: flex; align-items: center; justify-content: center; margin-bottom: 20px;'>";
     contenedorImagenTitulo += "<img src='/img/logo.png' alt='Logo' style='width: 120px; height: 75px; margin-right: 10px;'>";
 
-    contenedorImagenTitulo += "<h4 style='text-align: center; flex: 1;'>HOJA DE RUTA N°: " + cabeceraData.numhoja + "</h4>";
+    contenedorImagenTitulo += "<h4 style='text-align: center; flex: 1;'>HOJA DE RUTA N°: " + cabeceraData.numhoja + "</h4><br>";
     contenedorImagenTitulo += "<h4 style='text-align: center; flex: 1;'>Cita : " + cabeceraData.fechaprog + "</h4>";
     contenedorImagenTitulo += "<div style='text-align: right;'>";
     contenedorImagenTitulo += "<p style='font-size: 10px;'><strong>Fecha:</strong> " + cabeceraData.fecha + "</p>";
@@ -356,21 +356,40 @@ function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
     contenedorImagenTitulo += "</div>";
 
 
-    // Construir el contenido de la cabecera
-    var contenidoCabecera = "<div style='display: flex;'>";
-    contenidoCabecera += "<div style='flex: 1;'>";  
-    contenidoCabecera += "<p style='font-size: 12px;'><strong>Apellidos y Nombres:</strong></p><p style='font-size: 10px;'>" + cabeceraData.nombres+"</p>";
-    contenidoCabecera += "<p style='font-size: 12px;'><strong>DNI:</strong> </p><p style='font-size: 10px;'>" + cabeceraData.numdoc + "</p><p style='font-size: 12px;'>   <strong>Celular:</strong></p><p style='font-size: 10px;'> " + cabeceraData.celular + "</p>";
-    contenidoCabecera += "<p style='font-size: 12px;'><strong>Fecha cita:</strong></p><p style='font-size: 10px;'>" + cabeceraData.fechaprog + "</p><p style='font-size: 12px;'><strong>Correo:</strong></p><p style='font-size: 10px;'> " + cabeceraData.correo + "</p>";
-    contenidoCabecera += "<p style='font-size: 12px;'><strong>Edad:</strong></p><p style='font-size: 10px;'> " + cabeceraData.edad + "</p>";
-    contenidoCabecera += "</div>";
-    contenidoCabecera += "<div style='flex: 1;'>";
-    contenidoCabecera += "<p style='font-size: 14px;'><strong>Empresa:</strong></p><p style='font-size: 10px;'>  " + cabeceraData.razsoc + "</p>";
-    contenidoCabecera += "<p style='font-size: 14px;'><strong>Puesto en el que trabaja o trabajará:</strong></p><p style='font-size: 10px;'> " + cabeceraData.cargo + "</p>";
-    contenidoCabecera += "<p style='font-size: 14px;'><strong>Área de trabajo:</strong></p><p style='font-size: 10px;'> " + cabeceraData.area + "</p>";
-    contenidoCabecera += "<p style='font-size: 14px;'><strong>Tipo de Exámen:</strong></p><p style='font-size: 10px;'> " + cabeceraData.tipexa + "</p>";
-    contenidoCabecera += "</div>";
-    contenidoCabecera += "</div>";
+    var contenidoCabecera = "<table style='width: 100%; border-collapse: collapse;border-color: black;margin-bottom:20px'>";
+    contenidoCabecera += "<tr>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Apellidos y Nombres:</strong><br><label style='font-size: 10px;'>" + cabeceraData.nombres + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Empresa:</strong><br><label style='font-size: 10px;'>" + cabeceraData.razsoc + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "</tr>";
+    contenidoCabecera += "<tr>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>DNI:</strong><br><label style='font-size: 10px;'>" + cabeceraData.numdoc + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Puesto en el que trabaja o trabajará:</strong><br><label style='font-size: 10px;'>" + cabeceraData.cargo + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "</tr>";
+    contenidoCabecera += "<tr>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Celular:</strong><br><label style='font-size: 10px;'>" + cabeceraData.celular + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Área de trabajo:</strong><br><label style='font-size: 10px;'>" + cabeceraData.area + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "</tr>";
+    contenidoCabecera += "<tr>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Fecha cita:</strong><br><label style='font-size: 10px;'>" + cabeceraData.fechaprog + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Tipo de Exámen:</strong><br><label style='font-size: 10px;'>" + cabeceraData.tipexa + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "</tr>";
+    contenidoCabecera += "</table>";
 
     // Construir el contenido del detalle (tabla)
     var contenidoDetalle = "<table style='width: 100%; border-collapse: collapse;border-color: black;'>";

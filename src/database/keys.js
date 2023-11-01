@@ -4,7 +4,7 @@ module.exports={
         user: 'siscsp',
         password: 'C1n1c4123*',
         server: '198.251.67.234',
-        database: 'salud_BD',
+        database: 'salud_BK',
         options: {
             encrypt: true, // for azure
             trustServerCertificate: true, // change to true for local dev / self-signed certs

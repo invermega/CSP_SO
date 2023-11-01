@@ -46,6 +46,8 @@ router.get('/citaedit/:id', isLoggedIn, controllerrender.rendercitaedit);
 router.delete('/citadel',isLoggedIn, controllerEN.delcita);
 router.post('/listarhrc', isLoggedIn, controllerEN.getListaHojaRutaC);
 router.post('/listarhrd', isLoggedIn, controllerEN.getListaHojaRutaD);
+router.get('/listarempresa', isLoggedIn, controllerEN.getempresaCita);
+
 /*****************Médico*******************/
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
 router.post('/medico',isLoggedIn,controllerEN.postmedico);

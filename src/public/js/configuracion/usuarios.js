@@ -78,12 +78,13 @@ function guardarusuario() {
     const canvas = document.getElementById('canvas');
     let opc = 0;
     let iduser = $('#iduser').val();
-    let camposValidos = validarFormulario('file-input,clientemodal');
-    if (!camposValidos) {        
-        $("#btnUsuario").prop("disabled", false);
+    let camposValidos = validarFormulario('file-input,clientemodal,busquedamedico');
+    if (!camposValidos) {
+        var btnUsuario = document.getElementById("btnUsuario");
+        btnUsuario.disabled = true;
         return;
     }
-    
+
     if (iduser === '0') {
         opc = 0;//guardar
     } else {
@@ -101,6 +102,7 @@ function guardarusuario() {
     let direccion = $('#direccion');
     let codrol = $('#codrol');
     let sexo = $('#sexo');
+    let medid = $('#medid');
     var picuser = canvas.toDataURL();
     $.ajax({
         url: '/usuario',
@@ -121,18 +123,21 @@ function guardarusuario() {
             opc: opc,
             iduser: iduser,
             picuser: picuser,
+            medid: medid.val(),
         },
         success: function (response) {
-            $("#btnCita").prop("disabled", false);
+            var btnUsuario = document.getElementById("btnUsuario");
+            btnUsuario.disabled = true;
             getpermisos();
             limpiarinputs();
             activarCampo();
             $('input[type="text"]').val("");
-            mensaje(response[0].tipo, response[0].response, 1500);                        
+            mensaje(response[0].tipo, response[0].response, 1500);
         },
         error: function () {
-            $("#btnCita").prop("disabled", false);
-            mensaje('error', 'Error al guardar, intente nuevamente', 1500);            
+            var btnUsuario = document.getElementById("btnUsuario");
+            btnUsuario.disabled = true;
+            mensaje('error', 'Error al guardar, intente nuevamente', 1500);
         }
     });
 }
@@ -165,7 +170,7 @@ function getusuarios(parametro) {
               <td>${usuario.usuario}</td>
               <td>
               <a  type="button" class="btn btn-circle btn-sm btn-info mr-1" onclick=resetearPass(${usuario.iduser},'${usuario.usuario}')><i class="fa-solid fa-street-view"></i></a>
-              <button onclick="getusuariosm('${usuario.iduser}','${usuario.usuario}','${usuario.Nombres}','${usuario.app}','${usuario.apm}','${usuario.DNI}','${usuario.celular}','${usuario.fecnac}','${usuario.correo}','${usuario.direccion}','${usuario.codrol}','${usuario.sexo}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
+              <button onclick="getusuariosm('${usuario.iduser}','${usuario.usuario}','${usuario.Nombres}','${usuario.app}','${usuario.apm}','${usuario.DNI}','${usuario.celular}','${usuario.fecnac}','${usuario.correo}','${usuario.direccion}','${usuario.codrol}','${usuario.sexo}','${usuario.medid}','${usuario.mednam}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
               <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarUser("${usuario.iduser}")><i class="fa-solid fa-trash-can"></i></a>
               </td>
             </tr>
@@ -180,16 +185,16 @@ function getusuarios(parametro) {
         },
     });
 }
-function resetearPass(iduser,usuario) {
+function resetearPass(iduser, usuario) {
     iduser = parseInt(iduser);
     console.log(usuario)
-    
+
     $.ajax({
         url: '/editarPass',
         method: "POST",
         data: {
             iduser: iduser,
-            usuario:usuario,
+            usuario: usuario,
         },
         success: function (user) {
             $('#modalFormusuario [data-dismiss="modal"]').trigger('click');
@@ -221,7 +226,7 @@ function eliminarUser(iduser) {
         }
     });
 }
-function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, fecnacM, correoM, direccionM, codrolM, sexoM) {
+function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, fecnacM, correoM, direccionM, codrolM, sexoM,medidM,mednamM) {
     $('#iduser').val(iduserM);
     $('#usuario').val(usuarioM);
     $('#Nombres').val(NombresM);
@@ -235,7 +240,8 @@ function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, f
     $('#codrol').val(codrolM);
     $('#sexo').val(sexoM);
     $('#contrasena').val('123456789').prop('disabled', true);
-
+    $('#medid').val(medidM);
+    $('#mednam').val(mednamM);
     const canvas = $('#canvas')[0];
     const image = new Image();
     const context = canvas.getContext('2d');
@@ -246,7 +252,7 @@ function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, f
     };
     image.src = `./img/usuario/${DNIM}.webp`;
 
-    $('#modalFormusuario [data-dismiss="modal"]').trigger('click');    
+    $('#modalFormusuario [data-dismiss="modal"]').trigger('click');
 }
 
 function validarCampos() {
@@ -274,4 +280,4 @@ function limpiarImputUser() {
     $('input').val('');
     $('textarea').val('');
     $("#btnCita").prop("disabled", false);
-  }
+}

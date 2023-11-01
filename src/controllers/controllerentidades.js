@@ -246,7 +246,13 @@ module.exports = {
         const response = await pool.query(`pa_SelHojaRuta_det ${idcita}`);
         res.json(response.recordset);
     },   
-    
+    async getempresaCita(req, res) {
+        const empresa = req.query.empresa;
+        const codrol = req.user.codrol;
+        const pool = await getConnection();
+        const empresas = await pool.query(`sp_selCliente '${empresa}','${codrol}'`);
+        res.json(empresas.recordset);
+    },
     /*************************/
     /************Examenes*************/
     async getListaExamenes(req, res) {//listar los examenes        
