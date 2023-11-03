@@ -211,7 +211,7 @@ module.exports = {
         if (paciente === '') {
             paciente = '%';
         }
-        const pool = await getConnection();
+        const pool = await getConnection(fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6);
         const response = await pool.query(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`);
         res.json(response.recordset);
     },
@@ -245,13 +245,21 @@ module.exports = {
         const pool = await getConnection();
         const response = await pool.query(`pa_SelHojaRuta_det ${idcita}`);
         res.json(response.recordset);
-    },   
+    },      
     async getempresaCita(req, res) {
         const empresa = req.query.empresa;
         const codrol = req.user.codrol;
         const pool = await getConnection();
         const empresas = await pool.query(`sp_selCliente '${empresa}','${codrol}'`);
         res.json(empresas.recordset);
+    },
+    async getListaConsetimientoInf(req, res) {//listar cosentimiento informado
+        let { idcita } = req.body;        
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        
+        const response = await pool.query(`SET Language 'Spanish';EXEC pa_SelConsentimiento_Inf ${idcita},${codrolUser}`);
+        res.json(response.recordset);
     },
     /*************************/
     /************Examenes*************/

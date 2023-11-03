@@ -143,11 +143,11 @@
                                                 </select>
                                             </div>
                                             <div class="col-md-4 form-inline col-sm-12 form-group ">
-                                                <label class="labels mb-2">Médico</label>
+                                                <label class="labels mb-2" for="medapmn">Médico</label>
                                                 <div class="input-group input-group-sm" style="width: 100%;">
-                                                    <input type="hidden" id="medid" value="0">
-                                                    <input type="text" id="mednam" class="form-control form-control-sm"
-                                                        placeholder="Nombre del médico" aria-label="mednam" disabled>
+                                                    <input type="hidden" id="med_id" value="0">
+                                                    <input type="text" id="medapmn" class="form-control form-control-sm"
+                                                        placeholder="Nombre del médico" aria-label="medapmn" disabled>
                                                     <button type="button" class="btn input-group-text"
                                                         data-toggle="modal" data-target="#modalFormmedico">
                                                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -175,82 +175,20 @@
         </div>
     </div>
 </div>
-<!--MODAL MEDICO-->
-<div class="modal fade" id="modalFormmedico" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
-                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE
-                    MEDICO
-                </h4>
-            </div>
-            <div class="modal-body">
-                <div class="input-group input-group-sm" style="width: 100%;">
-                    <label class="control-label input-group-text" for="busquedamedico">MEDICO</label>
-                    <input class="form-control form-control-sm " id="busquedamedico"
-                        placeholder="Ingrese los nombres o el DNI del paciente" required></input>
-                    <label class="input-group-text form-control-sm"><i class="fa-solid fa-user"></i></label>
-                </div>
-
-                <div class="row mb-2 mt-2">
-                    <div class="table-responsive">
-                        <table
-                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
-                            id="tablamedicomodal" style="display: none;">
-                            <thead class="thead" style="text-align: left;">
-                                <tr>
-
-                                    <th scope="col">APELLIDOS Y NOMBRES
-                                    </th>
-                                    <th scope="col">DNI</th>
-                                    <th scope="col">ACCIONES</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodymedicomodal" style="text-align: left;">
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="text-center" id="cargaMedicoModal" style="display: none;">
-                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
-                            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
-                                background="transparent" speed="1" style="width: 300px; height: 300px;" loop
-                                autoplay></lottie-player>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btnMedicoModal"
-                        style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrarcliente"
-                        data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
-                        Cerrar</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
 <!--MODAL Editar usuario-->
 <div class="modal fade" id="modalFormusuario" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
-                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE CLIENTE</h4>
+                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE USUARIO</h4>
             </div>
             <div class="modal-body">
                 <div class="input-group input-group-sm" style="width: 100%;">
-                    <label class="control-label input-group-text" for="clientemodal">USUARIO</label>
-                    <input class="form-control form-control-sm " id="clientemodal"
+                    <label class="control-label input-group-text" for="usuariomodal">USUARIO</label>
+                    <input class="form-control form-control-sm " id="usuariomodal"
                         placeholder="Ingrese los nombres o el DNI del usuario" required></input>
                     <label class="input-group-text form-control-sm"><i class="fa-solid fa-user"></i></label>
                 </div>
-                <!--<div class="row mb-2">
-                                    <label class="col-sm-3 col-form-label" for="clientemodal">BUSCAR: </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control obs" id="clientemodal"
-                                            placeholder="Ingrese los nombres o el DNI del usuario" required></input>
-                                    </div>
-                                </div>-->
                 <div class="row mb-2 mt-2">
                     <div class="table-responsive">
                         <table
@@ -258,7 +196,6 @@
                             id="tablaususuariomodal" style="display: none;">
                             <thead class="thead">
                                 <tr>
-
                                     <th scope="col">NOMBRES Y APELLIDOS</th>
                                     <th scope="col">DNI</th>
                                     <th scope="col">USUARIO</th>
@@ -279,7 +216,57 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn"
-                        style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrarcliente"
+                        style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrarusuariomodal"
+                        data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
+                        Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--MODAL MEDICO-->
+<div class="modal fade" id="modalFormmedico" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE MÉDICO</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group input-group-sm" style="width: 100%;">
+                    <label class="control-label input-group-text" for="medicomodal">Médico</label>
+                    <input class="form-control form-control-sm " id="medicomodal"
+                        placeholder="Ingrese los nombres o el DNI del médico" required></input>
+                    <label class="input-group-text form-control-sm"><i class="fa-solid fa-user"></i></label>
+                </div>
+                <div class="row mb-2 mt-2">
+                    <div class="table-responsive">
+                        <table
+                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                            id="tablamedicomodal" style="display: none;">
+                            <thead class="thead">
+                                <tr>
+                                    <th scope="col">ACCIONES</th>
+                                    <th scope="col">APELLIDOS Y NOMBRES</th>
+                                    <th scope="col">DNI</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody id="bodymedicomodal">
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="text-center" id="cargamedico" style="display: none;">
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                background="transparent" speed="1" style="width: 300px; height: 300px;" loop
+                                autoplay></lottie-player>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn"
+                        style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrarmedicomodal"
                         data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
                         Cerrar</button>
                 </div>

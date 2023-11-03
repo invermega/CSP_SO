@@ -29,8 +29,12 @@ module.exports = {
     },
 
     async CerrarSesion(req, res) {
-        req.logOut();
-        res.redirect('/iniciarsesion');
+        req.logout(function (err) {
+            if (err) {
+                console.error(err);
+            }
+            res.redirect('/iniciarsesion');
+        });
     },
 
     async postgrupousuario(req, res) {
@@ -48,7 +52,7 @@ module.exports = {
     },
     async getaccesos(req, res) {
         const { codrol } = req.query;
-        
+
         const pool = await getConnection();
         const accesos = await pool.query(`sp_selAccesos '${codrol}'`);
         res.json(accesos.recordset);
@@ -105,11 +109,11 @@ module.exports = {
         }
         res.json('Completado');
     },
-    
+
 
     /************Usuario*******/
     async postusuario(req, res) {//agregar usuario
-        const { usuario, contrasena, celular, app, apm, Nombres, fecnac, DNI, correo, direccion, sexo, codrol, iduser, opc, picuser,medid } = req.body;
+        const { usuario, contrasena, celular, app, apm, Nombres, fecnac, DNI, correo, direccion, sexo, codrol, iduser, opc, picuser, med_id } = req.body;
         const passencrypt = await helpers.EncriptarPass(contrasena);
         const usenam = req.user.usuario;
         const hostname = '';
@@ -125,7 +129,7 @@ module.exports = {
             .toFormat('webp')
             .toFile(rutaSalida);
         const pool = await getConnection();
-        const response = await pool.query(`sp_insUsuario '${usuario.toUpperCase()}','${passencrypt}',${celular},'${app.toUpperCase()}','${apm.toUpperCase()}','${Nombres.toUpperCase()}','${DNI}','${fecnac}','${correo.toUpperCase()}','${direccion.toUpperCase()}','${codrol}', '${sexo.toUpperCase()}','${usenam}','${hostname}','${codrolUser}','${iduser}','${opc}','${medid}'`);
+        const response = await pool.query(`sp_insUsuario '${usuario.toUpperCase()}','${passencrypt}',${celular},'${app.toUpperCase()}','${apm.toUpperCase()}','${Nombres.toUpperCase()}','${DNI}','${fecnac}','${correo.toUpperCase()}','${direccion.toUpperCase()}',${codrol}, '${sexo.toUpperCase()}','${usenam}','${hostname}',${codrolUser},${iduser},${opc},${med_id}`);
         res.json(response.recordset);
     },
     async getusuarios(req, res) {//listar usuario para edicion
@@ -143,7 +147,7 @@ module.exports = {
         res.json(response.recordset);
     },
     async resetpass(req, res) {//resetear contraseña
-        const { iduser,usuario } = req.body;
+        const { iduser, usuario } = req.body;
         const codrolUser = req.user.codrol;
         const pool = await getConnection();
         const user = req.user.usuario;

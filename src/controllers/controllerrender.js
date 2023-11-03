@@ -85,12 +85,12 @@ module.exports = {
     },
     async rendercitacreate(req, res) {
         const parametro = "CT";
-        permisos(parametro,'entidades/citaCreates', req, res,0)
+        permisos(parametro,'entidades/citaCreate', req, res,0)
     },
     async rendercitaedit(req, res) {
         const { id } = req.params;
         const parametro = "CT";
-        permisos(parametro,'entidades/citaCreates', req, res,id)
+        permisos(parametro,'entidades/citaCreate', req, res,id)
     },
     async renderemedico(req, res) {
         const parametro = "PC";

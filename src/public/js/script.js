@@ -555,6 +555,27 @@ function validarFormulario2(incluirIds) {
   }
   return camposValidos;
 }
+function validarInputs(ids) {
+  var idsArray = ids.split(',');
+  var camposInvalidos = false;
+  idsArray.forEach(function(id) {
+      var input = document.getElementById(id.trim());
+      if (input) {
+          input.classList.remove('is-valid', 'is-invalid');
+          if (input.value.trim() !== '') {
+              input.classList.add('is-valid'); // Input válido
+          } else {
+              input.classList.add('is-invalid'); // Input inválido
+              camposInvalidos = true;
+          }
+      }
+  });
+  if (camposInvalidos) {
+      mensaje('error', 'Por favor, complete todos los campos.', 1800);
+      return false;
+  }
+  return true;
+}
 
 
 

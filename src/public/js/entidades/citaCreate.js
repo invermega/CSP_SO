@@ -17,7 +17,7 @@ $(document).ready(function () {
         getcitas(id);
     }
 
-    /*$('#fecprocitaTime').clockTimePicker({
+    $('#fecprocitaTime').clockTimePicker({
         duration: true,
         durationNegative: false,
         alwaysSelectHoursFirst: true,
@@ -30,7 +30,7 @@ $(document).ready(function () {
         onAdjust: function (newVal, oldVal) {
             //...
         }
-    });*/
+    });
 
 });
 function getcitas(id) {
@@ -120,13 +120,13 @@ function getPacienteCombos() {
                     valapt_id.append(option);
                 }
             });
-
+            valapt_id.val("6");
         },
         error: function () {
             alert('error');
         }
     });
-}/*
+}
 document.getElementById("pacientemodal").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
         var parametro = $('#pacientemodal').val();
@@ -170,7 +170,7 @@ document.getElementById("pacientemodal").addEventListener("keydown", function (e
         });
 
     }
-});*/
+});
 
 function getpacientem(btn) {
     event.preventDefault();
@@ -211,13 +211,13 @@ function getclientes(parametro) {
             } else {
                 clientes.forEach(cliente => {
                     tbodycli.append(`
-            <tr>             
+            <tr>
+              <td>
+               <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>              
+              </td>
               <td>${cliente.razsoc}</td>
               <td>${cliente.NumDoc}</td>
-              <td>
-              <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
               
-              </td>
             </tr>
           `);
                 });
@@ -280,11 +280,12 @@ function obtenerTerceraColumna(lista, idSeleccionado) {
 document.getElementById("codpro_id").addEventListener("change", function (event) {
     if (event.key === "Enter") {
         var parametro = this.value;
-        console.log(parametro)
         getclientes(parametro);
     }
 });
 function guardarCita() {
+    var btnCita = document.getElementById("btnCita");
+    btnCita.disabled=true;
     //$("#btnCita").prop("disabled", true);
     let inputid = $('#inputid');
     let cli_id = $('#cli_id');
@@ -343,6 +344,7 @@ function guardarCita() {
             res_lugar_trabajo: res_lugar_trabajo,
         },
         success: function (response) {
+            btnCita.disabled=false;
             opc = 0;
             if (response[0].tipo === 'success') {
                 MensajeSIyNO(response[0].tipo, response[0].mensaje, '¿Desea volver?', function (respuesta) {
@@ -357,12 +359,13 @@ function guardarCita() {
                     }
                 });
             } else {
+                btnCita.disabled=false;
                 mensaje(response[0].tipo, response[0].response, 1500);
             }
-            //$("#btnCita").prop("disabled", false);
         },
         error: function () {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);
+            btnCita.disabled=false;
             //$("#btnCita").prop("disabled", false);
         }
     });
