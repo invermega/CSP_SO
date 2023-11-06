@@ -1,0 +1,180 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4 tituloverde">Signos Vitales</h1>
+    <div class="card mb-4">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="left-content">
+                <i class="fas fa-table me-1"></i>
+                Formulario de signos vitales
+            </div>
+            <div>
+                <button class="btn position-relative" style="background-color: #793B8E; color: white; padding:0px"
+                    id="btnGrabar" onclick="Grabar()" data-toggle="modal" data-target="#modalFormProtocolo">
+                    <i class="fa-regular fa-floppy-disk" style="margin: 8px 12px;"></i>
+            </div>
+
+        </div>
+        <div class="card-body ">
+            <div class="row mt-2">
+                <div class="col-md-12 input-group input-group-sm">
+                    <label class="col-sm-2 input-group-text" for="inpfc">FC</label>
+                    <input type="text" class="form-control form-control-sm" value="" id="inpfc"
+                        placeholder="Ingrese el valor" required>
+                    <label class="input-group-text col-sm-1" for="inpfc">ipm</label>
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inpfc"><i
+                            class="fa-solid fa-heart-pulse"></i></label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12 input-group input-group-sm">
+                    <label class=" col-sm-2 input-group-text" for="inpfr">FR</label>
+                    <input type="text" class="form-control form-control-sm" value="" id="inpfr"
+                        placeholder="Ingrese el valor" required>
+                    <label class="input-group-text col-sm-1" for="inpfr">rpm</label>
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inpfr"><i
+                            class="fa-solid fa-lungs"></i></label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12 input-group input-group-sm">
+                    <label class=" col-sm-2 input-group-text" for="inppa">PA</label>
+                    <input type="text" class="form-control form-control-sm" value="" id="inppa"
+                        placeholder="Ingrese el valor" required>
+                    <label class="input-group-text col-sm-1" for="inppa">mmhg</label>
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inppa"><i
+                            class="fa-solid fa-stethoscope"></i></label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12 input-group input-group-sm">
+                    <label class=" col-sm-2 input-group-text" for="inpsato2">Sat O2</label>
+                    <input type="text" class="form-control form-control-sm" value="" id="inpsato2"
+                        placeholder="Ingrese el valor" required>
+                    <label class="input-group-text col-sm-1" for="inpsato2">%</label>
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inpsato2"><i
+                            class="fa-solid fa-gauge-high"></i></label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12 input-group input-group-sm">
+                    <label class="col-sm-2 input-group-text" for="inppeso">PESO</label>
+                    <input type="text" class="form-control form-control-sm" value="" id="inppeso"
+                        placeholder="Ingrese el valor" required>
+                    <label class="input-group-text col-sm-1" for="inppeso">kg</label>
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inppeso"><i
+                            class="fa-solid fa-weight-hanging"></i></label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12 input-group input-group-sm">
+                    <label class="col-sm-2 input-group-text" for="inptalla">TALLA</label>
+                    <input type="text" class="form-control form-control-sm" value="" id="inptalla"
+                        placeholder="Ingrese el valor" required>
+                    <label class="input-group-text col-sm-1" for="inptalla">m</label>
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inptalla"><i
+                            class="fa-solid fa-ruler-vertical ml-1"></i></label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12 input-group input-group-sm">
+                    <label class=" col-sm-2 input-group-text" for="inpimc">IMC</label>
+                    <input type="text" class="form-control form-control-sm" value="" id="inpimc"
+                        placeholder="Ingrese el valor" required>
+                    <label class="input-group-text col-sm-1" for="inpimc">kg/m2</label>
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inpimc"><i
+                            class="fa-solid fa-child"></i></label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12 input-group input-group-sm">
+                    <label class=" col-sm-2 input-group-text" for="inppeab">PERIMETRO ABDOMINAL</label>
+                    <input type="text" class="form-control form-control-sm" value="" id="inppeab"
+                        placeholder="Ingrese el valor" required>
+                    <label class="input-group-text col-sm-1" for="inppeab">cm</label>
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inppeab"><i
+                            class="fa-solid fa-ruler-horizontal"></i></label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12 input-group input-group-sm">
+                    <label class=" col-sm-2 input-group-text" for="inptemp">TEMPERATURA</label>
+                    <input type="text" class="form-control form-control-sm" value="" id="inptemp"
+                        placeholder="Ingrese el valor" required>
+                    <label class="input-group-text col-sm-1" for="inptemp">°C</label>
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inptemp"><i
+                            class="fa-solid fa-temperature-three-quarters ml-1"></i></label>
+                </div>
+            </div>
+
+            {{> cie10 }}
+            {{> recomendaciones }}
+            {{> documentoadicionales }}
+        </div>
+    </div>
+</div>
+
+<script>
+    function Grabar() {
+        let btnGrabar = document.getElementById('btnGrabar');
+        btnGrabar.disabled = true;
+        btnGrabar.innerHTML = `<lottie-player src="/img/jsonimg/btnloading.json" background="transparent"
+                                        speed="1" style="width: 38px; height: 35px;" loop
+                                        autoplay></lottie-player>`
+        let incluirIds = 'inpfc,inpfr,inppa,inpsato2,inppeso,inptalla,inpimc,inppeab,inptemp';
+        let cita_id = document.getElementById('id').value;
+        let fc = document.getElementById('inpfc').value;
+        let fr = document.getElementById('inpfr').value;
+        let pa = document.getElementById('inppa').value;
+        let sato2 = document.getElementById('inpsato2').value;
+        let peso = document.getElementById('inppeso').value;
+        let talla = document.getElementById('inptalla').value;
+        let imc = document.getElementById('inpimc').value;
+        let peab = document.getElementById('inppeab').value;
+        let temp = document.getElementById('inptemp').value;
+        validarFormulario2(incluirIds);
+        if (!cita_id || !fc || !fr || !pa || !sato2 || !peso || !talla || !imc || !peab || !temp) {
+            btnGrabar.disabled = false;
+            mensaje('error', 'Por favor, complete todos los campos antes de continuar.', 1500);
+            btnGrabar.innerHTML = `<i class="fa-regular fa-floppy-disk" style="margin: 8px 12px;">`
+            return;
+        } else {
+            var table = document.getElementById('tablecie10');
+            var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            var datains = [];
+            for (var i = 0; i < rows.length; i++) {
+                var input = rows[i].getElementsByTagName('input');
+                if (input.length >= 3 && input[1].value.trim() !== '') {
+                    var inputcodcie10 = input[1].value;
+                    var inputdesccie10 = input[2].value;
+                    var inputcomencie10 = input[3].value;
+                    var rowData = {
+                        cod: inputcodcie10,
+                        desc: inputdesccie10,
+                        comen: inputcomencie10
+                    };
+                    datains.push(rowData);
+                }
+            }
+
+            var table = document.getElementById('tablerecoemndaciones');
+            var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            var datainsrec = [];
+            for (var i = 0; i < rows.length; i++) {
+                var input = rows[i].getElementsByTagName('input');
+                if (input.length >= 2 && input[0].value.trim() !== '' && input[1].value.trim() !== '') {
+                    var inputrecomendacion = input[0].value;
+                    var inputcontrol = input[1].value;
+                    var rowDatarec = {
+                        recomen: inputrecomendacion,
+                        control: inputcontrol
+                    };
+                    datainsrec.push(rowDatarec);
+                }
+            }
+            console.log(datains);
+            console.log(datainsrec);
+        }
+    }
+
+
+
+</script>

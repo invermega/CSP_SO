@@ -52,7 +52,6 @@ $(document).ready(function () {
             reader.readAsDataURL(file);
         }
     });
-
 });
 function getpermisos() {
     $.ajax({
@@ -79,8 +78,9 @@ function guardarusuario() {
     const canvas = document.getElementById('canvas');
     let opc = 0;
     let iduser = $('#iduser').val();
-    let camposValidos = validarFormulario('','');
+    let camposValidos = validarFormulario('file-input,clientemodal');
     if (!camposValidos) {        
+        $("#btnUsuario").prop("disabled", false);
         return;
     }
     
@@ -123,16 +123,16 @@ function guardarusuario() {
             picuser: picuser,
         },
         success: function (response) {
+            $("#btnCita").prop("disabled", false);
             getpermisos();
             limpiarinputs();
             activarCampo();
             $('input[type="text"]').val("");
-            mensaje(response[0].tipo, response[0].response, 1500);
-            $("#btnCita").prop("disabled", false);
+            mensaje(response[0].tipo, response[0].response, 1500);                        
         },
         error: function () {
-            mensaje('error', 'Error al guardar, intente nuevamente', 1500);
             $("#btnCita").prop("disabled", false);
+            mensaje('error', 'Error al guardar, intente nuevamente', 1500);            
         }
     });
 }
@@ -165,13 +165,13 @@ function getusuarios(parametro) {
               <td>${usuario.usuario}</td>
               <td>
               <a  type="button" class="btn btn-circle btn-sm btn-info mr-1" onclick=resetearPass("${usuario.iduser}")><i class="fa-solid fa-street-view"></i></a>
-              <button onclick="getusuariosm('${usuario.iduser}','${usuario.usuario}','${usuario.Nombres}','${usuario.app}','${usuario.apm}','${usuario.DNI}','${usuario.celular}','${usuario.fecnac}','${usuario.correo}','${usuario.direccion}','${usuario.codrol}','${usuario.sexo}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
+              <button onclick="getusuariosm('${usuario.iduser}','${usuario.usuario}','${usuario.Nombres}','${usuario.app}','${usuario.apm}','${usuario.DNI}','${usuario.celular}','${usuario.fecnac}','${usuario.correo}','${usuario.direccion}','${usuario.codrol}','${usuario.sexo}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
               <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarUser("${usuario.iduser}")><i class="fa-solid fa-trash-can"></i></a>
               </td>
             </tr>
           `);
             });
-            mensaje(usuarios[0].tipo, usuarios[0].response, 5000);
+            mensaje(usuarios[0].tipo, usuarios[0].response, 1500);
 
             //mensaje('success', 'Accesos extraídos correctamente', 1000);
         },
@@ -243,8 +243,7 @@ function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, f
     };
     image.src = `./img/usuario/${DNIM}.webp`;
 
-    $('#modalFormusuario [data-dismiss="modal"]').trigger('click');
-    $('#iduser').val(0);
+    $('#modalFormusuario [data-dismiss="modal"]').trigger('click');    
 }
 
 function validarCampos() {
@@ -266,5 +265,10 @@ function activarCampo() {
     contrasena.disabled = false;
     let iduser = document.getElementById('iduser');
     iduser.value = 0;
+    $("#btnCita").prop("disabled", false);
 }
-
+function limpiarImputUser() {
+    $('input').val('');
+    $('textarea').val('');
+    $("#btnCita").prop("disabled", false);
+  }

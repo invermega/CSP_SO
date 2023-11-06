@@ -12,7 +12,7 @@
                     Ingrese un nuevo usuario al sistema
                 </div>
                 <div>
-                    <button class="btn position-relative" onclick="limpiarinputs();activarCampo();" style="background-color: #793B8E;color: white;border-color: #793B8E;">
+                    <button class="btn position-relative" onclick="limpiarImputUser();activarCampo();" style="background-color: #793B8E;color: white;border-color: #793B8E;">
                         <i class="fa-solid fa-plus"></i>
                         Nuevo
                     </button>
@@ -55,11 +55,9 @@
                                     <div class="d-flex justify-content-between align-items-center mb-3">
                                         <h4 class="text-right">Datos del usuario</h4>
                                     </div>
-                                    <div>
-                                        <input type="hidden" id="iduser" value="0">
-                                    </div>
-
+                                    
                                     <div class="row mt-2">
+                                        <input type="hidden" id="iduser" name="iduser" value="0">
                                         <div class="col-md-6"><label for="usuario" class="labels">Usuario</label><input
                                                 type="text" class="form-control form-control-sm"
                                                 placeholder="Ingrese usuario" id="usuario" value="" required></div>
