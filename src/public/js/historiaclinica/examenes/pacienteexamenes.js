@@ -37,7 +37,7 @@
             formElements.fc.value = data.fc;
             formElements.pa.value = data.pa;
             formElements.fr.value = data.fr;
-            formElements.sato2.value = data.sato2;
+            formElements.sato2.value = data.SATO2;
             formElements.talla.value = data.talla;
             formElements.peso.value = data.peso;
             formElements.imc.value = data.imc;
