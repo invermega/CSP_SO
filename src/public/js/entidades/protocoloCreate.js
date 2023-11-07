@@ -37,7 +37,6 @@ function llenarFormulario(id) {
   $.ajax({
     url: '/protocolodatos/' + id,
     success: function (datos) {
-      console.log(datos);
       var data = datos[0];
       formElements.codemp.value = data.codemp;
       formElements.nomempresa.value = data.razsoc;
@@ -341,7 +340,6 @@ function Guardar() {
     const tiemval_cermed = document.getElementById("tiemval_cermed").value
     const fecvcto_cermed = document.getElementById("fecvcto_cermed").value
 
-    //console.log(codemp, nompro, comentarios, tipexa_id, estado, tiemval_cermed, fecvcto_cermed);
     const datosCompletos = {
       codemp: codemp,
       nompro: nompro,

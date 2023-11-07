@@ -1,0 +1,24 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4 tituloverde">Laboratorio</h1>
+    <div class="card mb-4">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="left-content">
+                <i class="fas fa-table me-1"></i>
+                Formulario de laboratorio
+            </div>
+            <div>
+                <button class="btn position-relative" style="background-color: #793B8E; color: white; padding:0px"
+                    id="btnGrabar" onclick="Grabar()" data-toggle="modal" data-target="#modalFormProtocolo">
+                    <i class="fa-regular fa-floppy-disk" style="margin: 8px 12px;"></i>
+            </div>
+
+        </div>
+        <div class="card-body ">
+            
+
+            {{> cie10 }}
+            {{> recomendaciones }}
+            {{> documentoadicionales }}
+        </div>
+    </div>
+</div>

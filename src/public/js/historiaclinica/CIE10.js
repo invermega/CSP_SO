@@ -27,7 +27,6 @@ document.getElementById("modalFormCIE10").addEventListener("keydown", function (
                 cie10: cie10modal,
             },
             success: function (lista) {
-                console.log(lista);
                 ocultarDiv('cargacie10modal');
                 mostrarTabla('tablecie10modal');
                 let bodycie10modal = $('#bodycie10modal');
@@ -149,3 +148,28 @@ document.getElementById("limpiar2cie10").addEventListener("click", function () {
 document.getElementById("limpiar3cie10").addEventListener("click", function () {
     limpiarCIE10("3");
 });
+
+function obtenerDataIns() {
+    var table = document.getElementById('tablecie10');
+    var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    var datains = [];
+
+    for (var i = 0; i < rows.length; i++) {
+        var input = rows[i].getElementsByTagName('input');
+
+        if (input.length >= 3 && input[1].value.trim() !== '') {
+            var inputcodcie10 = input[1].value;
+            var inputdesccie10 = input[2].value;
+            var inputcomencie10 = input[3].value;
+            var rowData = {
+                diacod: inputcodcie10,
+                diadesc: inputdesccie10,
+                diacomen: inputcomencie10
+            };
+            datains.push(rowData);
+        }
+    }
+
+    return datains;
+}
+

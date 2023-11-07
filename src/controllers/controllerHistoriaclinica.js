@@ -1,4 +1,8 @@
 const { getConnection } = require('../database/conexionsql');
+const sql = require('mssql');
+const fs = require('fs').promises;
+const path = require('path');
+
 
 module.exports = {
     /*****************Pacientes citados*****************/
@@ -49,33 +53,121 @@ module.exports = {
     },
     async postdocumento(req, res) {
         try {
-            const { archivosBase64 } = req.body;
+            const { archivosBase64, cita_id, soexa, codpru_id } = req.body;
             const codrolUser = req.user.codrol;
             const pool = await getConnection();
-            const documento = await pool.query(`pa_InsDocumento '${archivosBase64}','${codrolUser}'`);
+            const newArchivo = {
+                archivosnombre: [],
+                archivosruta: []
+
+            };
+
+            for (const nombreArchivo in archivosBase64) {
+                const base64Data = archivosBase64[nombreArchivo];
+                const imagenBase64SinPrefijo = base64Data.replace(/^data:.*;base64,/, '');
+                const buffer = Buffer.from(imagenBase64SinPrefijo, 'base64');
+
+                // Modificar el nombre del archivo
+                const nombreModificado = `${soexa}_${codpru_id}_${cita_id}.pdf`;
+
+                // Guardar el archivo en el sistema de archivos
+                const rutaArchivo = path.join(__dirname, '..', 'public', 'documentos', nombreModificado);
+                const rutaArchivo1 = `/documentos/${soexa}_${codpru_id}_${cita_id}.pdf`;
+                fs.writeFile(rutaArchivo, buffer, async (err) => {
+                    if (err) {
+                        console.error(`Error al guardar ${nombreModificado}:`, err);
+                    } else {
+                        // Convertir la imagen a formato WebP usando sharp
+                        const rutaSalida = path.join(__dirname, 'ruta-de-salida', 'nombre-de-salida.webp');
+                        await sharp(buffer)
+                            .toFormat('pdf')
+                            .toFile(rutaSalida);
+                    }
+                });
+                newArchivo.archivosnombre.push(nombreArchivo);
+                newArchivo.archivosruta.push(rutaArchivo1);
+            }
+            const archivosnombreSeparadosPorComas = newArchivo.archivosnombre.join(',');
+            const archivosrutaSeparadosPorComas = newArchivo.archivosruta.join(',');
+            const documento = await pool.query(`pa_InsDocumento '${archivosnombreSeparadosPorComas}','${archivosrutaSeparadosPorComas}','${codrolUser}'`);
             res.json(documento.recordset);
         } catch (error) {
             console.error("Error en la función postDocumento:", error);
             res.status(500).json({ error: "Error en el servidor" });
         }
     },
+
+
     async deldocumento(req, res) {
         try {
-            const doc_adic_id = req.body.doc_adic_id;
+            const { doc_adic_id, cita_id, soexa, codpru_id } = req.body;
             const codrolUser = req.user.codrol;
-            console.log(doc_adic_id,codrolUser);
+
+            const nombreModificado = `${soexa}_${codpru_id}_${cita_id}.pdf`;
+            const rutaArchivo = path.join(__dirname, '..', 'public', 'documentos', nombreModificado);
+            fs.unlink(rutaArchivo, async (err) => {
+                if (err) {
+                    console.error(`Error al eliminar el archivo: ${err}`);
+                } else {
+                    console.log(`Archivo eliminado con éxito: ${rutaArchivo}`);
+                }
+            });
             const pool = await getConnection();
             const documento = await pool.query(`pa_DelDocumento '${doc_adic_id}','${codrolUser}'`);
             res.json(documento.recordset);
+
         } catch (error) {
             console.error("Error en la función postDocumento:", error);
             res.status(500).json({ error: "Error en el servidor" });
         }
     },
-
-
-
-
+    async getresultsignosvitales(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResultSignosVitales '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+    async postsignosvitales(req, res) {
+        try {
+            const { cita_id, nuncom, soexa, codpru_id, fc, fr, pa, sato2, peso, talla, imc, peab, temp, datains, doc_adic_id, datainsrec } = req.body;
+            const usenam = req.user.usuario;
+            const hostname = '';
+            const codrol = req.user.codrol;
+            const med_id = req.user.med_id;
+            const detalleJsoncie10 = JSON.stringify(datains);
+            const detalleJsonrecomen = JSON.stringify(datainsrec);
+            console.log(cita_id, nuncom, soexa, codpru_id, med_id, fc, fr, pa, sato2, peso, talla, imc, peab, temp, doc_adic_id, usenam, hostname, codrol, detalleJsoncie10, detalleJsonrecomen);
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_InsPbSignosVitales';
+            request.input('cita_id', sql.Int, cita_id);
+            request.input('nuncom', sql.Int, nuncom);
+            request.input('soexa', sql.VarChar(6), soexa);
+            request.input('codpru_id', sql.Int, codpru_id);
+            request.input('med_id', sql.Int, med_id);
+            request.input('fc', sql.VarChar(20), fc);
+            request.input('fr', sql.VarChar(20), fr);
+            request.input('pa', sql.VarChar(20), pa);
+            request.input('sato2', sql.VarChar(20), sato2);
+            request.input('peso', sql.VarChar(20), peso);
+            request.input('talla', sql.VarChar(20), talla);
+            request.input('imc', sql.VarChar(20), imc);
+            request.input('peab', sql.VarChar(20), peab);
+            request.input('temp', sql.VarChar(20), temp);
+            request.input('doc_adic_id', sql.Int, doc_adic_id);
+            request.input('usenam', sql.VarChar(30), usenam);
+            request.input('hostname', sql.VarChar(20), hostname);
+            request.input('codrol', sql.Int, codrol);
+            request.input('detalleJsoncie10', sql.NVarChar(sql.MAX), detalleJsoncie10);
+            request.input('detalleJsonrecomen', sql.NVarChar(sql.MAX), detalleJsonrecomen);
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
+    },
     /***************************************************/
 
 };

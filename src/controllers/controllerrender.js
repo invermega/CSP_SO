@@ -41,14 +41,18 @@ module.exports = {
         const parametro = "PH";
         permisos(parametro, 'historiaclinica/pacientescitados', req, res)
     },
-    async rendersignosvitales(req, res) {
+    async rendermenuexamenes(req, res) {
         const { soexa, id } = req.params;
         console.log(soexa, id);
-        res.render('historiaclinica/examenes/signosvitales', { id, soexa, layout: false });
+        res.render('historiaclinica/menuexamenes/menuexamenes', { id, soexa, layout: false });
     },
     async rendersignosvitalesprueba(req, res) {
         const parametro = "SG";
         permisosprueba(parametro, 'historiaclinica/pruebas/pbsignosvitales', req, res);
+    },
+    async renderlaboratorioprueba(req, res) {
+        const parametro = "LB";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pblaboratorio', req, res);
     },
 
     //entidades
