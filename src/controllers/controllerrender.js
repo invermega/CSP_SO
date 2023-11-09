@@ -93,11 +93,13 @@ module.exports = {
         const parametro = "CT";
         permisos(parametro,'entidades/citaCreate', req, res,id)
     },
+    /**Medico */
     async renderemedico(req, res) {
         const parametro = "MD";
         permisos(parametro,'entidades/medicos', req,res)
         res.render('entidades/medicos', { layout: false });
     },
+    /**Cliente */
     async rendercliente(req, res) {
         const parametro = "CL";
         permisos(parametro,'entidades/cliente', req,res)

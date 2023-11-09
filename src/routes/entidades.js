@@ -56,9 +56,11 @@ router.delete('/deleteMed',controllerCO.deletemedico);
 
 router.get('/cliente', isLoggedIn, controllerrender.rendercliente);
 router.post('/cliente',isLoggedIn,controllerEN.postcliente);
+router.post('/cliente',controllerCO.postcliente);
 router.get('/listarcliente',isLoggedIn,controllerEN.getcliente);
 router.delete('/deleteCli',isLoggedIn,controllerCO.deletecliente);
 router.delete('/deleteCli',controllerCO.deletecliente);
+
 
 
 

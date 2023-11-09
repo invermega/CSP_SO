@@ -1,6 +1,56 @@
 $(document).ready(function () {
     getPacienteCombos();
+    const canvas = document.getElementById('canvas');
+    const context = canvas.getContext('2d');
+    const originalImage = new Image();
+    let originalImageSrc = '../img/medicos/default.webp'; // Almacena la URL de la imagen original
 
+    originalImage.onload = function () {
+        drawImageOnCanvas(originalImage);
+    };
+    originalImage.src = originalImageSrc; // Utiliza la URL almacenada
+
+    // Función para cargar la imagen en el canvas y mostrarla como círculo
+    function drawImageOnCanvas(image) {
+        const width = 250; // Ancho fijo para el canvas
+        const height = 125; // Altura fija para el canvas
+        context.clearRect(0, 0, width, height);
+        context.save();
+        context.rect(0, 0, width, height);
+        context.clip();
+        context.drawImage(image, 0, 0, width, height);
+        context.restore();
+    }
+
+    function resetCanvasWithImage(imageSrc) {
+        event.preventDefault();
+        const image = new Image();
+        image.onload = function () {
+            drawImageOnCanvas(image);
+            $('#reset-btn').css('display', 'inline-block');
+        };
+        image.src = imageSrc;
+    }
+
+    $('#upload-btn').on('click', function (event) {
+        event.preventDefault();
+        $('#file-input').click();
+    });
+
+    $('#reset-btn').on('click', function (event) {
+        resetCanvasWithImage(originalImageSrc);
+    });
+
+    $('#file-input').on('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                resetCanvasWithImage(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 });
 
 
@@ -10,7 +60,6 @@ function getPacienteCombos() {
         success: function (lista) {
             let docident = $('#docide'); // Selecionar el select de tipo documento
             let espme = $('#esp_id');  // Seleccionar el select de especialidad
-            console.log(lista);
             docident.html('');
             espme.html('');
 
@@ -23,9 +72,7 @@ function getPacienteCombos() {
                 }
             });
             $("#docide").val("01");
-            $('#esp_id').val("1");
-
-            //pais.val('9589');
+            $('#esp_id').val("2");
         },
         error: function () {
             alert('error');
@@ -33,9 +80,7 @@ function getPacienteCombos() {
     });
 }
 
-/*function guardarMedico() {
-    validarFormulario('medcel,medTelfij,med_correo,meddir,med_firma');
-}*/
+
 document.getElementById("medicomodal").addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         var parametro = this.value;
@@ -53,7 +98,6 @@ function getmedico(parametro) {
             parametro: parametro,
         },
         success: function (medicos) {
-            console.log(medicos);
             ocultarDiv('carga');
             mostrarDiv('tablamedicomodal');
             const tbodymed = $('#bodymedicomodal');
@@ -61,7 +105,7 @@ function getmedico(parametro) {
             if (medicos.length === 0) {
                 tbodymed.append(`
                     <tr>
-                        <td colspan="2" class="text-center">No hay resultados disponibles </td>
+                        <td colspan="3" class="text-center">No hay resultados disponibles </td>
                     </tr>
                 `);
             } else {
@@ -72,7 +116,7 @@ function getmedico(parametro) {
                     <td>${medico.nundoc}</td>
                     <td>
                     <button onclick="getmedicom('${medico.medap}','${medico.medam}','${medico.mednam}','${medico.docide}','${medico.nundoc}','${medico.med_cmp}','${medico.med_rne}','${medico.medTelfij}','${medico.medcel}','${medico.med_correo}','${medico.meddir}','${medico.med_firma}','${medico.esp_id}','${medico.usenam}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
-                    <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarMed("${medico.med_id}")><i class="fa-solid fa-trash-can"></i></a>
+                    <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarMed("${medico.nundoc}")><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                   </tr>
           `);
@@ -86,20 +130,20 @@ function getmedico(parametro) {
     });
 }
 
-function eliminarMed() {
+function eliminarMed(dni) {
 
-    med_id = parseInt(med_id);
+    med_id = parseInt(dni);
     $.ajax({
         url: '/deleteMed',
         method: "DELETE",
         data: {
-            med_id: med_id,
+            dni: dni,
         },
-        success: function (user) {
+        success: function (med) {
             $('#modalFormmedico [data-dismiss="modal"]').trigger('click');
             const tbodymed = $('#bodymedicomodal');
             tbodymed.empty();
-            mensaje(user[0].tipo, user[0].response, 1800);
+            mensaje(med[0].tipo, med[0].response, 1800);
         },
         error: function () {
             alert('error');
@@ -111,7 +155,7 @@ function eliminarMed() {
 
 var opc = 0;
 function guardarMedico() {
-
+    const canvas = document.getElementById('canvas');
     let medap = $('#medap');
     let medam = $('#medam');
     let mednam = $('#mednam');
@@ -126,8 +170,7 @@ function guardarMedico() {
     let med_firma = $('#med_firma');
     let esp_id = $('#esp_id');
     let feccre = $('#feccre');
-    console.log(medap, medam, mednam, docide, nundoc, med_cmp, med_rne, medTelfij, medcel, med_correo, meddir, med_firma, esp_id, feccre);
-
+    var picmed = canvas.toDataURL();
     $.ajax({
         url: '/medico',
         method: "POST",
@@ -147,6 +190,7 @@ function guardarMedico() {
             esp_id: esp_id.val(),
             feccre: feccre.val(),
             opc: opc,
+            picmed: picmed,
         },
         success: function (response) {
 
@@ -177,8 +221,20 @@ function getmedicom(medapM, medamM, mednamM, docideM, nundocM, med_cmpM, med_rne
     $('#meddir').val(meddirM);
     //$('#med_firma').val(med_firmaM);
     $('#esp_id').val(esp_idM);
-    //$('#usenam').val(usenamM);
-    //$('#contrasena').val('123456789').prop('disabled', true);
+
+    const canvas = $('#canvas')[0];
+    const image = new Image();
+    const context = canvas.getContext('2d');
+    image.onload = function () {
+        canvas.width = image.width;
+        canvas.height = image.height;
+        context.drawImage(image, 0, 0);
+    };
+    image.src = `./img/medicos/${nundocM}.webp`;
+
+
+
+
     $('#modalFormmedico [data-dismiss="modal"]').trigger('click');
     //$('#iduser').val(0);
 }
