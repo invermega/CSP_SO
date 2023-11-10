@@ -11,7 +11,7 @@ $(document).ready(function () {
     };
     originalImage.src = originalImageSrc; // Utiliza la URL almacenada
 
-    // Función para cargar la imagen en el canvas y mostrarla como círculo
+    // Función para cargar la imagen en el canvas y mostrarla como rectamgulo
     function drawImageOnCanvas(image) {
         const width = 400; // Ancho fijo para el canvas
         const height = 150; // Altura fija para el canvas
@@ -151,7 +151,6 @@ radios.forEach(function (radio) {
 });
 
 function eliminarCli(dni) {
-
     dni = parseInt(dni);
     $.ajax({
         url: '/deleteCli',
@@ -383,7 +382,6 @@ function getclientem(docideM, NumDocM, razsocM, actividad_economicaM, DireccionM
     image.src = `./img/cliente/${NumDocM}.webp`;
 
     $('#modalFormactcliente [data-dismiss="modal"]').trigger('click');
-    //$('#cli_id').val(0);
 }
 
 

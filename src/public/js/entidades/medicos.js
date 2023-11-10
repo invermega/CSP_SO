@@ -156,6 +156,10 @@ function eliminarMed(dni) {
 var opc = 0;
 function guardarMedico() {
     const canvas = document.getElementById('canvas');
+    let camposValidosmed = validarFormulario('file-input,docide,med_cmp,medcel,medTelfij,med_correo,meddir,esp_id,med_rne,medicomodal');
+    if (!camposValidosmed) {
+        return;
+    }
     let medap = $('#medap');
     let medam = $('#medam');
     let mednam = $('#mednam');
@@ -167,7 +171,6 @@ function guardarMedico() {
     let medcel = $('#medcel');
     let med_correo = $('#med_correo');
     let meddir = $('#meddir');
-    let med_firma = $('#med_firma');
     let esp_id = $('#esp_id');
     let feccre = $('#feccre');
     var picmed = canvas.toDataURL();
@@ -186,7 +189,6 @@ function guardarMedico() {
             medcel: medcel.val(),
             med_correo: med_correo.val(),
             meddir: meddir.val(),
-            med_firma: med_firma.val(),
             esp_id: esp_id.val(),
             feccre: feccre.val(),
             opc: opc,
@@ -219,7 +221,6 @@ function getmedicom(medapM, medamM, mednamM, docideM, nundocM, med_cmpM, med_rne
     $('#medcel').val(medcelM);
     $('#med_correo').val(med_correoM);
     $('#meddir').val(meddirM);
-    //$('#med_firma').val(med_firmaM);
     $('#esp_id').val(esp_idM);
 
     const canvas = $('#canvas')[0];
@@ -232,11 +233,7 @@ function getmedicom(medapM, medamM, mednamM, docideM, nundocM, med_cmpM, med_rne
     };
     image.src = `./img/medicos/${nundocM}.webp`;
 
-
-
-
     $('#modalFormmedico [data-dismiss="modal"]').trigger('click');
-    //$('#iduser').val(0);
 }
 
 
