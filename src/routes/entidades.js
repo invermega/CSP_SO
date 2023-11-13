@@ -3,7 +3,7 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 const controllerrender = require("../controllers/controllerrender");
 
-const controllerEn = require("../controllers/controllerEntidades");
+const controllerEn = require("../controllers/controllerentidades");
 
 const { } = require('../lib/permisos');
 
@@ -38,32 +38,31 @@ router.delete('/deletePac',isLoggedIn,controllerEn.deletepaciente);
 /******************************************/
 /*****************Citas*****************/
 router.get('/cita', isLoggedIn, controllerrender.rendercita);
-router.get('/listarCombosCitas', isLoggedIn, controllerEN.getCitasCombos);
-router.get('/listarprotocolo', isLoggedIn, controllerEN.getProtocoloCombos);
-router.post('/cita',isLoggedIn,controllerEN.postcita)
-router.get('/listarcitas', isLoggedIn, controllerEN.getListaCitas);
+router.get('/listarCombosCitas', isLoggedIn, controllerEn.getCitasCombos);
+router.get('/listarprotocolo', isLoggedIn, controllerEn.getProtocoloCombos);
+router.post('/cita',isLoggedIn,controllerEn.postcita)
+router.get('/listarcitas', isLoggedIn, controllerEn.getListaCitas);
 router.get('/citacreate', isLoggedIn, controllerrender.rendercitacreate);
 router.get('/citaedit/:id', isLoggedIn, controllerrender.rendercitaedit);
-router.delete('/citadel',isLoggedIn, controllerEN.delcita);
-router.post('/listarhrc', isLoggedIn, controllerEN.getListaHojaRutaC);
-router.post('/listarhrd', isLoggedIn, controllerEN.getListaHojaRutaD);
-router.post('/listarcinf', isLoggedIn, controllerEN.getListaConsetimientoInf);
-router.get('/listarempresa', isLoggedIn, controllerEN.getempresaCita);
+router.delete('/citadel',isLoggedIn, controllerEn.delcita);
+router.post('/listarhrc', isLoggedIn, controllerEn.getListaHojaRutaC);
+router.post('/listarhrd', isLoggedIn, controllerEn.getListaHojaRutaD);
+router.post('/listarcinf', isLoggedIn, controllerEn.getListaConsetimientoInf);
+router.get('/listarempresa', isLoggedIn, controllerEn.getempresaCita);
 
 /*****************Médico*******************/
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
 router.post('/medico',isLoggedIn,controllerEn.postmedico);
 router.get('/listarmedicos',isLoggedIn,controllerEn.getmedico);
-router.delete('/deleteMed',isLoggedIn,controllerCO.deletemedico);
-router.delete('/deleteMed',controllerCO.deletemedico);
+router.delete('/deleteMed',isLoggedIn,controllerEn.deletemedico);
 
 /****************Cliente******************/
 
 router.get('/cliente', isLoggedIn, controllerrender.rendercliente);
 router.post('/cliente',isLoggedIn,controllerEn.postcliente);
 router.get('/listarcliente',isLoggedIn,controllerEn.getcliente);
-router.delete('/deleteCli',isLoggedIn,controllerCO.deletecliente);
-router.delete('/deleteCli',controllerCO.deletecliente);
+router.delete('/deleteCli',isLoggedIn,controllerEn.deletecliente);
+router.delete('/deleteCli',controllerEn.deletecliente);
 
 
 

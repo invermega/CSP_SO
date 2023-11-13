@@ -196,15 +196,143 @@ module.exports = {
         res.json(response.recordset);
     },
     async postcita(req, res) {//agregar cita
-        const { cli_id, codpro_id,valapt_id, pachis,fecprocitaDate, fecprocitaTime, obscita, cargo_actual, fecing_cargo, area_actual, fecing_area, fecing_empresa, altilab_id, superf_id, tipseg_id, cond_vehiculo, ope_equipo_pesado, envresult_correo, com_info_medica, ent_result_fisico, usa_firma_formatos, res_lugar_trabajo} = req.body;
+        const { inputid, cli_id, codpro_id, valapt_id, pachis, fecprocitaDate, fecprocitaTime, obscita, cargo_actual, fecing_cargo, area_actual, fecing_area, fecing_empresa, altilab_id, superf_id, tipseg_id, cond_vehiculo, ope_equipo_pesado, envresult_correo, com_info_medica, ent_result_fisico, usa_firma_formatos, res_lugar_trabajo } = req.body;
         const usenam = req.user.usuario;
         const hostname = '';
         const codrolUser = req.user.codrol;
 
         const pool = await getConnection();
-        const response = await pool.query(`pa_InsCita '${pachis}', ${valapt_id}, ${cli_id}, ${codpro_id}, '${fecprocitaDate}','${fecprocitaTime}', '${area_actual}', '${fecing_area}', '${cargo_actual}', '${fecing_cargo}', '${fecing_empresa}', '${ope_equipo_pesado}', '${cond_vehiculo}', '${envresult_correo}', '${com_info_medica}', '${ent_result_fisico}', '${usa_firma_formatos}', '${res_lugar_trabajo}', ${altilab_id}, ${superf_id}, ${tipseg_id}, '${obscita}', ${codrolUser}, '${usenam}'`);
+        const response = await pool.query(`pa_InsCita '${pachis}', ${valapt_id}, ${cli_id}, ${codpro_id}, '${fecprocitaDate}','${fecprocitaTime}', '${area_actual}', '${fecing_area}', '${cargo_actual}', '${fecing_cargo}', '${fecing_empresa}', '${ope_equipo_pesado}', '${cond_vehiculo}', '${envresult_correo}', '${com_info_medica}', '${ent_result_fisico}', '${usa_firma_formatos}', '${res_lugar_trabajo}', ${altilab_id}, ${superf_id}, ${tipseg_id}, '${obscita}', ${codrolUser}, '${usenam}', '${inputid}'`);
+        res.json(response.recordset);
+    },
+    async getListaCitas(req, res) {//listar las citas
+        let { fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6 } = req.query;        
+        const codrolUser = req.user.codrol;
+        if (paciente === '') {
+            paciente = '%';
+        }
+        const pool = await getConnection(fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6);
+        const response = await pool.query(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`);
+        res.json(response.recordset);
+    },
+    async delcita(req, res) {
+        try {
+            const seleccionados = req.body;
+            const detalleJson = JSON.stringify(seleccionados);
+            const codrol = req.user.codrol;
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_DelCita';
+            request.input('codrol', sql.Int, codrol);
+            request.input('CitaJson', sql.NVarChar(sql.MAX), detalleJson);   
+            const result = await request.execute(PROCEDURE_NAME);            
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
+    },
+    async getListaHojaRutaC(req, res) {//listar hoja de ruta cabecera
+        let { idcita } = req.body;        
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_SelHojaRuta_Cab ${idcita},${codrolUser}`);
+        res.json(response.recordset);
+    },
+    async getListaHojaRutaD(req, res) {//listar hoja de ruta detalle
+        let { idcita } = req.body;        
+        const pool = await getConnection();
+        const response = await pool.query(`pa_SelHojaRuta_det ${idcita}`);
+        res.json(response.recordset);
+    },      
+    async getempresaCita(req, res) {
+        const empresa = req.query.empresa;
+        const codrol = req.user.codrol;
+        const pool = await getConnection();
+        const empresas = await pool.query(`sp_selCliente '${empresa}','${codrol}'`);
+        res.json(empresas.recordset);
+    },
+    async getListaConsetimientoInf(req, res) {//listar cosentimiento informado
+        let { idcita } = req.body;        
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
         
+        const response = await pool.query(`SET Language 'Spanish';EXEC pa_SelConsentimiento_Inf ${idcita},${codrolUser}`);
         res.json(response.recordset);
     },
     /*************************/
+    /************Examenes*************/
+    async getListaExamenes(req, res) {//listar los examenes        
+        const codrolUser = req.user.codrol;        
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selExamenes '${codrolUser}'`);
+        res.json(response.recordset);
+    },
+    async postExamenes(req, res) {//insertar examenes
+        const { soexa,desexa,ordimp,ordprot,starep,staaddfile,reg_cie10,opc } = req.query;
+        const codrolUser = req.user.codrol;
+        const usenam = req.user.usuario;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_InsExamenes '${soexa}','${desexa}','${ordimp}','${ordprot}','${starep}','${staaddfile}','${reg_cie10}','${codrolUser}','${usenam}','${opc}'`);
+        res.json(response.recordset);
+    },
+    /*************************/
+
+    /************MEDICOS*************/
+
+    async postmedico(req, res) {//agregar medico
+        const { medap, medam, mednam, docide, nundoc, med_cmp, med_rne, medTelfij, medcel, med_correo, meddir, med_firma, esp_id, opc } = req.body;
+        const usenam = req.user.usuario;
+        const hostname = '';
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_InsMedico '${medap.toUpperCase()}',${medam.toUpperCase()},'${mednam.toUpperCase()}','${docide}','${nundoc}','${med_cmp}','${med_rne}',
+        '${medTelfij.trim()}','${medcel}','${med_correo.toUpperCase()}','${meddir}','${med_firma}','${esp_id}','${usenam}','${hostname}','${codrolUser}','${opc}'`);
+
+        res.json(response.recordset);
+    },
+    async getmedico(req, res) {//listar medico para edicion
+        const { parametro } = req.query;
+        const codrolUser = req.user.codrol;
+        console.log(parametro)
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selMedico  '${codrolUser}','${parametro}'`);
+        //console.log(response.recordset);
+        res.json(response.recordset);
+        
+    },
+    async deletemedico(req, res) {//eliminar medico
+        const { med_id } = req.body;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_delMedico '${codrolUser}','${med_id}'`);
+        res.json(response.recordset);
+    },
+    /*************Cliente***************/
+    async postcliente(req, res) {//agregar cliente
+        const { docide, NumDoc, razsoc, actividad_economica,Direccion, logo, contacto, emailcon, celular, telefono, emailmedocu,cadcermed, incfirmmedexa, Incfirpacexa, Inchuepacexa, Incfordatper, incdecjur, Incfirhueforadi, creusucatocu, Encorvctocert, envcorusuexi, creusucatprev, notinfmed_medocu, notinfmedpac, opc } = req.body;
+        const usenam = req.user.usuario;
+        const hostname = '';
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_InsCliente '${razsoc.toUpperCase()}','${docide}','${NumDoc}','${Direccion}','${telefono}','${emailcon}','${contacto}','${celular}','${emailmedocu}','${usenam}','${cadcermed}','${incfirmmedexa}','${Incfirpacexa}','${Inchuepacexa}','${Incfordatper}','${incdecjur}','${Incfirhueforadi}','${creusucatocu}','${Encorvctocert}','${envcorusuexi}','${creusucatprev}','${notinfmed_medocu}','${notinfmedpac}','${actividad_economica}','${logo}','${codrolUser}','${opc}'`);
+
+        res.json(response.recordset);
+    },
+    async getcliente(req, res) {//listar cliente para edicion
+        const { parametro } = req.query;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selCliente  '${codrolUser}','${parametro}'`);
+        //console.log(response.recordset);
+        res.json(response.recordset);
+    },
+    async deletecliente(req, res) {//eliminar cliente
+        const { cli_id } = req.body;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_delCliente '${codrolUser}','${cli_id}'`);
+        res.json(response.recordset);
+    },
 };
