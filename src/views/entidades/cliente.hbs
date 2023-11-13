@@ -1,0 +1,382 @@
+<div>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4 tituloverde">Entidades</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Clientes</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="left-content">
+                    <i class="fas fa-table me-1"></i>
+                    Ingrese un nuevo usuario al sistema
+                </div>
+                <div>
+                    <button class="btn position-relative" onclick="limpiarinputs();limpiarinputsradio()"
+                        style="background-color: #793B8E;color: white;border-color: #793B8E;">
+                        <i class="fa-solid fa-plus"></i>
+                        Nuevo
+                    </button>
+                    <button class="btn position-relative" id="btneditarusu" data-toggle="modal"
+                        data-target="#modalFormactcliente"
+                        style="background-color: #793B8E;color: white;border-color: #793B8E;">
+                        <i class="fa-solid fa-plus"></i>
+                        Editar usuario
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid body1">
+                    <form id="formcliente" class="needs-validation" novalidate>
+                        <div class="row">
+
+                            <div class="col-md-6 border-right">
+                                <div class="p-3 py-6">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 class="text-right">Datos del Cliente</h4>
+                                    </div>
+
+                                    <div>
+                                        <input type="hidden" id="cli_id" value="0">
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-3">
+                                            <label class="labels" for="docide">Tipo de documento</label>
+                                            <select class="form-select form-control form-control-sm" id="docide"
+                                                aria-label="Default select example" required>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-4"><label class="labels" for="NumDoc">N° de
+                                                documento</label><input type="text" id="NumDoc"
+                                                class="form-control btn-sm" placeholder="Número de documento" value=""
+                                                required>
+                                            <div class="invalid-feedback">Este campo es obligatorio</div>
+                                        </div>
+
+
+                                        <div class="col-md-5">
+                                            <label class="labels" for="razsoc">Razon Social</label><input type="text"
+                                                class="form-control form-control-sm" value="" id="razsoc"
+                                                placeholder="Ingrese razon social" required>
+                                            <div class="invalid-feedback">Este campo es obligatorio</div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label class="labels" for="actividad_economica">Actividad
+                                                Economica</label><input type="text" class="form-control form-control-sm"
+                                                value="" id="actividad_economica" placeholder="Ingrese razon social"
+                                                required>
+                                            <div class="invalid-feedback">Este campo es obligatorio</div>
+                                        </div>
+                                        <div class="col-md-6"><label class="labels"
+                                                for="Direccion">Dirección</label><input type="text"
+                                                class="form-control btn-sm" id="Direccion" value=""
+                                                placeholder="Dirección" required>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="labels" for="logo">Logo</label>
+                                            <input type="file" class="form-select form-control form-control-sm"
+                                                id="logo">
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="row mt-2">
+
+                                        <div class="row mt-2">
+
+
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="text-right">Datos de Contacto</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <div class="col-md-10"><label class="labels"
+                                                for="contacto">Contacto</label><input type="text" id="contacto"
+                                                class="form-control btn-sm" placeholder="Contacto">
+                                        </div>
+
+                                        <div class="col-md-8"><label class="labels" for="emailcon">Correo</label><input
+                                                type="text" id="emailcon" class="form-control btn-sm"
+                                                placeholder="correo@ejemplo.com">
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-5"><label class="labels" for="celular">Celular</label><input
+                                                type="text" id="celular" class="form-control btn-sm" value=""
+                                                placeholder="Número de celular">
+                                        </div>
+
+                                        <div class="col-md-5"><label class="labels"
+                                                for="telefono">Telefono</label><input type="text" id="telefono"
+                                                class="form-control btn-sm" placeholder="Telefono fijo">
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row mt-3">
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <h4 class="text-right">Datos del Médico</h4>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-2">
+                                        <!--<div class="col-md-10"><label class="labels"
+                                                for="contacto">Contacto</label><input type="text" id="contacto"
+                                                class="form-control btn-sm" placeholder="Contacto">
+                                        </div>-->
+
+                                        <div class="col-md-8"><label class="labels"
+                                                for="emailmedocu">Correo</label><input type="text" id="emailmedocu"
+                                                class="form-control btn-sm" placeholder="correo@ejemplo.com">
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-2">
+                                        <!--<div class="col-md-5"><label class="labels" for="celular">Celular</label><input
+                                                type="text" id="celular" class="form-control btn-sm" value=""
+                                                placeholder="Número de celular"
+                                                oninput="limitarCaracteresNumericos(this, 9)">
+                                        </div>-->
+
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="p-3 py-6">
+                                    <div class="row">
+
+
+
+
+                                        <div class="col-md-6 border-right">
+
+
+                                            <label for="cadcermed">¿Mostrar fecha de caducidad en certificado
+                                                médico?</label><br>
+                                            <label><input type="radio" name="respuesta1" value="S" id="cadcermed">
+                                            <label for="cadcermed">Sí</label><br>
+                                            <input type="radio" name="respuesta1" value="N" id="cadcermed">
+                                            <label for="cadcermed">No</label><br>
+
+                                            <label for="incfirmmedexa">¿Incluir firma del médico en los
+                                                examenes?</label><br>
+                                            <input type="radio" name="respuesta2" value="S" id="incfirmmedexa">
+                                            <label for="incfirmmedexa">Sí</label><br>
+                                            <input type="radio" name="respuesta2" value="N" id="incfirmmedexa">
+                                            <label for="incfirmmedexa">No</label><br>
+
+                                            <label for="Incfirpacexa">¿Incluir firma del paciente en los
+                                                examenes?</label><br>
+                                            <input type="radio" name="respuesta3" value="S" id="Incfirpacexa">
+                                            <label for="Incfirpacexa">Sí</label><br>
+                                            <input type="radio" name="respuesta3" value="N" id="Incfirpacexa">
+                                            <label for="Incfirpacexa">No</label><br>
+
+                                            <label for="Inchuepacexa">¿Incluir Huella del paciente en los
+                                                examenes?</label><br>
+                                            <input type="radio" name="respuesta31" value="S" id="Inchuepacexa">
+                                            <label for="Inchuepacexa">Sí</label><br>
+                                            <input type="radio" name="respuesta31" value="N" id="Inchuepacexa">
+                                            <label for="Inchuepacexa">No</label><br>
+
+                                            <label for="incfordatper">¿Incluir formatos de datos personales?</label><br>
+                                            <input type="radio" name="respuesta4" value="S" id="incfordatper">
+                                            <label for="incfordatper">Sí</label><br>
+                                            <input type="radio" name="respuesta4" value="N" id="incfordatper">
+                                            <label for="incfordatper">No</label><br>
+
+                                            <label for="incdecjur">¿Incluir Declaración Jurada?</label><br>
+                                            <input type="radio" name="respuesta5" value="S" id="incdecjur">
+                                            <label for="incdecjur">Sí</label><br>
+                                            <input type="radio" name="respuesta5" value="N" id="incdecjur">
+                                            <label for="incdecjur">No</label><br>
+
+
+                                            <label for="incfirhueforadi">¿Incluir firma y huella en formatos
+                                                adicionales?</label><br>
+                                            <input type="radio" name="respuesta6" value="S" id="incfirhueforadi">
+                                            <label for="incfirhueforadi">Sí</label><br>
+                                            <input type="radio" name="respuesta6" value="N" id="incfirhueforadi">
+                                            <label for="incfirhueforadi">No</label><br>
+
+                                            <label for="creusucatocu">¿Crear usuarios para catgoria
+                                                ocupacional?</label><br>
+                                            <input type="radio" name="respuesta7" value="S" id="creusucatocu">
+                                            <label for="creusucatocu">Sí</label><br>
+                                            <input type="radio" name="respuesta7" value="N" id="creusucatocu">
+                                            <label for="creusucatocu">No</label><br>
+
+
+
+
+                                        </div>
+
+
+                                        <div class="col-md-6">
+
+                                            <label for="Encorvctocert">¿Enviar correo recordatorio de vencimiento de
+                                                certificado?</label><br>
+                                            <input type="radio" name="respuesta71" value="S" id="Encorvctocert">
+                                            <label for="Encorvctocert">Sí</label><br>
+                                            <input type="radio" name="respuesta71" value="N" id="Encorvctocert">
+                                            <label for="Encorvctocert">No</label><br>
+
+                                            <label for="encorvusuexi">¿Enviar correo recordatorio a usuario
+                                                existente?</label><br>
+                                            <input type="radio" name="respuesta8" value="S" id="encorvusuexi">
+                                            <label for="encorvusuexi">Sí</label><br>
+                                            <input type="radio" name="respuesta8" value="N" id="encorvusuexi">
+                                            <label for="encorvusuexi">No</label><br>
+
+                                            <label for="creusucatprev">¿Crear usuarios para catgoria
+                                                preventivo?</label><br>
+                                            <input type="radio" name="respuesta9" value="S" id="creusucatprev">
+                                            <label for="creusucatprev">Sí</label><br>
+                                            <input type="radio" name="respuesta9" value="N" id="creusucatprev">
+                                            <label for="creusucatprev">No</label><br>
+
+
+
+                                            <label for="notinfmed_medocu">¿Notificar Informe médico al Médico
+                                                Ocupacional?</label><br>
+                                            <input type="radio" name="respuesta10" value="S" id="notinfmed_medocu">
+                                            <label for="notinfmed_medocu">Sí</label><br>
+                                            <input type="radio" name="respuesta10" value="N" id="notinfmed_medocu">
+                                            <label for="notinfmed_medocu">No</label><br>
+
+
+                                            <label for="notinfmedpac">¿Notificar Informe médico al paciente?</label><br>
+                                            <input type="radio" name="respuesta11" value="S" id="notinfmedpac">
+                                            <label for="notinfmedpac">Sí</label><br>
+                                            <input type="radio" name="respuesta11" value="N" id="notinfmedpac">
+                                            <label for="notinfmedpac">No</label><br>
+                                            <!--
+                                            <label for="tiemcadcertapti">¿Tiempo de caducidad del certificado médico
+                                                aptitud?</label><br>
+                                            <input type="radio" name="respuesta12" value="S" id="tiemcadcertapti">
+                                            <label for="tiemcadcertapti">Sí</label><br>
+                                            <input type="radio" name="respuesta12" value="N" id="tiemcadcertapti">
+                                            <label for="tiemcadcertapti">No</label><br>
+
+
+                                            <label for="tiemcadotroexa">¿Tiempo de caducidad de otro examen?</label><br>
+                                            <input type="radio" name="respuesta13" value="si" id="tiemcadotroexa">
+                                            <label for="tiemcadotroexa">Sí</label><br>
+                                            <input type="radio" name="respuesta13" value="no" id="tiemcadotroexa">
+                                            <label for="tiemcadotroexa">No</label>
+                                                -->
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+                                </div>
+
+                            </div>
+                            <div class="mt-5 text-center"><button class="btn btn2" type="button"
+                                    onclick="guardarcliente()" id="btn">
+                                    <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
+                                </button>
+                            </div>
+                    </form>
+                </div>
+
+                <!--MODAL CLIENTE-->
+
+                <div class="modal fade" id="modalFormactcliente" role="dialog">
+                    <div class="modal-dialog ">
+                        <div class="modal-content">
+                            <div class="modal-header"
+                                style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE
+                                    CLIENTES</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group input-group-sm" style="width: 100%;">
+                                    <label class="control-label input-group-text" for="clientemodal">CLIENTES</label>
+                                    <input class="form-control form-control-sm " id="clientemodal"
+                                        placeholder="Ingrese número de documento" required></input>
+                                    <label class="input-group-text form-control-sm"><i
+                                            class="fa-solid fa-magnifying-glass"></i></label>
+                                </div>
+                                <div class="row mb-2 mt-2">
+                                    <div class="table-responsive">
+                                        <table
+                                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                            id="tablaclientemodal" style="display: none;">
+                                            <thead class="thead">
+                                                <tr>
+                                                    <th scope="col">RAZON SOCIAL</th>
+                                                    <th scope="col">DIRECCION</th>
+                                                    <th scope="col">NUMERO DE DOCUMENTO</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="bodycliente">
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <div class="text-center" id="carga" style="display: none;">
+                                        <div class="d-flex justify-content-center align-items-center"
+                                            style="min-height: 5vh;">
+                                            <lottie-player
+                                                src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                                background="transparent" speed="1" style="width: 300px; height: 300px;"
+                                                loop autoplay></lottie-player>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn"
+                                        style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                        id="cerrar" data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
+                                        Cerrar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Scripts-->
+    <script src="/js/entidades/cliente.js"> </script>

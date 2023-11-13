@@ -1,233 +1,279 @@
-<div>
-    <div class="container-fluid px-4">
-        <h1 class="mt-4 tituloverde">Opciones de sistema</h1>
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-            <li class="breadcrumb-item active">Nuevo usuario</li>
-        </ol>
-        <div class="card mb-4">
-            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-                <div class="left-content">
-                    <i class="fas fa-table me-1"></i>
-                    Ingrese un nuevo usuario al sistema
-                </div>
-                <div>
-                    <button class="btn position-relative" onclick="limpiarinputs();activarCampo();" style="background-color: #793B8E;color: white;border-color: #793B8E;">
-                        <i class="fa-solid fa-plus"></i>
-                        Nuevo
-                    </button>
-                    <button class="btn position-relative" id="btneditarusu" data-toggle="modal"
-                        data-target="#modalFormusuario" style="background-color: #793B8E;color: white;border-color: #793B8E;">
-                        <i class="fa-solid fa-plus"></i>
-                        Editar usuario
-                    </button>
-                </div>
+<div class="container-fluid px-4">
+    <h1 class="mt-4 tituloverde">Opciones de sistema</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active">Nuevo usuario</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="left-content">
+                <i class="fas fa-table me-1"></i>
+                Ingrese un nuevo usuario al sistema
             </div>
-            <div class="card-body">
-                <div class="container-fluid body1">
-                    <form id="formusuarios" class="needs-validation" novalidate>
-                        <div class="row">
-                            <style>
-                                canvas {
-                                    max-width: 100%;
-                                    width: 300px;
-                                    height: 300px;
-                                }
-                            </style>
-                            <div class="col-md-3 border-right">
-                                <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                                    <h4 class="text-right">Foto</h4>
-                                    <canvas id="canvas" width="300" height="300" class="circle-canvas mb-3"
-                                        required></canvas>
-                                    <div class="button-container">
-                                        <input type="file" id="file-input" style="display: none;">
-                                        <button id="reset-btn" class="btn btn4"
-                                            style="background-color: #793B8E;color: white;border-color: #793B8E;"><i
-                                                class="fa-solid fa-circle-xmark"></i></button>
-                                        <button id="upload-btn" class="btn btn4"
-                                            style="background-color: #793B8E;color: white;border-color: #793B8E;"><i
-                                                class="fa-solid fa-upload"></i></button>
-                                    </div>
+            <div>
+                <button class="btn position-relative" onclick="limpiarImputUser();activarCampo();"
+                    style="background-color: #793B8E;color: white;border-color: #793B8E;">
+                    <i class="fa-solid fa-plus"></i>
+                    Nuevo
+                </button>
+                <button class="btn position-relative" id="btneditarusu" data-toggle="modal"
+                    data-target="#modalFormusuario"
+                    style="background-color: #793B8E;color: white;border-color: #793B8E;">
+                    <i class="fa-solid fa-plus"></i>
+                    Editar usuario
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="container-fluid body1">
+                <form id="formusuarios" class="needs-validation" novalidate>
+                    <div class="row">
+                        <style>
+                            canvas {
+                                max-width: 100%;
+                                width: 300px;
+                                height: 300px;
+                            }
+                        </style>
+                        <div class="col-md-3 border-right">
+                            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                                <h4 class="text-right">Foto</h4>
+                                <canvas id="canvas" width="300" height="300" class="circle-canvas mb-3"
+                                    required></canvas>
+                                <div class="button-container">
+                                    <input type="file" id="file-input" style="display: none;">
+                                    <button id="reset-btn" class="btn btn4"
+                                        style="background-color: #793B8E;color: white;border-color: #793B8E;"><i
+                                            class="fa-solid fa-circle-xmark"></i></button>
+                                    <button id="upload-btn" class="btn btn4"
+                                        style="background-color: #793B8E;color: white;border-color: #793B8E;"><i
+                                            class="fa-solid fa-upload"></i></button>
                                 </div>
-                            </div>
-                            <div class="col-md-8 border-right">
-                                <div class="p-3 py-5">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="text-right">Datos del usuario</h4>
-                                    </div>
-                                    <div>
-                                        <input type="hidden" id="iduser" value="0">
-                                    </div>
-
-                                    <div class="row mt-2">
-                                        <div class="col-md-6"><label for="usuario" class="labels">Usuario</label><input
-                                                type="text" class="form-control form-control-sm"
-                                                placeholder="Ingrese usuario" id="usuario" value="" required></div>
-                                        <div class="col-md-6"><label class="labels"
-                                                for="contrasena">Contraseña</label><input type="password"
-                                                class="form-control form-control-sm" value="" id="contrasena"
-                                                placeholder="Ingrese contraseña" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-2">
-                                        <div class="col-md-6"><label for="Nombres" class="labels">Nombres</label><input
-                                                type="text" class="form-control form-control-sm"
-                                                placeholder="Ingrese nombres" id="Nombres" value="" required></div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label class="labels" for="app">Apellido paterno</label><input
-                                                        type="text" class="form-control form-control-sm" value=""
-                                                        id="app" placeholder="Ingrese apellido paterno" required>
-
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="labels" for="apm">Apellido materno</label><input
-                                                        type="text" class="form-control form-control-sm" value=""
-                                                        id="apm" placeholder="Ingrese apellido materno" required>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-2">
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-4"><label class="labels"
-                                                        for="DNI">Documento(DNI)</label><input type="text" id="DNI"
-                                                        class="form-control btn-sm" placeholder="Número de documento"
-                                                        oninput="limitarCaracteresNumericos(this, 9)" required></div>
-                                                <div class="col-md-4"><label class="labels"
-                                                        for="celular">Celular</label><input type="text" id="celular"
-                                                        class="form-control btn-sm"
-                                                        oninput="limitarCaracteresNumericos(this, 9)"
-                                                        placeholder="Teléfono">
-                                                </div>
-                                                <div class="col-md-4"><label class="labels" for="fecnac">Fecha de
-                                                        nacimiento</label><input type="date" class="form-control btn-sm"
-                                                        id="fecnac" min="1900-01-01" max="2100-12-31" step="1" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-6"><label class="labels"
-                                                        for="correo">Email</label><input type="email"
-                                                        class="form-control btn-sm" id="correo" name="correo"
-                                                        placeholder="correo@ejemplo.com" required>
-                                                </div>
-                                                <div class="col-md-6"><label class="labels"
-                                                        for="direccion">Dirección</label><input type="text"
-                                                        id="direccion" class="form-control btn-sm"
-                                                        placeholder="Dirección">
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label class="control-label">Rol:</label>
-                                                    <select class="form-select form-control form-control-sm" id="codrol"
-                                                        aria-label="Default select example" required>
-                                                        <option value="M">MASCULINO</option>
-                                                    </select>
-                                                    <div class="invalid-feedback">Este campo es obligatorio</div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="labels" for="sexo">Sexo</label><select
-                                                        class="form-select form-control form-control-sm" id="sexo"
-                                                        aria-label="Default select example" required>
-                                                        <option value="M">MASCULINO</option>
-                                                        <option value="F">FEMENINO</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="mt-5 text-center"><button class="btn btn2" type="button"
-                                                onclick="guardarusuario()" id="btnUsuario">
-                                                <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-
-
                             </div>
                         </div>
-
-                    </form>
-                </div>
-                <!--MODAL Editar usuario-->
-                <div class="modal fade" id="modalFormusuario" role="dialog">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header"
-                                style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
-                                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE CLIENTE</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="input-group input-group-sm" style="width: 100%;">
-                                    <label class="control-label input-group-text" for="clientemodal">USUARIO</label>
-                                    <input class="form-control form-control-sm " id="clientemodal"
-                                        placeholder="Ingrese los nombres o el DNI del usuario" required></input>
-                                    <label class="input-group-text form-control-sm"><i
-                                            class="fa-solid fa-user"></i></label>
+                        <div class="col-md-8 border-right">
+                            <div class="p-3 py-5">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="text-right">Datos del usuario</h4>
                                 </div>
-                                <!--<div class="row mb-2">
-                                    <label class="col-sm-3 col-form-label" for="clientemodal">BUSCAR: </label>
-                                    <div class="col-sm-9">
-                                        <input class="form-control obs" id="clientemodal"
-                                            placeholder="Ingrese los nombres o el DNI del usuario" required></input>
-                                    </div>
-                                </div>-->
-                                <div class="row mb-2 mt-2">
-                                    <div class="table-responsive">
-                                        <table
-                                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
-                                            id="tablaususuariomodal" style="display: none;">
-                                            <thead class="thead">
-                                                <tr>
 
-                                                    <th scope="col">NOMBRES Y APELLIDOS</th>
-                                                    <th scope="col">DNI</th>
-                                                    <th scope="col">USUARIO</th>
-                                                    <th scope="col">ACCIONES</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="bodyususuariomodal">
-                                            </tbody>
-                                        </table>
-
+                                <div class="row mt-2">
+                                    <input type="hidden" id="iduser" name="iduser" value="0">
+                                    <div class="col-md-6"><label for="usuario" class="labels">Usuario</label><input
+                                            type="text" class="form-control form-control-sm"
+                                            placeholder="Ingrese usuario" id="usuario" value="" required></div>
+                                    <div class="col-md-6"><label class="labels"
+                                            for="contrasena">Contraseña</label><input type="password"
+                                            class="form-control form-control-sm" value="" id="contrasena"
+                                            placeholder="Ingrese contraseña" required>
                                     </div>
-                                    <div class="text-center" id="carga" style="display: none;">
-                                        <div class="d-flex justify-content-center align-items-center"
-                                            style="min-height: 5vh;">
-                                            <lottie-player
-                                                src="../img/jsonimg/Cargahealth.json"
-                                                background="transparent" speed="1" style="width: 300px; height: 300px;"
-                                                loop autoplay></lottie-player>
+                                </div>
+
+                                <div class="row mt-2">
+                                    <div class="col-md-6"><label for="Nombres" class="labels">Nombres</label><input
+                                            type="text" class="form-control form-control-sm"
+                                            placeholder="Ingrese nombres" id="Nombres" value="" required></div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class="labels" for="app">Apellido paterno</label><input
+                                                    type="text" class="form-control form-control-sm" value="" id="app"
+                                                    placeholder="Ingrese apellido paterno" required>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="labels" for="apm">Apellido materno</label><input
+                                                    type="text" class="form-control form-control-sm" value="" id="apm"
+                                                    placeholder="Ingrese apellido materno" required>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn"
-                                        style="background-color: #793B8E;color: white;border-color: #793B8E;"
-                                        id="cerrarcliente" data-dismiss="modal"> <i
-                                            class="fa-solid fa-circle-xmark"></i>
-                                        Cerrar</button>
+
+                                <div class="row mt-2">
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-4"><label class="labels"
+                                                    for="DNI">Documento(DNI)</label><input type="text" id="DNI"
+                                                    class="form-control btn-sm" placeholder="Número de documento"
+                                                    oninput="limitarCaracteresNumericos(this, 9)" required></div>
+                                            <div class="col-md-4"><label class="labels"
+                                                    for="celular">Celular</label><input type="text" id="celular"
+                                                    class="form-control btn-sm"
+                                                    oninput="limitarCaracteresNumericos(this, 9)"
+                                                    placeholder="Teléfono">
+                                            </div>
+                                            <div class="col-md-4"><label class="labels" for="fecnac">Fecha de
+                                                    nacimiento</label><input type="date" class="form-control btn-sm"
+                                                    id="fecnac" min="1900-01-01" max="2100-12-31" step="1" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-6"><label class="labels" for="correo">Email</label><input
+                                                    type="email" class="form-control btn-sm" id="correo" name="correo"
+                                                    placeholder="correo@ejemplo.com" required>
+                                            </div>
+                                            <div class="col-md-6"><label class="labels"
+                                                    for="direccion">Dirección</label><input type="text" id="direccion"
+                                                    class="form-control btn-sm" placeholder="Dirección">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">Rol:</label>
+                                                <select class="form-select form-control form-control-sm" id="codrol"
+                                                    aria-label="Default select example" required>
+                                                    <option value="M">MASCULINO</option>
+                                                </select>
+                                                <div class="invalid-feedback">Este campo es obligatorio</div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label class="labels" for="sexo">Sexo</label><select
+                                                    class="form-select form-control form-control-sm" id="sexo"
+                                                    aria-label="Default select example" required>
+                                                    <option value="M">MASCULINO</option>
+                                                    <option value="F">FEMENINO</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-4 form-inline col-sm-12 form-group ">
+                                                <label class="labels mb-2" for="medapmn">Médico</label>
+                                                <div class="input-group input-group-sm" style="width: 100%;">
+                                                    <input type="hidden" id="med_id" value="0">
+                                                    <input type="text" id="medapmn" class="form-control form-control-sm"
+                                                        placeholder="Nombre del médico" aria-label="medapmn" disabled>
+                                                    <button type="button" class="btn input-group-text"
+                                                        data-toggle="modal" data-target="#modalFormmedico">
+                                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 text-center"><button class="btn btn2" type="button"
+                                            onclick="guardarusuario()" id="btnUsuario">
+                                            <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
+
 
                         </div>
                     </div>
-                </div>
+
+                </form>
             </div>
+
         </div>
     </div>
+</div>
+<!--MODAL Editar usuario-->
+<div class="modal fade" id="modalFormusuario" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE USUARIO</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group input-group-sm" style="width: 100%;">
+                    <label class="control-label input-group-text" for="usuariomodal">USUARIO</label>
+                    <input class="form-control form-control-sm " id="usuariomodal"
+                        placeholder="Ingrese los nombres o el DNI del usuario" required></input>
+                    <label class="input-group-text form-control-sm"><i class="fa-solid fa-user"></i></label>
+                </div>
+                <div class="row mb-2 mt-2">
+                    <div class="table-responsive">
+                        <table
+                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                            id="tablaususuariomodal" style="display: none;">
+                            <thead class="thead">
+                                <tr>
+                                    <th scope="col">NOMBRES Y APELLIDOS</th>
+                                    <th scope="col">DNI</th>
+                                    <th scope="col">USUARIO</th>
+                                    <th scope="col">ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyususuariomodal">
+                            </tbody>
+                        </table>
 
-    <!--Scripts-->
-    <script src="/js/configuracion/usuarios.js"> </script>
+                    </div>
+                    <div class="text-center" id="carga" style="display: none;">
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                            <lottie-player src="../img/jsonimg/Cargahealth.json" background="transparent" speed="1"
+                                style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn"
+                        style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrarusuariomodal"
+                        data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
+                        Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--MODAL MEDICO-->
+<div class="modal fade" id="modalFormmedico" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE MÉDICO</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group input-group-sm" style="width: 100%;">
+                    <label class="control-label input-group-text" for="medicomodal">Médico</label>
+                    <input class="form-control form-control-sm " id="medicomodal"
+                        placeholder="Ingrese los nombres o el DNI del médico" required></input>
+                    <label class="input-group-text form-control-sm"><i class="fa-solid fa-user"></i></label>
+                </div>
+                <div class="row mb-2 mt-2">
+                    <div class="table-responsive">
+                        <table
+                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                            id="tablamedicomodal" style="display: none;">
+                            <thead class="thead">
+                                <tr>
+                                    <th scope="col">ACCIONES</th>
+                                    <th scope="col">APELLIDOS Y NOMBRES</th>
+                                    <th scope="col">DNI</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody id="bodymedicomodal">
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="text-center" id="cargamedico" style="display: none;">
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                background="transparent" speed="1" style="width: 300px; height: 300px;" loop
+                                autoplay></lottie-player>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn"
+                        style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrarmedicomodal"
+                        data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
+                        Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--Scripts-->
+<script src="/js/configuracion/usuarios.js"> </script>
