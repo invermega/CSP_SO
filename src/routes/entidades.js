@@ -38,17 +38,17 @@ router.delete('/deletePac',isLoggedIn,controllerEn.deletepaciente);
 /******************************************/
 /*****************Citas*****************/
 router.get('/cita', isLoggedIn, controllerrender.rendercita);
-router.get('/listarCombosCitas', isLoggedIn, controllerEn.getCitasCombos);
-router.get('/listarprotocolo', isLoggedIn, controllerEn.getProtocoloCombos);
-router.post('/cita',isLoggedIn,controllerEn.postcita)
-router.get('/listarcitas', isLoggedIn, controllerEn.getListaCitas);
+router.get('/listarCombosCitas', isLoggedIn, controllerEN.getCitasCombos);
+router.get('/listarprotocolo', isLoggedIn, controllerEN.getProtocoloCombos);
+router.post('/cita',isLoggedIn,controllerEN.postcita)
+router.get('/listarcitas', isLoggedIn, controllerEN.getListaCitas);
 router.get('/citacreate', isLoggedIn, controllerrender.rendercitacreate);
 router.get('/citaedit/:id', isLoggedIn, controllerrender.rendercitaedit);
-router.delete('/citadel',isLoggedIn, controllerEn.delcita);
-router.post('/listarhrc', isLoggedIn, controllerEn.getListaHojaRutaC);
-router.post('/listarhrd', isLoggedIn, controllerEn.getListaHojaRutaD);
-router.post('/listarcinf', isLoggedIn, controllerEn.getListaConsetimientoInf);
-router.get('/listarempresa', isLoggedIn, controllerEn.getempresaCita);
+router.delete('/citadel',isLoggedIn, controllerEN.delcita);
+router.post('/listarhrc', isLoggedIn, controllerEN.getListaHojaRutaC);
+router.post('/listarhrd', isLoggedIn, controllerEN.getListaHojaRutaD);
+router.post('/listarcinf', isLoggedIn, controllerEN.getListaConsetimientoInf);
+router.get('/listarempresa', isLoggedIn, controllerEN.getempresaCita);
 
 /*****************Médico*******************/
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
