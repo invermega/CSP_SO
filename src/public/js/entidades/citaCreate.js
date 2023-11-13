@@ -310,7 +310,9 @@ function guardarCita() {
     let ent_result_fisico = document.querySelector("input[name='ent_result_fisico']:checked").value;
     let usa_firma_formatos = document.querySelector("input[name='usa_firma_formatos']:checked").value;
     let res_lugar_trabajo = document.querySelector("input[name='res_lugar_trabajo']:checked").value;
-    validarFormulario('empresamodal,pacientemodal,obscita');
+    const validarFormulario1= validarFormulario('empresamodal,pacientemodal,obscita');
+    if (!validarFormulario1) {
+        mensaje('error', 'Complete los campos requeridos, porfavor', 1500);
     if (validarFormulario) {
         mensaje('error', 'Complete los campos requeridos, porfavor', 1500);
         return;
