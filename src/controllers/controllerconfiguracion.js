@@ -129,7 +129,6 @@ module.exports = {
         const response = await pool.query(`sp_editPassUser '${codrolUser}','${iduser}','${passencrypt}'`);
         res.json(response.recordset);
     }
-
     /************Medico*************/
 
 

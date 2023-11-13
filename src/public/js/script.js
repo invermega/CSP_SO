@@ -555,6 +555,49 @@ function validarFormulario2(incluirIds) {
   }
   return camposValidos;
 }
+
+
+function horatime(input) {
+  var horaActual = new Date().toLocaleTimeString(navigator.language, {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+  document.getElementById(input).value = horaActual;
+}
+
+function validarNumeroDecimal(input) {
+  const inputValue = input.value;
+  if (!/^-?\d*\.?\d*$/.test(inputValue)) {
+      input.value = inputValue.slice(0, -1);
+  }
+}
+
+function resultcrearMiniatura(ruta, nombreArchivo) {
+  const miniaturasDiv = document.getElementById("miniaturas");
+  const btnSubir = document.getElementById('btnSubir');
+  const fileInput = document.getElementById('archivos');
+  const btnEliminar = document.getElementById('btnEliminar');
+  miniaturasDiv.style.display="block";
+  btnSubir.disabled=true;
+  fileInput.disabled=true;
+  btnEliminar.disabled=false;
+
+  const miniaturaDiv = document.createElement("div");
+  miniaturaDiv.className = "archivo-item";
+
+  const pdfIcon = document.createElement("a");
+  pdfIcon.href = `${window.location.origin}${ruta}`;
+  pdfIcon.target = "_blank"; // Abrir el enlace en una nueva pestaña
+  pdfIcon.innerHTML = `<img src="/img/pdficono.webp" width="90" height="90">`;
+  miniaturaDiv.appendChild(pdfIcon);
+
+  const nombreArchivoParrafo = document.createElement("p");
+  nombreArchivoParrafo.textContent = nombreArchivo;
+  miniaturaDiv.appendChild(nombreArchivoParrafo);
+
+  miniaturasDiv.appendChild(miniaturaDiv);
+}
+
 function validarInputs(ids) {
   var idsArray = ids.split(',');
   var camposInvalidos = false;

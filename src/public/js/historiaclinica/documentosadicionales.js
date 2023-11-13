@@ -75,35 +75,45 @@ function SubirDocumento() {
         const response = await fetch(url);
         const blob = await response.blob();
         return new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => resolve(reader.result);
-            reader.onerror = reject;
-            reader.readAsDataURL(blob);
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
         });
-    }
+      }
 
     // Almacenar los archivos en un objeto
     const archivosBase64 = {};
+    let cita_id = document.getElementById('id').value;
+    let soexa = document.getElementById('soexa').value;
+    let codpru_id = document.getElementById('codpru_id').value;
 
     (async () => {
         for (const archivoItem of archivoItems) {
             const enlace = archivoItem.querySelector("a");
             const url = enlace.getAttribute("href");
             const nombreArchivo = archivoItem.querySelector("p").textContent;
-
+  
             try {
-                const base64Data = await urlToBase64(url);
-                archivosBase64[nombreArchivo] = base64Data;
+              const base64Data = await urlToBase64(url);
+              archivosBase64[nombreArchivo] = base64Data;
             } catch (error) {
-                console.error(`Error al convertir ${nombreArchivo} a Base64:`, error);
+              console.error(`Error al convertir ${nombreArchivo} a Base64:`, error);
             }
-        }
+          }
+
+        console.log(archivosBase64);
+        const datosAEnviar = {
+            cita_id:cita_id,
+            soexa:soexa,
+            codpru_id:codpru_id,
+            archivosBase64: archivosBase64
+          };
         $.ajax({
             url: '/subirdocumento', // Asegúrate de que la URL sea la correcta
             method: "POST",
-            data: {
-                archivosBase64: JSON.stringify(archivosBase64)
-            },
+            data:JSON.stringify(datosAEnviar),
+            contentType: 'application/json',
             success: function (lista) {
                 let doc_adic_id = document.getElementById('doc_adic_id');
                 doc_adic_id.value = lista[0].doc_adic_id;
@@ -116,6 +126,7 @@ function SubirDocumento() {
             },
             error: function () {
                 alert('Error al subir los archivos');
+                fileInput.disabled = false;
             },
             complete: function () {
                 btnSubir.innerHTML = '<i class="fa-solid fa-upload" style="margin: 8px 12px;">';
@@ -129,6 +140,9 @@ function EliminarDocumento() {
     const miniaturasDiv = document.getElementById("miniaturas");
     const fileInput = document.getElementById('archivos');
     const btnEliminar = document.getElementById('btnEliminar');
+    let cita_id = document.getElementById('id').value;
+    let soexa = document.getElementById('soexa').value;
+    let codpru_id = document.getElementById('codpru_id').value;
     btnEliminar.innerHTML = `
         <lottie-player src="/img/jsonimg/btnloading.json" background="transparent"
             speed="1" style="height: 35px;" loop autoplay>
@@ -137,6 +151,9 @@ function EliminarDocumento() {
         url: '/eliminardocumento', // Asegúrate de que la URL sea la correcta
         method: "DELETE",
         data: {
+            cita_id:cita_id,
+            soexa:soexa,
+            codpru_id:codpru_id,
             doc_adic_id : doc_adic_id.value
         },
         success: function (lista) {
