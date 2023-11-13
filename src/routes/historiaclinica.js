@@ -36,4 +36,9 @@ router.get('/resultsignosvitales', isLoggedIn, controllerHI.getresultsignosvital
 /************************************************/
 router.get('/pblaboratorio', isLoggedIn, controllerrender.renderlaboratorioprueba); 
 
+
+/*****************Ficha Musculo Esqueletica*****************/
+router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueletica);
+
+/************************************************/
 module.exports = router;

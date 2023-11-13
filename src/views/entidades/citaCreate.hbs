@@ -24,68 +24,68 @@
             </div>
             <div class="card-body">
                 <div class="container-fluid body1" id="body1">
-                    <form id="formusuarios" class="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-12 border-right">
-                                <div class="p-3 py-3">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="text-right">Datos de la cita</h5>
+
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            <div class="p-3 py-3">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h5 class="text-right">Datos de la cita</h5>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-4 form-inline col-sm-12 form-group ">
+                                        <label class="labels mb-2">Empresa</label>
+                                        <div class="input-group input-group-sm" style="width: 100%;">
+                                            <input type="hidden" id="cli_id" value="0">
+                                            <input type="text" id="razsoc" class="form-control form-control-sm"
+                                                placeholder="Nombre de la empresa" aria-label="" disabled>
+                                            <button type="button" class="btn input-group-text" data-toggle="modal"
+                                                data-target="#modalFormEmpresa">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="row mt-2">
-                                        <div class="col-md-4 form-inline col-sm-12 form-group ">
-                                            <label class="labels mb-2">Empresa</label>
-                                            <div class="input-group input-group-sm" style="width: 100%;">
-                                                <input type="hidden" id="cli_id" value="0">
-                                                <input type="text" id="razsoc" class="form-control form-control-sm"
-                                                    placeholder="Nombre de la empresa" aria-label="" disabled>
-                                                <button type="button" class="btn input-group-text" data-toggle="modal"
-                                                    data-target="#modalFormEmpresa">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                                </button>
-                                            </div>
-                                        </div>
 
-                                        <div class="col-md-4">
-                                            <label class="labels" for="codpro_id">Protocolo</label><select
-                                                class="form-select form-control form-control-sm" id="codpro_id"
-                                                aria-label="Default select example" required>
+                                    <div class="col-md-4">
+                                        <label class="labels" for="codpro_id">Protocolo</label><select
+                                            class="form-select form-control form-control-sm" id="codpro_id"
+                                            aria-label="Default select example" required>
 
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="labels" for="tipexa_id">Tipo de exámen</label>
-                                            <input type="text" class="form-control form-control-sm" id="tipexa_id"
-                                                disabled>
-                                        </div>
-
+                                        </select>
                                     </div>
-                                    <div class="row mt-2">
-                                        <div class="col-md-4 form-inline col-sm-12 form-group ">
-                                            <label class="labels mb-2">Paciente</label>
-                                            <div class="input-group input-group-sm" style="width: 100%;">
-                                                <input type="hidden" id="pachis" value="0">
-                                                <input type="text" id="appm_nom" class="form-control form-control-sm"
-                                                    placeholder="Nombre del paciente" aria-label="appm_nom" disabled>
-                                                <button type="button" class="btn input-group-text" data-toggle="modal"
-                                                    data-target="#modalFormpaciente">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                                </button>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-4">
+                                        <label class="labels" for="tipexa_id">Tipo de exámen</label>
+                                        <input type="text" class="form-control form-control-sm" id="tipexa_id" disabled>
+                                    </div>
 
-                                        <div class="col-md-6">
-                                            <label for="fecprocitaDate" class="labels">Fecha
-                                                Programada</label>
-                                            <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <input type="date" class="form-control form-control-sm mr-2"
-                                                    id="fecprocitaDate" data-mask="dd/mm/yyyy" required>
-                                                <input type="text" id="fecprocitaTime"
-                                                    class="time form-control form-control-sm">
-                                            </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-4 form-inline col-sm-12 form-group ">
+                                        <label class="labels mb-2">Paciente</label>
+                                        <div class="input-group input-group-sm" style="width: 100%;">
+                                            <input type="hidden" id="pachis" value="0">
+                                            <input type="text" id="appm_nom" class="form-control form-control-sm"
+                                                placeholder="Nombre del paciente" aria-label="appm_nom" disabled>
+                                            <button type="button" class="btn input-group-text" data-toggle="modal"
+                                                data-target="#modalFormpaciente">
+                                                <i class="fa-solid fa-magnifying-glass"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="fecprocitaDate" class="labels">Fecha
+                                            Programada</label>
+                                        <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
+                                            <input type="date" class="form-control form-control-sm mr-2"
+                                                id="fecprocitaDate" data-mask="dd/mm/yyyy" required>
+                                            <input type="text" id="fecprocitaTime"
+                                                class="time form-control form-control-sm">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row mt-2">
+                            </div>
+                            <div class="p-3 py-3">
+                                <div class="row mt-2 ">
                                     <div class="col-md-12">
                                         <label for="obscita" class="labels">Observación</label>
                                         <textarea class="form-control form-control-sm mr-2"
@@ -94,8 +94,11 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-                        <div class="col-md-12 border-right">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
                             <div class="p-3 py-3">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5 class="text-right">Datos adicionales del paciente</h5>
@@ -233,9 +236,9 @@
                                 </button>
                             </div>
                         </div>
+                    </div>
                 </div>
                 <input type="text" id="inputid" value="{{id}}" style="display: none;">
-                </form>
             </div>
 
         </div>

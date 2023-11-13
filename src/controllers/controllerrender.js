@@ -54,6 +54,10 @@ module.exports = {
         const parametro = "LB";
         permisosprueba(parametro, 'historiaclinica/pruebas/pblaboratorio', req, res);
     },
+    async renderfichamusculoesqueletica(req, res) {
+        const parametro = "FM";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamusculoesqueletica', req, res);
+    },
 
     //entidades
     async renderprotocolo(req, res) {

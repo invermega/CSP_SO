@@ -1,6 +1,6 @@
 $(document).ready(function () {
     getCitasCombo();
-
+    render();
     const refresh = document.getElementById('refresh');
     refresh.addEventListener('click', getcitas);
     const search = document.getElementById('search');
@@ -9,9 +9,9 @@ $(document).ready(function () {
     var fechaActual = new Date().toISOString().split('T')[0];
     $("#fecini").val(fechaActual);
     $("#fecfin").val(fechaActual);
-    render();
+    
 });
-function getcitas() {
+function getcitas() {    
     ocultarDiv('mydatatable');
     mostrarDiv('carga');
     let fecini = $('#fecini');//fecha inicio
@@ -93,6 +93,7 @@ function getCitasCombo() {
                 }
             });
             stacita.val('G');
+            getcitas();
         },
         error: function () {
             alert('error');

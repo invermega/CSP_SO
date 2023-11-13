@@ -1,37 +1,33 @@
-$(document).ready(function () {
-    /*$('#fecprocitaTime').clockpicker({
-        align: 'left',
-        autoclose: true,
-        'default': 'now',
-        donetext: 'Aceptar',
-        twelvehour: false,
-        afterDone: function () {
-            $('#fecprocitaTime').trigger('change');
-        }
-    });*/
+$(document).ready(function () {    
     getPacienteCombos();
-    const id = document.getElementById("inputid").value;
-    if (id === "0") {
-
-    } else {
-        getcitas(id);
-    }
-
     $('#fecprocitaTime').clockTimePicker({
         duration: true,
         durationNegative: false,
         alwaysSelectHoursFirst: true,
         afternoonHoursInOuterCircle: true,
-        precision: 10,
+        //precision: 10,
         required: true,
         i18n: {
             cancelButton: 'Abbrechen'
         },
+
         onAdjust: function (newVal, oldVal) {
             //...
         }
     });
-
+    const id = document.getElementById("inputid").value;
+    if (id === "0") {
+        var fecha = new Date().toISOString().slice(0, 10);
+        document.getElementById("fecprocitaDate").value = fecha;
+        document.getElementById("fecing_cargo").value = fecha;
+        document.getElementById("fecing_area").value = fecha;
+        document.getElementById("fecing_empresa").value = fecha;
+        var horaActual = new Date();
+        var horaInicial = horaActual.getHours() + ':' + horaActual.getMinutes();
+        $('#fecprocitaTime').clockTimePicker('value', horaInicial);
+    } else {
+        getcitas(id);
+    }    
 });
 function getcitas(id) {
     let fecini = '';//fecha inicio
@@ -174,11 +170,11 @@ document.getElementById("pacientemodal").addEventListener("keydown", function (e
 
 function getpacientem(btn) {
     event.preventDefault();
-    var filaorigen = $(btn).closest("tr");    
+    var filaorigen = $(btn).closest("tr");
     var appm_nom = filaorigen.find("td:eq(1)").text();
-    var  pachis = filaorigen.find("td:eq(2)").text();
+    var pachis = filaorigen.find("td:eq(2)").text();
     $('#appm_nom').val(appm_nom);
-    $('#pachis').val(pachis);    
+    $('#pachis').val(pachis);
 }
 document.getElementById("empresamodal").addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
@@ -285,7 +281,7 @@ document.getElementById("codpro_id").addEventListener("change", function (event)
 });
 function guardarCita() {
     var btnCita = document.getElementById("btnCita");
-    btnCita.disabled=true;
+    btnCita.disabled = true;
     //$("#btnCita").prop("disabled", true);
     let inputid = $('#inputid');
     let cli_id = $('#cli_id');
@@ -310,11 +306,10 @@ function guardarCita() {
     let ent_result_fisico = document.querySelector("input[name='ent_result_fisico']:checked").value;
     let usa_firma_formatos = document.querySelector("input[name='usa_firma_formatos']:checked").value;
     let res_lugar_trabajo = document.querySelector("input[name='res_lugar_trabajo']:checked").value;
-    const validarFormulario1= validarFormulario('empresamodal,pacientemodal,obscita');
+    const validarFormulario1 = validarFormulario('empresamodal,pacientemodal,obscita');
+
     if (!validarFormulario1) {
-        mensaje('error', 'Complete los campos requeridos, porfavor', 1500);
-    if (validarFormulario) {
-        mensaje('error', 'Complete los campos requeridos, porfavor', 1500);
+        btnCita.disabled = false;
         return;
     }
     $.ajax({
@@ -346,7 +341,7 @@ function guardarCita() {
             res_lugar_trabajo: res_lugar_trabajo,
         },
         success: function (response) {
-            btnCita.disabled=false;
+            btnCita.disabled = false;
             opc = 0;
             if (response[0].tipo === 'success') {
                 MensajeSIyNO(response[0].tipo, response[0].mensaje, '¿Desea volver?', function (respuesta) {
@@ -354,24 +349,23 @@ function guardarCita() {
                         $('input[type="text"]').val("");
                         rendersub('/cita');
                     } else {
-                        if (data[0].mensaje === "Guardado correctamente") {
+                        if (response[0].tipo === "success") {
                             limpiarImput();
                         }
                         return;
                     }
                 });
             } else {
-                btnCita.disabled=false;
+                btnCita.disabled = false;
                 mensaje(response[0].tipo, response[0].response, 1500);
             }
         },
         error: function () {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);
-            btnCita.disabled=false;
+            btnCita.disabled = false;
             //$("#btnCita").prop("disabled", false);
         }
     });
 }
-
 
 
