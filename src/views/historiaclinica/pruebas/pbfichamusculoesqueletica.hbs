@@ -15,55 +15,248 @@
         </div>
         <div class="card-body ">
             <div class="row mt-2">
-                <table>
-                    <thead class="thead">
-                        <th scope="col">Flexibilidad / Fuerza</th>
-                        <th scope="col">Exelente</th>
-                        <th scope="co l">Promedio</th>
-                        <th scope="col">Regular</th>
-                        <th scope="col">Pobre</th>
-                        <th scope="col">Puntos</th>
-                        <th scope="col" rowspan="5">Observaciones</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Abdomen</td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Cadera</td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Muslo</td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Abdomen Lateral</td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td><img src="" alt=""></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td colspan="6">Fila 5, Columna 1 - 6</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table text-center align-middle h-100" id="tab1">
+                        <thead class="align-middle">
+                            <th>Flexibilidad / Fuerza</th>
+                            <th>Exelente</th>
+                            <th>Promedio</th>
+                            <th>Regular</th>
+                            <th>Pobre</th>
+                            <th>Puntos</th>
+                            <th>Observaciones</th>
+                        </thead>
+                        <tbody>
+                            <div style="display: none;">
+                                <tr>
+                                    <td>Abdomen</td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/abdomen_excelente.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="abdomen1" class="align-middle">1
+                                                <input type="radio" class="form-check-input" role="switch" value="1"
+                                                    name="abdomen" id="abdomen1">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/abdomen_promedio.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="abdomen2" class="align-middle">2
+                                                <input type="radio" class="form-check-input" role="switch" value="2"
+                                                    name="abdomen" id="abdomen2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/abdomen_regular.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="abdomen3" class="align-middle">3
+                                                <input type="radio" class="form-check-input" role="switch" value="3"
+                                                    name="abdomen" id="abdomen3">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/abdomen_pobre.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="abdomen4" class="align-middle">4
+                                                <input type="radio" class="form-check-input" role="switch" value="4"
+                                                    name="abdomen" id="abdomen4">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span><input type="text" id="lbl_abdomen1" value="0" style="border: 0px;"
+                                                class="text-center"></span>
+                                    </td>
+                                    <td rowspan="1" class="h-100 textareacont">
+                                        <div class="form-floating h-100 w-100">
+                                            <textarea class="form-control h-100 w-100"
+                                                placeholder="Leave a comment here" id="obsTextAreaaAb"></textarea>
+                                            <label for="obsTextAreaaAb">Observaciones</label>
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>Cadera</td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/cadera_excelente.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="cadera1" class="align-middle">1
+                                                <input type="radio" class="form-check-input" role="switch" value="1"
+                                                    name="cadera" id="cadera1">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/cadera_promedio.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="cadera2" class="align-middle">2
+                                                <input type="radio" class="form-check-input" role="switch" value="2"
+                                                    name="cadera" id="cadera2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/cadera_regular.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="cadera3" class="align-middle">3
+                                                <input type="radio" class="form-check-input" role="switch" value="3"
+                                                    name="cadera" id="cadera3">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/cadera_pobre.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="cadera4" class="align-middle">4
+                                                <input type="radio" class="form-check-input" role="switch" value="4"
+                                                    name="cadera" id="cadera4">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span><input type="text" id="lbl_cadera1" value="0" style="border: 0px;"
+                                                class="text-center"></span>
+                                    </td>
+                                    <td rowspan="1" class="h-100 textareacont">
+                                        <div class="form-floating h-100 w-100">
+                                            <textarea class="form-control h-100 w-100"
+                                                placeholder="Leave a comment here" id="obsTextAreaCa"></textarea>
+                                            <label for="obsTextAreaCa">Observaciones</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Muslo</td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/muslo_excelente.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="muslo1" class="align-middle">1
+                                                <input type="radio" class="form-check-input" role="switch" value="1"
+                                                    name="muslo" id="muslo1">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/muslo_promedio.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="muslo2" class="align-middle">2
+                                                <input type="radio" class="form-check-input" role="switch" value="2"
+                                                    name="muslo" id="muslo2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/muslo_regular.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="muslo3" class="align-middle">3
+                                                <input type="radio" class="form-check-input" role="switch" value="3"
+                                                    name="muslo" id="muslo3">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/muslo_pobre.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="muslo4" class="align-middle">4
+                                                <input type="radio" class="form-check-input" role="switch" value="4"
+                                                    name="muslo" id="muslo4">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span><input type="text" id="lbl_muslo1" value="0" style="border: 0px;"
+                                                class="text-center"></span>
+                                    </td>
+                                    <td rowspan="1" class="h-100 textareacont">
+                                        <div class="form-floating h-100 w-100">
+                                            <textarea class="form-control h-100 w-100"
+                                                placeholder="Leave a comment here" id="obsTextAreaMu"></textarea>
+                                            <label for="obsTextAreaMu">Observaciones</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Abdomen Lateral</td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/abdomen_lateral_excelente.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="abdomenlat1" class="align-middle">1
+                                                <input type="radio" class="form-check-input" role="switch" value="1"
+                                                    name="abdomenlat" id="abdomenlat1">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/abdomen_lateral_promedio.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="abdomenlat2" class="align-middle">2
+                                                <input type="radio" class="form-check-input" role="switch" value="2"
+                                                    name="abdomenlat" id="abdomenlat2">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/abdomen_lateral_regular.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="abdomenlat3" class="align-middle">3
+                                                <input type="radio" class="form-check-input" role="switch" value="3"
+                                                    name="abdomenlat" id="abdomenlat3">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <img src="./img/ficha/fisioterapia/abdomen_lateral_pobre.webp" height="70px" alt="">
+                                        <hr>
+                                        <div class="form-check form-switch">
+                                            <label for="abdomenlat4" class="align-middle">4
+                                                <input type="radio" class="form-check-input" role="switch" value="4"
+                                                    name="abdomenlat" id="abdomenlat4">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span><input type="text" id="lbl_ablat1" value="0" style="border: 0px;"
+                                                class="text-center"></span>
+                                    </td>
+                                    <td rowspan="1" class="h-100 textareacont">
+                                        <div class="form-floating h-100 w-100">
+                                            <textarea class="form-control h-100 w-100"
+                                                placeholder="Leave a comment here" id="obsTextAreaAl"></textarea>
+                                            <label for="obsTextAreaAl">Observaciones</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" class="text-end">Total</td>
+                                    <td>
+                                        <span><input type="text" id="total" name="total1" value="0" style="border: 0px;"
+                                                class="text-center"></span>
+                                    </td>
+                                </tr>
+                            </div>
+                        </tbody>
+                    </table>
+                </div>
                 <!--<div class="col-md-12 input-group input-group-sm">
                     <label class="col-sm-2 input-group-text" for="inpfc">FC</label>
                     <input type="text" class="form-control form-control-sm" value="" id="inpfc"
