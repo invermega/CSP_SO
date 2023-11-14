@@ -109,13 +109,13 @@ function getcliente(parametro) {
             } else {
                 clientes.forEach(cliente => {
                     tbodycli.append(`
-            <tr>             
-              <td>${cliente.razsoc}</td>
-              <td>${cliente.NumDoc}</td>
-              <td>
-              <button onclick="getclientem('${cliente.docide}','${cliente.NumDoc}','${cliente.razsoc}','${cliente.actividad_economica}','${cliente.Direccion}','${cliente.contacto}','${cliente.emailcon}','${cliente.celular}','${cliente.telefono}','${cliente.emailmedocu}','${cliente.forpag_id}','${cliente.cadcermed}','${cliente.incfirmmedexa}','${cliente.Incfirpacexa}','${cliente.Inchuepacexa}','${cliente.incfordatper}','${cliente.incdecjur}','${cliente.incfirhueforadi}','${cliente.creusucatocu}','${cliente.Encorvctocert}','${cliente.encorvusuexi}','${cliente.notinfmed_medocu}','${cliente.notinfmedpac}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
-              <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarCli("${cliente.NumDoc}")><i class="fa-solid fa-trash-can"></i></a>
-              </td>
+            <tr>   
+            <td>
+            <button class="btn btn-info btn-circle btn-sm" onclick="getclientem('${cliente.docide}','${cliente.NumDoc}','${cliente.razsoc}','${cliente.actividad_economica}','${cliente.Direccion}','${cliente.contacto}','${cliente.emailcon}','${cliente.celular}','${cliente.telefono}','${cliente.emailmedocu}','${cliente.forpag_id}','${cliente.cadcermed}','${cliente.incfirmmedexa}','${cliente.Incfirpacexa}','${cliente.Inchuepacexa}','${cliente.incfordatper}','${cliente.incdecjur}','${cliente.incfirhueforadi}','${cliente.creusucatocu}','${cliente.Encorvctocert}','${cliente.encorvusuexi}','${cliente.notinfmed_medocu}','${cliente.notinfmedpac}')" class="btn btn-circle btn-sm "><i class="fa-regular fa-pen-to-square"></i></button>
+            <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarCli("${cliente.NumDoc}")><i class="fa-solid fa-trash-can"></i></a>
+            </td>  
+              <td style="vertical-align: middle;" class="text-left">${cliente.NumDoc}</td>
+              <td class="text-left">${cliente.razsoc}</td>    
             </tr>
           `);
                 });

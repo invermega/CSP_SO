@@ -3,7 +3,6 @@ const router = express.Router();
 const { isLoggedIn, isNotLoggedIn } = require('../lib/auth');
 const controllerrender = require("../controllers/controllerrender");
 const controllerEN = require("../controllers/controllerentidades");
-const controllerCO = require("../controllers/controllerentidades");
 const { } = require('../lib/permisos');
 
 
@@ -32,7 +31,7 @@ router.get('/listardistrito',isLoggedIn,controllerEN.getDistrito);
 router.get('/listarpais',isLoggedIn,controllerEN.getPais);
 router.post('/paciente',isLoggedIn,controllerEN.postpaciente);
 router.get('/listarpacientes',isLoggedIn,controllerEN.getpaciente)
-router.delete('/deletePac',controllerEN.deletepaciente);
+router.delete('/deletePac',isLoggedIn,controllerEN.deletepaciente);
 
 /******************************************/
 /*****************Citas*****************/
@@ -46,23 +45,21 @@ router.get('/citaedit/:id', isLoggedIn, controllerrender.rendercitaedit);
 router.delete('/citadel',isLoggedIn, controllerEN.delcita);
 
 /*****************Médico*******************/
+router.get('/medicocreate', isLoggedIn, controllerrender.rendermedicocreate);
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
 router.post('/medico',isLoggedIn,controllerEN.postmedico);
-router.get('/listarmedicos',isLoggedIn,controllerEN.getmedico);
-router.delete('/deleteMed',isLoggedIn,controllerCO.deletemedico);
-router.delete('/deleteMed',controllerCO.deletemedico);
+router.get('/listarmedicos',isLoggedIn,controllerEN.getmedicolist);
+router.delete('/deleteMed',isLoggedIn,controllerEN.deletemedico);
+router.get('/medicoedit/:id', isLoggedIn, controllerrender.rendermedicoedit);
+router.get('/medicodatos/:id', isLoggedIn, controllerEN.getmedicodatos);
 
 /****************Cliente******************/
 
 router.get('/cliente', isLoggedIn, controllerrender.rendercliente);
 router.post('/cliente',isLoggedIn,controllerEN.postcliente);
-router.post('/cliente',controllerCO.postcliente);
+router.post('/cliente',isLoggedIn,controllerEN.postcliente);
 router.get('/listarcliente',isLoggedIn,controllerEN.getcliente);
-router.delete('/deleteCli',isLoggedIn,controllerCO.deletecliente);
-router.delete('/deleteCli',controllerCO.deletecliente);
-
-
-
+router.delete('/deleteCli',isLoggedIn,controllerEN.deletecliente);
 
 /******************************************/
 module.exports = router;

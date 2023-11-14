@@ -23,7 +23,12 @@
                     <i class="fa-solid fa-pencil-alt"></i>
                     Editar Cliente
                 </button>
-
+                <button class="btn position-relative" id="btneliminarusu" data-toggle="modal"
+                    data-target="#modalFormactcliente" onclick="eliminarCli()"
+                    style="background-color: #793B8E;color: white;border-color: #793B8E;">
+                    <i class="fa-solid fa-trash-alt"></i>
+                    Eliminar
+                </button>
             </div>
         </div>
         <div class="card-body">
@@ -116,7 +121,8 @@
                                             <canvas id="canvas" width="400" height="150" class="rectangulo-canvas mb-3"
                                                 required></canvas>
                                             <div class="button-container">
-                                                <input type="file" id="file-input" style="display: none;">
+                                                <input type="file" id="file-input" style="display: none;"
+                                                    accept="image/*">
                                                 <button id="reset-btn" class="btn btn4"
                                                     style="background-color: #793B8E;color: white;border-color: #793B8E;"><i
                                                         class="fa-solid fa-circle-xmark"></i></button>
@@ -290,7 +296,7 @@
                 <div class="modal-dialog modal-lg ">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
-                            <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE
+                            <h4 class="modal-title" id="myModalLabel">LISTADO DE
                                 CLIENTES</h4>
                         </div>
                         <div class="modal-body">
@@ -299,8 +305,7 @@
                                 <input class="form-control form-control-sm " id="clientemodal"
                                     placeholder="Ingrese número de documento" required></input>
 
-
-                                <label class="input-group-text form-control-sm" for="clientemodal">
+                                <label class="input-group-text form-control-sm" for="clientemodal" onclick="mostar()">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </label>
                             </div>
@@ -311,16 +316,17 @@
                                         id="tablaclientemodal" style="display: none;">
                                         <thead class="thead">
                                             <tr>
-                                                <th scope="col">RAZON SOCIAL</th>
-                                                <th scope="col">NUMERO DE DOCUMENTO</th>
-                                                <th scope="col">ACCIONES</th>
-
+                                                <th scope="col">ACCIÓN</th>
+                                                <th scope="col">RUC / DNI</th>
+                                                <th scope="col">RAZÓN SOCIAL</th>
                                             </tr>
                                         </thead>
                                         <tbody id="bodycliente">
                                         </tbody>
-                                    </table>
 
+                                
+
+                                    </table>
                                 </div>
                                 <div class="text-center" id="carga" style="display: none;">
                                     <div class="d-flex justify-content-center align-items-center"
@@ -340,11 +346,9 @@
                         </div>
                     </div>
                 </div>
-
             </div>
 
         </div>
-
     </div>
 </div>
 

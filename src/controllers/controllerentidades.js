@@ -263,15 +263,21 @@ module.exports = {
 
         res.json(response.recordset);
     },
-    async getmedico(req, res) {//listar medico para edicion
-        const { parametro } = req.query;
-        const codrolUser = req.user.codrol;
-        console.log(parametro)
+    async getmedicodatos(req, res) {
+        const { id } = req.params;
         const pool = await getConnection();
-        const response = await pool.query(`pa_selMedico  '${codrolUser}','${parametro}'`);
-        //console.log(response.recordset);
+        const responde = await pool.query(`pa_selMedicoDatosId '${id}'`);
+        res.json(responde.recordset);
+    },
+    async getmedicolist(req, res) {//listar medicos
+        let  medico  = req.query.medico;
+        const codrolUser = req.user.codrol;
+        if (medico === '') {
+            medico = '%';
+        }
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selMedico  '${codrolUser}','${medico}'`);
         res.json(response.recordset);
-
     },
     async deletemedico(req, res) {//eliminar medico
         const { dni } = req.body;

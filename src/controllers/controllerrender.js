@@ -99,6 +99,15 @@ module.exports = {
         permisos(parametro,'entidades/medicos', req,res)
         res.render('entidades/medicos', { layout: false });
     },
+    async rendermedicocreate(req, res) {
+        const parametro = "MD";
+        permisos(parametro, 'entidades/medicosCreate', req, res, 0);
+    },
+    async rendermedicoedit(req, res) {
+        const { id } = req.params;
+        const parametro = "MD";
+        permisos(parametro, 'entidades/medicosCreate', req, res, id);
+    },
     /**Cliente */
     async rendercliente(req, res) {
         const parametro = "CL";
