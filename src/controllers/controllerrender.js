@@ -41,14 +41,18 @@ module.exports = {
         const parametro = "PH";
         permisos(parametro, 'historiaclinica/pacientescitados', req, res)
     },
-    async rendersignosvitales(req, res) {
+    async rendermenuexamenes(req, res) {
         const { soexa, id } = req.params;
         console.log(soexa, id);
-        res.render('historiaclinica/examenes/signosvitales', { id, soexa, layout: false });
+        res.render('historiaclinica/menuexamenes/menuexamenes', { id, soexa, layout: false });
     },
     async rendersignosvitalesprueba(req, res) {
         const parametro = "SG";
         permisosprueba(parametro, 'historiaclinica/pruebas/pbsignosvitales', req, res);
+    },
+    async renderlaboratorioprueba(req, res) {
+        const parametro = "LB";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pblaboratorio', req, res);
     },
 
     //entidades
@@ -85,7 +89,6 @@ module.exports = {
     },
     async rendercitacreate(req, res) {
         const parametro = "CT";
-        //res.render('entidades/citaCreate', { layout: false, id: 0 });
         permisos(parametro,'entidades/citaCreate', req, res,0)
     },
     async rendercitaedit(req, res) {
@@ -114,5 +117,14 @@ module.exports = {
         permisos(parametro,'entidades/cliente', req,res)
         res.render('entidades/cliente', { layout: false });
     },
-
+    /*Examen */
+    async renderexamen(req, res) {
+        const parametro = "EX";
+        permisos(parametro,'entidades/examen', req, res)
+    },
+    async renderexamencreate(req, res) {
+        const parametro = "EX";
+        permisos(parametro,'entidades/examenCreate', req, res,0)
+    },
+    
 };

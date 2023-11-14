@@ -43,7 +43,8 @@ router.get('/listarcitas', isLoggedIn, controllerEN.getListaCitas);
 router.get('/citacreate', isLoggedIn, controllerrender.rendercitacreate);
 router.get('/citaedit/:id', isLoggedIn, controllerrender.rendercitaedit);
 router.delete('/citadel',isLoggedIn, controllerEN.delcita);
-
+router.post('/listarhrc', isLoggedIn, controllerEN.getListaHojaRutaC);
+router.post('/listarhrd', isLoggedIn, controllerEN.getListaHojaRutaD);
 /*****************Médico*******************/
 router.get('/medicocreate', isLoggedIn, controllerrender.rendermedicocreate);
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
@@ -60,6 +61,13 @@ router.post('/cliente',isLoggedIn,controllerEN.postcliente);
 router.post('/cliente',isLoggedIn,controllerEN.postcliente);
 router.get('/listarcliente',isLoggedIn,controllerEN.getcliente);
 router.delete('/deleteCli',isLoggedIn,controllerEN.deletecliente);
+
+/******************************************/
+/****************Examenes******************/
+router.get('/examen', isLoggedIn, controllerrender.renderexamen);
+router.get('/examencreate', isLoggedIn, controllerrender.renderexamencreate);
+router.get('/listarexamen', isLoggedIn, controllerEN.getListaExamenes);
+
 
 /******************************************/
 module.exports = router;

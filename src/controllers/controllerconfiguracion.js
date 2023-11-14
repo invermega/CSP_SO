@@ -147,11 +147,11 @@ module.exports = {
         const codrolUser = req.user.codrol;
         const pool = await getConnection();
         const user = req.user.usuario;
+        console.log(user);
         const passencrypt = await helpers.EncriptarPass(user);
         const response = await pool.query(`sp_editPassUser '${codrolUser}','${iduser}','${passencrypt}'`);
         res.json(response.recordset);
     }
-
     /************Medico*************/
 
 

@@ -87,7 +87,6 @@
                                                                 <th scope="col">RAZON SOCIAL</th>
                                                                 <th scope="col">RUC</th>
                                                                 <th scope="col">ACCIÓN</th>
-
                                                             </tr>
                                                         </thead>
                                                         <tbody id="bodyEmpresa" style="text-align: left;">
@@ -131,37 +130,56 @@
                                         class="fa-regular fa-file-lines"></i></label>
                             </div>
                         </div>
-                        <div class="col-md-3 form-inline col-sm-12 form-group mb-1 mt-1">
-                            <label class="control-label input-group-text" for="parametro4" style="height: 30px;">Solo auditado</label>
-                            <div class="input-group-text">
+                        <div class="col-md-3 form-inline col-sm-12 form-group mb-1 mt-1" >
+                            <label class="control-label input-group-text" for="parametro4" style="height: 30px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;">Solo
+                                auditado</label>
+                            <div class="input-group-text" style="border-bottom-left-radius: 0px;border-top-left-radius: 0px;background-color: white ;">
                                 <input class="form-check-input mt-0" type="checkbox" value="" id="parametro4"
-                                    name="parametro4" aria-label="Checkbox for following text input" >
+                                    name="parametro4" aria-label="Checkbox for following text input" style="border-radius: 0px;">
                             </div>
                         </div>
-                        <div class="col-md-6 form-inline col-sm-12 form-group mb-1 mt-1">
-                            <div class="input-group input-group" style="width: 100%;">
-                                <button type="button" class="btn input-group-text" id="refresh">
-                                    <i class="fa-solid fa-retweet"></i>
-                                </button>
-                                <a class="opcionform btn input-group-text" href="/citacreate"><i
-                                        class="fa-solid fa-plus"></i>
-                                </a>
-                                <button type="button" class="btn input-group-text" id="edit"
-                                    onclick="navegaredit('mydatatable','citaedit')">
-                                    <i class="fa-solid fa-pen"></i>
-                                </button>
-                                <button type="button" class="btn input-group-text" id="delete" onclick="eliminar()">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
+                        <div class="col-md-6" >
+                            <div class="form-inline col-sm-12 form-group mb-1 mt-1" style="padding-left: 0px;">
+                                <div class="input-group input-group mr-4" >
+                                    <button type="button" class="btn input-group-text" id="refresh" data-toggle="tooltip" data-placement="top" title="Actualizar">
+                                        <i class="fa-solid fa-retweet"></i>
+                                    </button>
+                                    <a class="opcionform btn input-group-text" href="/citacreate" data-toggle="tooltip" data-placement="top" title="Añadir"><i
+                                            class="fa-solid fa-plus"></i>
+                                    </a>
+                                    <button type="button" class="btn input-group-text" id="edit"
+                                        onclick="navegaredit('mydatatable','citaedit')" data-toggle="tooltip" data-placement="top" title="Editar">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    <button type="button" class="btn input-group-text" id="delete" onclick="eliminar()" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+                                <div class="input-group input-group mr-2" >                                    
+                                    <button type="button" class="btn input-group-text" id="hruta"
+                                        onclick="navegargetid('mydatatable')" data-toggle="tooltip" data-placement="top" title="Descargar hoja de ruta">
+                                        <i class="fa-solid fa-file"></i>
+                                    </button>
+                                    <button type="button" class="btn input-group-text" id="cinf"
+                                        onclick="navegargetid('mydatatable')" data-toggle="tooltip" data-placement="top" title="Descargar consentimiento informado">
+                                        <i class="fa-solid fa-book"></i>
+                                    </button>
+                                    <button type="button" class="btn input-group-text" id="edit"
+                                        onclick="navegargetid('mydatatable')" data-toggle="tooltip" data-placement="top" title="Exportar">
+                                        <i class="bi bi-filetype-xls" style="max-height: 16px;line-height: 1;"></i>
+                                    </button>
+                                    <button type="button" class="btn input-group-text" id="edit"
+                                        onclick="navegargetid('mydatatable')" data-toggle="tooltip" data-placement="top" title="Este es un tooltip">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </button>
+                                    
+                                </div>
+                            </div>
+                        </div>
 
-                            </div>
-                        </div>
                     </div>
                 </div>
-
-
             </div>
-
             <div class="table-responsive mt-3">
                 <table
                     class="records_list table table-sm table-striped table-bordered letra animate__animated animate__fadeInDown"
@@ -169,11 +187,17 @@
                     <thead class="thead">
                         <tr>
                             <th scope="col">CHECK</th>
-                            <th scope="col">NOMBRE DEL PACIENTE</th>
-                            <th scope="col">N° DOCUMENTO</th>
                             <th scope="col">FECHA DE CITA</th>
                             <th scope="col">HORA DE CITA</th>
                             <th scope="col">TURNO</th>
+                            <th scope="col">EMPRESA</th>
+                            <th scope="col">NOMBRE DEL PACIENTE</th>
+                            <th scope="col">N° DOCUMENTO</th>
+                            <th scope="col">PROTOCOLO</th>
+                            <th scope="col">ESTADO</th>
+                            <th scope="col">RESULTADO</th>
+                            <th scope="col">CERT. MEDICA</th>
+                            <th scope="col">INF. MÉDICA</th>
                         </tr>
                     </thead>
                     <tbody id="bodyCita">
@@ -192,3 +216,4 @@
 
 <script src="/js/entidades/cita.js"> </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.2/xlsx.full.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
