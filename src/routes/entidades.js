@@ -51,20 +51,21 @@ router.post('/listarcinf', isLoggedIn, controllerEn.getListaConsetimientoInf);
 router.get('/listarempresa', isLoggedIn, controllerEn.getempresaCita);
 
 /*****************Médico*******************/
+router.get('/medicocreate', isLoggedIn, controllerrender.rendermedicocreate);
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
-router.post('/medico',isLoggedIn,controllerEn.postmedico);
-router.get('/listarmedicos',isLoggedIn,controllerEn.getmedico);
+router.post('/medico',isLoggedIn,controllerEN.postmedico);
+router.get('/listarmedicos',isLoggedIn,controllerEn.getmedicolist);
 router.delete('/deleteMed',isLoggedIn,controllerEn.deletemedico);
+router.get('/medicoedit/:id', isLoggedIn, controllerrender.rendermedicoedit);
+router.get('/medicodatos/:id', isLoggedIn, controllerEn.getmedicodatos);
 
 /****************Cliente******************/
 
 router.get('/cliente', isLoggedIn, controllerrender.rendercliente);
 router.post('/cliente',isLoggedIn,controllerEn.postcliente);
+router.post('/cliente',isLoggedIn,controllerEn.postcliente);
 router.get('/listarcliente',isLoggedIn,controllerEn.getcliente);
 router.delete('/deleteCli',isLoggedIn,controllerEn.deletecliente);
-router.delete('/deleteCli',controllerEn.deletecliente);
-
-
 
 /******************************************/
 /****************Examenes******************/

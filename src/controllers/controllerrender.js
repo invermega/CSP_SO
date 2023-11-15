@@ -54,6 +54,18 @@ module.exports = {
         const parametro = "LB";
         permisosprueba(parametro, 'historiaclinica/pruebas/pblaboratorio', req, res);
     },
+    async renderespirometriaprueba(req, res) {
+        const parametro = "ES";
+        permisos(parametro,'historiaclinica/pruebas/pbespirometria', req, res,0)
+    },
+    async rendercuestionarioespirometriaprueba(req, res) {
+        const parametro = "CE";
+        permisos(parametro,'historiaclinica/pruebas/pbcuestionarioespirometria', req, res,0)
+    },
+    async rendertestpsicologiaprueba(req, res) {
+        const parametro = "TP";
+        permisos(parametro,'historiaclinica/pruebas/pbtestpsicologia', req, res,0)
+    },
     async renderfichamusculoesqueletica(req, res) {
         const parametro = "ME";
         permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamusculoesqueletica', req, res);
@@ -100,11 +112,22 @@ module.exports = {
         const parametro = "CT";
         permisos(parametro, 'entidades/citaCreate', req, res, id)
     },
+    /**Medico */
     async renderemedico(req, res) {
         const parametro = "MD";
         permisos(parametro,'entidades/medicos', req,res)
         res.render('entidades/medicos', { layout: false });
     },
+    async rendermedicocreate(req, res) {
+        const parametro = "MD";
+        permisos(parametro, 'entidades/medicosCreate', req, res, 0);
+    },
+    async rendermedicoedit(req, res) {
+        const { id } = req.params;
+        const parametro = "MD";
+        permisos(parametro, 'entidades/medicosCreate', req, res, id);
+    },
+    /**Cliente */
     async rendercliente(req, res) {
         const parametro = "CL";
         permisos(parametro,'entidades/cliente', req,res)

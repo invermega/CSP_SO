@@ -1,7 +1,10 @@
 const { getConnection } = require('../database/conexionsql');
 const sql = require('mssql');
+const path = require('path');
+const sharp = require('sharp');
 const XLSX = require('xlsx');
 const xlsxPopulate = require('xlsx-populate');
+const fs = require('fs');
 
 module.exports = {
     /*****************Protocolo*****************/
@@ -211,7 +214,8 @@ module.exports = {
         if (paciente === '') {
             paciente = '%';
         }
-        const pool = await getConnection(fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6);
+        
+        const pool = await getConnection();
         const response = await pool.query(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`);
         res.json(response.recordset);
     },
@@ -224,8 +228,8 @@ module.exports = {
             const request = pool.request();
             const PROCEDURE_NAME = 'pa_DelCita';
             request.input('codrol', sql.Int, codrol);
-            request.input('CitaJson', sql.NVarChar(sql.MAX), detalleJson);   
-            const result = await request.execute(PROCEDURE_NAME);            
+            request.input('CitaJson', sql.NVarChar(sql.MAX), detalleJson);
+            const result = await request.execute(PROCEDURE_NAME);
             pool.close();
             res.json(result.recordset);
         } catch (error) {
@@ -282,42 +286,67 @@ module.exports = {
     /************MEDICOS*************/
 
     async postmedico(req, res) {//agregar medico
-        const { medap, medam, mednam, docide, nundoc, med_cmp, med_rne, medTelfij, medcel, med_correo, meddir, med_firma, esp_id, opc } = req.body;
+        const { medap, medam, mednam, docide, nundoc, med_cmp, med_rne, medTelfij, medcel, med_correo, meddir, esp_id, opc, picmed } = req.body;
         const usenam = req.user.usuario;
         const hostname = '';
         const codrolUser = req.user.codrol;
+        const imagenBase64 = picmed;
+        const rutaSalida = path.join(__dirname, '..', 'public', 'img', 'medicos', nundoc + '.webp');
+        if (fs.existsSync(rutaSalida)) {
+            fs.unlinkSync(rutaSalida)
+        }
+        const imagenBase64SinPrefijo = imagenBase64.replace(/^data:image\/png;base64,/, '');
+        const imagenBinaria = Buffer.from(imagenBase64SinPrefijo, 'base64');
+        await sharp(imagenBinaria)
+            .toFormat('webp')
+            .toFile(rutaSalida);
         const pool = await getConnection();
         const response = await pool.query(`pa_InsMedico '${medap.toUpperCase()}',${medam.toUpperCase()},'${mednam.toUpperCase()}','${docide}','${nundoc}','${med_cmp}','${med_rne}',
-        '${medTelfij.trim()}','${medcel}','${med_correo.toUpperCase()}','${meddir}','${med_firma}','${esp_id}','${usenam}','${hostname}','${codrolUser}','${opc}'`);
+        '${medTelfij.trim()}','${medcel}','${med_correo.toUpperCase()}','${meddir}','${esp_id}','${usenam}','${hostname}','${codrolUser}','${opc}'`);
 
         res.json(response.recordset);
     },
-    async getmedico(req, res) {//listar medico para edicion
-        const { parametro } = req.query;
-        const codrolUser = req.user.codrol;
-        console.log(parametro)
+    async getmedicodatos(req, res) {
+        const { id } = req.params;
         const pool = await getConnection();
-        const response = await pool.query(`pa_selMedico  '${codrolUser}','${parametro}'`);
-        //console.log(response.recordset);
+        const responde = await pool.query(`pa_selMedicoDatosId '${id}'`);
+        res.json(responde.recordset);
+    },
+    async getmedicolist(req, res) {//listar medicos
+        let  medico  = req.query.medico;
+        const codrolUser = req.user.codrol;
+        if (medico === '') {
+            medico = '%';
+        }
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selMedico  '${codrolUser}','${medico}'`);
         res.json(response.recordset);
-        
     },
     async deletemedico(req, res) {//eliminar medico
-        const { med_id } = req.body;
+        const { dni } = req.body;
         const codrolUser = req.user.codrol;
         const pool = await getConnection();
-        const response = await pool.query(`pa_delMedico '${codrolUser}','${med_id}'`);
+        const response = await pool.query(`pa_delMedico '${codrolUser}','${dni}'`);
         res.json(response.recordset);
     },
     /*************Cliente***************/
     async postcliente(req, res) {//agregar cliente
-        const { docide, NumDoc, razsoc, actividad_economica,Direccion, logo, contacto, emailcon, celular, telefono, emailmedocu,cadcermed, incfirmmedexa, Incfirpacexa, Inchuepacexa, Incfordatper, incdecjur, Incfirhueforadi, creusucatocu, Encorvctocert, envcorusuexi, creusucatprev, notinfmed_medocu, notinfmedpac, opc } = req.body;
+        const { docide, NumDoc, razsoc, actividad_economica, Direccion, contacto, emailcon, celular, telefono, emailmedocu, forpag_id, cadcermed, incfirmmedexa, Incfirpacexa, Inchuepacexa, Incfordatper, incdecjur, Incfirhueforadi, creusucatocu, Encorvctocert, envcorusuexi, notinfmed_medocu, notinfmedpac, opc, piccli } = req.body;
         const usenam = req.user.usuario;
         const hostname = '';
         const codrolUser = req.user.codrol;
+        const imagenBase64 = piccli;
+        const rutaSalida = path.join(__dirname, '..', 'public', 'img', 'cliente', NumDoc + '.webp');
+        if (fs.existsSync(rutaSalida)) {
+            fs.unlinkSync(rutaSalida)
+        }
+        const imagenBase64SinPrefijo = imagenBase64.replace(/^data:image\/png;base64,/, '');
+        const imagenBinaria = Buffer.from(imagenBase64SinPrefijo, 'base64');
+        await sharp(imagenBinaria)
+            .toFormat('webp')
+            .toFile(rutaSalida);
         const pool = await getConnection();
-        const response = await pool.query(`pa_InsCliente '${razsoc.toUpperCase()}','${docide}','${NumDoc}','${Direccion}','${telefono}','${emailcon}','${contacto}','${celular}','${emailmedocu}','${usenam}','${cadcermed}','${incfirmmedexa}','${Incfirpacexa}','${Inchuepacexa}','${Incfordatper}','${incdecjur}','${Incfirhueforadi}','${creusucatocu}','${Encorvctocert}','${envcorusuexi}','${creusucatprev}','${notinfmed_medocu}','${notinfmedpac}','${actividad_economica}','${logo}','${codrolUser}','${opc}'`);
-
+        const response = await pool.query(`pa_InsCliente '${razsoc.toUpperCase()}','${docide}','${NumDoc}','${Direccion}','${telefono}','${emailcon}','${contacto}','${celular}','${emailmedocu}','${forpag_id}','${usenam}','${cadcermed}','${incfirmmedexa}','${Incfirpacexa}','${Inchuepacexa}','${Incfordatper}','${incdecjur}','${Incfirhueforadi}','${creusucatocu}','${Encorvctocert}','${envcorusuexi}','${notinfmed_medocu}','${notinfmedpac}','${actividad_economica}','${codrolUser}','${opc}'`);
         res.json(response.recordset);
     },
     async getcliente(req, res) {//listar cliente para edicion
@@ -329,10 +358,10 @@ module.exports = {
         res.json(response.recordset);
     },
     async deletecliente(req, res) {//eliminar cliente
-        const { cli_id } = req.body;
+        const { dni } = req.body;
         const codrolUser = req.user.codrol;
         const pool = await getConnection();
-        const response = await pool.query(`pa_delCliente '${codrolUser}','${cli_id}'`);
+        const response = await pool.query(`pa_delCliente '${codrolUser}','${dni}'`);
         res.json(response.recordset);
     },
 };
