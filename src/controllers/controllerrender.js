@@ -55,7 +55,7 @@ module.exports = {
         permisosprueba(parametro, 'historiaclinica/pruebas/pblaboratorio', req, res);
     },
     async renderfichamusculoesqueletica(req, res) {
-        const parametro = "FM";
+        const parametro = "ME";
         permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamusculoesqueletica', req, res);
     },
 

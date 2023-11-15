@@ -41,11 +41,12 @@ router.post('/pblaboratorio', isLoggedIn, controllerHI.postlaboratorio);
 router.get('/resultlaboratorio', isLoggedIn, controllerHI.getresultlaboratorio);
 
 /************************************************/
-
-
-
 /*****************Ficha Musculo Esqueletica*****************/
 router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueletica);
+router.post('/pbfichamusculoesqueletica', isLoggedIn, controllerHI.postfichamusculoesqueletica);
+router.get('/resultfichamusculoesqueletica', isLoggedIn, controllerHI.getresultfichamusculoesqueletica);
+
+
 
 /************************************************/
 module.exports = router;
