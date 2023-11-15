@@ -54,7 +54,18 @@ module.exports = {
         const parametro = "LB";
         permisosprueba(parametro, 'historiaclinica/pruebas/pblaboratorio', req, res);
     },
-
+    async renderespirometriaprueba(req, res) {
+        const parametro = "ES";
+        permisos(parametro,'historiaclinica/pruebas/pbespirometria', req, res,0)
+    },
+    async rendercuestionarioespirometriaprueba(req, res) {
+        const parametro = "CE";
+        permisos(parametro,'historiaclinica/pruebas/pbcuestionarioespirometria', req, res,0)
+    },
+    async rendertestpsicologiaprueba(req, res) {
+        const parametro = "TP";
+        permisos(parametro,'historiaclinica/pruebas/pbtestpsicologia', req, res,0)
+    },
     //entidades
     async renderprotocolo(req, res) {
         const parametro = "PT";

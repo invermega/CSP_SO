@@ -215,7 +215,25 @@ module.exports = {
         const result = await pool.query(`pa_SelResultlaboratorio '${cita_id}','${soexa}'`);
         res.json(result.recordset);
     },
-    
+    async getresultespirometria(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResultespirometria '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+    async getresultcuestionarioespirometria(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResultcuestionarioespirometria '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+    async getresulttestpsicologia(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResulttestpsicologia '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+
     /***************************************************/
 
 };

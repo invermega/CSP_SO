@@ -40,6 +40,15 @@ router.get('/parametros', isLoggedIn, controllerHI.getparametros);
 router.post('/pblaboratorio', isLoggedIn, controllerHI.postlaboratorio);
 router.get('/resultlaboratorio', isLoggedIn, controllerHI.getresultlaboratorio);
 
+router.get('/pbespirometria', isLoggedIn, controllerrender.renderespirometriaprueba);
+router.get('/resultespirometria', isLoggedIn, controllerHI.getresultespirometria);
+
+router.get('/pbcuestionarioespirometria', isLoggedIn, controllerrender.rendercuestionarioespirometriaprueba);
+router.get('/resultcuestionarioespirometria', isLoggedIn, controllerHI.getresultcuestionarioespirometria);
+
+router.get('/pbtestpsicologia', isLoggedIn, controllerrender.rendertestpsicologiaprueba);
+router.get('/resulttestpsicologia', isLoggedIn, controllerHI.getresulttestpsicologia);
+
 /************************************************/
 
 
