@@ -15,91 +15,19 @@
         </div>
         <div class="card-body " style="max-height: 70vh; overflow-y: auto; ">
             <input type="text" id="nuncom" style="display: none;" value="0">
-            <input type="text" id="codpru_id" style="display: none;" value="1">
+            <input type="text" id="codpru_id" style="display: none;" value="5">
             <div class="row mt-2">
-                <div class="table-responsive scrollable-modal">
-                    <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                        <thead class="thead sticky-top">
+
+
+
+                <div class="table-responsive" id="tablaparametros">
+                    <table
+                        class="records_list table table-sm table-bordered table-hover letra animate_animated animate_fadeIn"
+                        id="tableparametros">
+                        <thead class="sticky-top">
                             <tr>
-                                <th scope="col" style="width:  8% !important;">DNI</th>
-                                <th scope="col" style="width: 24% !important;">NOMBRES Y APELLIDOS</th>
-                                <th scope="col" style="width:  8% !important;">FEC. NAC.</th>
-                                <th scope="col" style="width:  5% !important;">EDAD</th>
-                                <th scope="col" style="width:  8% !important;">SEXO</th>
-                                <th scope="col" style="width: 11% !important;">CARGO</th>
-                                <th scope="col" style="width: 24% !important;">EMPRESA</th>
-                                <th scope="col" style="width: 12% !important;">TIPO DE EVALUACIÓN</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="nomap">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fecnac">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="edad">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="sexo">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="cargo">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="empresa">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="tipoeva">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="table-responsive scrollable-modal">
-
-
-                    <table class="records_list table table-sm table-bordered letra" id="tablapara">
-
-                        <thead class="thead sticky-top">
-                            <tr>
-                                <th scope="col" style="width:  40% !important; text-align: center; line-height: 3">FECHA
-                                    DE ATENCIÓN
-                                </th>
-                                <th scope="col" style="width:  60% !important; text-align: center; line-height: 3">
-                                    <input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </th>
-                            <tr>
-                                <th scope="col" style="width:  40% !important;text-align: center; line-height: 3">
-                                    ANTECEDENTES MÉDICOS</th>
-                                <th scope="col" style="width:  60% !important;text-align: center; line-height: 3"><input
-                                        class="form-control form-control-sm" maxlength="50" type="text" id="dni"></th>
-                            </tr>
-                            </tr>
-                            <tr>
-                                <th scope="col" style="width:  50% !important;">FUMADOR</th>
-                                <th scope="col" style="width:  50% !important;">GRUPO ÉTNICO</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fum">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="gruet">
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <table class="records_list table table-sm table-bordered letra" id="tablapara">
-
-                        <thead class="thead ">
-
-
-
-                            <tr>
-                                <th scope="col" style="width: 14% !important;">PARÁMETROS</th>
+                                <th scope="col">PARÁMETROS</th>
+                                <th scope="col">UNIDAD</th>
                                 <th scope="col" style="width: 14% !important;">TEÓRICO</th>
                                 <th scope="col" style="width: 14% !important;">PRE</th>
                                 <th scope="col" style="width: 14% !important;">TEÓRICO %</th>
@@ -108,109 +36,64 @@
                                 <th scope="col" style="width: 14% !important;">PRE #3</th>
                             </tr>
                         </thead>
-
-                        <tbody>
+                        <tbody id="tbodyparametros">
                             <tr>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fev1">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                        id="fev1/fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                        id="fev1/fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fev1">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                        id="fev1/fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                        id="fev1/fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fev1">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                        id="fev1/fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                        id="fev1/fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fev1">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                        id="fev1/fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                        id="fev1/fvc">
-                                </td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="fef">
-                                </td>
-
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </tbody>
 
+                        <tfoot>
 
-                    </table>
 
-                    <table class="records_list table table-sm table-bordered letra" id="tablapara3">
-
-                        <tbody>
-                            <tr>
-                                <th scope="col" style="width:  50% !important;">CALIDAD</th>
-                                <th scope="col" style="width:  50% !important;"><input
-                                        class="form-control form-control-sm" maxlength="50" type="text" id="calidad">
+                            <tr >
+                                <th colspan="8">
+                                    <div class="col-md-12 form-inline col-sm-12 form-group mb-1 mt-1">
+                                        <div class="input-group input-group-sm" style="width: 100%;">
+                                            <label class="control-label input-group-text" for="std_fuma">FUMADOR</label>
+                                            <select id="std_fuma" class="form-control form-control-sm">
+                                                <option value="NORMAL">SI</option>
+                                                <option value="LEVE" checked>NO</option>
+                                            </select>
+                                            <label class="control-label input-group-text" for="Calidad">CALIDAD</label>
+                                            <select id="Calidad" class="form-control form-control-sm">
+                                                <option value="NORMAL" checked>A</option>
+                                                <option value="LEVE">B</option>
+                                                <option value="MODERADO">C</option>
+                                                <option value="MODERADAMENTE_GRAVE">D</option>
+                                                <option value="GRAVE">E</option>
+                                            </select>
+                                            <label class="control-label input-group-text"
+                                                for="conclusion">CONCLUSIONES</label>
+                                            <select id="conclusion" class="form-control form-control-sm">
+                                                <option value="NORMAL" checked>NORMAL</option>
+                                                <option value="LEVE">LEVE</option>
+                                                <option value="MODERADO">MODERADO</option>
+                                                <option value="MODERADAMENTE_GRAVE">MODERADAMENTE GRAVE</option>
+                                                <option value="GRAVE">GRAVE</option>
+                                                <option value="MUY_GRAVE">MUY GRAVE</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </th>
-                            <tr>
-                                <th colspan="1" scope="col" style="width:  50% !important;">CONCLUSIONES</th>
-                                <th colspan="1" scope="col" style="width:  50% !important;"><input
-                                        class="form-control form-control-sm" maxlength="50" type="text" id="cls"></th>
                             </tr>
-                            
-                        </tbody>
+
+                        </tfoot>
                     </table>
+
+
+                    <div class="text-center" id="cargaparametros" style="display: none;">
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                            <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent" speed="1"
+                                style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -46,8 +46,8 @@ router.get('/resultespirometria', isLoggedIn, controllerHI.getresultespirometria
 router.get('/pbcuestionarioespirometria', isLoggedIn, controllerrender.rendercuestionarioespirometriaprueba);
 router.get('/resultcuestionarioespirometria', isLoggedIn, controllerHI.getresultcuestionarioespirometria);
 
-router.get('/pbtestpsicologia', isLoggedIn, controllerrender.rendertestpsicologiaprueba);
-router.get('/resulttestpsicologia', isLoggedIn, controllerHI.getresulttestpsicologia);
+router.get('/pbpsicologia', isLoggedIn, controllerrender.renderpsicologiaprueba);
+router.get('/resultpsicologia', isLoggedIn, controllerHI.getresultpsicologia);
 
 /************************************************/
 

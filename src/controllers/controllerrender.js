@@ -62,9 +62,9 @@ module.exports = {
         const parametro = "CE";
         permisos(parametro,'historiaclinica/pruebas/pbcuestionarioespirometria', req, res,0)
     },
-    async rendertestpsicologiaprueba(req, res) {
+    async renderpsicologiaprueba(req, res) {
         const parametro = "TP";
-        permisos(parametro,'historiaclinica/pruebas/pbtestpsicologia', req, res,0)
+        permisos(parametro,'historiaclinica/pruebas/pbpsicologia', req, res,0)
     },
     //entidades
     async renderprotocolo(req, res) {
