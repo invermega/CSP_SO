@@ -57,7 +57,7 @@ router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfi
 
 /************************************************/
 /*****************Ficha Musculo Esqueletica*****************/
-router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueletica);
+router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueleticaprueba);
 router.post('/pbfichamusculoesqueletica', isLoggedIn, controllerHI.postfichamusculoesqueletica);
 router.get('/resultfichamusculoesqueletica', isLoggedIn, controllerHI.getresultfichamusculoesqueletica);
 

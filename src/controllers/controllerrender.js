@@ -66,7 +66,7 @@ module.exports = {
         const parametro = "TP";
         permisos(parametro,'historiaclinica/pruebas/pbtestpsicologia', req, res,0)
     },
-    async renderfichamusculoesqueletica(req, res) {
+    async renderfichamusculoesqueleticaprueba(req, res) {
         const parametro = "ME";
         permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamusculoesqueletica', req, res);
     },
