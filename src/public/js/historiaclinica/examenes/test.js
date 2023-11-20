@@ -2,7 +2,6 @@ function ObtenerParametros() {
     let codpru_id = document.getElementById('codpru_id').value;
     //inputcodpru_id.value = codpru_id;
     let nuncom = document.getElementById('nuncom').value;
-    console.log(codpru_id,nuncom);
     ocultarTabla("tablaparametros");
     mostrarDiv("cargaparametros");
     $.ajax({
@@ -18,26 +17,27 @@ function ObtenerParametros() {
             let tbody = $('#tbodyparametros');
             tbody.html('');
             parametros.forEach(parametro => {
-                console.log(parametro,nuncom);
                 if (parametro.statitulo === 'V') {
                     tbody.append(`
-                    <tr >
-                        <td class="text-left align-middle px-3" >${parametro.despar}</td>
-                        <td class="text-left align-middle px-3" >${parametro.unidad} <input style="display:none"  type="text" value="${parametro.parexa_id}" data-column="parexa_id"></td>
-                        <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;">  <input style="height: 25px;" type="text" class="form-control " value="${parametro.valor_ref}" data-column="valor_ref"></td>
-                        <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"><input style="height: 25px;" type="text" class="form-control" value="${parametro.mejor_valor}" data-column="mejor_valor"></td>
-                        <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"><input style="height: 25px;" type="text" class="form-control " value="${parametro.Mejor_val_porc}" data-column="Mejor_val_porc"></td>
-                        <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"><input style="height: 25px;" type="text" class="form-control " value="${parametro.valor_pre1}" data-column="valor_pre1"></td>
-                        <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"><input style="height: 25px;" type="text" class="form-control " value="${parametro.valor_pre2}" data-column="valor_pre2"</td>
-                        <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"><input style="height: 25px;" type="text" class="form-control " value="${parametro.valor_pre3}" data-column="valor_pre3"</td>
-                    </tr>`)
+                        <tr >
+                            <td class="text-left align-middle px-3" >${parametro.despar}</td>
+                            <td class="text-left align-middle px-3" >${parametro.unidad} <input style="display:none" type="text" value="${parametro.parexa_id}" data-column="parexa_id"></td>
+                            <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;">  <input style="height: 25px;" type="text" class="form-control " value="${parametro.valor_ref}" data-column="valor_ref"></td>
+                            <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"><input style="height: 25px;" type="text" class="form-control" value="${parametro.mejor_valor}" data-column="mejor_valor"></td>
+                            <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"><input style="height: 25px;" type="text" class="form-control " value="${parametro.Mejor_val_porc}" data-column="Mejor_val_porc"></td>
+                            <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"><input style="height: 25px;" type="text" class="form-control " value="${parametro.valor_pre1}" data-column="valor_pre1"></td>
+                            <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"><input style="height: 25px;" type="text" class="form-control " value="${parametro.valor_pre2}" data-column="valor_pre2"</td>
+                            <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"><input style="height: 25px;" type="text" class="form-control " value="${parametro.valor_pre3}" data-column="valor_pre3"</td>
+                        </tr>`)
+
                 } else {
                     tbody.append(`
-                    <tr>
-                        <td colspan="4" class="text-left align-middle px-2" style="font-weight: bold; background-color:#DADADA" >${parametro.despar}</td>
-                    </tr>
-                    `)
+                        <tr>
+                            <td colspan="4" class="text-left align-middle px-2" style="font-weight: bold; background-color:#DADADA" >${parametro.despar}</td>
+                        </tr>
+                        `)
                 }
+
             });
             $('#tableparametros tbody tr').each(function () {
                 $(this).find('td:gt(1) input').inputmask("numeric", {
@@ -51,9 +51,8 @@ function ObtenerParametros() {
                 var Calidad = $('#Calidad');
                 Calidad.val(parametros[0].Calidad);
                 var conclusion = $('#conclusion');
-                conclusion.val(parametros[0].conclusion);                
+                conclusion.val(parametros[0].conclusion);
             }
-            poblarcampos();
         },
         error: function () {
             $('#error-message').text('Se produjo un error al cargar los protocolos.');
@@ -62,7 +61,7 @@ function ObtenerParametros() {
 
 };
 
-function obtenerDataParametros() {    
+function obtenerDataParametros() {
     var table = document.getElementById('tableparametros');
     var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
     var data = [];
@@ -70,18 +69,18 @@ function obtenerDataParametros() {
     var std_fuma = document.getElementById('std_fuma').value;
     var Calidad = document.getElementById('Calidad').value;
     var conclusion = document.getElementById('conclusion').value;
-    
     for (var i = 0; i < rows.length; i++) {
         var input = rows[i].getElementsByTagName('input');
         if (input.length >= 6) {
-            var parexa_id = input[0].value;
-            var valor_ref = input[1].value;
-            var mejor_valor = input[2].value;
-            var Mejor_val_porc = input[3].value;
-            var valor_pre1 = input[4].value;
-            var valor_pre2 = input[5].value;
-            var valor_pre3 = input[6].value;
-            
+            var parexa_id = input[0].dataset.parexa_id;
+            console.log(parexa_id);
+            var valor_ref = input[1].dataset.valor_ref;
+            var mejor_valor = input[2].dataset.mejor_valor;
+            var Mejor_val_porc = input[3].dataset.Mejor_val_porc;
+            var valor_pre1 = input[4].dataset.valor_pre1;
+            var valor_pre2 = input[5].dataset.valor_pre2;
+            var valor_pre3 = input[6].dataset.valor_pre3;
+
             var rowData = {
                 parexa_id: parexa_id,
                 codpru_id: codpru_id,
@@ -93,7 +92,7 @@ function obtenerDataParametros() {
                 valor_pre3: valor_pre3,
                 Calidad: Calidad,
                 conclusion: conclusion,
-                std_fuma:std_fuma
+                std_fuma: std_fuma
             };
             data.push(rowData);
         } else {
@@ -153,7 +152,9 @@ function Grabar() {
             console.error('Error:', error);
         });
 }
+
 (function poblarcampos() {
+    ObtenerParametros();
     let cita_id = document.getElementById('id').value;
     let soexa = document.getElementById('soexa').value;
     let nuncom = document.getElementById('nuncom');
@@ -183,12 +184,27 @@ function Grabar() {
             soexa: soexa
         },
         success: function (result) {
-
-            if (result[0].mensaje != 'sin datos') {                
-                nuncom.value = result[0].nuncom;
+            if (result[0].mensaje != 'sin datos') {
+                
+                //nuncom.value = result[0].nuncom;
                 doc_adic_id.value = result[0].doc_adic_id;
                 if (result[0].doc_adic_id != '0') {
                     resultcrearMiniatura(result[0].rutarch, result[0].nomarch);
+                }
+                if (result[0].espirometria) {
+                    let espirometriaArray = JSON.parse(result[0].espirometria);
+                    nuncom.value = espirometriaArray[1].nuncom;                    
+                    for (let i = 0; i < espirometriaArray.length && i < 6; i++) {
+                        let registro = espirometriaArray[i];
+                        let parexa_id = registro.parexa_id;
+                        let inputElement = $(`input[value="${parexa_id}"]`);                        
+                        if (inputElement.length > 0) {
+                            inputElement.closest('tr').find('input[type="text"]').each(function () {
+                                let columnName = $(this).data('column');
+                                $(this).val(registro[columnName]);
+                            });
+                        }
+                    }
                 }
                 if (result[0].diagnosticos) {
                     let diagnosticosArray = JSON.parse(result[0].diagnosticos);
@@ -235,7 +251,6 @@ function Grabar() {
 
 
             }
-            ObtenerParametros();
         },
         error: function (Examenes) {
             alert('error');

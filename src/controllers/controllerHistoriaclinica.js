@@ -237,7 +237,6 @@ module.exports = {
     /**************** Espirometria ***********************/
     async getparametrosespiro(req, res) {
         let { codpru_id, nuncom } = req.query;
-        console.log(codpru_id, nuncom)
         const pool = await getConnection();
         const parametros = await pool.query(`pa_SelParametrosEspiro ${codpru_id},${nuncom}`);
         res.json(parametros.recordset);
@@ -245,7 +244,6 @@ module.exports = {
     async postespirometria(req, res) {
         try {
             const { cita_id, nuncom, soexa, codpru_id, doc_adic_id, datains, datainsrec, dataparametros } = req.body;
-            console.log(cita_id, nuncom, soexa, codpru_id, doc_adic_id, datains, datainsrec, dataparametros)
             const usenam = req.user.usuario;
             const hostname = '';
             const codrol = req.user.codrol;
@@ -253,7 +251,7 @@ module.exports = {
             const detalleJsoncie10 = JSON.stringify(datains);
             const detalleJsonrecomen = JSON.stringify(datainsrec);
             const detalleJsonparametros = JSON.stringify(dataparametros);
-            console.log(detalleJsoncie10, detalleJsonrecomen, detalleJsonparametros)
+            console.log(detalleJsonparametros);
             const pool = await getConnection();
             const request = pool.request();
             const PROCEDURE_NAME = 'pa_InsPbEspirometria';
@@ -295,11 +293,8 @@ module.exports = {
             const med_id = req.user.med_id;            
             const detalleJsoncie10 = JSON.stringify(datains);
             const detalleJsonrecomen = JSON.stringify(datainsrec);
-            console.log(cita_id, nuncom, soexa, codpru_id, aptitud_espalda, doc_adic_id,med_id );
-            console.log(detalleJsoncie10,detalleJsonrecomen);
             const detalleJsonflex_fuerza = JSON.stringify(flex_fuerza);
             const detalleJsonrangos_articulares = JSON.stringify(rangos_articulares);
-            console.log(detalleJsonflex_fuerza,detalleJsonrangos_articulares);
             const pool = await getConnection();
             const request = pool.request();
             const PROCEDURE_NAME = 'pa_InsPbFichaMusculoEsqueletica';
