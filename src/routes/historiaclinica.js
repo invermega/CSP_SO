@@ -39,12 +39,16 @@ router.get('/pruebascards', isLoggedIn, controllerHI.getpruebascards);
 router.get('/parametros', isLoggedIn, controllerHI.getparametros); 
 router.post('/pblaboratorio', isLoggedIn, controllerHI.postlaboratorio);
 router.get('/resultlaboratorio', isLoggedIn, controllerHI.getresultlaboratorio);
-
+/****************Espirometria*****************/
 router.get('/pbespirometria', isLoggedIn, controllerrender.renderespirometriaprueba);
 router.get('/resultespirometria', isLoggedIn, controllerHI.getresultespirometria);
+router.post('/pbespirometria', isLoggedIn, controllerHI.postespirometria);
 
+/*********************************************/
 router.get('/pbcuestionarioespirometria', isLoggedIn, controllerrender.rendercuestionarioespirometriaprueba);
+
 router.get('/resultcuestionarioespirometria', isLoggedIn, controllerHI.getresultcuestionarioespirometria);
+router.get('/parametrosespiro', isLoggedIn, controllerHI.getparametrosespiro); 
 
 router.get('/pbtestpsicologia', isLoggedIn, controllerrender.rendertestpsicologiaprueba);
 router.get('/resulttestpsicologia', isLoggedIn, controllerHI.getresulttestpsicologia);
