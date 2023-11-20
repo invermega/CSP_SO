@@ -77,7 +77,7 @@
                         }
                     }
                 }
-                if (result[0].flex_fuerza) {
+                if (result[0].rangos_articulares) {
                     let rangos_articularesArray = JSON.parse(result[0].rangos_articulares);
                     for (let i = 0; i < rangos_articularesArray.length && i < 4; i++) {
                         let registro = rangos_articularesArray[i];
@@ -110,23 +110,26 @@
                 if (result[0].diagnosticos) {
                     let diagnosticosArray = JSON.parse(result[0].diagnosticos);
                     for (let i = 0; i < diagnosticosArray.length && i < 3; i++) {
-
                         let registro = diagnosticosArray[i];
                         let codigo = registro.diacod;
                         let descripcion = registro.diades;
                         let comentario = registro.obs;
+                        let combo = registro.tipdia;
 
                         if (i === 0) {
                             codcie101.value = codigo;
                             codcie10desc1.value = descripcion;
+                            combocie101.value = combo;
                             codcie10comen1.value = comentario;
                         } else if (i === 1) {
                             codcie102.value = codigo;
                             codcie10desc2.value = descripcion;
+                            combocie102.value = combo;
                             codcie10comen2.value = comentario;
                         } else if (i === 2) {
                             codcie103.value = codigo;
                             codcie10desc3.value = descripcion;
+                            combocie103.value = combo;
                             codcie10comen3.value = comentario;
                         }
                     }

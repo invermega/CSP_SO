@@ -183,7 +183,7 @@ function Grabar() {
     let codpru_id = document.getElementById('codpru_id').value;
     let doc_adic_id = document.getElementById('doc_adic_id').value;
     var datains = obtenerDataIns();
-console.log(datains);
+    console.log(datains);
     var datainsrec = obtenerDataInsRec();
     var dataparametros = obtenerDataParametros();
     const datosCompletos = {

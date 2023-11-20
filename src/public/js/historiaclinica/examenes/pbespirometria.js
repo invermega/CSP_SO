@@ -2,7 +2,6 @@ function ObtenerParametros() {
     let codpru_id = document.getElementById('codpru_id').value;
     //inputcodpru_id.value = codpru_id;
     let nuncom = document.getElementById('nuncom').value;
-    console.log(codpru_id,nuncom);
     ocultarTabla("tablaparametros");
     mostrarDiv("cargaparametros");
     $.ajax({
@@ -18,7 +17,6 @@ function ObtenerParametros() {
             let tbody = $('#tbodyparametros');
             tbody.html('');
             parametros.forEach(parametro => {
-                console.log(parametro,nuncom);
                 if (parametro.statitulo === 'V') {
                     tbody.append(`
                     <tr >
@@ -40,18 +38,47 @@ function ObtenerParametros() {
                 }
             });
             $('#tableparametros tbody tr').each(function () {
-                $(this).find('td:gt(1) input').inputmask("numeric", {
-                    radixPoint: '.',
-                    inputtype: "text"
+                $(this).find('td').each(function (index) {
+                    // Aplica el inputmask a las columnas 3, 4, 6, 7 y 8
+                    if (index === 2 || index === 3 || index === 5 || index === 6 || index === 7) {
+                        $(this).find('input').inputmask("currency", {
+                            radixPoint: '.',
+                            inputtype: "text",
+                            allowMinus: false,
+                            autoUnmask: true,
+                            placeholder: "00.00",
+                            showMaskOnHover: true,
+                            scale: 3,
+                        });
+                    }
                 });
             });
+            $('#tableparametros tbody tr').each(function () {
+                $(this).find('td').each(function (index) {
+                    if (index === 4) {
+                        $(this).find('input').inputmask("integer", {
+                            radixPoint: '.',
+                            inputtype: "text",
+                            allowMinus: false,
+                            autoUnmask: true,
+                            placeholder: "0",
+                            showMaskOnHover: true,
+                            scale: 0,  
+                        });
+                    }
+                });
+            });
+            
+            
+            
+
             if (nuncom !== '0') {
                 var std_fuma = $('#std_fuma');
                 std_fuma.val(parametros[0].std_fuma);
                 var Calidad = $('#Calidad');
                 Calidad.val(parametros[0].Calidad);
                 var conclusion = $('#conclusion');
-                conclusion.val(parametros[0].conclusion);                
+                conclusion.val(parametros[0].conclusion);
             }
             poblarcampos();
         },
@@ -62,7 +89,7 @@ function ObtenerParametros() {
 
 };
 
-function obtenerDataParametros() {    
+function obtenerDataParametros() {
     var table = document.getElementById('tableparametros');
     var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
     var data = [];
@@ -70,7 +97,7 @@ function obtenerDataParametros() {
     var std_fuma = document.getElementById('std_fuma').value;
     var Calidad = document.getElementById('Calidad').value;
     var conclusion = document.getElementById('conclusion').value;
-    
+
     for (var i = 0; i < rows.length; i++) {
         var input = rows[i].getElementsByTagName('input');
         if (input.length >= 6) {
@@ -81,7 +108,7 @@ function obtenerDataParametros() {
             var valor_pre1 = input[4].value;
             var valor_pre2 = input[5].value;
             var valor_pre3 = input[6].value;
-            
+
             var rowData = {
                 parexa_id: parexa_id,
                 codpru_id: codpru_id,
@@ -93,7 +120,7 @@ function obtenerDataParametros() {
                 valor_pre3: valor_pre3,
                 Calidad: Calidad,
                 conclusion: conclusion,
-                std_fuma:std_fuma
+                std_fuma: std_fuma
             };
             data.push(rowData);
         } else {
@@ -184,7 +211,7 @@ function Grabar() {
         },
         success: function (result) {
 
-            if (result[0].mensaje != 'sin datos') {                
+            if (result[0].mensaje != 'sin datos') {
                 nuncom.value = result[0].nuncom;
                 doc_adic_id.value = result[0].doc_adic_id;
                 if (result[0].doc_adic_id != '0') {
@@ -197,18 +224,22 @@ function Grabar() {
                         let codigo = registro.diacod;
                         let descripcion = registro.diades;
                         let comentario = registro.obs;
+                        let combo = registro.tipdia;
 
                         if (i === 0) {
                             codcie101.value = codigo;
                             codcie10desc1.value = descripcion;
+                            combocie101.value = combo;
                             codcie10comen1.value = comentario;
                         } else if (i === 1) {
                             codcie102.value = codigo;
                             codcie10desc2.value = descripcion;
+                            combocie102.value = combo;
                             codcie10comen2.value = comentario;
                         } else if (i === 2) {
                             codcie103.value = codigo;
                             codcie10desc3.value = descripcion;
+                            combocie103.value = combo;
                             codcie10comen3.value = comentario;
                         }
                     }
