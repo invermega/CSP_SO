@@ -70,6 +70,11 @@ module.exports = {
         const parametro = "ME";
         permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamusculoesqueletica', req, res);
     },
+    async renderfichamedicoocupacional312prueba(req, res) {
+        const parametro = "MO";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamedicoocupacional312', req, res);
+    },
+    
 
     //entidades
     async renderprotocolo(req, res) {

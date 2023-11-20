@@ -53,6 +53,8 @@ router.get('/parametrosespiro', isLoggedIn, controllerHI.getparametrosespiro);
 router.get('/pbtestpsicologia', isLoggedIn, controllerrender.rendertestpsicologiaprueba);
 router.get('/resulttestpsicologia', isLoggedIn, controllerHI.getresulttestpsicologia);
 
+router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfichamedicoocupacional312prueba); 
+
 /************************************************/
 /*****************Ficha Musculo Esqueletica*****************/
 router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueletica);
