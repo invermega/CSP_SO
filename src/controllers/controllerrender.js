@@ -54,7 +54,11 @@ module.exports = {
         const parametro = "LB";
         permisosprueba(parametro, 'historiaclinica/pruebas/pblaboratorio', req, res);
     },
-
+    
+    async renderradiosimpleprueba(req, res) {
+        const parametro = "IM";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbradiosimple', req, res);
+    },
     //entidades
     async renderprotocolo(req, res) {
         const parametro = "PT";

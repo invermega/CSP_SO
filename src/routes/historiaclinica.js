@@ -35,5 +35,7 @@ router.post('/pbsignosvitales', isLoggedIn, controllerHI.postsignosvitales);
 router.get('/resultsignosvitales', isLoggedIn, controllerHI.getresultsignosvitales);
 /************************************************/
 router.get('/pblaboratorio', isLoggedIn, controllerrender.renderlaboratorioprueba); 
+/************************************************/
+router.get('/pbradiosimple', isLoggedIn, controllerrender.renderradiosimpleprueba); 
 
 module.exports = router;
