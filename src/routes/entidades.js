@@ -46,13 +46,13 @@ router.delete('/citadel',isLoggedIn, controllerEN.delcita);
 router.post('/listarhrc', isLoggedIn, controllerEN.getListaHojaRutaC);
 router.post('/listarhrd', isLoggedIn, controllerEN.getListaHojaRutaD);
 /*****************Médico*******************/
+
 router.get('/medicocreate', isLoggedIn, controllerrender.rendermedicocreate);
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
 router.post('/medico',isLoggedIn,controllerEN.postmedico);
 router.get('/listarmedicos',isLoggedIn,controllerEN.getmedicolist);
 router.delete('/deleteMed',isLoggedIn,controllerEN.deletemedico);
 router.get('/medicoedit/:id', isLoggedIn, controllerrender.rendermedicoedit);
-router.get('/medicodatos/:id', isLoggedIn, controllerEN.getmedicodatos);
 
 /****************Cliente******************/
 
