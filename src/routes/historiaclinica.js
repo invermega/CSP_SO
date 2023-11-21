@@ -29,13 +29,11 @@ router.delete('/eliminardocumento', isLoggedIn, controllerHI.deldocumento);
 router.get('/menuexamenes/:soexa/:id', isLoggedIn, controllerrender.rendermenuexamenes);
 /************************************************/
 
-/*****************Signos vitales*****************/
+/*****************Pruebas*****************/
 router.get('/pbsignosvitales', isLoggedIn, controllerrender.rendersignosvitalesprueba);
 router.post('/pbsignosvitales', isLoggedIn, controllerHI.postsignosvitales);
 router.get('/resultsignosvitales', isLoggedIn, controllerHI.getresultsignosvitales);
-/************************************************/
+
 router.get('/pblaboratorio', isLoggedIn, controllerrender.renderlaboratorioprueba); 
-/************************************************/
-router.get('/pbradiosimple', isLoggedIn, controllerrender.renderradiosimpleprueba); 
 
 module.exports = router;

@@ -1,6 +1,6 @@
 $(document).ready(function () {
     getCitasCombo();
-
+    render();
     const refresh = document.getElementById('refresh');
     refresh.addEventListener('click', getcitas);
     const search = document.getElementById('search');
@@ -9,9 +9,9 @@ $(document).ready(function () {
     var fechaActual = new Date().toISOString().split('T')[0];
     $("#fecini").val(fechaActual);
     $("#fecfin").val(fechaActual);
-    render();
+    
 });
-function getcitas() {
+function getcitas() {    
     ocultarDiv('mydatatable');
     mostrarDiv('carga');
     let fecini = $('#fecini');//fecha inicio
@@ -93,6 +93,7 @@ function getCitasCombo() {
                 }
             });
             stacita.val('G');
+            getcitas();
         },
         error: function () {
             alert('error');
@@ -241,11 +242,10 @@ function eliminar() {
         });
     }
 }
-function navegargetid(iddatatableble,tipo) {
+async function navegargetidhr(iddatatableble) {
     var table = document.getElementById(iddatatableble);
     var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
     var seleccionados = []; // Array para almacenar los elementos checkbox seleccionados
-
     for (var i = 0; i < rows.length; i++) {
         var checkbox = rows[i].querySelector('input[type="checkbox"]');
 
@@ -259,64 +259,17 @@ function navegargetid(iddatatableble,tipo) {
     } else if (seleccionados.length > 1) {
         mensajecentral('error', 'Debes seleccionar solo un registro.');
     } else {
-        const cabecera =  obtenerDatosCabecera(`${seleccionados[0]}`);
-        console.log(`${seleccionados[0]}`);
-        const detalle = obtenerDatosDetalle(`${seleccionados[0]}`);
-        imprimirHojaRuta(cabecera,detalle);
+        var detalle = await obtenerDatosDetalle(`${seleccionados[0]}`);
+        obtenerDatosCabecera(`${seleccionados[0]}`).then(function (cabeceraData) {
+            imprimirHojaRuta(cabeceraData, detalle);
+        }).catch(function (error) {
+            console.log(error);
+        });
     }
 }
-/*
-function obtenerCabercera(id) {
-    $.ajax({
-        url: '/listarhr',//hoja de ruta
-        method: 'GET',
-        data: {
-            id: id,
-        },
-        success: function (citas) {
-            ocultarDiv('carga');
-            mostrarDiv('mydatatable');
-            const tbody = $('#bodyCita');
-            tbody.empty();
 
-            if (citas.length === 0) {
-                tbody.append(`
-                    <tr>
-                        <td colspan="13" class="text-center">No hay resultados disponibles </td>
-                    </tr>
-                `);
-            } else {
-                citas.forEach(cita => {
-                    tbody.append(`
-            <tr data-id="${cita.id}">
-              <td class="align-middle"><input id="check_${cita.id}" value="id_${cita.id}" type="checkbox" class="mt-1" ></td>
-              <td>${cita.Fecha}</td>
-              <td>${cita.Hora}</td> 
-              <td>${cita.Turno}</td>
-              <td>${cita.razsoc}</td>
-              <td>${cita.appm_nom}</td>
-              <td>${cita.numdoc}</td>
-              <td>${cita.nompro}</td>
-              <td>${cita.dessta}</td> 
-              <td>${cita.desvalapt}</td>
-              <td>${cita.CERT}</td>
-              <td>${cita.INF}</td>
-            </tr>
-          `);
-                });
-                mensaje(citas[0].tipo, citas[0].response, 1500);
-            }
+function imprimirHojaRuta(cabeceraData, detalleData) {
 
-        },
-        error: function () {
-            alert('Error en la solicitud AJAX');
-        },
-    });
-}*/
-
-
-function imprimirHojaRuta(cabeceraData, detalleData) {    
-    
     // Obtener el contenido de la guía
     const contenidoGuia = obtenerContenidoHojaRuta(cabeceraData, detalleData);
 
@@ -335,44 +288,67 @@ function imprimirHojaRuta(cabeceraData, detalleData) {
     };
 }
 function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
+
+    console.log(cabeceraData.numhoja, detalleData);
     // Construir el contenido del contenedor de imagen y título
-    var contenedorImagenTitulo = "<div style='display: flex; align-items: center; justify-content: center; margin-bottom: 200px;'>";
+    var contenedorImagenTitulo = "<div style='display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 20px;'>";
     contenedorImagenTitulo += "<img src='/img/logo.png' alt='Logo' style='width: 120px; height: 75px; margin-right: 10px;'>";
-
-    contenedorImagenTitulo = "<h4 style='text-align: center; flex: 1;'>Hoja de ruta N°: " + cabeceraData.numhoja + "</h4>";
-    contenedorImagenTitulo = "<div style='text-align: right;'>";
-    contenedorImagenTitulo = "<p style='font-size: 10px;'><strong>Fecha:</strong> " + cabeceraData.fecha + "</p>";
-    contenedorImagenTitulo = "<p style='font-size: 10px;'><strong>Hora:</strong> " + cabeceraData.hora + "</p>";
-
+    contenedorImagenTitulo += "<div style='text-align: center;'>"
+    contenedorImagenTitulo += "<h4 style='margin: 0;'>HOJA DE RUTA N°: " + cabeceraData.numhoja + "</h4>";
+    contenedorImagenTitulo += "<h4 style='margin: 0;'>Cita : " + cabeceraData.fechaprog + "</h4>";
+    contenedorImagenTitulo += "</div>"
+    contenedorImagenTitulo += "<div style='text-align: right;'>";
+    contenedorImagenTitulo += "<p style='margin: 0;font-size: 10px;'><strong>Fecha:</strong> " + cabeceraData.fecha + "</p>";
+    contenedorImagenTitulo += "<p style='margin: 0;font-size: 10px;'><strong>Hora:</strong> " + cabeceraData.hora + "</p>";
     contenedorImagenTitulo += "</div>";
     contenedorImagenTitulo += "</div>";
 
 
-    // Construir el contenido de la cabecera
-    var contenidoCabecera = "<div style='display: flex;'>";
-    contenidoCabecera += "<div style='flex: 1;'>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Apellidos y Nombres:</strong> " + cabeceraData.nombres;
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Área de trabajo:</strong> " + cabeceraData.area + "</p>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Fecha cita:</strong> " + cabeceraData.fechaprog + "  <strong>Celular:</strong> " + cabeceraData.celular + "</p>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Edad:</strong> " + cabeceraData.edad + "</p>";
-    contenidoCabecera += "</div>";
-    contenidoCabecera += "<div style='flex: 1;'>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Empresa:</strong> " + cabeceraData.razsoc + "</p>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Puesto en el que trabaja o trabajará:</strong> " + cabeceraData.cargo + "</p>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>DNI:</strong> " + cabeceraData.numdoc + "  <strong>DNI:</strong> " + cabeceraData.correo + "</p>";
-    contenidoCabecera += "<p style='font-size: 10px;'><strong>Tipo de Exámen:</strong> " + cabeceraData.tipexa + "</p>";
-    contenidoCabecera += "</div>";
-    contenidoCabecera += "</div>";
+    var contenidoCabecera = "<table style='width: 100%; border-collapse: collapse;border-color: black;margin-bottom:20px'>";
+    contenidoCabecera += "<tr>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;width: 60%;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Apellidos y Nombres:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.nombres + "</label>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Empresa:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.razsoc + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "</tr>";
+    contenidoCabecera += "<tr>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Correo:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.correo + "</label>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Puesto de trabajo:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.cargo + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "</tr>";
+    contenidoCabecera += "<tr>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>DNI:</strong><label style='font-size: 10px;margin-right: 10px'>&nbsp;&nbsp;" + cabeceraData.numdoc + "</label>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Celular:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.celular + "</label>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Área de trabajo:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.area + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "</tr>";
+    contenidoCabecera += "<tr>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Fecha cita:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.edad + "</label>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Tipo de Exámen:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.tipexa + "</label><br>";
+    contenidoCabecera += "</td>";
+    contenidoCabecera += "</tr>";
+    contenidoCabecera += "</table>";
 
     // Construir el contenido del detalle (tabla)
-    var contenidoDetalle = "<table style='width: 100%; border-collapse: collapse;'>";
+    var contenidoDetalle = "<table style='width: 100%; border-collapse: collapse;border-color: black;'>";
     // Agregar encabezados de columna de la tabla
     contenidoDetalle += "<thead>";
     contenidoDetalle += "<tr style='background-color: #0FA0A7; color: white;'>";
-    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 10px;'>Exámen</th>";
-    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 10px;'>Firma y Sello</th>";
-    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 10px;'>Exámen</th>";
-    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 10px;'>Firma y Sello</th>";
+    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 14px;'>Exámen</th>";
+    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 14px;'>Firma y Sello</th>";
+    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 14px;'>Exámen</th>";
+    contenidoDetalle += "<th style='border: 1px solid #ccc; padding: 5px; font-size: 14px;'>Firma y Sello</th>";
     // ... Agregar más encabezados de columna según corresponda
     contenidoDetalle += "</tr>";
     contenidoDetalle += "</thead>";
@@ -380,11 +356,11 @@ function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
     // Agregar filas de datos de la tabla
     contenidoDetalle += "<tbody>";
     detalleData.forEach(function (detalle) {
-        contenidoDetalle += "<tr>";
-        contenidoDetalle += "<td style='border: 1px solid #ccc; padding: 5px; font-size: 10px;min-height: 40px;'>" + detalle.Exa + "<br>" + detalle.deta + "</td>";
-        contenidoDetalle += "<td style='border: 1px solid #ccc; padding: 5px; font-size: 10px;min-height: 40px;'>" + detalle.firma + "</td>";
-        contenidoDetalle += "<td style='border: 1px solid #ccc; padding: 5px; font-size: 10px;min-height: 40px;'>" + detalle.Exa + "<br>" + detalle.deta + "</td>";
-        contenidoDetalle += "<td style='border: 1px solid #ccc; padding: 5px; font-size: 10px;min-height: 40px;'>" + detalle.firma + "</td>";
+        contenidoDetalle += "<tr style='height: 120px;'>";
+        contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; padding-top: 5x; padding-left: 10px; vertical-align: top;height: 120px;width: 250px;padding-right: 10px;'><span style='font-size: 12px;'><strong>" + detalle.exa + "</span></strong><br><br><span style='font-size: 10px;'>" + detalle.deta + "</span></td>";
+        contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; vertical-align: top;font-size: 10px;height: 120px;width: 400px;'>" + detalle.firma + "</td>";
+        contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; padding-top: 5x; padding-left: 10px; vertical-align: top;font-size: 12px;height: 120px;width: 250px;'><span style='font-size: 12px;'><strong>" + detalle.exa1 + "</span></strong><br><br><span style='font-size: 10px;'>" + detalle.deta1 + "</span></td>";
+        contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; vertical-align: top;font-size: 10px;height: 120px;width: 400px;'>" + detalle.firma + "</td>";
         // ... Agregar más columnas de datos según corresponda
         contenidoDetalle += "</tr>";
     });
@@ -413,7 +389,6 @@ function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
 
 function obtenerDatosCabecera(idcita) {
     return new Promise(function (resolve, reject) {
-        var cabeceraData;
         $.ajax({
             url: '/listarhrc',
             method: 'POST',
@@ -421,19 +396,22 @@ function obtenerDatosCabecera(idcita) {
                 idcita: idcita,
             },
             success: function (lista) {
-                cabeceraData.numhoja = lista[0].numhoja;
-                cabeceraData.nombres = lista[0].nombres;
-                cabeceraData.area = lista[0].area;
-                cabeceraData.fechaprog = lista[0].fechaprog;
-                cabeceraData.celular = lista[0].celular;
-                cabeceraData.edad = lista[0].edad;
-                cabeceraData.razsoc = lista[0].razsoc;
-                cabeceraData.cargo = lista[0].cargo;
-                cabeceraData.numdoc = lista[0].numdoc;
-                cabeceraData.correo = lista[0].correo;
-                cabeceraData.tipexa = lista[0].tipexa;
-                cabeceraData.fecha = lista[0].fecha;
-                cabeceraData.hora = lista[0].hora;                
+                var cabeceraData = {
+                    numhoja: lista[0].numhoja,
+                    nombres: lista[0].nombres,
+                    area: lista[0].area,
+                    fechaprog: lista[0].fechaprog,
+                    celular: lista[0].celular,
+                    edad: lista[0].edad,
+                    razsoc: lista[0].razsoc,
+                    cargo: lista[0].cargo,
+                    numdoc: lista[0].numdoc,
+                    correo: lista[0].correo,
+                    tipexa: lista[0].tipexa,
+                    fecha: lista[0].fecha,
+                    hora: lista[0].hora
+                }
+
                 resolve(cabeceraData);
             },
             error: function (error) {
@@ -444,16 +422,128 @@ function obtenerDatosCabecera(idcita) {
         });
     });
 }
+
 function obtenerDatosDetalle(idcita) {
     return new Promise(function (resolve, reject) {
+        var detalleData = [];
+
         $.ajax({
             url: '/listarhrd',
             method: 'POST',
             data: {
                 idcita: idcita,
             },
-            success: function (lista) {                             
-                resolve(lista);
+            success: function (empresas) {
+                empresas.forEach(empresa => {
+                    var detalleItem = {
+                        exa: empresa.Exa,
+                        exa1: empresa.Exa1,
+                        deta: empresa.deta,
+                        deta1: empresa.deta1,
+                        firma: empresa.firma,
+                        firma1: empresa.firma1,
+                    };
+
+                    detalleData.push(detalleItem);
+                });
+                resolve(detalleData);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
+    });
+}
+
+//Imprimir Consentimiento Informado
+async function navegargetidci(iddatatableble) {
+    var table = document.getElementById(iddatatableble);
+    var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    var seleccionados = []; // Array para almacenar los elementos checkbox seleccionados
+    for (var i = 0; i < rows.length; i++) {
+        var checkbox = rows[i].querySelector('input[type="checkbox"]');
+
+        if (checkbox && checkbox.checked) {
+            var id = checkbox.value.split('_')[1];
+            seleccionados.push(id); // Agregar el id al array de seleccionados
+        }
+    }
+    if (seleccionados.length === 0) {
+        mensajecentral('error', 'Debes seleccionar algún registro.');
+    } else if (seleccionados.length > 1) {
+        mensajecentral('error', 'Debes seleccionar solo un registro.');
+    } else {
+        obtenerDatosCI(`${seleccionados[0]}`).then(function (cabeceraData) {
+            imprimirConsentimientoInf(cabeceraData);
+        }).catch(function (error) {
+            console.log(error);
+        });
+    }
+}
+
+function imprimirConsentimientoInf(cabeceraData) {
+
+    // Obtener el contenido de la guía
+    const contenidoGuia = obtenerConsentimientoInf(cabeceraData);
+
+    // Abrir una nueva ventana con el tamaño y opciones deseadas
+    const opciones = 'width=595,height=842,menubar=no,toolbar=no,location=no,resizable=no,maximize=no';
+    const ventanaImpresion = window.open('', '_blank', opciones);
+
+    // Escribir el contenido de la guía en la ventana
+    ventanaImpresion.document.write(contenidoGuia);
+    ventanaImpresion.document.close();
+
+    // Esperar a que el contenido se cargue completamente antes de imprimir
+    ventanaImpresion.onload = function () {
+        ventanaImpresion.print();
+        ventanaImpresion.close();
+    };
+}
+function obtenerConsentimientoInf(cabeceraData) {
+    // Construir el contenido del contenedor de imagen y título
+    var contenedorImagenTitulo = "<div style='display: flex; align-items: center; margin-bottom: 10px;'>";
+    contenedorImagenTitulo += "<img src='/img/logo.png' alt='Logo' style='width: 120px; height: 75px;'>";
+    contenedorImagenTitulo += "</div>";
+    contenedorImagenTitulo += "</div>";
+
+    // Agregar el título centrado
+    var tituloCentrado = "<h4 style='text-align: center;'><strong>CONSENTIMIENTO INFORMADO PARA EXAMEN MÉDICO, AUTORIZACIÓN DE ENTREGA DE RESULTADOS Y DECLARACIÓN JURADA DE VERACIDAD DE INFORMACIÓN</strong></h4>";
+    tituloCentrado += "<p style='text-align: right;margin-left:10px;margin-bottom:20px;'>" + cabeceraData.fecha + "</p>";
+    tituloCentrado += "<p style='text-align: justify;margin:10px;line-height: 1.5em;font-size:14px;'>Yo,&nbsp" + cabeceraData.appm_nom + ",  identificado con DNI N°"+cabeceraData.numdoc+", con ocupación laboral de:&nbsp"+cabeceraData.cargo_actual+"&nbspcertifico con este documento que he sido informado acerca de la naturaleza y propósito de los Exámenes Médicos-Ocupacionales y pruebas complementarias que la empresa:&nbsp"+cabeceraData.razsoc+"&nbspsolicita de acuerdo a los riesgos de mi puesto de trabajo y que todas mis dudas y preguntas han sido absueltas."  
+    "</p>";
+    tituloCentrado += "<p style='text-align: justify;margin:10px;padding-top:20px;line-height: 1.5em;font-size:14px;'>Por tanto de forma consciente y voluntaria otorgo mi consentimiento para que procedan a realizar los exámenes que me correspondan en&nbsp"+cabeceraData.empresa+"&nbspy así mismo autorizo que los resultados sean entregados al área de salud ocupacional de la empresa&nbsp"+cabeceraData.razsoc+", con la finalidad de realizar la vigilancia medica ocupacional ordenada por la Ley de Seguridad y Salud en el trabajo 29783 y su modificatoria Ley 30222. Además DECLARO BAJO JURAMENTO que toda información proporcionada a los profesionales médicos o funcionarios responsables es de carácter verídico, para el cargo correspondiente al que postulo."+"</p>";
+    tituloCentrado += "<div style='display: flex; justify-content: center; align-items: center;padding-top: 50px;font-size:14px;'><div style='overflow: hidden;text-align: center;'><hr style='width: 100%; margin: 0;'><p style='margin: 0;padding-top: 25px;'>" + cabeceraData.appm_nom +"</p><p style='margin: 0;'>DNI:&nbsp"+cabeceraData.numdoc+ "</p></div><div style='margin-left: 20px;'><img src='/img/cuadrado.png' alt='Cuadrado' style='width: 130px; height: 110px;'></div></div><p style='margin-top: 20px;'><strong>La presente autorización se ampara en lo dispuesto en los Artículos 5º segundo párrafo y Artículos 13°, 25, 27 y 29° tercer párrafo de la Ley General de Salud N° 26842.</strong></p>";
+    contenedorImagenTitulo += "</div>";
+    // Construir el contenido final de la guía
+    var contenidoGuia = "<div style='font-family: Arial, sans-serif;'>" +
+        contenedorImagenTitulo +
+        tituloCentrado
+        "</div>";
+
+    // Retornar el contenido de la guía
+    return contenidoGuia;
+}
+
+function obtenerDatosCI(idcita) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: '/listarcinf',
+            method: 'POST',
+            data: {
+                idcita: idcita,
+            },
+            success: function (lista) {
+                var cabeceraData = {
+                    fecha: lista[0].fecha,
+                    appm_nom: lista[0].appm_nom,
+                    numdoc: lista[0].numdoc,
+                    cargo_actual: lista[0].cargo_actual,
+                    razsoc: lista[0].razsoc,
+                    empresa: lista[0].empresa,
+                }
+
+                resolve(cabeceraData);
             },
             error: function (error) {
                 // Manejo de errores aquí, si es necesario
@@ -462,4 +552,14 @@ function obtenerDatosDetalle(idcita) {
             }
         });
     });
+}
+
+// Ejemplo de cómo usar la función con async/await
+async function obtenerYManipularDatos(idcita) {
+    try {
+        var datos = await obtenerDatosDetalle(idcita);
+        console.log(datos); // Hacer algo con los datos obtenidos
+    } catch (error) {
+        console.error(error);
+    }
 }
