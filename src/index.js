@@ -31,6 +31,8 @@ const requerirAuth = function(req, res, next) {
 };
 
 const app = express();
+
+//a
 require('./lib/passport');
 
 // Manejo de uncaughtException
@@ -96,8 +98,19 @@ app.use(require('./routes/'));
 app.use(require('./routes/configuracion'));
 app.use(require('./routes/historiaclinica'));
 app.use(require('./routes/entidades'));
+/*
+const auth = (req, res, next) => {
+  const credentials = basicAuth(req);
 
-app.use(requerirAuth, express.static(path.join(__dirname, 'public')));
+  if (!credentials || credentials.name !== 'usuario' || credentials.pass !== 'contraseña') {
+    res.set('WWW-Authenticate', 'Basic realm="example"');
+    return res.status(401).send('Authentication required.');
+  }
+
+  next();
+};
+app.use('/img/paciente', auth, express.static(path.join(__dirname, 'public', 'img', 'paciente')));*/
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), () => {
   console.log('Server on port', app.get('port'));

@@ -165,7 +165,7 @@ module.exports = {
         }
     },
     async getpruebascards(req, res) {
-        let { soexa,cita_id } = req.query;
+        let { soexa, cita_id } = req.query;
         const pool = await getConnection();
         const pruebas = await pool.query(`pa_SelPruebasPorExamen '${soexa}','${cita_id}'`);
         res.json(pruebas.recordset);
@@ -178,7 +178,7 @@ module.exports = {
     },
     async postlaboratorio(req, res) {
         try {
-            const { cita_id, nuncom, soexa, codpru_id,doc_adic_id, datains, datainsrec, dataparametros  } = req.body;
+            const { cita_id, nuncom, soexa, codpru_id, doc_adic_id, datains, datainsrec, dataparametros } = req.body;
             const usenam = req.user.usuario;
             const hostname = '';
             const codrol = req.user.codrol;
@@ -215,7 +215,111 @@ module.exports = {
         const result = await pool.query(`pa_SelResultlaboratorio '${cita_id}','${soexa}'`);
         res.json(result.recordset);
     },
-    
+    async getresultespirometria(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResultespirometria '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+    async getresultcuestionarioespirometria(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResultcuestionarioespirometria '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+    async getresulttestpsicologia(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResulttestpsicologia '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+
+    /**************** Espirometria ***********************/
+    async getparametrosespiro(req, res) {
+        let { codpru_id, nuncom } = req.query;
+        const pool = await getConnection();
+        const parametros = await pool.query(`pa_SelParametrosEspiro ${codpru_id},${nuncom}`);
+        res.json(parametros.recordset);
+    },
+    async postespirometria(req, res) {
+        try {
+            const { cita_id, nuncom, soexa, codpru_id, doc_adic_id, datains, datainsrec, dataparametros } = req.body;
+            const usenam = req.user.usuario;
+            const hostname = '';
+            const codrol = req.user.codrol;
+            const med_id = req.user.med_id;
+            const detalleJsoncie10 = JSON.stringify(datains);
+            const detalleJsonrecomen = JSON.stringify(datainsrec);
+            const detalleJsonparametros = JSON.stringify(dataparametros);
+            console.log(detalleJsonparametros);
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_InsPbEspirometria';
+            request.input('cita_id', sql.Int, cita_id);
+            request.input('nuncom', sql.Int, nuncom);
+            request.input('soexa', sql.VarChar(6), soexa);
+            request.input('codpru_id', sql.Int, codpru_id);
+            request.input('med_id', sql.Int, med_id);
+            request.input('doc_adic_id', sql.Int, doc_adic_id);
+            request.input('usenam', sql.VarChar(30), usenam);
+            request.input('hostname', sql.VarChar(20), hostname);
+            request.input('codrol', sql.Int, codrol);
+            request.input('detalleJsoncie10', sql.NVarChar(sql.MAX), detalleJsoncie10);
+            request.input('detalleJsonrecomen', sql.NVarChar(sql.MAX), detalleJsonrecomen);
+            request.input('detalleJsonespiro', sql.NVarChar(sql.MAX), detalleJsonparametros);
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
+    },
+    /************************************************/
+    /*************** Ficha Musculo Esqueletica *****************/
+    async getresultfichamusculoesqueletica(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResultFichaMusculoesqueletica '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+    async postfichamusculoesqueletica(req, res) {
+        try {
+            const { cita_id, nuncom, soexa, codpru_id, aptitud_espalda, flex_fuerza, rangos_articulares, datains, doc_adic_id, datainsrec } = req.body;
+            
+            const usenam = req.user.usuario;
+            const hostname = '';
+            const codrol = req.user.codrol;
+            const med_id = req.user.med_id;            
+            const detalleJsoncie10 = JSON.stringify(datains);
+            const detalleJsonrecomen = JSON.stringify(datainsrec);
+            const detalleJsonflex_fuerza = JSON.stringify(flex_fuerza);
+            const detalleJsonrangos_articulares = JSON.stringify(rangos_articulares);
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_InsPbFichaMusculoEsqueletica';
+            request.input('cita_id', sql.Int, cita_id);
+            request.input('nuncom', sql.Int, nuncom);
+            request.input('soexa', sql.VarChar(6), soexa);
+            request.input('codpru_id', sql.Int, codpru_id);
+            request.input('med_id', sql.Int, med_id);
+            request.input('doc_adic_id', sql.Int, doc_adic_id);
+            request.input('usenam', sql.VarChar(30), usenam);
+            request.input('hostname', sql.VarChar(20), hostname);
+            request.input('codrol', sql.Int, codrol);
+            request.input('detalleJsoncie10', sql.NVarChar(sql.MAX), detalleJsoncie10);
+            request.input('detalleJsonrecomen', sql.NVarChar(sql.MAX), detalleJsonrecomen);
+            request.input('aptitud_espalda', sql.VarChar(40), aptitud_espalda);
+            request.input('flex_fuerza', sql.VarChar(sql.MAX), detalleJsonflex_fuerza);
+            request.input('rangos_articulares', sql.VarChar(sql.MAX), detalleJsonrangos_articulares);
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
+    },
     /***************************************************/
 
 };
