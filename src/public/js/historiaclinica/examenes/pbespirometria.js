@@ -63,15 +63,11 @@ function ObtenerParametros() {
                             autoUnmask: true,
                             placeholder: "0",
                             showMaskOnHover: true,
-                            scale: 0,  
+                            scale: 0,
                         });
                     }
                 });
             });
-            
-            
-            
-
             if (nuncom !== '0') {
                 var std_fuma = $('#std_fuma');
                 std_fuma.val(parametros[0].std_fuma);
@@ -80,7 +76,6 @@ function ObtenerParametros() {
                 var conclusion = $('#conclusion');
                 conclusion.val(parametros[0].conclusion);
             }
-            poblarcampos();
         },
         error: function () {
             $('#error-message').text('Se produjo un error al cargar los protocolos.');
@@ -96,8 +91,14 @@ function obtenerDataParametros() {
     var codpru_id = document.getElementById('codpru_id').value;
     var std_fuma = document.getElementById('std_fuma').value;
     var Calidad = document.getElementById('Calidad').value;
-    var conclusion = document.getElementById('conclusion').value;
-
+    let tipo = document.getElementById('tipo').value;
+    let conclusionInput = document.getElementById('conclusion').value;
+    let conclusion = ''; 
+    if (tipo === 'NORMAL') {
+        conclusion = tipo;
+    } else {
+        conclusion = tipo + ' - ' + conclusionInput;
+    }
     for (var i = 0; i < rows.length; i++) {
         var input = rows[i].getElementsByTagName('input');
         if (input.length >= 6) {
@@ -181,6 +182,7 @@ function Grabar() {
         });
 }
 (function poblarcampos() {
+    ocultarConclusionEspiro();
     let cita_id = document.getElementById('id').value;
     let soexa = document.getElementById('soexa').value;
     let nuncom = document.getElementById('nuncom');
@@ -273,3 +275,11 @@ function Grabar() {
         }
     });
 })();
+
+function ocultarConclusionEspiro() {
+    var conclusionDiv = $('#conclusionDiv');
+    conclusionDiv.hide();
+    $('#tipo').on('change', function () {
+        conclusionDiv.toggle($('#tipo').val() !== 'NORMAL');
+    });
+}
