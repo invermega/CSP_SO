@@ -1,6 +1,5 @@
 function ObtenerParametros() {
     let codpru_id = document.getElementById('codpru_id').value;
-    //inputcodpru_id.value = codpru_id;
     let nuncom = document.getElementById('nuncom').value;
     ocultarTabla("tablaparametros");
     mostrarDiv("cargaparametros");
@@ -73,8 +72,17 @@ function ObtenerParametros() {
                 std_fuma.val(parametros[0].std_fuma);
                 var Calidad = $('#Calidad');
                 Calidad.val(parametros[0].Calidad);
-                var conclusion = $('#conclusion');
-                conclusion.val(parametros[0].conclusion);
+                let conclusionResult = parametros[0].conclusion;
+                conclusionResult = conclusionResult.replace(/\s*-\s*/, '-');
+                let [tipo, conclusionInput] = conclusionResult.split('-');
+                console.log(tipo, conclusionInput, parametros[0].conclusion);
+                document.getElementById('tipo').value = tipo;
+                var conclusionDiv = $('#conclusionDiv');
+                conclusionDiv.hide();
+                if (tipo !== 'NORMAL') {
+                    conclusionDiv.show();
+                    document.getElementById('conclusion').value = conclusionInput ? conclusionInput : '';
+                }
             }
         },
         error: function () {
@@ -83,7 +91,7 @@ function ObtenerParametros() {
     });
 
 };
-
+//
 function obtenerDataParametros() {
     var table = document.getElementById('tableparametros');
     var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
@@ -93,12 +101,13 @@ function obtenerDataParametros() {
     var Calidad = document.getElementById('Calidad').value;
     let tipo = document.getElementById('tipo').value;
     let conclusionInput = document.getElementById('conclusion').value;
-    let conclusion = ''; 
+    let conclusion = '';
     if (tipo === 'NORMAL') {
         conclusion = tipo;
     } else {
         conclusion = tipo + ' - ' + conclusionInput;
     }
+    console.log(conclusion);
     for (var i = 0; i < rows.length; i++) {
         var input = rows[i].getElementsByTagName('input');
         if (input.length >= 6) {
