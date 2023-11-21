@@ -54,12 +54,33 @@ module.exports = {
         const parametro = "LB";
         permisosprueba(parametro, 'historiaclinica/pruebas/pblaboratorio', req, res);
     },
+    async renderespirometriaprueba(req, res) {
+        const parametro = "ES";
+        permisos(parametro,'historiaclinica/pruebas/pbespirometria', req, res,0)
+    },
+    async rendercuestionarioespirometriaprueba(req, res) {
+        const parametro = "CE";
+        permisos(parametro,'historiaclinica/pruebas/pbcuestionarioespirometria', req, res,0)
+    },
+    async rendertestpsicologiaprueba(req, res) {
+        const parametro = "TP";
+        permisos(parametro,'historiaclinica/pruebas/pbtestpsicologia', req, res,0)
+    },
+    async renderfichamusculoesqueleticaprueba(req, res) {
+        const parametro = "ME";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamusculoesqueletica', req, res);
+    },
+    async renderfichamedicoocupacional312prueba(req, res) {
+        const parametro = "MO";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamedicoocupacional312', req, res);
+    },
+    
 
     //entidades
     async renderprotocolo(req, res) {
         const parametro = "PT";
         permisos(parametro, 'entidades/protocolo', req, res)
-    },
+    },    
     async renderprotocolocreate(req, res) {
         const parametro = "PT";
         permisos(parametro, 'entidades/protocoloCreate', req, res, 0);
@@ -72,35 +93,46 @@ module.exports = {
     /*Paciente*/
     async renderpaciente(req, res) {
         const parametro = "PC";
-        permisos(parametro,'entidades/paciente', req, res);       
+        permisos(parametro, 'entidades/paciente', req, res);
     },
     async renderpacientecreate(req, res) {
         const parametro = "PC";
-        permisos(parametro,'entidades/paciente', req, res,0);
-    },async renderpacienteedit(req, res) {
+        permisos(parametro, 'entidades/paciente', req, res, 0);
+    }, async renderpacienteedit(req, res) {
         const { id } = req.params;
         const parametro = "PC";
-        permisos(parametro,'entidades/paciente', req, res,id);
+        permisos(parametro, 'entidades/paciente', req, res, id);
     },
     /*Cita */
     async rendercita(req, res) {
         const parametro = "CT";
-        permisos(parametro,'entidades/cita', req, res)
+        permisos(parametro, 'entidades/cita', req, res)
     },
     async rendercitacreate(req, res) {
         const parametro = "CT";
-        permisos(parametro,'entidades/citaCreate', req, res,0)
+        permisos(parametro, 'entidades/citaCreate', req, res, 0)
     },
     async rendercitaedit(req, res) {
         const { id } = req.params;
         const parametro = "CT";
-        permisos(parametro,'entidades/citaCreate', req, res,id)
+        permisos(parametro, 'entidades/citaCreate', req, res, id)
     },
+    /**Medico */
     async renderemedico(req, res) {
         const parametro = "MD";
         permisos(parametro,'entidades/medicos', req,res)
         res.render('entidades/medicos', { layout: false });
     },
+    async rendermedicocreate(req, res) {
+        const parametro = "MD";
+        permisos(parametro, 'entidades/medicosCreate', req, res, 0);
+    },
+    async rendermedicoedit(req, res) {
+        const { id } = req.params;
+        const parametro = "MD";
+        permisos(parametro, 'entidades/medicosCreate', req, res, id);
+    },
+    /**Cliente */
     async rendercliente(req, res) {
         const parametro = "CL";
         permisos(parametro,'entidades/cliente', req,res)
@@ -109,11 +141,11 @@ module.exports = {
     /*Examen */
     async renderexamen(req, res) {
         const parametro = "EX";
-        permisos(parametro,'entidades/examen', req, res)
+        permisos(parametro, 'entidades/examen', req, res)
     },
     async renderexamencreate(req, res) {
         const parametro = "EX";
-        permisos(parametro,'entidades/examenCreate', req, res,0)
+        permisos(parametro, 'entidades/examenCreate', req, res, 0)
     },
-    
+
 };

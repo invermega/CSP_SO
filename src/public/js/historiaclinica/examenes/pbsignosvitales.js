@@ -33,7 +33,7 @@
     let recomendacion3 = document.getElementById('recomendacion3');
     let control3 = document.getElementById('control3');
     $.ajax({
-        url: '/resultsignosvitales',
+        url: '/resultfichamusculoesqueletica',
         method: "GET",
         data: {
             cita_id: cita_id,
@@ -62,18 +62,22 @@
                         let codigo = registro.diacod;
                         let descripcion = registro.diades;
                         let comentario = registro.obs;
+                        let combo = registro.tipdia;
 
                         if (i === 0) {
                             codcie101.value = codigo;
                             codcie10desc1.value = descripcion;
+                            combocie101.value = combo;
                             codcie10comen1.value = comentario;
                         } else if (i === 1) {
                             codcie102.value = codigo;
                             codcie10desc2.value = descripcion;
+                            combocie102.value = combo;
                             codcie10comen2.value = comentario;
                         } else if (i === 2) {
                             codcie103.value = codigo;
                             codcie10desc3.value = descripcion;
+                            combocie103.value = combo;
                             codcie10comen3.value = comentario;
                         }
                     }
