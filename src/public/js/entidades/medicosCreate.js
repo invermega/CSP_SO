@@ -1,8 +1,6 @@
 $(document).ready(function () {
-    const id = document.getElementById("inputid").value;
+    //const id = document.getElementById("inputid").value;
     getPacienteCombos();
-
-    llenarFormulariomedico(id);
 
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
@@ -58,6 +56,7 @@ $(document).ready(function () {
 });
 
 
+
 function getPacienteCombos() {
     $.ajax({
         url: '/listarCombosPac',
@@ -86,6 +85,7 @@ function getPacienteCombos() {
 
 var opc = 0;
 function guardarMedico() {
+
     const canvas = document.getElementById('canvas');
     let camposValidosmed = validarFormulario('file-input,docide,med_cmp,medcel,medTelfij,med_correo,meddir,esp_id,med_rne,medicomodal');
     if (!camposValidosmed) {
@@ -126,11 +126,23 @@ function guardarMedico() {
             picmed: picmed,
         },
         success: function (response) {
-
-            $('input[type="text"]').val("");
             opc = 0;
-
-            mensaje(response[0].tipo, response[0].response, 1500);
+            if (response[0].tipo === 'success') {
+                MensajeSIyNO(response[0].tipo, response[0].mensaje, '¿Desea volver?', function (respuesta) {
+                    if (respuesta) {
+                        $('input[type="text"]').val("");
+                        rendersub('/medicos');
+                    } else {
+                        if (data[0].mensaje === "Guardado correctamente") {
+                            limpiarImput();
+                        }
+                        return;
+                    }
+                });
+            } else {
+                mensaje(response[0].tipo, response[0].response, 1500);
+            }
+            $("#btnMed").prop("disabled", false);
         },
         error: function () {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);
@@ -138,34 +150,9 @@ function guardarMedico() {
     });
 }
 
-function getmedicom(medapM, medamM, mednamM, docideM, nundocM, med_cmpM, med_rneM, medTelfijM, medcelM, med_correoM, meddirM, med_firmaM, esp_idM) {
-    opc = 1;
-    $('#medap').val(medapM);
-    $('#medam').val(medamM);
-    $('#mednam').val(mednamM);
-    $('#docide').val(docideM);
-    $('#nundoc').val(nundocM);
-    $('#med_cmp').val(med_cmpM);
-    $('#med_rne').val(med_rneM);
-    $('#medTelfij').val(medTelfijM);
-    $('#medcel').val(medcelM);
-    $('#med_correo').val(med_correoM);
-    $('#meddir').val(meddirM);
-    $('#esp_id').val(esp_idM);
 
-    const canvas = $('#canvas')[0];
-    const image = new Image();
-    const context = canvas.getContext('2d');
-    image.onload = function () {
-        canvas.width = image.width;
-        canvas.height = image.height;
-        context.drawImage(image, 0, 0);
-    };
-    image.src = `./img/medicos/${nundocM}.webp`;
 
-    //$('#modalFormmedico [data-dismiss="modal"]').trigger('click');
-}
-
+/*
 function llenarFormulariomedico(id) {
     // Selecciona los elementos una sola vez y guárdalos en variables
     var formElements = {
@@ -207,51 +194,7 @@ function llenarFormulariomedico(id) {
         }
     });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/
 
 function eliminarMed(dni) {
 

@@ -227,7 +227,7 @@ module.exports = {
         const result = await pool.query(`pa_SelResultcuestionarioespirometria '${cita_id}','${soexa}'`);
         res.json(result.recordset);
     },
-    async getresulttestpsicologia(req, res) {
+    async getresultpsicologia(req, res) {
         let { cita_id, soexa } = req.query;
         const pool = await getConnection();
         const result = await pool.query(`pa_SelResulttestpsicologia '${cita_id}','${soexa}'`);
