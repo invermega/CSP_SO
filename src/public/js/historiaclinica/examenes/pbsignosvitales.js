@@ -33,7 +33,7 @@
     let recomendacion3 = document.getElementById('recomendacion3');
     let control3 = document.getElementById('control3');
     $.ajax({
-        url: '/resultfichamusculoesqueletica',
+        url: '/resultsignosvitales',
         method: "GET",
         data: {
             cita_id: cita_id,
