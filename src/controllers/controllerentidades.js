@@ -209,12 +209,12 @@ module.exports = {
         res.json(response.recordset);
     },
     async getListaCitas(req, res) {//listar las citas
-        let { fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6 } = req.query;        
+        let { fecini, fecfin, paciente, parametro3, parametro4, parametro5, parametro6 } = req.query;
         const codrolUser = req.user.codrol;
         if (paciente === '') {
             paciente = '%';
         }
-        
+
         const pool = await getConnection();
         const response = await pool.query(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`);
         res.json(response.recordset);
@@ -238,31 +238,31 @@ module.exports = {
         }
     },
     async getListaHojaRutaC(req, res) {//listar hoja de ruta cabecera
-        let { idcita } = req.body;        
+        let { idcita } = req.body;
         const codrolUser = req.user.codrol;
-        console.log(idcita,codrolUser)
+        console.log(idcita, codrolUser)
         const pool = await getConnection();
         const response = await pool.query(`pa_SelHojaRuta_Cab ${idcita},${codrolUser}`);
         res.json(response.recordset);
     },
     async getListaHojaRutaD(req, res) {//listar hoja de ruta detalle
-        let { idcita } = req.body;        
+        let { idcita } = req.body;
         console.log(idcita)
         const pool = await getConnection();
         const response = await pool.query(`pa_SelHojaRuta_det ${idcita}`);
         res.json(response.recordset);
-    },   
-    
+    },
+
     /*************************/
     /************Examenes*************/
     async getListaExamenes(req, res) {//listar los examenes        
-        const codrolUser = req.user.codrol;        
+        const codrolUser = req.user.codrol;
         const pool = await getConnection();
         const response = await pool.query(`pa_selExamenes '${codrolUser}'`);
         res.json(response.recordset);
     },
     async postExamenes(req, res) {//insertar examenes
-        const { soexa,desexa,ordimp,ordprot,starep,staaddfile,reg_cie10,opc } = req.query;
+        const { soexa, desexa, ordimp, ordprot, starep, staaddfile, reg_cie10, opc } = req.query;
         const codrolUser = req.user.codrol;
         const usenam = req.user.usuario;
         const pool = await getConnection();
@@ -274,7 +274,7 @@ module.exports = {
     /************MEDICOS*************/
 
     async postmedico(req, res) {//agregar medico
-        const { medap, medam, mednam, docide, nundoc, med_cmp, med_rne, medTelfij, medcel, med_correo, meddir, esp_id, opc, picmed } = req.body;
+        const { inputid, medap, medam, mednam, docide, nundoc, med_cmp, med_rne, medTelfij, medcel, med_correo, meddir, esp_id, picmed } = req.body;
         const usenam = req.user.usuario;
         const hostname = '';
         const codrolUser = req.user.codrol;
@@ -290,21 +290,21 @@ module.exports = {
             .toFile(rutaSalida);
         const pool = await getConnection();
         const response = await pool.query(`pa_InsMedico '${medap.toUpperCase()}',${medam.toUpperCase()},'${mednam.toUpperCase()}','${docide}','${nundoc}','${med_cmp}','${med_rne}',
-        '${medTelfij.trim()}','${medcel}','${med_correo.toUpperCase()}','${meddir}','${esp_id}','${usenam}','${hostname}','${codrolUser}','${opc}'`);
+        '${medTelfij.trim()}','${medcel}','${med_correo.toUpperCase()}','${meddir}','${esp_id}','${usenam}','${hostname}','${codrolUser}','${inputid}'`);
 
         res.json(response.recordset);
     },
-    async getmedicolist(req, res) {//listar medicos
-        let  medico  = req.query.medico;
+    async getmedicolist(req, res) {//listar los medicos
+        let {parametro1 } = req.query;
         const codrolUser = req.user.codrol;
+        let medico = req.query.medico;
         if (medico === '') {
             medico = '%';
         }
         const pool = await getConnection();
-        const response = await pool.query(`pa_selMedico  '${codrolUser}','${medico}'`);
+        const response = await pool.query(`pa_selMedico '${codrolUser}','${medico}','${parametro1}'`);
         res.json(response.recordset);
     },
-    
     async deletemedico(req, res) {//eliminar medico
         const { dni } = req.body;
         const codrolUser = req.user.codrol;
@@ -312,7 +312,7 @@ module.exports = {
         const response = await pool.query(`pa_delMedico '${codrolUser}','${dni}'`);
         res.json(response.recordset);
     },
-    
+
     /*************Cliente***************/
     async postcliente(req, res) {//agregar cliente
         const { docide, NumDoc, razsoc, actividad_economica, Direccion, contacto, emailcon, celular, telefono, emailmedocu, forpag_id, cadcermed, incfirmmedexa, Incfirpacexa, Inchuepacexa, Incfordatper, incdecjur, Incfirhueforadi, creusucatocu, Encorvctocert, envcorusuexi, notinfmed_medocu, notinfmedpac, opc, piccli } = req.body;

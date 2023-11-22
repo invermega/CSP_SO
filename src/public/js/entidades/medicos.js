@@ -1,6 +1,7 @@
 $(document).ready(function () {
-  getmedico();
   render();
+  getmedico();
+  getPacienteCombos();
   const refresh = document.getElementById('refresh');
   refresh.addEventListener('click', getmedico);
   const search = document.getElementById('search');
@@ -10,12 +11,15 @@ $(document).ready(function () {
 function getmedico() {
   mostrarDiv('carga');
   ocultarTabla('mydatatable');
-  let medico = $('#medico').val();
+  let medico = $('#medico');
+  let parametro1 = $('#inputid');
+  parametro1 = 0;
   $.ajax({
     url: '/listarmedicos',
-    method: "GET",
+    method: 'GET',
     data: {
-      medico: medico,
+      medico: medico.val(),
+      parametro1:parametro1
     },
     success: function (medicos) {
       ocultarDiv('carga');
@@ -47,6 +51,33 @@ function getmedico() {
     }
   });
 }
+
+function getPacienteCombos() {
+  $.ajax({
+      url: '/listarCombosPac',
+      success: function (lista) {
+          let docident = $('#docide'); // Selecionar el select de tipo documento
+          let espme = $('#esp_id');  // Seleccionar el select de especialidad
+          docident.html('');
+          espme.html('');
+
+          lista.forEach(item => {
+              let option = `<option value="${item.id}">${item.descripcion}</option>`;
+              if (item.tabla === 'documento_identidad') {
+                  docident.append(option);
+              } if (item.tabla === 'especialidad') {
+                  espme.append(option);
+              }
+          });
+          $("#docide").val("01");
+          $('#esp_id').val("2");
+      },
+      error: function () {
+          alert('error');
+      }
+  });
+}
+
 /*
 function navegargetid(iddatatableble, tipo) {
   var table = document.getElementById(iddatatableble);

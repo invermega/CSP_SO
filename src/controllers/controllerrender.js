@@ -111,7 +111,6 @@ module.exports = {
     async renderemedico(req, res) {
         const parametro = "MD";
         permisos(parametro,'entidades/medicos', req,res)
-        res.render('entidades/medicos', { layout: false });
     },
     async rendermedicocreate(req, res) {
         const parametro = "MD";
