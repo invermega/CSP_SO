@@ -12,398 +12,495 @@
                     <i class="fa-regular fa-floppy-disk" style="margin: 8px 12px;"></i>
             </div>
         </div>
-        <div class="card-body " style="max-height: 70vh; overflow-y: auto; ">
+        <div class="card-body" style="max-height: 70vh; overflow-y: auto; ">
             <input type="text" id="nuncom" style="display: none;" value="0">
             <input type="text" id="codpru_id" style="display: none;" value="4">
-            <div class="row">
-                <div class="table-responsive ">
-                    <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                        <thead class="thead sticky-top">
-                            <tr>
-                                <th colspan="4">DATOS DEL TRABAJADOR</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>N° de Documento</td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                                <td>Apellidos y Nombres</td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Empresa</td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                                <td>Cargo Actual</td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Cargo al que postula</td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                                <td>Área de trabajo</td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Edad</td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                                <td>Sexo</td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Fecha Nacimiento</td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                                <td>DNI</td>
-                                <td><input class="form-control form-control-sm" maxlength="50" type="text" id="dni">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tipo de examen</td>
-                                <td colspan="3"><input class="form-control form-control-sm" maxlength="50" type="text"
-                                        id="dni"></td>
-                            </tr>
-                            <tr>
-                                <td>Fecha de atención</td>
-                                <td colspan="3"><input class="form-control form-control-sm" maxlength="50" type="text"
-                                        id="dni"></td>
-                            </tr>
-                        </tbody>
-                    </table>
 
-                    <div class="tituloverde">
-                        <h5>PREGUNTAS PARA TODOS LOS CANDIDATOS A ESPIROMETRÍA (RELACIONADAS A CRITERIOS DE EXCLUSIÓN)
-                        </h5>
+            <div id="formPreguntas">
+                <div class="row">
+                    <h5 class="tituloverde mb-3">PREGUNTAS PARA TODOS LOS CANDIDATOS A ESPIROMETRÍA (RELACIONADAS A
+                        CRITERIOS DE
+                        EXCLUSIÓN)
+                    </h5>
+                    <div class="col-md-8 ms-1">
+                        <p>1. ¿Tuvo desprendimiento de la retina o una operación (cirugía) de los ojos, tórax o abdomen,
+                            en
+                            los últimos 3 meses?</p>
                     </div>
-
-                    <body>
-
-                        <label style="margin: 1em; display: inline-block; text-align: left; width: 60em;"
-                            for="cadcermedN">1. ¿Tuvo desprendimiento de la retina o una operación (cirugía) de los
-                            ojos, tórax o abdomen, en los últimos 3 meses?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                        </div><br>
-
-                        <label style="margin: 1em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">  2. ¿Ha tenido algún ataque cardíaco o infarto al corazón en los
-                            últimos 3 meses?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                        </div><br>
-
-                        <label style="margin: 1em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">  3. ¿Ha estado hospitalizado(a) por cualquier otro problema del
-                            corazón en los últimos 3 meses?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                        </div><br>
-
-                        <label style="margin: 1em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">  4. ¿Está usando medicamentos para la tuberculosis, en este
-                            momento?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                        </div><br>
-
-                        <label style="margin: 1em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">5. En caso de ser mujer: ¿Está usted embarazada
-                            actualmente?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="N" id="cadcermedN"
-                                checked>
-                            <label for="cadcermedN">No aplica</label>
-                            <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                        </div><br>
-
-                    </body>
-
-                    <div class="tituloverde">
-                        <h5>PARA SER LLENADO POR EL PROFESIONAL QUE REALIZA LA PRUEBA
-                        </h5>
-                    </div>
-
-                    <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-
-                        <tbody>
-                            <tr>
-                                <td>6</td>
-                                <td>HEMOPTISIS</td>
-                                <td>
-                                    <label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 5em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>PNEUMOTORAX</td>
-                                <td><label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 5em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>TRAQUEOSTOMÍA</td>
-                                <td><label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 5em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>SONDA PLEURAL</td>
-                                <td><label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 5em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>ANEURISMAS CEREBRAL, ABDOMEN, TORAX</td>
-                                <td><label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 5em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>EMBOLA PULMONAR</td>
-                                <td><label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 5em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>12</td>
-                                <td>INFARTO RECIENTE</td>
-                                <td><label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 5em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>13</td>
-                                <td>INESTABILIDAD CV</td>
-                                <td><label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 5em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>14</td>
-                                <td>FIEBRE, NAUSEA, VOMITO</td>
-                                <td><label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 5em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>15</td>
-                                <td>EMBARAZO AVANZADO</td>
-                                <td><label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 5em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>16</td>
-                                <td>EMBARAZO COMPLICADO</td>
-                                <td><label for="cadcermedS">Sí</label>
-                                    <input style="margin-right: 2em" type="radio" name="respuesta1" value="S"
-                                        id="cadcermedS">
-                                    <label for="cadcermedN">No</label>
-                                    <input style="margin-right: 2em" type="radio" name="respuesta1" value="N"
-                                        id="cadcermedN" checked>
-                                    <label for="cadcermedN">No aplica</label>
-                                    <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="tituloverde">
-                        <h5>PREGUNTAS PARA TODOS LOS ENTREVISTADOS QUE NO TIENEN LOS CRITERIOS DE EXCLUSIÓN Y QUE POR LO
-                            TANTO DEBEN HACER LA ESPIROMETRÍA
-                        </h5>
-                    </div>
-
-                    <body>
-
-                        <label style="margin-right: 10em; display: inline-block; text-align: left; width: 60em;"
-                            for="cadcermedN">1. ¿Tuvo una infección respiratoria (resfriado), en las ultimas 3
-                            semanas?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                        </div><br>
-
-                        <label style="margin-right: 10em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">2. ¿Tuvo Infección en el oido en las ultimas 3 semanas?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                        </div><br>
-
-                        <label style="margin-right: 10em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">3. ¿Uso aerosoles (sprays inhalados) o nebulizaciones con
-                            broncodilatadores, en las útimas 3 horas?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                        </div><br>
-
-                        <label style="margin-right: 10em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">4. ¿Ha usado algún medicamento broncodilatador toma en las últimas 8
-                            horas?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input type="radio" name="respuesta1" value="N" id="cadcermedN" checked>
-                        </div><br>
-
-                        <label style="margin-right: 10em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">5. ¿Fumó (cualquier tipo de cigarro), en las útimas dos horas?, si la
-                            respuesta es si. Cuántos?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="N" id="cadcermedN"
-                                checked>
-
-                        </div><br>
-
-                        <label style="margin-right: 10em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">6. ¿Realizó algún ejercio fisico tuerte (como gimnasia, caminata o
-                            trotar), en la útima hora?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="N" id="cadcermedN"
-                                checked>
-
-                        </div><br>
-
-                        <label style="margin-right: 10em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">7. ¿Comio en la ultima hora?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="N" id="cadcermedN"
-                                checked>
-
-                        </div><br>
-
-                        <label style="margin-right: 10em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">8. ¿Ha sufrido de Tuberculosis? ¿Completo el Tratamiento?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="N" id="cadcermedN"
-                                checked>
-
-                        </div><br>
-
-                        <label style="margin-right: 10em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">9. Si es fumador. ¿Ha fumado (cualquier tipo de cigarro), en las
-                            últimas dos horas?</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="N" id="cadcermedN"
-                                checked>
-
-                        </div><br>
-
-                        <label style="margin-right: 10em; display: inline-block; text-align: left; width: 60em;"
-                            for="incfirmmedexaS">10. ¿Sufre de asma? Indicar último cpisodio</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <label for="cadcermedS">Sí</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="cadcermedS">
-                            <label for="cadcermedN">No</label>
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="N" id="cadcermedN"
-                                checked>
-                        </div><br>
-
-                        <div class="tituloverde">
-                            <h6>Nota de personal</h6>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre1" id="ce_pre1S" value="SI">
+                            <label class="form-check-label" for="ce_pre1S">Si</label>
                         </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre1" id="ce_pre1N" value="NO" checked
+                                checked>
+                            <label class="form-check-label" for="ce_pre1N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>2. ¿Ha tenido algún ataque cardíaco o infarto al corazón en los últimos 3 meses?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline ">
+                            <input class="form-check-input" type="radio" name="ce_pre2" id="ce_pre2S" value="SI">
+                            <label class="form-check-label" for="ce_pre2S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre2" id="ce_pre2N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre2N" checked>No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>3. ¿Ha estado hospitalizado(a) por cualquier otro problema del corazón en los últimos 3
+                            meses?
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre3" id="ce_pre3S" value="SI">
+                            <label class="form-check-label" for="ce_pre3S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre3" id="ce_pre3N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre3N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>4. ¿Está usando medicamentos para la tuberculosis, en este momento?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre4" id="ce_pre4S" value="SI">
+                            <label class="form-check-label" for="ce_pre4S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre4" id="ce_pre4N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre4N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>5. En caso de ser mujer, ¿Está usted embarazada actualmente?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre5" id="ce_pre5S" value="SI">
+                            <label class="form-check-label" for="ce_pre5S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre5" id="ce_pre5N" value="NO">
+                            <label class="form-check-label" for="ce_pre5N">No</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre5" id="ce_pre5NA" value="NA"
+                                checked>
+                            <label class="form-check-label" for="ce_pre5NA">No aplica</label>
+                        </div>
+                    </div>
+                </div>
 
-                        <label style="margin-right: 5em; text-align: left; width: 20em;" for="colaboraSi">Persona
-                            colabora con la prueba</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="colaboraSi">
-                        </div><br>
+                <div class="row">
+                    <h5 class="tituloverde mb-3">PARA SER LLENADO POR EL PROFESIONAL QUE REALIZA LA PRUEBA
+                    </h5>
+                    <div class="col-md-8 ms-1">
+                        <p>6. HEMOPTISIS</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre6" id="ce_pre6S" value="SI">
+                            <label class="form-check-label" for="ce_pre6S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre6" id="ce_pre6N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre6N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>7. PNEUMOTORAX</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre7" id="ce_pre7S" value="SI">
+                            <label class="form-check-label" for="ce_pre7S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre7" id="ce_pre7N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre7N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>8. TRAQUEOSTOMÍA
+                        </p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre8" id="ce_pre8S" value="SI">
+                            <label class="form-check-label" for="ce_pre8S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre8" id="ce_pre8N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre8N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>9. SONDA PLEURAL</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre9" id="ce_pre9S" value="SI">
+                            <label class="form-check-label" for="ce_pre9S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre9" id="ce_pre9N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre9N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>10. ANEURISMAS CEREBRAL, ABDOMEN, TORAX</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre10" id="ce_pre10S" value="SI">
+                            <label class="form-check-label" for="ce_pre10S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre10" id="ce_pre10N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre10N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>11. EMBOLA PULMONAR</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre11" id="ce_pre11S" value="SI">
+                            <label class="form-check-label" for="ce_pre11S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre11" id="ce_pre11N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre11N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>12. INFARTO RECIENTE</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre12" id="ce_pre12S" value="SI">
+                            <label class="form-check-label" for="ce_pre12S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre12" id="ce_pre12N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre12N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>13. INESTABILIDAD CV</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre13" id="ce_pre13S" value="SI">
+                            <label class="form-check-label" for="ce_pre13S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre13" id="ce_pre13N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre13N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>14. FIEBRE, NAUSEA, VOMITO</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre14" id="ce_pre14S" value="SI">
+                            <label class="form-check-label" for="ce_pre14S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre14" id="ce_pre14N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre14N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>15. EMBARAZO AVANZADO</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre15" id="ce_pre15S" value="SI">
+                            <label class="form-check-label" for="ce_pre15S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre15" id="ce_pre15N" value="NO">
+                            <label class="form-check-label" for="ce_pre15N">No</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre15" id="ce_pre15NA" value="NA"
+                                checked>
+                            <label class="form-check-label" for="ce_pre15NA">No aplica</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>16. EMBARAZO COMPLICADO</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre16" id="ce_pre16S" value="SI">
+                            <label class="form-check-label" for="ce_pre16S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre16" id="ce_pre16N" value="NO">
+                            <label class="form-check-label" for="ce_pre16N">No</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre16" id="ce_pre16NA" value="NA"
+                                checked>
+                            <label class="form-check-label" for="ce_pre16NA">No aplica</label>
+                        </div>
+                    </div>
+                </div>
 
-                        <label style="margin-right: 5em; text-align: left; width: 20em;" for="colaboraNo">No
-                            colabora</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S" id="colaboraNo">
-                        </div><br>
+                <div class="row">
+                    <h5 class="tituloverde mb-3">PREGUNTAS PARA TODOS LOS ENTREVISTADOS QUE NO TIENEN LOS CRITERIOS DE
+                        EXCLUSIÓN Y QUE POR LO
+                        TANTO DEBEN HACER LA ESPIROMETRÍA</h5>
+                    <div class="col-md-8 ms-1">
+                        <p>1.¿Tuvo una infección respiratoria (resfriado), en las ultimas 3
+                            semanas?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre17" id="ce_pre17S" value="SI">
+                            <label class="form-check-label" for="ce_pre17S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre17" id="ce_pre17N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre17N">No</label>
+                        </div>
+                    </div>
+                </div>
 
-                        <label style="margin-right: 5em; text-align: left; width: 20em;" for="colaboraPoco">Colabora de
-                            forma poco adecuada</label>
-                        <div style="display: inline-block; text-align: right;">
-                            <input style="margin-right: 5em;" type="radio" name="respuesta1" value="S"
-                                id="colaboraPoco">
-                        </div><br>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>2. ¿Tuvo Infección en el oido en las ultimas 3 semanas?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre18" id="ce_pre18S" value="SI">
+                            <label class="form-check-label" for="ce_pre18S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre18" id="ce_pre18N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre18N">No</label>
+                        </div>
+                    </div>
+                </div>
 
-                    </body>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>3. ¿Uso aerosoles (sprays inhalados) o nebulizaciones con
+                            broncodilatadores, en las útimas 3 horas?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre19" id="ce_pre19S" value="SI">
+                            <label class="form-check-label" for="ce_pre19S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre19" id="ce_pre19N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre19N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>4. ¿Ha usado algún medicamento broncodilatador toma en las últimas 8
+                            horas?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre20" id="ce_pre20S" value="SI">
+                            <label class="form-check-label" for="ce_pre20S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre20" id="ce_pre20N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre20N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>5. ¿Fumó (cualquier tipo de cigarro), en las útimas dos horas?, si la
+                            respuesta es si. Cuántos?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre21" id="ce_pre21S" value="SI">
+                            <label class="form-check-label" for="ce_pre21S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre21" id="ce_pre21N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre21N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>6. ¿Realizó algún ejercio fisico tuerte (como gimnasia, caminata o
+                            trotar), en la útima hora?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre22" id="ce_pre22S" value="SI">
+                            <label class="form-check-label" for="ce_pre22S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre22" id="ce_pre22N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre22N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>7. ¿Comio en la ultima hora?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre23" id="ce_pre23S" value="SI">
+                            <label class="form-check-label" for="ce_pre23S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre23" id="ce_pre23N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre23N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>8. ¿Ha sufrido de Tuberculosis? ¿Completo el Tratamiento?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre24" id="ce_pre24S" value="SI">
+                            <label class="form-check-label" for="ce_pre24S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre24" id="ce_pre24N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre24N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>9. Si es fumador. ¿Ha fumado (cualquier tipo de cigarro), en las
+                            últimas dos horas?</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre25" id="ce_pre25S" value="SI">
+                            <label class="form-check-label" for="ce_pre25S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre25" id="ce_pre25N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre25N">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 ms-1">
+                        <p>10. ¿Sufre de asma? Indicar último cpisodio</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre26" id="ce_pre26S" value="SI">
+                            <label class="form-check-label" for="ce_pre26S">Si</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre26" id="ce_pre26N" value="NO"
+                                checked>
+                            <label class="form-check-label" for="ce_pre26N">No</label>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="row">
+                    <h5 class="tituloverde mb-3">Nota de personal</h5>
+                    <div class="col-md-3 ms-1">
+                        <p>Persona colabora con la prueba</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre27" id="ce_pre27S" value="SI"
+                                checked>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 ms-1">
+                        <p>No colabora</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre27" id="ce_pre27N" value="NO">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 ms-1">
+                        <p>Colabora de forma poco adecuada</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ce_pre27" id="ce_pre27NA" value="NA">
+                        </div>
+                    </div>
                 </div>
             </div>
 

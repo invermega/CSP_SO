@@ -43,18 +43,18 @@ router.get('/resultlaboratorio', isLoggedIn, controllerHI.getresultlaboratorio);
 router.get('/pbespirometria', isLoggedIn, controllerrender.renderespirometriaprueba);
 router.get('/resultespirometria', isLoggedIn, controllerHI.getresultespirometria);
 router.post('/pbespirometria', isLoggedIn, controllerHI.postespirometria);
-
 /*********************************************/
+/****************Cuestionario Espirometria*****************/
 router.get('/pbcuestionarioespirometria', isLoggedIn, controllerrender.rendercuestionarioespirometriaprueba);
-
 router.get('/resultcuestionarioespirometria', isLoggedIn, controllerHI.getresultcuestionarioespirometria);
-router.get('/parametrosespiro', isLoggedIn, controllerHI.getparametrosespiro); 
-
+router.post('/pbcuestionarioespiromeria', isLoggedIn, controllerHI.postcuestionarioespiromeria);
+/*********************************************/
+/****************Psicologia*****************/
 router.get('/pbpsicologia', isLoggedIn, controllerrender.renderpsicologiaprueba);
 router.get('/resultpsicologia', isLoggedIn, controllerHI.getresultpsicologia);
-
-router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfichamedicoocupacional312prueba); 
-
+/*********************************************/
+/****************Ficha medico ocupacional 312*****************/
+router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfichamedicoocupacional312prueba);
 /************************************************/
 /*****************Ficha Musculo Esqueletica*****************/
 router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueleticaprueba);
@@ -65,3 +65,4 @@ router.get('/resultfichamusculoesqueletica', isLoggedIn, controllerHI.getresultf
 
 /************************************************/
 module.exports = router;
+//pbcuestionarioespiromeria

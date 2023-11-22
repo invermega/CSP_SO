@@ -72,10 +72,10 @@ function ObtenerParametros() {
                 std_fuma.val(parametros[0].std_fuma);
                 var Calidad = $('#Calidad');
                 Calidad.val(parametros[0].Calidad);
+                
                 let conclusionResult = parametros[0].conclusion;
                 conclusionResult = conclusionResult.replace(/\s*-\s*/, '-');
                 let [tipo, conclusionInput] = conclusionResult.split('-');
-                console.log(tipo, conclusionInput, parametros[0].conclusion);
                 document.getElementById('tipo').value = tipo;
                 var conclusionDiv = $('#conclusionDiv');
                 conclusionDiv.hide();
@@ -107,7 +107,6 @@ function obtenerDataParametros() {
     } else {
         conclusion = tipo + ' - ' + conclusionInput;
     }
-    console.log(conclusion);
     for (var i = 0; i < rows.length; i++) {
         var input = rows[i].getElementsByTagName('input');
         if (input.length >= 6) {
@@ -288,7 +287,8 @@ function Grabar() {
 function ocultarConclusionEspiro() {
     var conclusionDiv = $('#conclusionDiv');
     conclusionDiv.hide();
+    var tipo = $('#tipo');
     $('#tipo').on('change', function () {
-        conclusionDiv.toggle($('#tipo').val() !== 'NORMAL');
+        conclusionDiv.toggle($('#tipo').val() !== 'NORMAL');        
     });
 }

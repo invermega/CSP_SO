@@ -215,24 +215,6 @@ module.exports = {
         const result = await pool.query(`pa_SelResultlaboratorio '${cita_id}','${soexa}'`);
         res.json(result.recordset);
     },
-    async getresultespirometria(req, res) {
-        let { cita_id, soexa } = req.query;
-        const pool = await getConnection();
-        const result = await pool.query(`pa_SelResultespirometria '${cita_id}','${soexa}'`);
-        res.json(result.recordset);
-    },
-    async getresultcuestionarioespirometria(req, res) {
-        let { cita_id, soexa } = req.query;
-        const pool = await getConnection();
-        const result = await pool.query(`pa_SelResultcuestionarioespirometria '${cita_id}','${soexa}'`);
-        res.json(result.recordset);
-    },
-    async getresultpsicologia(req, res) {
-        let { cita_id, soexa } = req.query;
-        const pool = await getConnection();
-        const result = await pool.query(`pa_SelResulttestpsicologia '${cita_id}','${soexa}'`);
-        res.json(result.recordset);
-    },
 
     /**************** Espirometria ***********************/
     async getparametrosespiro(req, res) {
@@ -251,7 +233,6 @@ module.exports = {
             const detalleJsoncie10 = JSON.stringify(datains);
             const detalleJsonrecomen = JSON.stringify(datainsrec);
             const detalleJsonparametros = JSON.stringify(dataparametros);
-            console.log(detalleJsonparametros);
             const pool = await getConnection();
             const request = pool.request();
             const PROCEDURE_NAME = 'pa_InsPbEspirometria';
@@ -275,6 +256,12 @@ module.exports = {
             res.status(500).json({ error: error.message });
         }
     },
+    async getresultespirometria(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResultespirometria '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
     /************************************************/
     /*************** Ficha Musculo Esqueletica *****************/
     async getresultfichamusculoesqueletica(req, res) {
@@ -286,11 +273,11 @@ module.exports = {
     async postfichamusculoesqueletica(req, res) {
         try {
             const { cita_id, nuncom, soexa, codpru_id, aptitud_espalda, flex_fuerza, rangos_articulares, datains, doc_adic_id, datainsrec } = req.body;
-            
+
             const usenam = req.user.usuario;
             const hostname = '';
             const codrol = req.user.codrol;
-            const med_id = req.user.med_id;            
+            const med_id = req.user.med_id;
             const detalleJsoncie10 = JSON.stringify(datains);
             const detalleJsonrecomen = JSON.stringify(datainsrec);
             const detalleJsonflex_fuerza = JSON.stringify(flex_fuerza);
@@ -321,5 +308,51 @@ module.exports = {
         }
     },
     /***************************************************/
-
+    /*************** Cuestionario Espirometria *****************/
+    async postcuestionarioespiromeria(req, res) {
+        try {
+            const { cita_id, nuncom, soexa, codpru_id, doc_adic_id, datains, datainsrec, dataparametros } = req.body;
+            const usenam = req.user.usuario;
+            const hostname = '';
+            const codrol = req.user.codrol;
+            const med_id = req.user.med_id;
+            const detalleJsoncie10 = JSON.stringify(datains);
+            const detalleJsonrecomen = JSON.stringify(datainsrec);
+            const detalleJsonparametros = JSON.stringify(dataparametros);
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_InsPbCuestionarioEspirometria';
+            request.input('cita_id', sql.Int, cita_id);
+            request.input('nuncom', sql.Int, nuncom);
+            request.input('soexa', sql.VarChar(6), soexa);
+            request.input('codpru_id', sql.Int, codpru_id);
+            request.input('med_id', sql.Int, med_id);
+            request.input('doc_adic_id', sql.Int, doc_adic_id);
+            request.input('usenam', sql.VarChar(30), usenam);
+            request.input('hostname', sql.VarChar(20), hostname);
+            request.input('codrol', sql.Int, codrol);
+            request.input('detalleJsoncie10', sql.NVarChar(sql.MAX), detalleJsoncie10);
+            request.input('detalleJsonrecomen', sql.NVarChar(sql.MAX), detalleJsonrecomen);
+            request.input('detalleJsoncuestionarioespiro', sql.NVarChar(sql.MAX), detalleJsonparametros);
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
+    },
+    async getresultcuestionarioespirometria(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResultCuestionarioEspirometria '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+    /***************************************************/
+    async getresultpsicologia(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResulttestpsicologia '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
 };
