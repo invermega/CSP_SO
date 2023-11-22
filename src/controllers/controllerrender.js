@@ -30,7 +30,7 @@ module.exports = {
     //render de configuracion
     async renderusuario(req, res) {
         const parametro = "US";
-        permisos(parametro, 'configuracion/usuario', req, res)
+        permisos(parametro, 'configuracion/usuario', req, res);
     },
     async renderroles(req, res) {
         const parametro = "PE"
@@ -39,7 +39,7 @@ module.exports = {
     //historiaclinica
     async renderpacientescitados(req, res) {
         const parametro = "PH";
-        permisos(parametro, 'historiaclinica/pacientescitados', req, res)
+        permisos(parametro, 'historiaclinica/pacientescitados', req, res);
     },
     async rendermenuexamenes(req, res) {
         const { soexa, id } = req.params;
@@ -54,32 +54,9 @@ module.exports = {
         const parametro = "LB";
         permisosprueba(parametro, 'historiaclinica/pruebas/pblaboratorio', req, res);
     },
-    async renderespirometriaprueba(req, res) {
-        const parametro = "ES";
-        permisos(parametro,'historiaclinica/pruebas/pbespirometria', req, res,0)
-    },
-    async rendercuestionarioespirometriaprueba(req, res) {
-        const parametro = "CE";
-        permisos(parametro,'historiaclinica/pruebas/pbcuestionarioespirometria', req, res,0)
-    },
-    async rendertestpsicologiaprueba(req, res) {
-        const parametro = "TP";
-        permisos(parametro,'historiaclinica/pruebas/pbtestpsicologia', req, res,0)
-    },
-    async renderfichamusculoesqueleticaprueba(req, res) {
-        const parametro = "ME";
-        permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamusculoesqueletica', req, res);
-    },
-    async renderfichamedicoocupacional312prueba(req, res) {
-        const parametro = "MO";
-        permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamedicoocupacional312', req, res);
-    },
-    
-
-    //entidades
     async renderprotocolo(req, res) {
         const parametro = "PT";
-        permisos(parametro, 'entidades/protocolo', req, res)
+        permisos(parametro, 'entidades/protocolo', req, res);
     },    
     async renderprotocolocreate(req, res) {
         const parametro = "PT";
