@@ -182,6 +182,16 @@ function Grabar() {
     let soexa = document.getElementById('soexa').value;
     let codpru_id = document.getElementById('codpru_id').value;
     let doc_adic_id = document.getElementById('doc_adic_id').value;
+
+    var tbody = document.getElementById('tbodyparametros');
+    if (tbody.rows.length > 0) {
+        var datains = obtenerDataIns();
+    } else {
+        btnGrabar.disabled = false;
+        mensaje('error', 'Por favor, seleccione alguna prueba', 1500);
+        btnGrabar.innerHTML = `<i class="fa-regular fa-floppy-disk" style="margin: 8px 12px;">`
+        return;
+    }
     var datains = obtenerDataIns();
     console.log(datains);
     var datainsrec = obtenerDataInsRec();
@@ -222,6 +232,7 @@ function Grabar() {
             console.error('Error:', error);
         });
 }
+
 
 function obtenerDataParametros() {
     var table = document.getElementById('tableparametros');
