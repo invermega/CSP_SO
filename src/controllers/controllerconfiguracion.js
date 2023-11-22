@@ -29,12 +29,8 @@ module.exports = {
     },
 
     async CerrarSesion(req, res) {
-        req.logout(function (err) {
-            if (err) {
-                console.error(err);
-            }
-            res.redirect('/iniciarsesion');
-        });
+        req.logOut();
+        res.redirect('/iniciarsesion');
     },
 
     async postgrupousuario(req, res) {
@@ -52,11 +48,37 @@ module.exports = {
     },
     async getaccesos(req, res) {
         const { codrol } = req.query;
-
+        
         const pool = await getConnection();
         const accesos = await pool.query(`sp_selAccesos '${codrol}'`);
         res.json(accesos.recordset);
     },
+    async postaccesos(req, res) {
+        const datains = req.body.datains;
+        const usenam = '';
+        const hostname = '';
+        const pool = await getConnection();
+        for (let i = 0; i < datains.length; i++) {
+            const codrol = datains[i].codrol;
+            const opcsis = datains[i].opcsis;
+            const estado = datains[i].estado;
+            const lectura = datains[i].lectura;
+            const escritura = datains[i].escritura;
+            await pool.query(`sp_insAccesos '${opcsis}','${codrol}','${estado}','${lectura}','${escritura}','${usenam}','${hostname}'`);
+        }
+        res.json('Completado');
+    },
+    async delaccesos(req, res) {
+        const datadel = req.body.datadel;
+        const pool = await getConnection();
+        for (let i = 0; i < datadel.length; i++) {
+            const codrol = datadel[i].codrol;
+            const opcsis = datadel[i].opcsis;
+            await pool.query(`sp_delAccesos '${opcsis}','${codrol}'`);
+        }
+        res.json('Completado');
+    },
+    /****************************************************************/
 
     async postaccesos(req, res) {
         const datains = req.body.datains;
@@ -83,11 +105,11 @@ module.exports = {
         }
         res.json('Completado');
     },
-
+    
 
     /************Usuario*******/
     async postusuario(req, res) {//agregar usuario
-        const { usuario, contrasena, celular, app, apm, Nombres, fecnac, DNI, correo, direccion, sexo, codrol, iduser, opc, picuser, med_id } = req.body;
+        const { usuario, contrasena, celular, app, apm, Nombres, fecnac, DNI, correo, direccion, sexo, codrol, iduser, opc, picuser } = req.body;
         const passencrypt = await helpers.EncriptarPass(contrasena);
         const usenam = req.user.usuario;
         const hostname = '';
@@ -103,7 +125,7 @@ module.exports = {
             .toFormat('webp')
             .toFile(rutaSalida);
         const pool = await getConnection();
-        const response = await pool.query(`sp_insUsuario '${usuario.toUpperCase()}','${passencrypt}',${celular},'${app.toUpperCase()}','${apm.toUpperCase()}','${Nombres.toUpperCase()}','${DNI}','${fecnac}','${correo.toUpperCase()}','${direccion.toUpperCase()}',${codrol}, '${sexo.toUpperCase()}','${usenam}','${hostname}',${codrolUser},${iduser},${opc},${med_id}`);
+        const response = await pool.query(`sp_insUsuario '${usuario.toUpperCase()}','${passencrypt}',${celular},'${app.toUpperCase()}','${apm.toUpperCase()}','${Nombres.toUpperCase()}','${DNI}','${fecnac}','${correo.toUpperCase()}','${direccion.toUpperCase()}','${codrol}', '${sexo.toUpperCase()}','${usenam}','${hostname}','${codrolUser}','${iduser}','${opc}'`);
         res.json(response.recordset);
     },
     async getusuarios(req, res) {//listar usuario para edicion
@@ -121,11 +143,12 @@ module.exports = {
         res.json(response.recordset);
     },
     async resetpass(req, res) {//resetear contraseña
-        const { iduser, usuario } = req.body;
+        const { iduser } = req.body;        
         const codrolUser = req.user.codrol;
         const pool = await getConnection();
         const user = req.user.usuario;
-        const passencrypt = await helpers.EncriptarPass(usuario);
+        console.log(user);
+        const passencrypt = await helpers.EncriptarPass(user);
         const response = await pool.query(`sp_editPassUser '${codrolUser}','${iduser}','${passencrypt}'`);
         res.json(response.recordset);
     }

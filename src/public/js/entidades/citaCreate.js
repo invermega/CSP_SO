@@ -1,33 +1,37 @@
-$(document).ready(function () {    
+$(document).ready(function () {
+    /*$('#fecprocitaTime').clockpicker({
+        align: 'left',
+        autoclose: true,
+        'default': 'now',
+        donetext: 'Aceptar',
+        twelvehour: false,
+        afterDone: function () {
+            $('#fecprocitaTime').trigger('change');
+        }
+    });*/
     getPacienteCombos();
+    const id = document.getElementById("inputid").value;
+    if (id === "0") {
+
+    } else {
+        getcitas(id);
+    }
+    
     $('#fecprocitaTime').clockTimePicker({
         duration: true,
         durationNegative: false,
-        alwaysSelectHoursFirst: true,
-        afternoonHoursInOuterCircle: true,
-        //precision: 10,
-        required: true,
+        alwaysSelectHoursFirst:true,
+        afternoonHoursInOuterCircle:true,
+        precision: 10,
+        required:true,
         i18n: {
             cancelButton: 'Abbrechen'
         },
-
         onAdjust: function (newVal, oldVal) {
             //...
         }
     });
-    const id = document.getElementById("inputid").value;
-    if (id === "0") {
-        var fecha = new Date().toISOString().slice(0, 10);
-        document.getElementById("fecprocitaDate").value = fecha;
-        document.getElementById("fecing_cargo").value = fecha;
-        document.getElementById("fecing_area").value = fecha;
-        document.getElementById("fecing_empresa").value = fecha;
-        var horaActual = new Date();
-        var horaInicial = horaActual.getHours() + ':' + horaActual.getMinutes();
-        $('#fecprocitaTime').clockTimePicker('value', horaInicial);
-    } else {
-        getcitas(id);
-    }    
+
 });
 function getcitas(id) {
     let fecini = '';//fecha inicio
@@ -116,76 +120,79 @@ function getPacienteCombos() {
                     valapt_id.append(option);
                 }
             });
-            valapt_id.val("6");
+
         },
         error: function () {
             alert('error');
         }
     });
 }
-document.getElementById("pacientemodal").addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        var parametro = $('#pacientemodal').val();
-        mostrarDiv('carga');
-        ocultarDiv('tablapacientemodal');
-        $.ajax({
-            url: '/listarpacientes',
-            method: 'GET',
-            data: {
-                parametro: parametro,
-            },
-            success: function (pacientes) {
-                ocultarDiv('carga');
-                mostrarDiv('tablapacientemodal');
-                const tbodypac = $('#bodypacientemodal');
-                tbodypac.empty();
-                if (pacientes.length === 0) {
-                    tbodypac.append(`
+function getpacientes(parametro) {
+    mostrarDiv('carga');
+    ocultarDiv('tablapacientemodal');
+    $.ajax({
+        url: '/listarpacientes',
+        method: 'GET',
+        data: {
+            parametro: parametro,
+        },
+        success: function (pacientes) {
+            ocultarDiv('carga');
+            mostrarDiv('tablapacientemodal');
+            const tbodypac = $('#bodypacientemodal');
+            tbodypac.empty();
+            if (pacientes.length === 0) {
+                tbodydistrito.append(`
                     <tr>
-                        <td colspan="3" class="text-center">No hay resultados disponibles </td>
+                        <td colspan="2" class="text-center">No hay resultados disponibles </td>
                     </tr>
                 `);
-                } else {
-                    pacientes.forEach(paciente => {
-                        tbodypac.append(`
-                        <tr>  
-                        <td>              
-                            <button onclick="getpacientem(this)" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>              
-                        </td>           
-                        <td>${paciente.appm_nom}</td>
-                        <td>${paciente.pachis}</td>
-                        </tr>
-                    `);
-                    });
+            } else {
+                pacientes.forEach(paciente => {
+                    tbodypac.append(`
+            <tr>             
+              <td>${paciente.appm_nom}</td>
+              <td>${paciente.pachis}</td>
+              <td>
+              
+              <button onclick="getpacientem('${paciente.appm_nom}','${paciente.pachis}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
+              
+              </td>
+            </tr>
+          `);
+                });
 
-                }
-            },
-            error: function () {
-                alert('Error en la solicitud AJAX');
-            },
-        });
-
+            }
+            mensaje(pacientes[0].tipo, pacientes[0].response, 1500);
+        },
+        error: function () {
+            alert('Error en la solicitud AJAX');
+        },
+    });
+}
+document.getElementById("pacientemodal").addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+        var parametro = this.value;
+        getpacientes(parametro);
     }
 });
 
-function getpacientem(btn) {
-    event.preventDefault();
-    var filaorigen = $(btn).closest("tr");
-    var appm_nom = filaorigen.find("td:eq(1)").text();
-    var pachis = filaorigen.find("td:eq(2)").text();
+function getpacientem(appm_nom, pachis) {
     $('#appm_nom').val(appm_nom);
     $('#pachis').val(pachis);
+    $('#modalFormpaciente [data-dismiss="modal"]').trigger('click');
+
+    event.preventDefault();
 }
 document.getElementById("empresamodal").addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         var parametro = this.value;
-        console.log(parametro);
         getclientes(parametro);
     }
 });
 function getclientes(parametro) {
-    mostrarDiv('cargaempresamodal');
-    ocultarDiv('tableempresamodal');
+    mostrarDiv('cargaEmpresa');
+    ocultarDiv('tableEmpresamodal');
     console.log(parametro);
     $.ajax({
         url: '/empresas',
@@ -194,9 +201,9 @@ function getclientes(parametro) {
             empresa: parametro,
         },
         success: function (clientes) {
-            ocultarDiv('cargaempresamodal');
-            mostrarDiv('tableempresamodal');
-            const tbodycli = $('#bodyempresamodal');
+            ocultarDiv('cargaEmpresa');
+            mostrarDiv('tableEmpresamodal');
+            const tbodycli = $('#bodyEmpresa');
             tbodycli.empty();
             if (clientes.length === 0) {
                 tbodycli.append(`
@@ -207,19 +214,18 @@ function getclientes(parametro) {
             } else {
                 clientes.forEach(cliente => {
                     tbodycli.append(`
-            <tr>
-              <td>
-               <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>              
-              </td>
+            <tr>             
               <td>${cliente.razsoc}</td>
               <td>${cliente.NumDoc}</td>
+              <td>
+              <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
               
+              </td>
             </tr>
           `);
                 });
 
             }
-            //mensaje(clientes[0].icono, clientes[0].mensaje, 1500);
         },
         error: function () {
             alert('Error en la solicitud AJAX');
@@ -229,7 +235,6 @@ function getclientes(parametro) {
 function getempresam(razsoc, cli_id) {
     $('#razsoc').val(razsoc);
     $('#cli_id').val(cli_id);
-    //$('#modalFormEmpresa [data-dismiss="modal"]').trigger('click');
     getprotocolo(cli_id);
     event.preventDefault();
 }
@@ -276,13 +281,12 @@ function obtenerTerceraColumna(lista, idSeleccionado) {
 document.getElementById("codpro_id").addEventListener("change", function (event) {
     if (event.key === "Enter") {
         var parametro = this.value;
+        console.log(parametro)
         getclientes(parametro);
     }
 });
 function guardarCita() {
-    var btnCita = document.getElementById("btnCita");
-    btnCita.disabled = true;
-    //$("#btnCita").prop("disabled", true);
+    $("#btnCita").prop("disabled", true);
     let inputid = $('#inputid');
     let cli_id = $('#cli_id');
     let codpro_id = $('#codpro_id');
@@ -306,12 +310,7 @@ function guardarCita() {
     let ent_result_fisico = document.querySelector("input[name='ent_result_fisico']:checked").value;
     let usa_firma_formatos = document.querySelector("input[name='usa_firma_formatos']:checked").value;
     let res_lugar_trabajo = document.querySelector("input[name='res_lugar_trabajo']:checked").value;
-    const validarFormulario1 = validarFormulario('empresamodal,pacientemodal,obscita');
-
-    if (!validarFormulario1) {
-        btnCita.disabled = false;
-        return;
-    }
+    validarFormulario('empresamodal,pacientemodal');
     $.ajax({
         url: '/cita',
         method: "POST",
@@ -341,7 +340,6 @@ function guardarCita() {
             res_lugar_trabajo: res_lugar_trabajo,
         },
         success: function (response) {
-            btnCita.disabled = false;
             opc = 0;
             if (response[0].tipo === 'success') {
                 MensajeSIyNO(response[0].tipo, response[0].mensaje, '¿Desea volver?', function (respuesta) {
@@ -349,23 +347,32 @@ function guardarCita() {
                         $('input[type="text"]').val("");
                         rendersub('/cita');
                     } else {
-                        if (response[0].tipo === "success") {
+                        if (data[0].mensaje === "Guardado correctamente") {
                             limpiarImput();
                         }
                         return;
                     }
                 });
             } else {
-                btnCita.disabled = false;
                 mensaje(response[0].tipo, response[0].response, 1500);
             }
+            $("#btnCita").prop("disabled", false);
         },
         error: function () {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);
-            btnCita.disabled = false;
-            //$("#btnCita").prop("disabled", false);
+            $("#btnCita").prop("disabled", false);
         }
     });
 }
+var input = document.getElementById('fecprocitaTime');
+function bloquearEntradaTeclado(event) {
+    event.preventDefault();
+}
+input.addEventListener('keydown', bloquearEntradaTeclado);
+input.addEventListener('mousedown', function (event) {
+    event.preventDefault();
+    input.blur();
+});
+
 
 

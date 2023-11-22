@@ -74,18 +74,16 @@ function getpermisos() {
 
 
 function guardarusuario() {
-    var btnUsuario = document.getElementById("btnUsuario");
-    btnUsuario.disabled = true;
-
+    $("#btnUsuario").prop("disabled", true);
     const canvas = document.getElementById('canvas');
     let opc = 0;
     let iduser = $('#iduser').val();
-    let camposValidos = validarInputs('usuario,contrasena,Nombres,app,apm,DNI,celular,fecnac,correo,direccion,codrol,sexo');
-    if (!camposValidos) {
-        btnUsuario.disabled = false;
+    let camposValidos = validarFormulario('file-input,clientemodal');
+    if (!camposValidos) {        
+        $("#btnUsuario").prop("disabled", false);
         return;
     }
-
+    
     if (iduser === '0') {
         opc = 0;//guardar
     } else {
@@ -102,8 +100,7 @@ function guardarusuario() {
     let correo = $('#correo');
     let direccion = $('#direccion');
     let codrol = $('#codrol');
-    let sexo = $('#sexo');    
-    let med_id = $('#med_id');
+    let sexo = $('#sexo');
     var picuser = canvas.toDataURL();
     $.ajax({
         url: '/usuario',
@@ -124,23 +121,22 @@ function guardarusuario() {
             opc: opc,
             iduser: iduser,
             picuser: picuser,
-            med_id: med_id.val(),
         },
         success: function (response) {
-            btnUsuario.disabled = false;
+            $("#btnCita").prop("disabled", false);
             getpermisos();
             limpiarinputs();
             activarCampo();
             $('input[type="text"]').val("");
-            mensaje(response[0].tipo, response[0].response, 1500);
+            mensaje(response[0].tipo, response[0].response, 1500);                        
         },
         error: function () {
-            btnUsuario.disabled = false;
-            mensaje('error', 'Error al guardar, intente nuevamente', 1500);
+            $("#btnCita").prop("disabled", false);
+            mensaje('error', 'Error al guardar, intente nuevamente', 1500);            
         }
     });
 }
-document.getElementById("usuariomodal").addEventListener("keyup", function (event) {
+document.getElementById("clientemodal").addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
         var parametro = this.value;
         getusuarios(parametro);
@@ -168,8 +164,8 @@ function getusuarios(parametro) {
               <td>${usuario.DNI}</td>
               <td>${usuario.usuario}</td>
               <td>
-              <a  type="button" class="btn btn-circle btn-sm btn-info mr-1" onclick=resetearPass(${usuario.iduser},'${usuario.usuario}')><i class="fa-solid fa-street-view"></i></a>
-              <button onclick="getusuariosm('${usuario.iduser}','${usuario.usuario}','${usuario.Nombres}','${usuario.app}','${usuario.apm}','${usuario.DNI}','${usuario.celular}','${usuario.fecnac}','${usuario.correo}','${usuario.direccion}','${usuario.codrol}','${usuario.sexo}',${usuario.med_id},'${usuario.medapmn}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>
+              <a  type="button" class="btn btn-circle btn-sm btn-info mr-1" onclick=resetearPass("${usuario.iduser}")><i class="fa-solid fa-street-view"></i></a>
+              <button onclick="getusuariosm('${usuario.iduser}','${usuario.usuario}','${usuario.Nombres}','${usuario.app}','${usuario.apm}','${usuario.DNI}','${usuario.celular}','${usuario.fecnac}','${usuario.correo}','${usuario.direccion}','${usuario.codrol}','${usuario.sexo}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-solid fa-plus"></i></button>
               <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarUser("${usuario.iduser}")><i class="fa-solid fa-trash-can"></i></a>
               </td>
             </tr>
@@ -184,14 +180,13 @@ function getusuarios(parametro) {
         },
     });
 }
-function resetearPass(iduser, usuario) {
+function resetearPass(iduser) {
     iduser = parseInt(iduser);
     $.ajax({
         url: '/editarPass',
         method: "POST",
         data: {
             iduser: iduser,
-            usuario: usuario,
         },
         success: function (user) {
             $('#modalFormusuario [data-dismiss="modal"]').trigger('click');
@@ -223,7 +218,7 @@ function eliminarUser(iduser) {
         }
     });
 }
-function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, fecnacM, correoM, direccionM, codrolM, sexoM,med_idM,medapmnM) {
+function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, fecnacM, correoM, direccionM, codrolM, sexoM) {
     $('#iduser').val(iduserM);
     $('#usuario').val(usuarioM);
     $('#Nombres').val(NombresM);
@@ -237,8 +232,7 @@ function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, f
     $('#codrol').val(codrolM);
     $('#sexo').val(sexoM);
     $('#contrasena').val('123456789').prop('disabled', true);
-    $('#med_id').val(med_idM);
-    $('#medapmn').val(medapmnM);
+
     const canvas = $('#canvas')[0];
     const image = new Image();
     const context = canvas.getContext('2d');
@@ -249,10 +243,10 @@ function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, f
     };
     image.src = `./img/usuario/${DNIM}.webp`;
 
-    var btncerrar = document.getElementById(`cerrarusuariomodal`);
-    btncerrar.click();
+    $('#modalFormusuario [data-dismiss="modal"]').trigger('click');    
 }
-/*function validarCampos() {
+
+function validarCampos() {
     let campos = ['#usuario', '#contrasena', '#Nombres', '#app', '#apm', '#DNI', '#celular', '#fecnac', '#correo', '#direccion', '#codrol', '#sexo'];
     let camposValidos = true;
 
@@ -265,7 +259,7 @@ function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, f
     });
 
     return camposValidos;
-}*/
+}
 function activarCampo() {
     let contrasena = document.getElementById('contrasena');
     contrasena.disabled = false;
@@ -277,59 +271,4 @@ function limpiarImputUser() {
     $('input').val('');
     $('textarea').val('');
     $("#btnCita").prop("disabled", false);
-}
-//BUSQUEDA MEDICO
-document.getElementById("medicomodal").addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-        var parametro = this.value;
-        getmedico(parametro);
-    }
-});
-
-function getmedico(parametro) {
-    mostrarDiv('cargamedico');
-    ocultarDiv('tablamedicomodal');
-    $.ajax({
-        url: '/listarmedicos',
-        method: 'GET',
-        data: {
-            parametro: parametro,
-        },
-        success: function (medicos) {
-            ocultarDiv('cargamedico');
-            mostrarDiv('tablamedicomodal');
-            const tbodymed = $('#bodymedicomodal');
-            tbodymed.empty();
-            if (medicos.length === 0) {
-                tbodymed.append(`
-                    <tr>
-                        <td colspan="2" class="text-center">No hay resultados disponibles </td>
-                    </tr>
-                `);
-            } else {
-                medicos.forEach(medico => {
-                    tbodymed.append(`
-                    <tr>             
-                    <td>${medico.medapmn}</td>
-                    <td>${medico.nundoc}</td>
-                    <td>
-                    <button onclick="getmedicom('${medico.med_id}','${medico.medapmn}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>                    
-                    </td>
-                  </tr>
-                `);
-                });
-                mensaje(medicos[0].tipo, medicos[0].response, 1500);
-            }
-        },
-        error: function () {
-            alert('Error en la solicitud AJAX');
-        },
-    });
-}
-
-function getmedicom(med_idM, medapmnM, ) {    
-    $('#med_id').val(med_idM);
-    $('#medapmn').val(medapmnM);
-    var btncerrar = document.getElementById(`cerrarmedicomodal`);
-    btncerrar.click();
-}
+  }
