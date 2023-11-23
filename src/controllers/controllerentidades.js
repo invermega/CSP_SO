@@ -313,7 +313,7 @@ module.exports = {
         res.json(responde.recordset);
     },
     async getmedicolist(req, res) {//listar medicos
-        let  medico  = req.query.medico;
+        let  medico  = req.query.parametro;
         let  parametro1  = req.query.parametro1;
         const codrolUser = req.user.codrol;
         if (medico === '') {
