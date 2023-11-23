@@ -191,9 +191,7 @@ function limpiarModal() {
     tbodypais.empty();
 }
 var opc = 0;
-function guardarpaciente() {
-    validarFormulario('distritomodal,paismodal,foto,huella,firma,pachis');
-    //$("#btnPaciente").prop("disabled", true);
+function guardarpaciente() {    
     let appaterno = $('#appaterno');
     let apmaterno = $('#apmaterno');
     let nombres = $('#nombres');
@@ -217,7 +215,10 @@ function guardarpaciente() {
     let estciv_id = $('#estciv_id');
     let codtipcon = $('#codtipcon');
     let ippais = $('#ippais');
-
+    var validar = validarFormulario2('appaterno,apmaterno,nombres,fecnac,cod_ubigeo,docide,numdoc,dirpac,cod_ubigeo2,correo,telefono,celular,numhijos,numdep,pcd,sexo_id,grainst_id,estciv_id,codtipcon,ippais');
+    if(!validar){
+        return;
+    }
     $.ajax({
         url: '/paciente',
         method: "POST",
