@@ -42,22 +42,18 @@
                         let codigo = registro.diacod;
                         let descripcion = registro.diades;
                         let comentario = registro.obs;
-                        let combo = registro.tipdia;
 
                         if (i === 0) {
                             codcie101.value = codigo;
                             codcie10desc1.value = descripcion;
-                            combocie101.value = combo;
                             codcie10comen1.value = comentario;
                         } else if (i === 1) {
                             codcie102.value = codigo;
                             codcie10desc2.value = descripcion;
-                            combocie102.value = combo;
                             codcie10comen2.value = comentario;
                         } else if (i === 2) {
                             codcie103.value = codigo;
                             codcie10desc3.value = descripcion;
-                            combocie103.value = combo;
                             codcie10comen3.value = comentario;
                         }
                     }
@@ -147,7 +143,7 @@ function ObtenerParametros(codpru_id) {
                     tbody.append(`
                     <tr >
                         <td class="text-left align-middle px-3" >${parametro.despar}</td>
-                        <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"> <input style="display:none" type="text" id="input${parametro.parexa_id}" value="${parametro.parexa_id}" > <input style="height: 25px;" type="text" id="valor${parametro.parexa_id}" class="form-control " value="${parametro.resultvalor}"></td>
+                        <td style="padding-bottom: 0px; padding-top: 0px; vertical-align: middle;"> <input style="display:none" type="text" value="${parametro.parexa_id}" > <input style="height: 25px;" type="text" class="form-control " value="${parametro.resultvalor}"></td>
                         <td >${parametro.unidad}</td>
                         <td >${parametro.valorref}</td>
                     </tr>
@@ -183,7 +179,6 @@ function Grabar() {
     let codpru_id = document.getElementById('codpru_id').value;
     let doc_adic_id = document.getElementById('doc_adic_id').value;
     var datains = obtenerDataIns();
-    console.log(datains);
     var datainsrec = obtenerDataInsRec();
     var dataparametros = obtenerDataParametros();
     const datosCompletos = {

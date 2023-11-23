@@ -24,81 +24,207 @@
             </div>
             <div class="card-body">
                 <div class="container-fluid body1" id="body1">
+                    <form id="formusuarios" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-12 border-right">
+                                <div class="p-3 py-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="text-right">Datos de la cita</h5>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-4 form-inline col-sm-12 form-group ">
+                                            <label class="labels mb-2">Empresa</label>
+                                            <div class="input-group input-group-sm" style="width: 100%;">
+                                                <input type="hidden" id="cli_id" value="0">
+                                                <input type="text" id="razsoc" class="form-control form-control-sm"
+                                                    placeholder="Nombre de la empresa" aria-label="" disabled>
+                                                <button type="button" class="btn input-group-text" data-toggle="modal"
+                                                    data-target="#modalFormEmpresa">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--MODAL EMPRESA-->
+                                        <div class="modal fade" id="modalFormEmpresa" role="dialog">
+                                            <div class="modal-dialog ">
+                                                <div class="modal-content">
+                                                    <div class="modal-header"
+                                                        style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                                        <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE
+                                                            EMPRESA</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="input-group input-group-sm" style="width: 100%;">
+                                                            <label class="control-label input-group-text"
+                                                                for="Empresa">EMPRESA</label>
+                                                            <input class="form-control form-control-sm "
+                                                                id="empresamodal"
+                                                                placeholder="Ingrese el nombre de la empresa"
+                                                                required></input>
+                                                            <label class="input-group-text form-control-sm"><i
+                                                                    class="fa-solid fa-magnifying-glass"></i></label>
+                                                        </div>
+                                                        <div class="row mb-2 mt-2">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                                                    id="tableEmpresamodal" style="display: none;">
+                                                                    <thead class="thead">
+                                                                        <tr>
+                                                                            <th scope="col">RAZON SOCIAL</th>
+                                                                            <th scope="col">RUC</th>
+                                                                            <th scope="col">ACCIÓN</th>
 
-                    <div class="row">
-                        <div class="col-md-12 ">
-                            <div class="p-3 py-3">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <h5 class="text-right">Datos de la cita</h5>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="bodyEmpresa" style="text-align: left;">
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                            <div class="text-center" id="cargaEmpresa"
+                                                                style="display: none;">
+                                                                <div class="d-flex justify-content-center align-items-center"
+                                                                    style="min-height: 5vh;">
+                                                                    <lottie-player src="/img/jsonimg/Cargahealth.json"
+                                                                        background="transparent" speed="1"
+                                                                        style="width: 200px; height: 200px;" loop
+                                                                        autoplay></lottie-player>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn"
+                                                                style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                                                id="cerrardistrito" data-dismiss="modal"> <i
+                                                                    class="fa-solid fa-circle-xmark"></i>
+                                                                Cerrar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="labels" for="codpro_id">Protocolo</label><select
+                                                class="form-select form-control form-control-sm" id="codpro_id"
+                                                aria-label="Default select example" required>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="labels" for="">Tipo de exámen</label>
+                                            <input type="text" class="form-control form-control-sm" value=""
+                                                id="tipexa_id" disabled>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-4 form-inline col-sm-12 form-group ">
+                                            <label class="labels mb-2">Paciente</label>
+                                            <div class="input-group input-group-sm" style="width: 100%;">
+                                                <input type="hidden" id="pachis" value="0">
+                                                <input type="text" id="appm_nom" class="form-control form-control-sm"
+                                                    placeholder="Nombre del paciente" aria-label="appm_nom" disabled>
+                                                <button type="button" class="btn input-group-text" data-toggle="modal"
+                                                    data-target="#modalFormpaciente">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!--MODAL PACIENTE-->
+                                        <div class="modal fade" id="modalFormpaciente" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header"
+                                                        style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                                        <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE PACIENTE
+                                                        </h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="input-group input-group-sm" style="width: 100%;">
+                                                            <label class="control-label input-group-text"
+                                                                for="pacientemodal">PACIENTE</label>
+                                                            <input class="form-control form-control-sm "
+                                                                id="pacientemodal"
+                                                                placeholder="Ingrese los nombres o el DNI del paciente"
+                                                                required></input>
+                                                            <label class="input-group-text form-control-sm"><i
+                                                                    class="fa-solid fa-user"></i></label>
+                                                        </div>
+
+                                                        <div class="row mb-2 mt-2">
+                                                            <div class="table-responsive">
+                                                                <table
+                                                                    class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                                                    id="tablapacientemodal" style="display: none;">
+                                                                    <thead class="thead" style="text-align: left;">
+                                                                        <tr>
+
+                                                                            <th scope="col">APELLIDOS Y NOMBRES</th>
+                                                                            <th scope="col">DNI</th>
+                                                                            <th scope="col">ACCIONES</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody id="bodypacientemodal"
+                                                                        style="text-align: left;">
+                                                                    </tbody>
+                                                                </table>
+
+                                                            </div>
+                                                            <div class="text-center" id="carga" style="display: none;">
+                                                                <div class="d-flex justify-content-center align-items-center"
+                                                                    style="min-height: 5vh;">
+                                                                    <lottie-player
+                                                                        src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                                                        background="transparent" speed="1"
+                                                                        style="width: 300px; height: 300px;" loop
+                                                                        autoplay></lottie-player>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn"
+                                                                style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                                                id="cerrarcliente" data-dismiss="modal"> <i
+                                                                    class="fa-solid fa-circle-xmark"></i>
+                                                                Cerrar</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="" class="labels">Fecha
+                                                Programada</label>
+                                            <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
+                                                <input type="date" class="form-control form-control-sm mr-2"
+                                                    id="fecprocitaDate" data-mask="dd/mm/yyyy" required>
+                                                <input type="text" id="fecprocitaTime"
+                                                    class="time form-control form-control-sm">
+                                                <!--<div class=" form-inline form-group " style="max-width: 90px;">
+                                                    <div class="input-group input-group-sm" style="width: 100%;">
+
+                                                        <button type="button" class="btn input-group-text" disabled>
+                                                            <i class="fa-regular fa-clock"></i>
+                                                        </button>
+                                                    </div>-->
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row mt-2">
-                                    <div class="col-md-4 form-inline col-sm-12 form-group ">
-                                        <label class="labels mb-2">Empresa</label>
-                                        <div class="input-group input-group-sm" style="width: 100%;">
-                                            <input type="hidden" id="cli_id" value="0">
-                                            <input type="text" id="razsoc" class="form-control form-control-sm"
-                                                placeholder="Nombre de la empresa" aria-label="" disabled>
-                                            <button type="button" class="btn input-group-text" data-toggle="modal"
-                                                data-target="#modalFormEmpresa">
-                                                <i class="fa-solid fa-magnifying-glass"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <label class="labels" for="codpro_id">Protocolo</label><select
-                                            class="form-select form-control form-control-sm" id="codpro_id"
-                                            aria-label="Default select example" required>
-
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="labels" for="tipexa_id">Tipo de exámen</label>
-                                        <input type="text" class="form-control form-control-sm" id="tipexa_id" disabled>
-                                    </div>
-
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col-md-4 form-inline col-sm-12 form-group ">
-                                        <label class="labels mb-2">Paciente</label>
-                                        <div class="input-group input-group-sm" style="width: 100%;">
-                                            <input type="hidden" id="pachis" value="0">
-                                            <input type="text" id="appm_nom" class="form-control form-control-sm"
-                                                placeholder="Nombre del paciente" aria-label="appm_nom" disabled>
-                                            <button type="button" class="btn input-group-text" data-toggle="modal"
-                                                data-target="#modalFormpaciente">
-                                                <i class="fa-solid fa-magnifying-glass"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label for="fecprocitaDate" class="labels">Fecha
-                                            Programada</label>
-                                        <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                            <input type="date" class="form-control form-control-sm mr-2"
-                                                id="fecprocitaDate" data-mask="dd/mm/yyyy" required>
-                                            <input type="text" id="fecprocitaTime"
-                                                class="time form-control form-control-sm">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-3 py-3">
-                                <div class="row mt-2 ">
                                     <div class="col-md-12">
-                                        <label for="obscita" class="labels">Observación</label>
+                                        <label for="" class="labels">Observación</label>
                                         <textarea class="form-control form-control-sm mr-2"
                                             placeholder="Ingresar observación" id="obscita" required></textarea>
 
                                     </div>
                                 </div>
                             </div>
-
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 border-right">
                             <div class="p-3 py-3">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h5 class="text-right">Datos adicionales del paciente</h5>
@@ -107,7 +233,7 @@
                                     <div class="col-md-3">
                                         <label class="labels" for="cargo_actual">Cargo actual</label><input type="text"
                                             class="form-control form-control-sm" placeholder="Ingrese su cargo"
-                                            id="cargo_actual" required>
+                                            id="cargo_actual" value="" required>
                                     </div>
                                     <div class="col-md-2">
                                         <label class="labels" for="fecing_cargo">Fecha de ingreso al
@@ -117,7 +243,7 @@
                                     <div class="col-md-3">
                                         <label class="labels" for="area_actual">Área</label><input type="text"
                                             class="form-control form-control-sm" placeholder="Ingrese su área"
-                                            id="area_actual" required>
+                                            id="area_actual" value="" required>
                                     </div>
                                     <div class="col-md-2">
                                         <label class="labels" for="fecing_area">Fecha de ingreso al
@@ -162,190 +288,86 @@
                                 </div>
                                 <div class="row mt-4">
                                     <div class="col bloque" id="cond_vehiculo">
-                                        <label for="cond_vehiculo" class="labels">Conduce vehículo</label>
+                                        <label for="" class="labels">Conduce vehículo</label>
                                         <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                            <label for="cond_vehiculo" class="mr-4"><input type="radio" class="me-2"
-                                                    value="S" name="cond_vehiculo" required>SI</label>
-                                            <label for="cond_vehiculo" class=""><input type="radio" class="me-2"
-                                                    value="N" name="cond_vehiculo" required checked>NO</label>
+                                            <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                    name="cond_vehiculo" required>SI</label>
+                                            <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                    name="cond_vehiculo" required checked>NO</label>
                                         </div>
                                     </div>
                                     <div class="col bloque" id="ope_equipo_pesado">
-                                        <label class="labels" for="ope_equipo_pesado">Opera vehículo pesado</label>
+                                        <label class="labels" for="">Opera vehículo pesado</label>
                                         <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                            <label for="ope_equipo_pesado" class="mr-4"><input type="radio" class="me-2"
-                                                    value="S" name="ope_equipo_pesado" required>SI</label>
-                                            <label for="ope_equipo_pesado" class=""><input type="radio" class="me-2"
-                                                    value="N" name="ope_equipo_pesado" required checked>NO</label>
+                                            <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                    name="ope_equipo_pesado" required>SI</label>
+                                            <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                    name="ope_equipo_pesado" required checked>NO</label>
                                         </div>
                                     </div>
                                     <div class="col bloque" id="envresult_correo">
-                                        <label for="envresult_correo" class="labels">Enviar resultados por
-                                            correo</label>
+                                        <label for="" class="labels">Enviar resultados por correo</label>
                                         <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                            <label for="envresult_correo" class="mr-4"><input type="radio" class="me-2"
-                                                    value="S" name="envresult_correo" required>SI</label>
+                                            <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                    name="envresult_correo" required>SI</label>
 
-                                            <label for="envresult_correo" class=""><input type="radio" class="me-2"
-                                                    value="N" name="envresult_correo" required checked>NO</label>
+                                            <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                    name="envresult_correo" required checked>NO</label>
                                         </div>
                                     </div>
                                     <div class="col bloque" id="com_info_medica">
-                                        <label for="com_info_medica" class="labels">Comparte información médica</label>
+                                        <label for="" class="labels">Comparte información médica</label>
                                         <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                            <label for="com_info_medica" class="mr-4"><input type="radio" class="me-2"
-                                                    value="S" name="com_info_medica" required>SI</label>
-                                            <label for="com_info_medica" class=""><input type="radio" class="me-2"
-                                                    value="N" name="com_info_medica" required checked>NO</label>
+                                            <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                    name="com_info_medica" required>SI</label>
+                                            <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                    name="com_info_medica" required checked>NO</label>
                                         </div>
                                     </div>
                                     <div class="col bloque" id="ent_result_fisico">
-                                        <label for="ent_result_fisico" class="labels">Entrega de resultado en
-                                            físico</label>
+                                        <label for="" class="labels">Entrega de resultado en físico</label>
                                         <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                            <label for="ent_result_fisico" class="mr-4"><input type="radio" class="me-2"
-                                                    value="S" name="ent_result_fisico" required>SI</label>
-                                            <label for="ent_result_fisico" class=""><input type="radio" class="me-2"
-                                                    value="N" name="ent_result_fisico" required checked>NO</label>
+                                            <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                    name="ent_result_fisico" required>SI</label>
+                                            <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                    name="ent_result_fisico" required checked>NO</label>
                                         </div>
                                     </div>
                                     <div class="col bloque" id="usa_firma_formatos">
-                                        <label for="usa_firma_formatos" class="labels">Usar firma escaneada en
-                                            formatos</label>
+                                        <label for="" class="labels">Usar firma escaneada en formatos</label>
                                         <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                            <label for="usa_firma_formatos" class="mr-4"><input type="radio"
-                                                    class="me-2" value="S" name="usa_firma_formatos" required>SI</label>
-                                            <label for="usa_firma_formatos" class=""><input type="radio" class="me-2"
-                                                    value="N" name="usa_firma_formatos" required checked>NO</label>
+                                            <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                    name="usa_firma_formatos" required>SI</label>
+                                            <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                    name="usa_firma_formatos" required checked>NO</label>
                                         </div>
                                     </div>
                                     <div class="col bloque" id="res_lugar_trabajo">
-                                        <label for="res_lugar_trabajo" class="labels">Reside en lugar de trabajo</label>
+                                        <label for="" class="labels">Reside en lugar de trabajo</label>
                                         <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                            <label for="res_lugar_trabajo" class="mr-4"><input type="radio" class="me-2"
-                                                    value="S" name="res_lugar_trabajo" required>SI</label>
-                                            <label for="res_lugar_trabajo" class=""><input type="radio" class="me-2"
-                                                    value="N" name="res_lugar_trabajo" required checked>NO</label>
+                                            <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                    name="res_lugar_trabajo" required>SI</label>
+                                            <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                    name="res_lugar_trabajo" required checked>NO</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-5 text-center"><button class="btn btn2" type="submit" onclick="guardarCita()"
-                                    id="btnCita">
-                                    <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
-                                </button>
-                            </div>
                         </div>
-                    </div>
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn2" type="button" onclick="guardarCita()"
+                        id="btnCita">
+                        <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
+                    </button>
                 </div>
                 <input type="text" id="inputid" value="{{id}}" style="display: none;">
+                </form>
             </div>
 
         </div>
     </div>
 </div>
-<!--MODAL PACIENTE-->
-<div class="modal fade" id="modalFormpaciente" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
-                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE PACIENTE
-                </h4>
-            </div>
-            <div class="modal-body">
-                <div class="input-group input-group-sm" style="width: 100%;">
-                    <label class="control-label input-group-text" for="pacientemodal">PACIENTE</label>
-                    <input class="form-control form-control-sm " id="pacientemodal"
-                        placeholder="Ingrese los nombres o el DNI del paciente" required></input>
-                    <label class="input-group-text form-control-sm"><i class="fa-solid fa-user"></i></label>
-                </div>
 
-                <div class="row mb-2 mt-2">
-                    <div class="table-responsive">
-                        <table
-                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
-                            id="tablapacientemodal" style="display: none;">
-                            <thead class="thead" style="text-align: left;">
-                                <tr>
-                                    <th scope="col">ACCIONES</th>
-                                    <th scope="col">APELLIDOS Y NOMBRES</th>
-                                    <th scope="col">DNI</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodypacientemodal" style="text-align: left;">
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="text-center" id="carga" style="display: none;">
-                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
-                            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
-                                background="transparent" speed="1" style="width: 300px; height: 300px;" loop
-                                autoplay></lottie-player>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn"
-                        style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrarcliente"
-                        data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
-                        Cerrar</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-<!--MODAL EMPRESA-->
-<div class="modal fade" id="modalFormEmpresa" role="dialog">
-    <div class="modal-dialog ">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
-                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE
-                    EMPRESA</h4>
-            </div>
-            <div class="modal-body">
-                <div class="input-group input-group-sm" style="width: 100%;">
-                    <label class="control-label input-group-text" for="empresamodal">EMPRESA</label>
-                    <input class="form-control form-control-sm " id="empresamodal"
-                        placeholder="Ingrese el nombre de la empresa" required></input>
-                    <label class="input-group-text form-control-sm"><i class="fa-solid fa-magnifying-glass"></i></label>
-                </div>
-                <div class="row mb-2 mt-2">
-                    <div class="table-responsive">
-                        <table
-                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
-                            id="tableEmpresamodal" style="display: none;">
-                            <thead class="thead">
-                                <tr>
-                                    <th scope="col">ACCIÓN</th>
-                                    <th scope="col">RAZON SOCIAL</th>
-                                    <th scope="col">RUC</th>
-                                </tr>
-                            </thead>
-                            <tbody id="bodyEmpresa" style="text-align: left;">
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="text-center" id="cargaEmpresa" style="display: none;">
-                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
-                            <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent" speed="1"
-                                style="width: 200px; height: 200px;" loop autoplay></lottie-player>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn"
-                        style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrardistrito"
-                        data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
-                        Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
 <!--Scripts-->
 <script src="/js/entidades/citacreate.js"> </script>
 <script src="/jS/jqueryinputmask.min.js"> </script>

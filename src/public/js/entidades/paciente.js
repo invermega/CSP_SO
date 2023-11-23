@@ -50,53 +50,52 @@ function getPacienteCombos() {
         }
     });
 }
-document.getElementById("distritomodal").addEventListener("keydown", function (event) {
+document.getElementById("distritomodal").addEventListener("keyup", function (event) {
+    event.preventDefault();
     if (event.key === "Enter") {
-        let parametro = $('#distritomodal').val(); // Corregido: agregué el símbolo '#' para seleccionar el elemento por su ID
-        event.preventDefault();
-        mostrarDiv('cargadistrito');
-        ocultarDiv('tabledistritomodal');
-        $.ajax({
-            url: '/listardistrito',
-            method: 'GET',
-            data: {
-                parametro: parametro,
-            },
-            success: function (response) {
-                ocultarDiv('cargadistrito');
-                mostrarDiv('tabledistritomodal');
-                const tbodydistrito = $('#bodyDistrio');
-                tbodydistrito.empty();
-                if (response.length === 0) {
-                    tbodydistrito.append(`
-                    <tr>
-                        <td colspan="2" class="text-center">No hay resultados disponibles </td>
-                    </tr>
-                `);
-                } else {
-                    response.forEach(lista => {
-                        tbodydistrito.append(`
-                    <tr> 
-                    <td>
-                    <button onclick="event.preventDefault();getDistritoinput('${lista.cod_ubigeo}','${lista.desubigeo}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>
-                    </td>            
-                    <td>${lista.desubigeo}</td>                  
-                    
-                    </tr>
-                `);
-                    });
-                    mensaje(response[0].tipo, response[0].response, 1500);
-                }
-            },
-            error: function () {
-                alert('Error en la solicitud AJAX');
-            },
-        });
+        var parametro = this.value;
+        getDistrito(parametro);
     }
 });
 function getDistrito(parametro) {
 
-
+    mostrarDiv('cargadistrito');
+    ocultarDiv('tabledistritomodal');
+    $.ajax({
+        url: '/listardistrito',
+        method: 'GET',
+        data: {
+            parametro: parametro,
+        },
+        success: function (response) {
+            ocultarDiv('cargadistrito');
+            mostrarDiv('tabledistritomodal');
+            const tbodydistrito = $('#bodyDistrio');
+            tbodydistrito.empty();
+            if (response.length === 0) {
+                tbodydistrito.append(`
+                    <tr>
+                        <td colspan="2" class="text-center">No hay resultados disponibles </td>
+                    </tr>
+                `);
+            } else {
+                response.forEach(lista => {
+                    tbodydistrito.append(`
+                    <tr>             
+                    <td>${lista.desubigeo}</td>                        
+                    <td>
+                    <button onclick="event.preventDefault();getDistritoinput('${lista.cod_ubigeo}','${lista.desubigeo}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
+                    </td>
+                    </tr>
+                `);
+                });
+                mensaje(response[0].tipo, response[0].response, 1500);
+            }
+        },
+        error: function () {
+            alert('Error en la solicitud AJAX');
+        },
+    });
 }
 var codigoDistrito = 0;
 var btnDistrito1 = document.getElementById('btnDistrito1');
@@ -125,55 +124,55 @@ function getDistritoinput(codigo, descripcion) {
         des_ubigeo2.value = descripcion;
     }
     codigoDistrito = 0;
-    $('#modalFormDistrito [data-dismiss="modal"]').trigger('click');
+    //$('#modalFormDistrito [data-dismiss="modal"]').trigger('click');
 }
 
 /*Busqueda de Pais */
-document.getElementById("paismodal").addEventListener("keydown", function (event) {
+document.getElementById("paismodal").addEventListener("keyup", function (event) {
     if (event.key === "Enter") {
-        var parametro = $('#paismodal').val();;
-        mostrarDiv('cargapais');
-        ocultarDiv('tablepaismodal');
-        $.ajax({
-            url: '/listarpais',
-            method: 'GET',
-            data: {
-                parametro: parametro,
-            },
-            success: function (response) {
+        var parametro = this.value;
+        getPais(parametro);
+    }
+});
+function getPais(parametro) {
+    mostrarDiv('cargapais');
+    ocultarDiv('tablepaismodal');
+    $.ajax({
+        url: '/listarpais',
+        method: 'GET',
+        data: {
+            parametro: parametro,
+        },
+        success: function (response) {
 
-                ocultarDiv('cargapais');
-                mostrarDiv('tablepaismodal');
-                const tbodydistrito = $('#bodypais');
-                tbodydistrito.empty();
-                if (response.length === 0) {
-                    tbodydistrito.append(`
+            ocultarDiv('cargapais');
+            mostrarDiv('tablepaismodal');
+            const tbodydistrito = $('#bodypais');
+            tbodydistrito.empty();
+            if (response.length === 0) {
+                tbodydistrito.append(`
                     <tr>
                         <td colspan="2" class="text-center">No hay resultados disponibles  </td>
                     </tr>
                 `);
-                } else {
-                    response.forEach(lista => {
-                        tbodydistrito.append(`
-                    <tr>
+            } else {
+                response.forEach(lista => {
+                    tbodydistrito.append(`
+                    <tr>             
+                    <td>${lista.nacionalidad}</td>                        
                     <td>
-                    <button onclick="event.preventDefault();getPaisinput('${lista.idPais}','${lista.nacionalidad}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>
+                    <button onclick="event.preventDefault();getPaisinput('${lista.idPais}','${lista.nacionalidad}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
                     </td>
-                    <td>${lista.nacionalidad}</td>                    
                     </tr>
                 `);
-                    });
-                    mensaje(response[0].tipo, response[0].response, 1500);
-                }
-            },
-            error: function () {
-                alert('Error en la solicitud AJAX');
-            },
-        });
-    }
-});
-function getPais(parametro) {
-
+                });
+                mensaje(response[0].tipo, response[0].response, 1500);
+            }
+        },
+        error: function () {
+            alert('Error en la solicitud AJAX');
+        },
+    });
 }
 function getPaisinput(codigo, descripcion) {
     let idPais = document.getElementById('ippais');
@@ -191,9 +190,8 @@ function limpiarModal() {
     tbodypais.empty();
 }
 var opc = 0;
-function guardarpaciente() {
-    validarFormulario('distritomodal,paismodal,foto,huella,firma,pachis');
-    //$("#btnPaciente").prop("disabled", true);
+function guardarpaciente() {    
+    $("#btnPaciente").prop("disabled", true);
     let appaterno = $('#appaterno');
     let apmaterno = $('#apmaterno');
     let nombres = $('#nombres');
@@ -254,11 +252,11 @@ function guardarpaciente() {
             opc = 0;
             limpiar();
             mensaje(response[0].tipo, response[0].response, 1500);
-            //$("#btnCita").prop("disabled", false);
+            $("#btnCita").prop("disabled", false);
         },
         error: function () {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);
-            //$("#btnCita").prop("disabled", false);
+            $("#btnCita").prop("disabled", false);
         }
     });
 }
@@ -313,7 +311,7 @@ function getpacientes(parametro) {
               </td>
             </tr>
           `);
-
+                    
                 });
 
             }

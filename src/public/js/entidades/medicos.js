@@ -1,107 +1,202 @@
 $(document).ready(function () {
-  getmedico();
-  render();
-  const refresh = document.getElementById('refresh');
-  refresh.addEventListener('click', getmedico);
-  const search = document.getElementById('search');
-  search.addEventListener('click', getmedico);
+    getPacienteCombos();
+
 });
 
-function getmedico() {
-  mostrarDiv('carga');
-  ocultarTabla('mydatatable');
-  let medico = $('#medico').val();
-  $.ajax({
-    url: '/listarmedicos',
-    method: "GET",
-    data: {
-      medico: medico,
-    },
-    success: function (medicos) {
-      ocultarDiv('carga');
-      mostrarTabla('mydatatable');
-      let tablebody1 = $('tbody');
-      tablebody1.html('');
-      if (medicos.length === 0) {
-        tablebody1.append(`
-              <tr>
-                <td colspan="6">No hay médico con los datos proporcinado</td>
-              </tr>
-            `);
-      } else {
-        medicos.forEach(medico => {
-          tablebody1.append(`
-                <tr data-id="${medico.med_id}">
-                <td class="align-middle"><input id="check_${medico.med_id}" value="id_${medico.med_id}" type="checkbox" class="mt-1" ></td>
-                <td style="vertical-align: middle;" class="text-left">${medico.medapmn}</td>
-                <td style="vertical-align: middle;" class="text-left">${medico.nundoc}</td>
-                <td style="vertical-align: middle;" class="text-left">${medico.esp_id}</td>
-              </tr>
-      `);
-        });
-        mensaje(medicos[0].icono, medicos[0].mensaje, 1500);
-      }
-    },
-    error: function () {
-      $('#error-message').text('Se produjo un error al cargar los medicos.');
-    }
-  });
+
+function getPacienteCombos() {
+    $.ajax({
+        url: '/listarCombosPac',
+        success: function (lista) {
+            let docident = $('#docide'); // Selecionar el select de tipo documento
+            let espme = $('#esp_id');  // Seleccionar el select de especialidad
+            console.log(lista);
+            docident.html('');
+            espme.html('');
+
+            lista.forEach(item => {
+                let option = `<option value="${item.id}">${item.descripcion}</option>`;
+                if (item.tabla === 'documento_identidad') {
+                    docident.append(option);
+                } if (item.tabla === 'especialidad') {
+                    espme.append(option);
+                }
+            });
+            $("#docide").val("01");
+            $('#esp_id').val("1");
+
+            //pais.val('9589');
+        },
+        error: function () {
+            alert('error');
+        }
+    });
 }
-/*
-function navegargetid(iddatatableble, tipo) {
-  var table = document.getElementById(iddatatableble);
-  var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-  var seleccionados = []; // Array para almacenar los elementos checkbox seleccionados
 
-  for (var i = 0; i < rows.length; i++) {
-    var checkbox = rows[i].querySelector('input[type="checkbox"]');
-
-    if (checkbox && checkbox.checked) {
-      var id = checkbox.value.split('_')[1];
-      seleccionados.push(id); // Agregar el id al array de seleccionados
-    }
-  }
-  if (seleccionados.length === 0) {
-    mensajecentral('error', 'Debes seleccionar algún registro.');
-  } else if (seleccionados.length > 1) {
-    mensajecentral('error', 'Debes seleccionar solo un registro.');
-  } else {
-    obtenerDatosCabeceramed(`${seleccionados[0]}`);
-    obtenerDatosDetalle(`${seleccionados[0]}`);
-  }
+/*function guardarMedico() {
+    validarFormulario('medcel,medTelfij,med_correo,meddir,med_firma');
 }*/
-/*
-function obtenerDatosCabeceramed(idmed) {
-  return new Promise(function (resolve, reject) {
-      var cabeceraData;
-      $.ajax({
-          url: '/listarmedico',
-          method: 'GET',
-          data: {
-            idmed: idmed,
-          },
-          success: function (lista) {
-              cabeceraData.medap = lista[0].medap;
-              cabeceraData.medam = lista[0].medam;
-              cabeceraData.mednam = lista[0].mednam;
-              cabeceraData.docide = lista[0].docide;
-              cabeceraData.nundoc = lista[0].nundoc;
-              cabeceraData.med_cmp = lista[0].med_cmp;
-              cabeceraData.med_rne = lista[0].med_rne;
-              cabeceraData.medTelfij = lista[0].medTelfij;
-              cabeceraData.medcel = lista[0].medcel;
-              cabeceraData.med_correo = lista[0].med_correo;
-              cabeceraData.meddir = lista[0].meddir;
-              cabeceraData.esp_id = lista[0].esp_id;              
-              resolve(cabeceraData);
-          },
-          error: function (error) {
-              // Manejo de errores aquí, si es necesario
-              // Rechaza la promesa en caso de error
-              reject(error);
-          }
-      });
-  });
+document.getElementById("medicomodal").addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+        var parametro = this.value;
+        getmedico(parametro);
+    }
+});
+
+function getmedico(parametro) {
+    mostrarDiv('carga');
+    ocultarDiv('tablamedicomodal');
+    $.ajax({
+        url: '/listarmedicos',
+        method: 'GET',
+        data: {
+            parametro: parametro,
+        },
+        success: function (medicos) {
+            console.log(medicos);
+            ocultarDiv('carga');
+            mostrarDiv('tablamedicomodal');
+            const tbodymed = $('#bodymedicomodal');
+            tbodymed.empty();
+            if (medicos.length === 0) {
+                tbodymed.append(`
+                    <tr>
+                        <td colspan="2" class="text-center">No hay resultados disponibles </td>
+                    </tr>
+                `);
+            } else {
+                medicos.forEach(medico => {
+                    tbodymed.append(`
+                    <tr>             
+                    <td>${medico.medapmn}</td>
+                    <td>${medico.nundoc}</td>
+                    <td>
+                    <button onclick="getmedicom('${medico.medap}','${medico.medam}','${medico.mednam}','${medico.docide}','${medico.nundoc}','${medico.med_cmp}','${medico.med_rne}','${medico.medTelfij}','${medico.medcel}','${medico.med_correo}','${medico.meddir}','${medico.med_firma}','${medico.esp_id}','${medico.usenam}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
+                    <a style="color:white" type="button" class="btn btn-circle btn-sm btn-danger mr-1" onclick=eliminarMed("${medico.med_id}")><i class="fa-solid fa-trash-can"></i></a>
+                    </td>
+                  </tr>
+          `);
+                });
+                mensaje(medicos[0].tipo, medicos[0].response, 1500);
+            }
+        },
+        error: function () {
+            alert('Error en la solicitud AJAX');
+        },
+    });
 }
 
-*/
+function eliminarMed() {
+
+    med_id = parseInt(med_id);
+    $.ajax({
+        url: '/deleteMed',
+        method: "DELETE",
+        data: {
+            med_id: med_id,
+        },
+        success: function (user) {
+            $('#modalFormmedico [data-dismiss="modal"]').trigger('click');
+            const tbodymed = $('#bodymedicomodal');
+            tbodymed.empty();
+            mensaje(user[0].tipo, user[0].response, 1800);
+        },
+        error: function () {
+            alert('error');
+        }
+    });
+
+}
+
+
+var opc = 0;
+function guardarMedico() {
+
+    let medap = $('#medap');
+    let medam = $('#medam');
+    let mednam = $('#mednam');
+    let docide = $('#docide');
+    let nundoc = $('#nundoc');
+    let med_cmp = $('#med_cmp');
+    let med_rne = $('#med_rne');
+    let medTelfij = $('#medTelfij');
+    let medcel = $('#medcel');
+    let med_correo = $('#med_correo');
+    let meddir = $('#meddir');
+    let med_firma = $('#med_firma');
+    let esp_id = $('#esp_id');
+    let feccre = $('#feccre');
+    console.log(medap, medam, mednam, docide, nundoc, med_cmp, med_rne, medTelfij, medcel, med_correo, meddir, med_firma, esp_id, feccre);
+
+    $.ajax({
+        url: '/medico',
+        method: "POST",
+        data: {
+            medap: medap.val(),
+            medam: medam.val(),
+            mednam: mednam.val(),
+            docide: docide.val(),
+            nundoc: nundoc.val(),
+            med_cmp: med_cmp.val(),
+            med_rne: med_rne.val(),
+            medTelfij: medTelfij.val(),
+            medcel: medcel.val(),
+            med_correo: med_correo.val(),
+            meddir: meddir.val(),
+            med_firma: med_firma.val(),
+            esp_id: esp_id.val(),
+            feccre: feccre.val(),
+            opc: opc,
+        },
+        success: function (response) {
+
+            $('input[type="text"]').val("");
+            opc = 0;
+
+            mensaje(response[0].tipo, response[0].response, 1500);
+        },
+        error: function () {
+            mensaje('error', 'Error al guardar, intente nuevamente', 1500);
+        }
+    });
+}
+
+
+function getmedicom(medapM, medamM, mednamM, docideM, nundocM, med_cmpM, med_rneM, medTelfijM, medcelM, med_correoM, meddirM, med_firmaM, esp_idM) {
+    opc = 1;
+    $('#medap').val(medapM);
+    $('#medam').val(medamM);
+    $('#mednam').val(mednamM);
+    $('#docide').val(docideM);
+    $('#nundoc').val(nundocM);
+    $('#med_cmp').val(med_cmpM);
+    $('#med_rne').val(med_rneM);
+    $('#medTelfij').val(medTelfijM);
+    $('#medcel').val(medcelM);
+    $('#med_correo').val(med_correoM);
+    $('#meddir').val(meddirM);
+    //$('#med_firma').val(med_firmaM);
+    $('#esp_id').val(esp_idM);
+    //$('#usenam').val(usenamM);
+    //$('#contrasena').val('123456789').prop('disabled', true);
+    $('#modalFormmedico [data-dismiss="modal"]').trigger('click');
+    //$('#iduser').val(0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -133,10 +133,8 @@ function ObtenerCie10(id, cie10cod, cie10desc) {
 function limpiarCIE10(identificador) {
     var cie10codigo = document.getElementById(identificador + "codcie10");
     var cie10descript = document.getElementById(identificador + "codcie10desc");
-    var combocie103 = document.getElementById("combocie10" + identificador);
     cie10codigo.value = "";
     cie10descript.value = "";
-    combocie103.value = "P";
 }
 
 document.getElementById("limpiar1cie10").addEventListener("click", function () {
@@ -157,17 +155,14 @@ function obtenerDataIns() {
     var datains = [];
 
     for (var i = 0; i < rows.length; i++) {
-        var selects = rows[i].getElementsByTagName('select');
         var input = rows[i].getElementsByTagName('input');
 
         if (input.length >= 3 && input[1].value.trim() !== '') {
-            var selectcie10 = selects[0].value;
             var inputcodcie10 = input[1].value;
             var inputdesccie10 = input[2].value;
             var inputcomencie10 = input[3].value;
             var rowData = {
                 diacod: inputcodcie10,
-                tipdia: selectcie10,
                 diadesc: inputdesccie10,
                 diacomen: inputcomencie10
             };

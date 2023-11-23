@@ -63,6 +63,5 @@ router.get('/resultfichamusculoesqueletica', isLoggedIn, controllerHI.getresultf
 
 
 
-/************************************************/
+
 module.exports = router;
-//pbcuestionarioespiromeria

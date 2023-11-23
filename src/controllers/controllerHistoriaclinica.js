@@ -165,7 +165,7 @@ module.exports = {
         }
     },
     async getpruebascards(req, res) {
-        let { soexa, cita_id } = req.query;
+        let { soexa,cita_id } = req.query;
         const pool = await getConnection();
         const pruebas = await pool.query(`pa_SelPruebasPorExamen '${soexa}','${cita_id}'`);
         res.json(pruebas.recordset);
@@ -178,7 +178,7 @@ module.exports = {
     },
     async postlaboratorio(req, res) {
         try {
-            const { cita_id, nuncom, soexa, codpru_id, doc_adic_id, datains, datainsrec, dataparametros } = req.body;
+            const { cita_id, nuncom, soexa, codpru_id,doc_adic_id, datains, datainsrec, dataparametros  } = req.body;
             const usenam = req.user.usuario;
             const hostname = '';
             const codrol = req.user.codrol;
