@@ -40,7 +40,7 @@ router.get('/parametros', isLoggedIn, controllerHI.getparametros);
 router.post('/pblaboratorio', isLoggedIn, controllerHI.postlaboratorio);
 router.get('/resultlaboratorio', isLoggedIn, controllerHI.getresultlaboratorio);
 
-/************************************************/
-
+router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfichamedicoocupacional312prueba); 
+/*************************************************/
 
 module.exports = router;

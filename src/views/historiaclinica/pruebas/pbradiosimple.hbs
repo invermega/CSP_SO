@@ -1,0 +1,54 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4 tituloverde">Radiología simple</h1>
+    <div class="card mb-4">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="left-content">
+                <i class="fas fa-table me-1"></i>
+                Formulario de Radiología
+            </div>
+            <div>
+                <button class="btn position-relative" style="background-color: #793B8E; color: white; padding:0px"
+                    id="btnGrabar" onclick="Grabar()">
+                    <i class="fa-regular fa-floppy-disk" style="margin: 8px 12px;"></i>
+            </div>
+
+        </div>
+        <div class="card-body ">
+            <input type="text" id="nuncom" style="display: none;" value="0">
+            <input type="text" id="codpru_id" style="display: none;" value="109">
+
+            <div class="row">
+                <div class="col-md-12 input-group input-group-sm mt-2">
+                    <label class="col-sm-2 input-group-text" for="inprs">Nro referencia</label>
+                    <input type="text" class="form-control form-control-sm" id="inprs" placeholder="Ingrese el valor"
+                        required>
+
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inprs"><i
+                            class="fa-solid fa-heart-pulse"></i></label>
+                </div>
+                <div class="col-md-12 input-group input-group-sm mt-2">
+                    <label class="col-sm-2 input-group-text" for="inpdetrs">Detalle del informe</label>
+                    <textarea type="text" class="form-control form-control-sm" id="inpdetrs" rows="5"
+                        placeholder="Ingrese el valor" required></textarea>
+
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inpdetrs"><i
+                            class="fa-regular fa-file"></i></label>
+                </div>
+                <div class="col-md-12 input-group input-group-sm mt-2">
+                    <label class="col-sm-2 input-group-text" for="inpconrs">Conclusión</label>
+                    <textarea type="text" class="form-control form-control-sm" id="inpconrs" rows="3"
+                        placeholder="Ingrese el valor" required></textarea>
+
+                    <label class="input-group-text" style="width: 35px; color: #773C8D;" for="inpconrs"><i
+                            class="fa-solid fa-heart-pulse"></i></label>
+                </div>
+            </div>
+
+            
+            {{> cie10 }}
+            {{> recomendaciones }}
+            {{> documentoadicionales }}
+        </div>
+    </div>
+</div>
+<script src="/js/historiaclinica/examenes/pbradiosimple.js"></script>
