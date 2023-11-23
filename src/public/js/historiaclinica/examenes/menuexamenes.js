@@ -14,7 +14,7 @@
             pruebas.forEach((item, index) => {
                 const desexa = item.desexa;
                 const desexadet = item.desexadet;
-                
+
                 // Si la opción no existe en el objeto agrupado, crea un array vacío
                 if (!groupedOptions[desexa]) {
                     groupedOptions[desexa] = [];
@@ -60,5 +60,33 @@
 
 })()
 
+
+
+$(document).ready(function () {
+    asignarimagen();
+});
+
+function asignarimagen() {
+    const canvas = document.getElementById('canvas');
+    const context = canvas.getContext('2d');
+    let originalImageSrc = '/img/usuario/default.webp';
+    const originalImage = new Image();
+    originalImage.onload = function () {
+        drawImageOnCanvas(originalImage);
+    };
+    originalImage.src = originalImageSrc;
+
+    function drawImageOnCanvas(image) {
+        const size = 300; // Tamaño fijo para el canvas
+        context.clearRect(0, 0, size, size);
+        context.save();
+        context.beginPath();
+        context.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+        context.closePath();
+        context.clip();
+        context.drawImage(image, 0, 0, size, size);
+        context.restore();
+    }
+}
 
 

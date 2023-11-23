@@ -30,7 +30,7 @@ module.exports = {
     //render de configuracion
     async renderusuario(req, res) {
         const parametro = "US";
-        permisos(parametro, 'configuracion/usuario', req, res)
+        permisos(parametro, 'configuracion/usuario', req, res);
     },
     async renderroles(req, res) {
         const parametro = "PE"
@@ -39,7 +39,7 @@ module.exports = {
     //historiaclinica
     async renderpacientescitados(req, res) {
         const parametro = "PH";
-        permisos(parametro, 'historiaclinica/pacientescitados', req, res)
+        permisos(parametro, 'historiaclinica/pacientescitados', req, res);
     },
     async rendermenuexamenes(req, res) {
         const { soexa, id } = req.params;
@@ -77,8 +77,8 @@ module.exports = {
     //entidades
     async renderprotocolo(req, res) {
         const parametro = "PT";
-        permisos(parametro, 'entidades/protocolo', req, res)
-    },
+        permisos(parametro, 'entidades/protocolo', req, res);
+    },    
     async renderprotocolocreate(req, res) {
         const parametro = "PT";
         permisos(parametro, 'entidades/protocoloCreate', req, res, 0);
@@ -91,29 +91,29 @@ module.exports = {
     /*Paciente*/
     async renderpaciente(req, res) {
         const parametro = "PC";
-        permisos(parametro,'entidades/paciente', req, res);       
+        permisos(parametro, 'entidades/paciente', req, res);
     },
     async renderpacientecreate(req, res) {
         const parametro = "PC";
-        permisos(parametro,'entidades/paciente', req, res,0);
-    },async renderpacienteedit(req, res) {
+        permisos(parametro, 'entidades/paciente', req, res, 0);
+    }, async renderpacienteedit(req, res) {
         const { id } = req.params;
         const parametro = "PC";
-        permisos(parametro,'entidades/paciente', req, res,id);
+        permisos(parametro, 'entidades/paciente', req, res, id);
     },
     /*Cita */
     async rendercita(req, res) {
         const parametro = "CT";
-        permisos(parametro,'entidades/cita', req, res)
+        permisos(parametro, 'entidades/cita', req, res)
     },
     async rendercitacreate(req, res) {
         const parametro = "CT";
-        permisos(parametro,'entidades/citaCreate', req, res,0)
+        permisos(parametro, 'entidades/citaCreate', req, res, 0)
     },
     async rendercitaedit(req, res) {
         const { id } = req.params;
         const parametro = "CT";
-        permisos(parametro,'entidades/citaCreate', req, res,id)
+        permisos(parametro, 'entidades/citaCreate', req, res, id)
     },
     /**Medico */
     async renderemedico(req, res) {
@@ -139,11 +139,11 @@ module.exports = {
     /*Examen */
     async renderexamen(req, res) {
         const parametro = "EX";
-        permisos(parametro,'entidades/examen', req, res)
+        permisos(parametro, 'entidades/examen', req, res)
     },
     async renderexamencreate(req, res) {
         const parametro = "EX";
-        permisos(parametro,'entidades/examenCreate', req, res,0)
+        permisos(parametro, 'entidades/examenCreate', req, res, 0)
     },
-    
+
 };
