@@ -42,6 +42,7 @@ router.get('/resultlaboratorio', isLoggedIn, controllerHI.getresultlaboratorio);
 /****************Espirometria*****************/
 router.get('/pbespirometria', isLoggedIn, controllerrender.renderespirometriaprueba);
 router.get('/resultespirometria', isLoggedIn, controllerHI.getresultespirometria);
+router.get('/parametrosespiro', isLoggedIn, controllerHI.getparametrosespiro);
 router.post('/pbespirometria', isLoggedIn, controllerHI.postespirometria);
 /*********************************************/
 /****************Cuestionario Espirometria*****************/
