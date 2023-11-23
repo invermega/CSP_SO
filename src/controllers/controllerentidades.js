@@ -322,6 +322,7 @@ module.exports = {
         const response = await pool.query(`pa_selMedico  '${codrolUser}','${medico}'`);
         res.json(response.recordset);
     },
+    
     async deletemedico(req, res) {//eliminar medico
         const { dni } = req.body;
         const codrolUser = req.user.codrol;
@@ -329,6 +330,7 @@ module.exports = {
         const response = await pool.query(`pa_delMedico '${codrolUser}','${dni}'`);
         res.json(response.recordset);
     },
+    
     /*************Cliente***************/
     async postcliente(req, res) {//agregar cliente
         const { docide, NumDoc, razsoc, actividad_economica, Direccion, contacto, emailcon, celular, telefono, emailmedocu, forpag_id, cadcermed, incfirmmedexa, Incfirpacexa, Inchuepacexa, Incfordatper, incdecjur, Incfirhueforadi, creusucatocu, Encorvctocert, envcorusuexi, notinfmed_medocu, notinfmedpac, opc, piccli } = req.body;
