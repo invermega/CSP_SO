@@ -39,8 +39,29 @@ router.get('/pruebascards', isLoggedIn, controllerHI.getpruebascards);
 router.get('/parametros', isLoggedIn, controllerHI.getparametros); 
 router.post('/pblaboratorio', isLoggedIn, controllerHI.postlaboratorio);
 router.get('/resultlaboratorio', isLoggedIn, controllerHI.getresultlaboratorio);
+/****************Espirometria*****************/
+router.get('/pbespirometria', isLoggedIn, controllerrender.renderespirometriaprueba);
+router.get('/resultespirometria', isLoggedIn, controllerHI.getresultespirometria);
+router.post('/pbespirometria', isLoggedIn, controllerHI.postespirometria);
+/*********************************************/
+/****************Cuestionario Espirometria*****************/
+router.get('/pbcuestionarioespirometria', isLoggedIn, controllerrender.rendercuestionarioespirometriaprueba);
+router.get('/resultcuestionarioespirometria', isLoggedIn, controllerHI.getresultcuestionarioespirometria);
+router.post('/pbcuestionarioespiromeria', isLoggedIn, controllerHI.postcuestionarioespiromeria);
+/*********************************************/
+/****************Psicologia*****************/
+router.get('/pbpsicologia', isLoggedIn, controllerrender.renderpsicologiaprueba);
+router.get('/resultpsicologia', isLoggedIn, controllerHI.getresultpsicologia);
+/*********************************************/
+/****************Ficha medico ocupacional 312*****************/
+router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfichamedicoocupacional312prueba);
+/************************************************/
+/*****************Ficha Musculo Esqueletica*****************/
+router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueleticaprueba);
+router.post('/pbfichamusculoesqueletica', isLoggedIn, controllerHI.postfichamusculoesqueletica);
+router.get('/resultfichamusculoesqueletica', isLoggedIn, controllerHI.getresultfichamusculoesqueletica);
 
-router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfichamedicoocupacional312prueba); 
-/*************************************************/
+
+
 
 module.exports = router;

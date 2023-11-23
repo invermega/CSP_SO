@@ -1,6 +1,5 @@
 function ObtenerParametros() {
     let codpru_id = document.getElementById('codpru_id').value;
-    //inputcodpru_id.value = codpru_id;
     let nuncom = document.getElementById('nuncom').value;
     ocultarTabla("tablaparametros");
     mostrarDiv("cargaparametros");
@@ -63,24 +62,28 @@ function ObtenerParametros() {
                             autoUnmask: true,
                             placeholder: "0",
                             showMaskOnHover: true,
-                            scale: 0,  
+                            scale: 0,
                         });
                     }
                 });
             });
-            
-            
-            
-
             if (nuncom !== '0') {
                 var std_fuma = $('#std_fuma');
                 std_fuma.val(parametros[0].std_fuma);
                 var Calidad = $('#Calidad');
                 Calidad.val(parametros[0].Calidad);
-                var conclusion = $('#conclusion');
-                conclusion.val(parametros[0].conclusion);
+                
+                let conclusionResult = parametros[0].conclusion;
+                conclusionResult = conclusionResult.replace(/\s*-\s*/, '-');
+                let [tipo, conclusionInput] = conclusionResult.split('-');
+                document.getElementById('tipo').value = tipo;
+                var conclusionDiv = $('#conclusionDiv');
+                conclusionDiv.hide();
+                if (tipo !== 'NORMAL') {
+                    conclusionDiv.show();
+                    document.getElementById('conclusion').value = conclusionInput ? conclusionInput : '';
+                }
             }
-            poblarcampos();
         },
         error: function () {
             $('#error-message').text('Se produjo un error al cargar los protocolos.');
@@ -88,7 +91,7 @@ function ObtenerParametros() {
     });
 
 };
-
+//
 function obtenerDataParametros() {
     var table = document.getElementById('tableparametros');
     var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
@@ -96,8 +99,14 @@ function obtenerDataParametros() {
     var codpru_id = document.getElementById('codpru_id').value;
     var std_fuma = document.getElementById('std_fuma').value;
     var Calidad = document.getElementById('Calidad').value;
-    var conclusion = document.getElementById('conclusion').value;
-
+    let tipo = document.getElementById('tipo').value;
+    let conclusionInput = document.getElementById('conclusion').value;
+    let conclusion = '';
+    if (tipo === 'NORMAL') {
+        conclusion = tipo;
+    } else {
+        conclusion = tipo + ' - ' + conclusionInput;
+    }
     for (var i = 0; i < rows.length; i++) {
         var input = rows[i].getElementsByTagName('input');
         if (input.length >= 6) {
@@ -181,6 +190,7 @@ function Grabar() {
         });
 }
 (function poblarcampos() {
+    ocultarConclusionEspiro();
     let cita_id = document.getElementById('id').value;
     let soexa = document.getElementById('soexa').value;
     let nuncom = document.getElementById('nuncom');
@@ -273,3 +283,12 @@ function Grabar() {
         }
     });
 })();
+
+function ocultarConclusionEspiro() {
+    var conclusionDiv = $('#conclusionDiv');
+    conclusionDiv.hide();
+    var tipo = $('#tipo');
+    $('#tipo').on('change', function () {
+        conclusionDiv.toggle($('#tipo').val() !== 'NORMAL');        
+    });
+}
