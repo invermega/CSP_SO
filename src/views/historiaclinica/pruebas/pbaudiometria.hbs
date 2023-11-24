@@ -1,0 +1,92 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"
+    integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<div class="container-fluid px-4">
+    <h1 class="mt-4 tituloverde">Audiometría</h1>
+    <div class="card mb-4">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="left-content">
+                <i class="fas fa-table me-1"></i>
+                Formulario de audiometría
+            </div>
+            <div>
+                <button class="btn position-relative" style="background-color: #793B8E; color: white; padding:0px"
+                    id="btnGrabar" onclick="Grabar()" data-toggle="modal" data-target="#modalFormProtocolo">
+                    <i class="fa-regular fa-floppy-disk" style="margin: 8px 12px;"></i>
+            </div>
+
+        </div>
+        <div class="card-body " style="max-height: 70vh; overflow-y: auto; ">
+            <input type="text" id="nuncom" style="display: none;" value="0">
+            <input type="text" id="codpru_id" style="display: none;" value="3">
+            <div class="row mt-2">
+
+                <div class="row">
+                    <div class="row">
+                        <h5 class="tituloverde">AUDIÓMETRO</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                                <label class="control-label input-group-text" for="protocolomodal">Marca y
+                                    modelo</label>
+                                <select class="form-select" name="" id=""></select>
+                                <label class="input-group-text form-control-sm" for="protocolomodal"><i
+                                        class="fa-solid fa-headphones"></i></label>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                                <label class="control-label input-group-text" for="protocolomodal">Fecha de
+                                    calibración</label>
+                                <input class="form-control form-control-sm " id="protocolomodal" disabled>
+                                <label class="input-group-text form-control-sm" for="protocolomodal"><i
+                                        class="fa-solid fa-list-ul"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row">
+                        <h5 class="tituloverde">Datos adicionales</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                                <label class="control-label input-group-text" for="protocolomodal">Tiempo de exposición diario</label>
+                                <input class="form-control form-control-sm " id="protocolomodal" disabled>
+                                <label class="input-group-text form-control-sm" for="protocolomodal"><i
+                                        class="fa-solid fa-headphones"></i></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                                <label class="control-label input-group-text" for="protocolomodal">Marca y
+                                    modelo</label>
+                                <select class="form-select" name="" id=""></select>
+                                <label class="input-group-text form-control-sm" for="protocolomodal"><i
+                                        class="fa-solid fa-headphones"></i></label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                                <label class="control-label input-group-text" for="protocolomodal">Marca y
+                                    modelo</label>
+                                <select class="form-select" name="" id=""></select>
+                                <label class="input-group-text form-control-sm" for="protocolomodal"><i
+                                        class="fa-solid fa-headphones"></i></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{> cie10 }}
+                {{> recomendaciones }}
+                {{> documentoadicionales }}
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/historiaclinica/examenes/pbaudiometria.js"></script>

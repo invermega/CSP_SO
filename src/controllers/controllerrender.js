@@ -74,6 +74,10 @@ module.exports = {
         const parametro = "MO";
         permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamedicoocupacional312', req, res);
     },
+    async renderaudiometriaprueba(req, res) {
+        const parametro = "AD";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbaudiometria', req, res);
+    },
     //entidades
     async renderprotocolo(req, res) {
         const parametro = "PT";
@@ -104,7 +108,7 @@ module.exports = {
     /*Cita */
     async rendercita(req, res) {
         const parametro = "CT";
-        permisos(parametro, 'entidades/cita', req, res)
+        permisos(parametro, 'entidades/citaCreate', req, res,0)
     },
     async rendercitacreate(req, res) {
         const parametro = "CT";

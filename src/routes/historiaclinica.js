@@ -61,8 +61,10 @@ router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfi
 router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueleticaprueba);
 router.post('/pbfichamusculoesqueletica', isLoggedIn, controllerHI.postfichamusculoesqueletica);
 router.get('/resultfichamusculoesqueletica', isLoggedIn, controllerHI.getresultfichamusculoesqueletica);
+/**************** Audiometria *********************/
+router.get('/pbaudiometria', isLoggedIn, controllerrender.renderaudiometriaprueba);
 
-
+/***************************************************/
 
 
 module.exports = router;

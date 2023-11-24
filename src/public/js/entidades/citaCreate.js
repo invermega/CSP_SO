@@ -1,4 +1,4 @@
-$(document).ready(function () {    
+$(document).ready(function () {
     getPacienteCombos();
     $('#fecprocitaTime').clockTimePicker({
         duration: true,
@@ -27,7 +27,7 @@ $(document).ready(function () {
         $('#fecprocitaTime').clockTimePicker('value', horaInicial);
     } else {
         getcitas(id);
-    }    
+    }
 });
 function getcitas(id) {
     let fecini = '';//fecha inicio
@@ -175,14 +175,57 @@ function getpacientem(btn) {
     var pachis = filaorigen.find("td:eq(2)").text();
     $('#appm_nom').val(appm_nom);
     $('#pachis').val(pachis);
+    var btncerrar = document.getElementById(`cerrarPacienteModal`);
+    btncerrar.click();
+    event.preventDefault();
 }
-document.getElementById("empresamodal").addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-        var parametro = this.value;
+document.getElementById("empresamodal").addEventListener("keydown", function (event) {
+    if (event.key ) {
+        var parametro = $('#empresamodal').val();
+        mostrarDiv('cargaEmpresa');
+        ocultarDiv('tableEmpresamodal');
         console.log(parametro);
-        getclientes(parametro);
+        $.ajax({
+            url: '/empresas',
+            method: 'GET',
+            data: {
+                empresa: parametro,
+            },
+            success: function (clientes) {
+                ocultarDiv('cargaEmpresa');
+                mostrarDiv('tableEmpresamodal');
+                const tbodycli = $('#bodyEmpresa');
+                tbodycli.empty();
+                if (clientes.length === 0) {
+                    tbodycli.append(`
+                    <tr>
+                        <td colspan="3" class="text-center">No hay resultados disponibles </td>
+                    </tr>
+                `);
+                } else {
+                    clientes.forEach(cliente => {
+                        tbodycli.append(`
+            <tr>
+              <td>
+               <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>              
+              </td>
+              <td>${cliente.razsoc}</td>
+              <td>${cliente.NumDoc}</td>
+              
+            </tr>
+          `);
+                    });
+
+                }
+                //mensaje(clientes[0].icono, clientes[0].mensaje, 1500);
+            },
+            error: function () {
+                alert('Error en la solicitud AJAX');
+            },
+        });
     }
 });
+
 function getclientes(parametro) {
     mostrarDiv('cargaempresamodal');
     ocultarDiv('tableempresamodal');
@@ -229,8 +272,9 @@ function getclientes(parametro) {
 function getempresam(razsoc, cli_id) {
     $('#razsoc').val(razsoc);
     $('#cli_id').val(cli_id);
-    //$('#modalFormEmpresa [data-dismiss="modal"]').trigger('click');
     getprotocolo(cli_id);
+    var btncerrar = document.getElementById(`cerrarEmpresaModal`);
+    btncerrar.click();
     event.preventDefault();
 }
 function getprotocolo(parametro) {
