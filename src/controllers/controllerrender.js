@@ -108,7 +108,7 @@ module.exports = {
     /*Cita */
     async rendercita(req, res) {
         const parametro = "CT";
-        permisos(parametro, 'entidades/citaCreate', req, res,0)
+        permisos(parametro, 'entidades/cita', req, res)
     },
     async rendercitacreate(req, res) {
         const parametro = "CT";
