@@ -42,9 +42,9 @@ module.exports = {
         permisos(parametro, 'historiaclinica/pacientescitados', req, res);
     },
     async rendermenuexamenes(req, res) {
-        const { soexa, id } = req.params;
-        console.log(soexa, id);
-        res.render('historiaclinica/menuexamenes/menuexamenes', { id, soexa, layout: false });
+        const { id } = req.params;
+        console.log(id);
+        res.render('historiaclinica/menuexamenes/menuexamenes', { id, layout: false });
     },
     async rendersignosvitalesprueba(req, res) {
         const parametro = "SG";

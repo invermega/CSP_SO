@@ -12,7 +12,7 @@ router.get('/cmbexamen', isLoggedIn, controllerHI.getcmbexamen);
 
 /*****************Menú examenes genéricos*****************/
 router.get('/pacienteexamen/:id/', isLoggedIn, controllerHI.getpacienteexamen);
-router.get('/arbolpruebas/:id/:opcion', isLoggedIn, controllerHI.getarbolpruebas);
+router.get('/arbolpruebas/:id', isLoggedIn, controllerHI.getarbolpruebas);
 /*********************************************************/
 
 /*****************CIE 1O*****************/
@@ -26,7 +26,7 @@ router.delete('/eliminardocumento', isLoggedIn, controllerHI.deldocumento);
 /************************************************/
 
 /*************Menú de examenes y pruebas*************/
-router.get('/menuexamenes/:soexa/:id', isLoggedIn, controllerrender.rendermenuexamenes);
+router.get('/menuexamenes/:id', isLoggedIn, controllerrender.rendermenuexamenes);
 /************************************************/
 
 /*****************Pruebas*****************/
