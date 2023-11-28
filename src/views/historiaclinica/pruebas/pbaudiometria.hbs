@@ -1,6 +1,6 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"
-    integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+
 <div class="container-fluid px-4">
     <h1 class="mt-4 tituloverde">Audiometría</h1>
     <div class="card mb-4">
@@ -17,66 +17,616 @@
 
         </div>
         <div class="card-body " style="max-height: 70vh; overflow-y: auto; ">
-            <input type="text" id="nuncom" style="display: none;" value="0">
-            <input type="text" id="codpru_id" style="display: none;" value="3">
+            <input type="text" class="form-control" id="nuncom" style="display: none;" value="0">
+            <input type="text" class="form-control" id="codpru_id" style="display: none;" value="3">
             <div class="row mt-2">
-
                 <div class="row">
                     <div class="row">
                         <h5 class="tituloverde">AUDIÓMETRO</h5>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="input-group input-group-sm" style="width: 100%;">
-                                <label class="control-label input-group-text" for="protocolomodal">Marca y
+                            <div class="input-group input-group-sm">
+                                <label class="control-label input-group-text" for="equi_id">Marca y
                                     modelo</label>
-                                <select class="form-select" name="" id=""></select>
-                                <label class="input-group-text form-control-sm" for="protocolomodal"><i
+                                <select class="form-select" name="" id="equi_id"></select>
+                                <label class="input-group-text form-control-sm" for="equi_id"><i
                                         class="fa-solid fa-headphones"></i></label>
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="input-group input-group-sm" style="width: 100%;">
-                                <label class="control-label input-group-text" for="protocolomodal">Fecha de
+                            <div class="input-group input-group-sm">
+                                <label class="control-label input-group-text" for="feccali">Fecha de
                                     calibración</label>
-                                <input class="form-control form-control-sm " id="protocolomodal" disabled>
-                                <label class="input-group-text form-control-sm" for="protocolomodal"><i
-                                        class="fa-solid fa-list-ul"></i></label>
+                                <input class="form-control form-control-sm " id="feccali" disabled>
+                                <label class="input-group-text form-control-sm" for="feccali"><i
+                                        class="fa-solid fa-calendar-days"></i></label>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mt-3">
                     <div class="row">
                         <h5 class="tituloverde">Datos adicionales</h5>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="input-group input-group-sm" style="width: 100%;">
-                                <label class="control-label input-group-text" for="protocolomodal">Tiempo de exposición diario</label>
-                                <input class="form-control form-control-sm " id="protocolomodal" disabled>
-                                <label class="input-group-text form-control-sm" for="protocolomodal"><i
-                                        class="fa-solid fa-headphones"></i></label>
+                            <div class="input-group input-group-sm">
+                                <label class="control-label input-group-text" for="protocolomodal">Tiempo de exposición
+                                    diario</label>
+                                <input class="form-control form-control-sm " id="protocolomodal">
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="input-group input-group-sm" style="width: 100%;">
-                                <label class="control-label input-group-text" for="protocolomodal">Marca y
-                                    modelo</label>
-                                <select class="form-select" name="" id=""></select>
-                                <label class="input-group-text form-control-sm" for="protocolomodal"><i
-                                        class="fa-solid fa-headphones"></i></label>
+                            <div class="input-group input-group-sm align-items-center">
+                                <label class="control-label input-group-text" for="protocolomodal">Uso de protector
+                                    auditivo</label>
+                                <div class="form-check ps-2">
+                                    <label for="" class="form-check-label mr-1">Tapones</label>
+                                    <input type="radio" class="" id="protocolomodal" value="Tapones" name="efwefwe">
+
+                                </div>
+                                <div class="form-check ps-4">
+                                    <label for="" class="form-check-label mr-1">Orejeras</label>
+                                    <input type="radio" class="" id="protocolomodal" value="Orejeras" name="efwefwe">
+
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <div class="input-group input-group-sm" style="width: 100%;">
-                                <label class="control-label input-group-text" for="protocolomodal">Marca y
-                                    modelo</label>
-                                <select class="form-select" name="" id=""></select>
-                                <label class="input-group-text form-control-sm" for="protocolomodal"><i
-                                        class="fa-solid fa-headphones"></i></label>
+                            <div class="input-group input-group-sm">
+                                <label class="control-label input-group-text" for="protocolomodal">Apreciación del
+                                    ruido</label>
+                                <select class="form-select" name="" id="equi_id">
+                                    <option value="RUIDO NO MOLESTO">RUIDO NO MOLESTO</option>
+                                    <option value="RUIDO MODERADO">RUIDO MODERADO</option>
+                                    <option value="RUIDO MUY INTENSO">RUIDO MUY INTENSO</option>
+                                </select>
                             </div>
                         </div>
+                    </div>
+
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <table
+                            class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn">
+                            <thead class="text-start">
+                                <th>ANTECEDENTES RELACIONADOS</th>
+                                <th class="text-center">RESULTADO</th>
+                            </thead>
+                            <tbody class="text-start">
+                                <tr>
+                                    <td>Consumo</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="consumo" value="SI"
+                                                id="si_consumo">
+                                            <label class="form-check-label" for="si_consumo">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="consumo" value="NO"
+                                                id="no_consumo" checked>
+                                            <label class="form-check-label" for="no_consumo">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Servicio militar</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="servicio_militar"
+                                                value="SI" id="si_servicio_militar">
+                                            <label class="form-check-label" for="si_servicio_militar">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="servicio_militar"
+                                                value="NO" id="no_servicio_militar" checked>
+                                            <label class="form-check-label" for="no_servicio_militar">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Hobbies con exposición al ruido</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="hobbies_ruido" value="SI"
+                                                id="si_hobbies_ruido">
+                                            <label class="form-check-label" for="si_hobbies_ruido">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="hobbies_ruido" value="NO"
+                                                id="no_hobbies_ruido" checked>
+                                            <label class="form-check-label" for="no_hobbies_ruido">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Exposición laboral a químicos</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="exposicion_quimicos"
+                                                value="SI" id="exposicion_quimicos_si">
+                                            <label class="form-check-label" for="exposicion_quimicos_si">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="exposicion_quimicos"
+                                                value="NO" id="exposicion_quimicos_no" checked>
+                                            <label class="form-check-label" for="exposicion_quimicos_no">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Infección al oído</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="infeccion_oido"
+                                                value="SI" id="si_infeccion_oido">
+                                            <label class="form-check-label" for="si_infeccion_oido">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="infeccion_oido"
+                                                value="NO" id="no_infeccion_oido" checked>
+                                            <label class="form-check-label" for="no_infeccion_oido">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Uso de ototóxicos</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="uso_ototoxicos"
+                                                value="SI" id="si_uso_ototoxicos">
+                                            <label class="form-check-label" for="si_uso_ototoxicos">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="uso_ototoxicos"
+                                                value="NO" id="no_uso_ototoxicos" checked>
+                                            <label class="form-check-label" for="no_uso_ototoxicos">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Otros</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="otros" value="SI"
+                                                id="si_otros">
+                                            <label class="form-check-label" for="si_otros">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="otros" value="NO"
+                                                id="no_otros" checked>
+                                            <label class="form-check-label" for="no_otros">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table
+                            class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn">
+                            <thead class="text-start">
+                                <th>SÍNTOMAS ACTUALES</th>
+                                <th class="text-center">RESULTADO</th>
+                            </thead>
+                            <tbody class="text-start">
+                                <tr>
+                                    <td>Disminución de audición</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="disminucion_audicion"
+                                                id="disminucion_audicion_si">
+                                            <label class="form-check-label" for="disminucion_audicion_si">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="disminucion_audicion"
+                                                id="disminucion_audicion_no" checked>
+                                            <label class="form-check-label" for="disminucion_audicion_no">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Dolor de oído</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="dolor_oido"
+                                                id="dolor_oido_si">
+                                            <label class="form-check-label" for="dolor_oido_si">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="dolor_oido"
+                                                id="dolor_oido_no" checked>
+                                            <label class="form-check-label" for="dolor_oido_no">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Zumbidos</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="zumbidos"
+                                                id="zumbidos_si">
+                                            <label class="form-check-label" for="zumbidos_si">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="zumbidos"
+                                                id="zumbidos_no" checked>
+                                            <label class="form-check-label" for="zumbidos_no">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Mareos</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="mareos" id="mareos_si">
+                                            <label class="form-check-label" for="mareos_si">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="mareos" id="mareos_no"
+                                                checked>
+                                            <label class="form-check-label" for="mareos_no">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Infección al oído</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="infeccion_oido_2"
+                                                id="infeccion_oido_2_si">
+                                            <label class="form-check-label" for="infeccion_oido_2_si">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="infeccion_oido_2"
+                                                id="infeccion_oido_2_no" checked>
+                                            <label class="form-check-label" for="infeccion_oido_2_no">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Estuvo expuesto al ruido 14 horas previas</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="exposicion_ruido"
+                                                id="exposicion_ruido_si">
+                                            <label class="form-check-label" for="exposicion_ruido_si">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="exposicion_ruido"
+                                                id="exposicion_ruido_no" checked>
+                                            <label class="form-check-label" for="exposicion_ruido_no">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Otros</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="otros_2" id="otros_2_si">
+                                            <label class="form-check-label" for="otros_2_si">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="otros_2" id="otros_2_no"
+                                                checked>
+                                            <label class="form-check-label" for="otros_2_no">NO</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <h4 class="tituloverde">OTOSCOPÍA</h4>
+                    <div class="col-md-6">
+                        <table
+                            class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn">
+                            <thead>
+                                <th colspan="3">OÍDO DERECHO</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Triángulo de luz</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="SI" id="">
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="NO" id=""
+                                                checked>
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Perforaciones</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="SI" id="">
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="NO" id=""
+                                                checked>
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Abombamiento</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="SI" id="">
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="NO" id=""
+                                                checked>
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tapón de Cerumen</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="SI" id="">
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="NO" id=""
+                                                checked>
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Otros</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="SI" id="">
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="NO" id=""
+                                                checked>
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table
+                            class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn">
+                            <thead>
+                                <th colspan="3">OÍDO IZQUIERDO</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Triángulo de luz</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="SI" id="">
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="NO" id=""
+                                                checked>
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Perforaciones</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="SI" id="">
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="NO" id=""
+                                                checked>
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Abombamiento</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="SI" id="">
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="NO" id=""
+                                                checked>
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Tapón de Cerumen</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="SI" id="">
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="NO" id=""
+                                                checked>
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Otros</td>
+                                    <td class="text-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="SI" id="">
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="" value="NO" id=""
+                                                checked>
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12">
+                        <div class="input-group input-group-sm">
+                            <label class="control-label input-group-text" for="equi_id">Logoaudiometría</label>
+                            <label class="control-label input-group-text" for="equi_id">O.Derecho</label>
+                            <input type="text" name="" id="" class="form-control">
+                            <label class="control-label input-group-text" for="equi_id">O.Izquierdo</label>
+                            <input type="text" name="" id="" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <table
+                            class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn">
+                            <thead>
+                                <tr>
+                                    <th colspan="10" rowspan="1">OÍDO DERECHO</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>125</th>
+                                    <th>250</th>
+                                    <th>500</th>
+                                    <th>1000</th>
+                                    <th>2000</th>
+                                    <th>3000</th>
+                                    <th>4000</th>
+                                    <th>6000</th>
+                                    <th>8000</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>V.A.</td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_d_125"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_d_250"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_d_500"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_d_1000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_d_2000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_d_3000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_d_4000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_d_6000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_d_8000"></td>
+                                </tr>
+                                <tr>
+                                    <td>V.O.</td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_d_125"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_d_250"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_d_500"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_d_1000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_d_2000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_d_3000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_d_4000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_d_6000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_d_8000"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table
+                            class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn">
+                            <thead>
+                                <tr>
+                                    <th colspan="10" rowspan="1">OÍDO IZQUIERDO</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>125</th>
+                                    <th>250</th>
+                                    <th>500</th>
+                                    <th>1000</th>
+                                    <th>2000</th>
+                                    <th>3000</th>
+                                    <th>4000</th>
+                                    <th>6000</th>
+                                    <th>8000</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>V.A.</td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_i_125"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_i_250"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_i_500"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_i_1000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_i_2000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_i_3000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_i_4000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_i_6000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="va_i_8000"></td>
+                                </tr>
+                                <tr>
+                                    <td>V.O.</td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_i_125"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_i_250"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_i_500"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_i_1000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_i_2000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_i_3000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_i_4000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_i_6000"></td>
+                                    <td><input type="text" class="form-control form-control-sm" id="vo_i_8000"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6" >
+                        <canvas id="graf_OD"></canvas>
+                    </div>
+                    <div class="col-md-6" >
+                        <canvas id="graf_OI"></canvas>
                     </div>
                 </div>
 
@@ -90,3 +640,8 @@
     </div>
 
     <script src="/js/historiaclinica/examenes/pbaudiometria.js"></script>
+
+    <script>
+        
+        var data = [va_d_125] 
+    </script>

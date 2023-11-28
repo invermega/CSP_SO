@@ -355,4 +355,12 @@ module.exports = {
         const result = await pool.query(`pa_SelResulttestpsicologia '${cita_id}','${soexa}'`);
         res.json(result.recordset);
     },
+    /**************** Audiometria ******************/
+    async getequipos(req, res) {
+        let { codpru_id,opc,equipos } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelEquiposForm '${codpru_id}','${equipos}','${opc}'`);
+        res.json(result.recordset);
+    },
+    /*********************************************/
 };
