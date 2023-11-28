@@ -31,9 +31,9 @@ module.exports = {
         res.json(pruebas.recordset);
     },
     async getarbolpruebas(req, res) {
-        const { id, opcion } = req.params;
+        const { id } = req.params;
         const pool = await getConnection();
-        const pruebas = await pool.query(`pa_SelMenuExamenes '${id}','${opcion}'`);
+        const pruebas = await pool.query(`pa_SelMenuExamenes '${id}'`);
         res.json(pruebas.recordset);
     },
     async getcie10(req, res) {

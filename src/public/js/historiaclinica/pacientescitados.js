@@ -26,50 +26,29 @@ function getPacientesCitados() {
     success: function (Pacientes) {
       ocultarDiv('carga');
       mostrarTabla('mydatatable');
-      let tablehead = $('thead');
-      tablehead.html('');
       let tablebody = $('tbody');
       tablebody.html('');
       if (Pacientes.length === 0) {
-        tablehead.append(`
-            <tr>
-              <th>PACIENTES CITADOS</th>
-            </tr>
-          `);
         tablebody.append(`
             <tr>
-              <td>No hay pacientes citados.</td>
+              <td colspan="8">No hay pacientes con los filtros proporcionados</td>
             </tr>
           `);
       } else {
-        // Construir el thead excluyendo la columna de ID
-        tablehead.append('<tr>');
-        for (let key in Pacientes[0]) {
-          if (Pacientes[0].hasOwnProperty(key) && key !== 'ID' && key !== 'ICONO' && key !== 'MENSAJE') {
-            tablehead.append(`<th>${key}</th>`);
-          }
-        }
-        tablehead.append('</tr>');
-
-        // Construir el tbody con los datos de los pacientes excluyendo la columna de ID
         Pacientes.forEach(Paciente => {
-          tablebody.append('<tr>');
-          let shouldConcatenate = false;
-          for (let key in Paciente) {
-            if (Paciente.hasOwnProperty(key) && key !== 'ID' && key !== 'ICONO' && key !== 'MENSAJE') {
-              if (key === 'H. ADM') {
-                shouldConcatenate = true;
-                tablebody.append(`<td>${Paciente[key]}</td>`);
-              } else if (shouldConcatenate && Paciente[key]) {
-                tablebody.append(`<td class="text-center"><a style="color:white;background-color: cornflowerblue;" type="submit" href="${Paciente[key]}/${Paciente.ID}"  class="btn btn-circle btn-sm btn" target="_blank"><i class="fa-solid fa-file-lines"></i></a></td>`);
-              } else {
-                tablebody.append(`<td>${Paciente[key]}</td>`);
-              }
-            }
-          }
-          tablebody.append('</tr>');
+          tablebody.append(`
+              <tr>
+              <td style="vertical-align: middle;" class="text-left">${Paciente.FECHADECITA}</td>
+              <td style="vertical-align: middle;" class="text-left">${Paciente.PACIENTE}</td>
+                <td style="vertical-align: middle;" class="text-left">${Paciente.EDAD}</td>
+                <td style="vertical-align: middle;" class="text-left">${Paciente.CLIENTE}</td>
+                <td style="vertical-align: middle;" class="text-left">${Paciente.TIPOEX}</td>
+                <td style="vertical-align: middle;" class="text-left">${Paciente.HADM}</td>
+                <td class="text-center"><a style="color:white;background-color: cornflowerblue;" type="submit" href="${Paciente.RUTA}"  class="btn btn-circle btn-sm btn" target="_blank"><i class="fa-solid fa-file-lines"></i></a></td>
+                <td><button style="color:white;background-color: cornflowerblue;" class="btn btn-circle btn-sm btn"><i class="fa-solid fa-ellipsis-vertical"></i></button></td>               
+              </tr>
+            `);
         });
-
         mensaje(Pacientes[0].ICONO, Pacientes[0].MENSAJE, 1500);
 
       }
