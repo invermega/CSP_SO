@@ -63,7 +63,9 @@ router.post('/pbfichamusculoesqueletica', isLoggedIn, controllerHI.postfichamusc
 router.get('/resultfichamusculoesqueletica', isLoggedIn, controllerHI.getresultfichamusculoesqueletica);
 /**************** Audiometria *********************/
 router.get('/pbaudiometria', isLoggedIn, controllerrender.renderaudiometriaprueba);
+router.post('/pbaudiometria', isLoggedIn, controllerHI.postaudiometria);
 router.get('/equipos', isLoggedIn, controllerHI.getequipos);
+router.get('/resultaudiometria', isLoggedIn, controllerHI.getresultaudiometria);
 /***************************************************/
 
 
