@@ -1,13 +1,5 @@
 $(document).ready(function () {
     getPacienteCombos();
-
-    const id = document.getElementById("inputid").value;
-    if (id === "0") {
-
-    } else {
-        getmedico(id);
-    }
-
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
     const originalImage = new Image();
@@ -44,11 +36,10 @@ $(document).ready(function () {
         event.preventDefault();
         $('#file-input').click();
     });
-
     $('#reset-btn').on('click', function (event) {
+        event.preventDefault();
         resetCanvasWithImage(originalImageSrc);
     });
-
     $('#file-input').on('change', function (event) {
         const file = event.target.files[0];
         if (file) {
@@ -62,13 +53,13 @@ $(document).ready(function () {
 });
 
 function getmedico(id) {
-    let parametro1 ="";
-    parametro1 =id;
+    let opc =1;
     $.ajax({
         url: '/listarmedicos',
-        method: 'GET',
+        method: "GET",
         data: {
-            parametro1: parametro1,
+            parametro:id,
+            opc: opc
         },
         success: function (medicos) {
             $('#medap').val(medicos[0].medap);
@@ -84,9 +75,6 @@ function getmedico(id) {
             $('#meddir').val(medicos[0].meddir);
             $('#med_firma').val(medicos[0].med_firma);
             $('#esp_id').val(medicos[0].esp_id);
-            
-            //$('#iduser').val(iduserM);
-            //'<tr data-id="${citas.id}"></tr>'
 
             mensaje(medicos[0].tipo, medicos[0].response, 1500)
             
@@ -115,8 +103,13 @@ function getPacienteCombos() {
                     espme.append(option);
                 }
             });
-            $("#docide").val("01");
-            $('#esp_id').val("2");
+            const id=document.getElementById("inputid").value;
+            if (id === "0") {
+                $("#docide").val("01");
+                $('#esp_id').val("2");
+            } else {
+                getmedico(id);
+            }
         },
         error: function () {
             alert('error');
@@ -124,7 +117,7 @@ function getPacienteCombos() {
     });
 }
 
-function guardarMedico() {
+function guardarmedico() {
     const canvas = document.getElementById('canvas');
     let camposValidosmed = validarFormulario('file-input,docide,med_cmp,medcel,medTelfij,med_correo,meddir,esp_id,med_rne,medicomodal');
     if (!camposValidosmed) {
@@ -167,46 +160,25 @@ function guardarMedico() {
         },
         success: function (response) {
             opc = 0;
-            if (response[0].tipo === 'success') {
-                MensajeSIyNO(response[0].tipo, response[0].mensaje, '¿Desea volver?', function (respuesta) {
+            if (response[0].icono === 'success') {
+                MensajeSIyNO(response[0].icono, response[0].mensaje, '¿Desea volver?', function (respuesta) {
                     if (respuesta) {
                         $('input[type="text"]').val("");
                         rendersub('/medico');
                     } else {
-                        if (data[0].mensaje === "Guardado correctamente") {
+                        if (response[0].mensaje === "Guardado correctamente") {
                             limpiarImput();
+                            inputid.val("0");
                         }
                         return;
                     }
                 });
             } else {
-                mensaje(response[0].tipo, response[0].response, 1500);
+                mensaje(response[0].icono, response[0].response, 1500);
             }
         },
         error: function () {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);
         }
     });
-}
-
-function eliminarMed(dni) {
-
-    med_id = parseInt(dni);
-    $.ajax({
-        url: '/deleteMed',
-        method: "DELETE",
-        data: {
-            dni: dni,
-        },
-        success: function (med) {
-            $('#modalFormmedico [data-dismiss="modal"]').trigger('click');
-            const tbodymed = $('#bodymedicomodal');
-            tbodymed.empty();
-            mensaje(med[0].tipo, med[0].response, 1800);
-        },
-        error: function () {
-            alert('error');
-        }
-    });
-
 }

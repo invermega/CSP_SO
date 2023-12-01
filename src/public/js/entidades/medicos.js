@@ -1,7 +1,6 @@
 $(document).ready(function () {
   render();
   getmedico();
-  getPacienteCombos();
   const refresh = document.getElementById('refresh');
   refresh.addEventListener('click', getmedico);
   const search = document.getElementById('search');
@@ -11,35 +10,36 @@ $(document).ready(function () {
 function getmedico() {
   mostrarDiv('carga');
   ocultarTabla('mydatatable');
-  let medico = $('#medico');
-  let parametro1 = $('#inputid');
-  parametro1 = 0;
+  let parametro = $('#medico');
+  let opc=0;
+
   $.ajax({
     url: '/listarmedicos',
-    method: 'GET',
+    method: "GET",
     data: {
-      medico: medico.val(),
-      parametro1:parametro1
+      parametro: parametro.val(),
+      opc:opc
     },
     success: function (medicos) {
+      console.log(medicos);
       ocultarDiv('carga');
       mostrarTabla('mydatatable');
-      let tablebody1 = $('tbody');
-      tablebody1.html('');
+      const tablebodymed = $('#bodymedicos');
+      tablebodymed.empty();
       if (medicos.length === 0) {
-        tablebody1.append(`
+        tablebodymed.append(`
               <tr>
                 <td colspan="6">No hay médico con los datos proporcinado</td>
               </tr>
             `);
       } else {
         medicos.forEach(medico => {
-          tablebody1.append(`
+          tablebodymed.append(`
                 <tr data-id="${medico.med_id}">
                 <td class="align-middle"><input id="check_${medico.med_id}" value="id_${medico.med_id}" type="checkbox" class="mt-1" ></td>
                 <td style="vertical-align: middle;" class="text-left">${medico.medapmn}</td>
                 <td style="vertical-align: middle;" class="text-left">${medico.nundoc}</td>
-                <td style="vertical-align: middle;" class="text-left">${medico.esp_id}</td>
+                <td style="vertical-align: middle;" class="text-left">${medico.des_esp}</td>
               </tr>
       `);
         });
@@ -52,87 +52,78 @@ function getmedico() {
   });
 }
 
-function getPacienteCombos() {
-  $.ajax({
-      url: '/listarCombosPac',
-      success: function (lista) {
-          let docident = $('#docide'); // Selecionar el select de tipo documento
-          let espme = $('#esp_id');  // Seleccionar el select de especialidad
-          docident.html('');
-          espme.html('');
-
-          lista.forEach(item => {
-              let option = `<option value="${item.id}">${item.descripcion}</option>`;
-              if (item.tabla === 'documento_identidad') {
-                  docident.append(option);
-              } if (item.tabla === 'especialidad') {
-                  espme.append(option);
-              }
-          });
-          $("#docide").val("01");
-          $('#esp_id').val("2");
-      },
-      error: function () {
-          alert('error');
-      }
-  });
-}
-
-/*
-function navegargetid(iddatatableble, tipo) {
+function navegarmededit(iddatatableble, rutaparcial) {
   var table = document.getElementById(iddatatableble);
   var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
   var seleccionados = []; // Array para almacenar los elementos checkbox seleccionados
 
   for (var i = 0; i < rows.length; i++) {
-    var checkbox = rows[i].querySelector('input[type="checkbox"]');
+      var checkbox = rows[i].querySelector('input[type="checkbox"]');
 
-    if (checkbox && checkbox.checked) {
-      var id = checkbox.value.split('_')[1];
-      seleccionados.push(id); // Agregar el id al array de seleccionados
-    }
+      if (checkbox && checkbox.checked) {
+          var id = checkbox.value.split('_')[1];
+          seleccionados.push(id); // Agregar el id al array de seleccionados
+      }
   }
+
   if (seleccionados.length === 0) {
-    mensajecentral('error', 'Debes seleccionar algún registro.');
+      mensajecentral('error', 'Debes seleccionar algún registro.');
   } else if (seleccionados.length > 1) {
-    mensajecentral('error', 'Debes seleccionar solo un registro.');
-  } else {
-    obtenerDatosCabeceramed(`${seleccionados[0]}`);
-    obtenerDatosDetalle(`${seleccionados[0]}`);
-  }
-}*/
-/*
-function obtenerDatosCabeceramed(idmed) {
-  return new Promise(function (resolve, reject) {
-      var cabeceraData;
-      $.ajax({
-          url: '/listarmedico',
-          method: 'GET',
-          data: {
-            idmed: idmed,
-          },
-          success: function (lista) {
-              cabeceraData.medap = lista[0].medap;
-              cabeceraData.medam = lista[0].medam;
-              cabeceraData.mednam = lista[0].mednam;
-              cabeceraData.docide = lista[0].docide;
-              cabeceraData.nundoc = lista[0].nundoc;
-              cabeceraData.med_cmp = lista[0].med_cmp;
-              cabeceraData.med_rne = lista[0].med_rne;
-              cabeceraData.medTelfij = lista[0].medTelfij;
-              cabeceraData.medcel = lista[0].medcel;
-              cabeceraData.med_correo = lista[0].med_correo;
-              cabeceraData.meddir = lista[0].meddir;
-              cabeceraData.esp_id = lista[0].esp_id;              
-              resolve(cabeceraData);
-          },
-          error: function (error) {
-              // Manejo de errores aquí, si es necesario
-              // Rechaza la promesa en caso de error
-              reject(error);
-          }
-      });
-  });
+      mensajecentral('error', 'Debes seleccionar solo un registro.');
+  } 
 }
 
-*/
+function eliminar() {
+  var table = document.getElementById('mydatatable');
+  if (!table) {
+      console.error('La tabla no se encontró.');
+      return;
+  }
+  var rows = table.querySelectorAll('tbody tr');
+  var seleccionados = [];
+  for (var i = 0; i < rows.length; i++) {
+      var checkbox = rows[i].querySelector('input[type="checkbox"]');
+
+      if (checkbox && checkbox.checked) {
+          var med_id = checkbox.value.split('_')[1];
+          seleccionados.push({ med_id: med_id });
+      }
+  }
+  if (seleccionados.length === 0) {
+      mensajecentral('error', 'Debes seleccionar algún registro.');
+  } else {
+      MensajeSIyNO('warning','', '¿Está seguro de eliminar los medicos seleccionados?', function (respuesta) {
+          if (respuesta) {
+              fetch('/medicosdel', {
+                  method: 'DELETE',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(seleccionados)
+              })
+                  .then(response => {
+                      if (!response.ok) {
+                          console.error('Error en la solicitud');
+                          throw new Error('Error en la solicitud');
+                      }
+                      return response.json();
+                  })
+                  .then(data => {
+                      if (data[0].icono === "success") {
+                          for (var i = 0; i < seleccionados.length; i++) {
+                              var medId = seleccionados[i].med_id;
+                              var fila = table.querySelector('tr[data-id="' + medId + '"]');
+                              if (fila) {
+                                  fila.remove();
+                              }
+                          }
+                      }
+                      mensaje(data[0].icono, data[0].mensaje, 1500);
+                  })
+                  .catch(error => {
+                      console.error('Error:', error);
+                  })
+          }
+      })
+  }
+}

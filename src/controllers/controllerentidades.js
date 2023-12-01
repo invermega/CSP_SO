@@ -272,11 +272,17 @@ module.exports = {
     /*************************/
 
     /************MEDICOS*************/
-
+    async getmedicos(req, res) {//listar medicos
+        const { parametro,opc  } = req.query;
+        const codrolUser = req.user.codrol;
+        console.log(parametro,opc);
+        const pool = await getConnection();
+        const response = await pool.query(`pa_selMedico1 '${codrolUser}','${parametro}','${opc}'`);
+        res.json(response.recordset);
+    },
     async postmedico(req, res) {//agregar medico
         const { inputid, medap, medam, mednam, docide, nundoc, med_cmp, med_rne, medTelfij, medcel, med_correo, meddir, esp_id, picmed } = req.body;
         const usenam = req.user.usuario;
-        const hostname = '';
         const codrolUser = req.user.codrol;
         const imagenBase64 = picmed;
         const rutaSalida = path.join(__dirname, '..', 'public', 'img', 'medicos', nundoc + '.webp');
@@ -289,28 +295,27 @@ module.exports = {
             .toFormat('webp')
             .toFile(rutaSalida);
         const pool = await getConnection();
-        const response = await pool.query(`pa_InsMedico '${medap.toUpperCase()}',${medam.toUpperCase()},'${mednam.toUpperCase()}','${docide}','${nundoc}','${med_cmp}','${med_rne}',
-        '${medTelfij.trim()}','${medcel}','${med_correo.toUpperCase()}','${meddir}','${esp_id}','${usenam}','${hostname}','${codrolUser}','${inputid}'`);
-
+        const response = await pool.query(`pa_InsMedico ${inputid},'${medap.toUpperCase()}',${medam.toUpperCase()},'${mednam.toUpperCase()}','${docide}','${nundoc}','${med_cmp}','${med_rne}',
+        '${medTelfij.trim()}','${medcel}','${med_correo.toUpperCase()}','${meddir}','${esp_id}','${usenam}',${codrolUser}`);
         res.json(response.recordset);
     },
-    async getmedicolist(req, res) {//listar los medicos
-        let {parametro1 } = req.query;
-        const codrolUser = req.user.codrol;
-        let medico = req.query.medico;
-        if (medico === '') {
-            medico = '%';
+    async deletemedico(req, res) {
+        try {
+            const seleccionados = req.body;
+            const detalleJson = JSON.stringify(seleccionados);
+            const codrol = req.user.codrol;
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_delMedico';
+            request.input('codrol', sql.Int, codrol);
+            request.input('MedicosJson', sql.NVarChar(sql.MAX), detalleJson);
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
         }
-        const pool = await getConnection();
-        const response = await pool.query(`pa_selMedico '${codrolUser}','${medico}','${parametro1}'`);
-        res.json(response.recordset);
-    },
-    async deletemedico(req, res) {//eliminar medico
-        const { dni } = req.body;
-        const codrolUser = req.user.codrol;
-        const pool = await getConnection();
-        const response = await pool.query(`pa_delMedico '${codrolUser}','${dni}'`);
-        res.json(response.recordset);
     },
 
     /*************Cliente***************/
@@ -347,5 +352,38 @@ module.exports = {
         const pool = await getConnection();
         const response = await pool.query(`pa_delCliente '${codrolUser}','${dni}'`);
         res.json(response.recordset);
+    },
+    /*************Equipos***************/
+    async getequipos(req, res) {//listar equipos
+        const { opc, equipos } = req.query;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_SelEquiposForm '','${equipos}','${opc}'`);
+        res.json(response.recordset);
+    },
+    async postequipos(req, res) {//agregar equipo
+        const { inputid, marca, modelo, soexa, desequi, feccali, fecfab } = req.body;
+        const usenam = req.user.usuario;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_InsEquipos ${inputid}, '${marca}', '${modelo}', '${soexa}', '${desequi}','${feccali}', '${fecfab}', ${codrolUser}, '${usenam}'`);
+        res.json(response.recordset);
+    },
+    async deleteequipos(req, res) {
+        try {
+            const seleccionados = req.body;
+            const detalleJson = JSON.stringify(seleccionados);
+            const codrol = req.user.codrol;
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_DelEquipos';
+            request.input('codrol', sql.Int, codrol);
+            request.input('EquiposJson', sql.NVarChar(sql.MAX), detalleJson);
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
     },
 };

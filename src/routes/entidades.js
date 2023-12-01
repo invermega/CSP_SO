@@ -50,8 +50,8 @@ router.post('/listarhrd', isLoggedIn, controllerEN.getListaHojaRutaD);
 router.get('/medicocreate', isLoggedIn, controllerrender.rendermedicocreate);
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
 router.post('/medico',isLoggedIn,controllerEN.postmedico);
-router.get('/listarmedicos',isLoggedIn,controllerEN.getmedicolist);
-router.delete('/deleteMed',isLoggedIn,controllerEN.deletemedico);
+router.get('/listarmedicos',isLoggedIn,controllerEN.getmedicos);
+router.delete('/medicosdel',isLoggedIn,controllerEN.deletemedico);
 router.get('/medicoedit/:id', isLoggedIn, controllerrender.rendermedicoedit);
 
 /****************Cliente******************/
@@ -68,6 +68,12 @@ router.get('/examen', isLoggedIn, controllerrender.renderexamen);
 router.get('/examencreate', isLoggedIn, controllerrender.renderexamencreate);
 router.get('/listarexamen', isLoggedIn, controllerEN.getListaExamenes);
 
-
+/**************Equipos****************/
+router.get('/equipos', isLoggedIn, controllerrender.renderequipos);
+router.get('/listarequipos',isLoggedIn,controllerEN.getequipos);
+router.get('/equiposcreate', isLoggedIn, controllerrender.renderequiposcreate);
+router.post('/equipos',isLoggedIn,controllerEN.postequipos);
+router.get('/equiposedit/:id', isLoggedIn, controllerrender.renderequiposedit);
+router.delete('/equiposdel',isLoggedIn,controllerEN.deleteequipos);
 /******************************************/
 module.exports = router;

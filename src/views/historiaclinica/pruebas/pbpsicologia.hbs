@@ -11,339 +11,214 @@
                     id="btnGrabar" onclick="Grabar()" data-toggle="modal" data-target="#modalFormProtocolo">
                     <i class="fa-regular fa-floppy-disk" style="margin: 8px 12px;"></i>
             </div>
-
         </div>
         <div class="card-body " style="max-height: 70vh; overflow-y: auto; ">
             <input type="text" id="nuncom" style="display: none;" value="0">
             <input type="text" id="codpru_id" style="display: none;" value="33">
-            <div>
-                <div class="table-responsive">
+            <div class="row">
+                <style>
+                    .largodespan {
+                        width: 25%;
+                    }
 
-                    <table class="table-responsive">
-                        <!--style="width: 70%; float:left;margin-right: 2px"-->
-                        <div> 
-                            <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                                <thead class="thead sticky-top">
-                                    <tr>
-                                        <th colspan="8">OBSERVACIÓN DE CONDUCTAS</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>Prestación</th>
-                                        <td colspan="2">Adecuado</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td colspan="2">Inadecuado</td>
-                                        <td colspan="2"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Postura</th>
-                                        <td colspan="2">Erguida</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td colspan="2">Encorvada</td>
-                                        <td colspan="2"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th rowspan="3">Discurso</th>
-                                        <th>Ritmo</th>
-                                        <td>Lento</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Rapido</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Fluido</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <th>Tono</th>
-                                        <td>Alto</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Moderado</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Bajo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Articulación</th>
-                                        <td>Con dificultad</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Sin dificultad</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th rowspan="3">Orientación</th>
-                                        <th>Tiempo</th>
-                                        <td>Orientado</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td colspan="2">Desorientado</td>
-                                        <td colspan="2"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni"></td>
+                    .largospan12 {
+                        width: 12.5%;
+                    }
+                </style>
+                <div class="col-md-6">
+                    <div class="row">
+                        <h5 class="tituloverde mb-3">OBSERVACIÓN DE CONDUCTAS</h5>
 
-                                    </tr>
-                                    
-                                    <tr>
-                                        <th>Espacio</th>
-                                        <td>Orientado</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td colspan="2">Desorientado</td>
-                                        <td colspan="2"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Persona</th>
-                                        <td>Orientado</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td colspan="2">Desorientado</td>
-                                        <td colspan="2"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <!--<table class="records_list table table-sm table-bordered letra" style="width: 25%; float:right;">
-                                <thead class="thead sticky-top">
-                                    <th colspan="2">NOMBRES</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>NO PRESENTA</td>
-                                        <td>Test de Yoshitake (Fatiga)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>LEVE</td>
-                                        <td>Test de Epworth (Somnoloencia)</td>
-                                    </tr>
-                                </tbody>
-                            </table>-->
-
-                            <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                                <thead class="thead sticky-top">
-                                    <th colspan="7">PROCESOS COGNITIVOS</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>Lúcido, atento</th>
-                                        <td colspan="6"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni" placeholder="Conservado">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Pensamiento</th>
-                                        <td colspan="6"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni" placeholder="Conservado">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Percepción</th>
-                                        <td colspan="6"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni" placeholder="Conservado">
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th rowspan="2">Memoria</th>
-                                        <td>Corto Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        </td>
-                                        <td>Mediano Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Largo Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Corto y Largo Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        </td>
-                                        <td>Mediano y Largo Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Corto, Mediano y Largo Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <th rowspan="3">Inteligencia</th>
-                                        <td>Muy Superior</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        </td>
-                                        <td>Superior</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Promedio alto</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Promedio</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        </td>
-                                        <td>Promedio Bajo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Inferior o Bajo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Deficiencia Mental</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        </td>
-                                        <td colspan="4"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Apetito</th>
-                                        <td colspan="6"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni" placeholder="Conservado">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Sueño</th>
-                                        <td colspan="6"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni" placeholder="Conservado">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                                <thead class="thead sticky-top">
-                                    <th colspan="2">RESULTADOS DE EVALUACIÓN</th>
-                                </thead>
-
-                                <tbody>
-                                    <tr>
-                                        <th>Nivel Intelectual</th>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni" placeholder="Promedio">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Coordinación Visomotriz</th>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni" placeholder="Conservado">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nivel de Memoria</th>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni" placeholder="Conservado">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Personalidad</th>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni"
-                                                placeholder="Presenta personalidad extrovertida y recursos de afrontamiento a las demandas del entorno">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Afectividad</th>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni" placeholder="Estable">
-                                        </td>
-                                    </tr>
-                                </tbody>
-
-                            </table>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Prestación</span>
+                            <select class="form-select" id="cod_present">
+                                <option value="Adecuado" selected>Adecuado</option>
+                                <option value="Inadecuado">Inadecuado</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Postura</span>
+                            <select class="form-select" id="cod_postura">
+                                <option value="Erguida" selected>Erguida</option>
+                                <option value="Encorvada">Encorvada</option>
+                            </select>
                         </div>
 
-                    </table>
+                    </div>
+                    <div class="row">
+                        <h6 class="tituloverde ms-1">Discurso</h6>
 
-                    <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                        <thead class="thead sticky-top">
-                            <th colspan="2">CONCLUSIONES</th>
-                        </thead>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Ritmo</span>
+                            <select class="form-select" id="dis_ritmo">
+                                <option value="Lento">Lento</option>
+                                <option value="Rapido">Rapido</option>
+                                <option value="Fluido" selected>Fluido</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Tono</span>
+                            <select class="form-select" id="dis_tono">
+                                <option value="Alto">Alto</option>
+                                <option value="Moderado" selected>Moderado</option>
+                                <option value="Bajo">Bajo</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Articulación</span>
+                            <select class="form-select" id="dis_articulacion">
+                                <option value="Con dificultad">Con dificultad</option>
+                                <option value="Sin dificultad" selected>Sin dificultad</option>
+                            </select>
+                        </div>
 
-                        <tbody>
-                            <tr>
-                                <th>Área Cognitiva</th>
-                                <td><input class="form-control form-control-sm" maxlength="200" type="text" id="dni">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Área Emocional</th>
-                                <td><input class="form-control form-control-sm" maxlength="200" type="text" id="dni">
-                                </td>
-                            </tr>
-                        </tbody>
+                    </div>
+                    <div class="row">
+                        <h6 class="tituloverde ms-1">Orientación</h6>
 
-                    </table>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Tiempo</span>
+                            <select class="form-select" id="ori_tiempo">
+                                <option value="Orientado" selected>Orientado</option>
+                                <option value="Desorientado">Desorientado</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Espacio</span>
+                            <select class="form-select" id="ori_espacio">
+                                <option value="Orientado" selected>Orientado</option>
+                                <option value="Desorientado">Desorientado</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Persona</span>
+                            <select class="form-select" id="ori_persona">
+                                <option value="Orientado" selected>Orientado</option>
+                                <option value="Desorientado">Desorientado</option>
+                            </select>
+                        </div>
 
-                    <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                        <tbody>
-                            <tr>
+                    </div>
+                    <div class="row">
+                        <h5 class="tituloverde mb-3">PROCESOS COGNITIVOS</h5>
 
-                                <td>Aptitud</td>
-                                <td>
-                                    <input class="form-control form-control-sm" maxlength="200" type="text" id="dni">
-                                </td>
-                            </tr>
-                    </table>
-
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Lúcido, atento</span>
+                            <input type="text" class="form-control" type="text" id="pro_cog_lucido_atento"
+                                maxlength="60">
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Pensamiento</span>
+                            <input type="text" class="form-control" type="text" id="pro_cog_pensamiento" maxlength="60">
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Percepción</span>
+                            <input type="text" class="form-control" type="text" id="pro_cog_percepcion" maxlength="60">
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Memoria</span>
+                            <select class="form-select" id="pro_cog_memoria">
+                                <option value="Corto Plazo">Corto Plazo</option>
+                                <option value="Mediano Plazo">Mediano Plazo</option>
+                                <option value="Largo Plazo">Largo Plazo</option>
+                                <option value="Corto y Largo Plazo" selected>Corto y Largo Plazo</option>
+                                <option value="Mediano y Largo Plazo">Mediano y Largo Plazo</option>
+                                <option value="Corto, Mediano y Largo Plazo">Corto, Mediano y Largo Plazo</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Inteligencia</span>
+                            <select class="form-select" id="pro_cog_inteligencia">
+                                <option value="Muy Superior">Muy Superior</option>
+                                <option value="Superior">Superior</option>
+                                <option value="Promedio alto">Promedio alto</option>
+                                <option value="Promedio" selected>Promedio</option>
+                                <option value="Promedio Bajo">Promedio Bajo</option>
+                                <option value="Inferior o Bajo">Inferior o Bajo</option>
+                                <option value="Deficiencia Mental">Deficiencia Mental</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Apetito</span>
+                            <input type="text" class="form-control" type="text" id="pro_cog_apetito" maxlength="20">
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Sueño</span>
+                            <input type="text" class="form-control" type="text" id="pro_cog_sueño" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <h5 class="tituloverde mb-3">RESULTADOS DE EVALUACIÓN</h5>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Nivel Intelectual</span>
+                            <input type="text" class="form-control" type="text" id="re_nivel_inte" maxlength="20">
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Coordinación Visomotriz</span>
+                            <input type="text" class="form-control" type="text" id="re_coord_visomotriz" maxlength="80">
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Nivel de Memoria</span>
+                            <input type="text" class="form-control" type="text" id="re_nivel_memoria" maxlength="20">
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Personalidad</span>
+                            <textarea rows="1" class="form-control" id="re_personalidad"></textarea>
+                        </div>
+                        <div class="input-group mb-3 ms-1">
+                            <span class="input-group-text largodespan">Afectividad</span>
+                            <input type="text" class="form-control" type="text" id="re_afectividad" maxlength="20">
+                        </div>
+                    </div>
                 </div>
+
+                <div class="col-md-6">
+                    <div class="table responsive">
+                        <table class="records_list table table-sm table-bordered letra mt-3">
+                            <thead>
+                                <th colspan="2">NOMBRES</th>
+                            </thead>
+                            <tbody>
+                                <tr class="text-left">
+                                    <td>NO PRESENTA</td>
+                                    <td>Test de Yoshitake (Fatiga)</td>
+                                </tr>
+                                <tr class="text-left">
+                                    <td>LEVE</td>
+                                    <td>Test de Epworth (Somnoloencia)</td>
+                                </tr>
+                                <tr style="min-height">
+                                    <td colspan="2"></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h5 class="tituloverde mb-3">CONCLUSIONES</h5>
+                    <div class="col-md-12 ms-1">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text largospan12">Área Cognitiva</span>
+                            <textarea rows="1" class="form-control" id="con_area_cognitiva"></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text largospan12">Área Emocional</span>
+                            <textarea spellcheck="true" rows="1" class="form-control"
+                                id="con_area_emocional"></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text largospan12">Aptitud</span>
+                            <select class="form-select" id="tipresult_id">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                {{> cie10 }}
+                {{> recomendaciones }}
+                {{> documentoadicionales }}
             </div>
-
-
-            {{> cie10 }}
-            {{> recomendaciones }}
-            {{> documentoadicionales }}
         </div>
     </div>
-</div>
-
-<script src="/js/historiaclinica/examenes/pbtestpsicologia.js"></script>
+    <script src="/js/historiaclinica/examenes/pbpsicologia.js"></script>
