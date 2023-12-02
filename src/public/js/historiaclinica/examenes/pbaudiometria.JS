@@ -13,8 +13,17 @@ function loadScript(url) {
 }
 (async function poblarcampos() {
     try {
+        await loadScript('https://cdn.jsdelivr.net/npm/chart.js');
         await loadScript('https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels');
-        setTimeout(() => {
+        await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js');
+        
+        await (async () => {
+            while (typeof ChartDataLabels === 'undefined' || typeof Chart.helpers === 'undefined') {
+                await new Promise(resolve => setTimeout(resolve, 50));
+            }
+            
+        })();
+        await (async () => {
             cargarEquipo();
             let cita_id = document.getElementById('id').value;
             let soexa = document.getElementById('soexa').value;
@@ -197,7 +206,7 @@ function loadScript(url) {
                     alert('error');
                 }
             });
-        }, 3000);
+        })();
     } catch (error) {
         console.error('Error al cargar el script. Revisa la consola para obtener más detalles.');
     }
@@ -333,7 +342,7 @@ function setupOnChange() {
             $(element).inputmask("numeric", {
                 radixPoint: '.',
                 inputtype: "text",
-                allowMinus: false,
+                allowMinus: true,
                 autoUnmask: true,
                 placeholder: "0",
                 showMaskOnHover: true,
@@ -354,7 +363,7 @@ function setupOnChange() {
             $(elementi).inputmask("numeric", {
                 radixPoint: '.',
                 inputtype: "text",
-                allowMinus: false,
+                allowMinus: true,
                 autoUnmask: true,
                 placeholder: "0",
                 showMaskOnHover: true,
