@@ -10,22 +10,7 @@
                 </div>
                 Dashboard
             </a>-->
-            <a class="nav-link collapsed ocultaretiqueta" id="historiaclinica" href="#" data-bs-toggle="collapse"
-                data-bs-target="#collapsePageshc" aria-expanded="false" aria-controls="collapsePageshc">
-                <div class="sb-nav-link-icon"><i class="fa-solid fa-book-medical animate__animated animate__rollIn "></i>
-                </div>
-                Historia Clínica
-                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-            </a>
-            <div class="collapse" id="collapsePageshc" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                    <a class="nav-link opcion collapsed" href="/paciente" data-bs-target="#pagesCollapseAuth"
-                        aria-expanded="false" aria-controls="pagesCollapseAuth">
-                        Pacientes
-                        <div class="sb-sidenav-collapse-arrow"></div>
-                    </a>
-                </nav>
-            </div>
+
 
             <a class="nav-link collapsed ocultaretiqueta" id="entidades" href="#" data-bs-toggle="collapse"
                 data-bs-target="#collapsePagesen" aria-expanded="false" aria-controls="collapsePagesen">
@@ -36,13 +21,76 @@
             </a>
             <div class="collapse" id="collapsePagesen" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                 <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                    <a class="nav-link opcion collapsed" href="/cliente" data-bs-target="#pagesCollapseAuth"
+                        aria-expanded="false" aria-controls="pagesCollapseAuth">
+                        Cliente
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+                    <a class="nav-link opcion collapsed" href="/paciente" data-bs-target="#pagesCollapseAuth"
+                        aria-expanded="false" aria-controls="pagesCollapseAuth">
+                        Paciente
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+                    <a class="nav-link opcion collapsed" href="/medico" data-bs-target="#pagesCollapseAuth"
+                        aria-expanded="false" aria-controls="pagesCollapseAuth">
+                        Medico
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+                    <a class="nav-link opcion collapsed" href="/examen" data-bs-target="#pagesCollapseAuth"
+                        aria-expanded="false" aria-controls="pagesCollapseAuth">
+                        Examenes
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
                     <a class="nav-link opcion collapsed" href="/protocolo" data-bs-target="#pagesCollapseAuth"
                         aria-expanded="false" aria-controls="pagesCollapseAuth">
                         Protocolo
                         <div class="sb-sidenav-collapse-arrow"></div>
                     </a>
+
+                    <a class="nav-link opcion collapsed" href="/cita" data-bs-target="#pagesCollapseAuth"
+                        aria-expanded="false" aria-controls="pagesCollapseAuth">
+                        Cita
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
                 </nav>
             </div>
+            <a class="nav-link collapsed ocultaretiqueta" id="historiaclinica" href="#" data-bs-toggle="collapse"
+                data-bs-target="#collapsePageshc" aria-expanded="false" aria-controls="collapsePageshc">
+                <div class="sb-nav-link-icon"><i
+                        class="fa-solid fa-book-medical animate__animated animate__rollIn "></i>
+                </div>
+                Historia Clínica
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapsePageshc" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                    <a class="nav-link opcion collapsed" href="/pacientescitados" data-bs-target="#pagesCollapseAuth"
+                        aria-expanded="false" aria-controls="pagesCollapseAuth">
+                        Pacientes citados
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+                </nav>
+            </div>
+
+            <a class="nav-link collapsed ocultaretiqueta" id="descargas" href="#" data-bs-toggle="collapse"
+                data-bs-target="#collapsePagesds" aria-expanded="false" aria-controls="collapsePagesds">
+                <div class="sb-nav-link-icon"><i class="fa-solid fa-download animate__animated animate__rollIn "></i>
+                </div>
+                Descargas
+                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+            </a>
+            <div class="collapse" id="collapsePagesds" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                    <a class="nav-link opcion collapsed" href="/informes" data-bs-target="#pagesCollapseAuth"
+                        aria-expanded="false" aria-controls="pagesCollapseAuth">
+                        Informes
+                        <div class="sb-sidenav-collapse-arrow"></div>
+                    </a>
+                </nav>
+            </div>
+
+
+
 
             <a class="nav-link collapsed ocultaretiqueta" id="configuracion" href="#" data-bs-toggle="collapse"
                 data-bs-target="#collapsePagesco" aria-expanded="false" aria-controls="collapsePagesco">
@@ -67,11 +115,6 @@
             </div>
         </div>
     </div>
-    <div class="sb-sidenav-footer">
-        <div class="small">Establecimiento:</div>
-        {{user.ESTABLECIMIENTO}}
-    </div>
-    <div class="sb-sidenav-footer">
-        {{user.fullname}}
-    </div>
+
+
 </nav>

@@ -1,14 +1,14 @@
 module.exports={
 
     dbSettings : {
-        user: 'sa',
-        password: 'sql2016$',
-        server: '192.168.10.8',
-        database: 'SALUD',
+        user: 'siscsp',
+        password: 'C1n1c4123*',
+        server: '198.251.67.234',
+        database: 'salud_BK',
         options: {
             encrypt: true, // for azure
             trustServerCertificate: true, // change to true for local dev / self-signed certs
-            port:60089
+            port:10200
         }
     }
 

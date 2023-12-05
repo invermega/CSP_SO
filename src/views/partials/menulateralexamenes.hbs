@@ -1,0 +1,82 @@
+<nav class="sb-sidenav accordion sb-sidenav" id="sidenavAccordion">
+    <div class="sb-sidenav-menu">
+        <div class="nav">
+            
+            <div style="font-size: 10px;">
+                <div class="input-group px-1 pb-1">
+                    <span class="input-group-text"
+                        style="font-size: 13px; font-weight: bold; width: 100%; color: #793B8E;">PACIENTE</span>
+                </div>
+                <style>
+                    canvas {
+                        max-width: 100%;
+                        width: 120px;
+                        height: 120px;
+                    }
+                </style>
+                <div >
+                    <div class="d-flex flex-column align-items-center text-center px-4 py-2">
+                        <canvas id="canvas" width="300" height="300" class="circle-canvas mb-3" required></canvas>
+                    </div>
+                </div>
+                <div class="input-group input-group-sm px-1 pb-1">
+                    <span class="input-group-text" style="font-size: 10px; font-weight: bold;">FEC ATEN.</span>
+                    <input type="date" id="fecaten" class="form-control form-control-sm" disabled style="font-size: 10px;">
+                </div>
+                <div class="input-group input-group-sm px-1 pb-1">
+                    <span class="input-group-text" style="font-size: 10px; font-weight: bold;">DNI</span>
+                    <input type="text" id="dni" class="form-control form-control-sm" placeholder="dni" aria-label="dni" disabled
+                        style="font-size: 10px;">
+                </div>
+                <div class="input-group input-group-sm px-1 pb-1">
+                    <span class="input-group-text" style="font-size: 10px; font-weight: bold;">NOMBRES</span>
+                    <input type="text" id="nombres" class="form-control form-control-sm" placeholder="nombres" aria-label="nombres"
+                         disabled style="font-size: 10px;">
+                </div>
+                <div class="input-group input-group-sm px-1 pb-1">
+                    <span class="input-group-text" style="font-size: 10px; font-weight: bold;">FEC. NAC.</span>
+                    <input type="date" class="form-control form-control-sm" id="fecnac" style="font-size: 10px;" disabled
+                        style="font-size: 10px;">
+                </div>
+                <div class="input-group input-group-sm px-1 pb-1">
+                    <span class="input-group-text" style="font-size: 10px; font-weight: bold;">EDAD</span>
+                    <input type="text" class="form-control form-control-sm" id="edad" placeholder="edad" aria-label="edad"
+                        disabled style="font-size: 10px;">
+                </div>
+                <div class="input-group input-group-sm px-1 pb-1">
+                    <span class="input-group-text" style="font-size: 10px; font-weight: bold;">SEXO</span>
+                    <input type="text" class="form-control form-control-sm" id="sexo" placeholder="sexo" aria-label="sexo"
+                        disabled style="font-size: 10px;">
+                </div>
+                <div class="input-group input-group-sm px-1 pb-1">
+                    <span class="input-group-text" style="font-size: 10px; font-weight: bold;">EMPRESA</span>
+                    <input type="text" class="form-control form-control-sm" id="empresa" placeholder="empresa" aria-label="empresa"
+                        disabled style="font-size: 10px;">
+                </div>
+                <div class="input-group input-group-sm px-1 pb-1">
+                    <span class="input-group-text" style="font-size: 10px; font-weight: bold;">TIPO EXAMEN</span>
+                    <input type="text" class="form-control form-control-sm" id="tipoexamen" placeholder="tipoexamen"
+                        aria-label="tipoexamen" disabled style="font-size: 10px;">
+                </div>
+                <div class="input-group input-group-sm px-1 pb-1">
+                    <span class="input-group-text" style="font-size: 10px; font-weight: bold;">PROTOCOLO</span>
+                    <input type="text" class="form-control form-control-sm" id="protocolo" placeholder="protocolo"
+                        aria-label="protocolo" disabled style="font-size: 10px;">
+                </div>
+                <div class="input-group input-group-sm px-1 pb-1">
+                    <span class="input-group-text" style="font-size: 10px; font-weight: bold;">ÁREA</span>
+                    <input type="text" class="form-control form-control-sm" id="area" style="font-size: 10px;" placeholder="area"
+                        aria-label="area" disabled>
+                </div>
+            </div>
+
+
+            <div class="border-top mt-2 mb-2 mx-1">
+                
+            </div>
+            <div id="menuexamenes" class="">
+            </div>
+        </div>
+    </div>
+</nav>
+

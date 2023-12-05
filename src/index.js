@@ -13,20 +13,34 @@ const Sequelize = require('sequelize');
 const MSSQLStore = require('express-session-sequelize')(session.Store);
 
 
-//a
+const requerirAuth = function(req, res, next) {
+  if (req.path.startsWith('/img/paciente')) {
+    if (req.isAuthenticated()) {
+      return next(); 
+    }
+    res.status(401).send('Acceso no autorizado');
+  }else if (req.path.startsWith('/documentos')) {
+    if (req.isAuthenticated()) {
+      return next(); 
+    }
+    res.status(401).send('Acceso no autorizado');
+  }  
+  else {
+    return next(); 
+  }
+};
+
 const app = express();
+
+//a
 require('./lib/passport');
 
 // Manejo de uncaughtException
 process.on('uncaughtException', (err) => {
   console.error('Uncaught Exception:', err);
-  // Realiza tareas de limpieza si es necesario
-  
-  // Detén el servidor para evitar que siga manejando solicitudes con problemas
-  //process.exit(1); // Código 1 indica que ocurrió un error
 });
 
-app.set('port', process.env.PORT || 3300);
+app.set('port', process.env.PORT || 4000);
 app.set('views', path.join(__dirname, 'views'));
 const exphbs = create({
   extname: '.hbs',
@@ -50,7 +64,7 @@ app.use(
       db: new Sequelize(dbSettings.database, dbSettings.user, dbSettings.password, {
         host: dbSettings.server,
         dialect: 'mssql',
-        port: 60089,
+        port: 10200,
         dialectOptions: {
           options: {
             encrypt: dbSettings.options.encrypt,
@@ -67,12 +81,7 @@ app.use(
 
 app.use(flash());
 
-app.use(
-  morgan('dev', {
-    skip: (req, res) => req.originalUrl === '/ruta-de-verificacion-de-sesion'
-  })
-);
-
+app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: false }));
 app.use(passport.initialize());
@@ -89,7 +98,19 @@ app.use(require('./routes/'));
 app.use(require('./routes/configuracion'));
 app.use(require('./routes/historiaclinica'));
 app.use(require('./routes/entidades'));
+app.use(require('./routes/descargas'));
+/*
+const auth = (req, res, next) => {
+  const credentials = basicAuth(req);
 
+  if (!credentials || credentials.name !== 'usuario' || credentials.pass !== 'contraseña') {
+    res.set('WWW-Authenticate', 'Basic realm="example"');
+    return res.status(401).send('Authentication required.');
+  }
+
+  next();
+};
+app.use('/img/paciente', auth, express.static(path.join(__dirname, 'public', 'img', 'paciente')));*/
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), () => {

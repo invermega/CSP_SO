@@ -8,194 +8,74 @@
         <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
             <div class="left-content">
                 <i class="fas fa-table me-1"></i>
-                Configuración de protocolos
+                Consulte los protocolos
             </div>
-        </div>
-        <div class="card-body ">
-            <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="ex1-tab-1" data-bs-toggle="tab" href="#ex1-tabs-1" role="tab"
-                        aria-controls="ex1-tabs-1" aria-selected="true">Datos</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="ex1-tab-2" data-bs-toggle="tab" href="#ex1-tabs-2" role="tab"
-                        aria-controls="ex1-tabs-2" aria-selected="false">Exámenes</a>
-                </li>
-            </ul>
-
-            <div class="tab-content" id="ex1-content">
-                <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
-                    <div class="row mt-2">
-                        <div class="col-md-12 form-inline col-sm-12 form-group mb-1 mt-1">
-                            <div class="input-group input-group-sm" style="width: 100%;">
-                                <label class="control-label input-group-text" for="codempresa">Empresa</label>
-                                <input type="text" oninput="limitarCaracteresNumericos(this, 9);" id="codempresa"
-                                    class="form-control form-control-sm" placeholder="Código de la empresa"
-                                    aria-label="Username" disabled>
-                                <button type="button" data-toggle="modal" data-target="#modalFormEmpresa"
-                                    class="btn input-group-text" id="empresa">
-                                    <i class="fa-solid fa-building mr-1"></i>
-                                </button>
-                                <input type="text" style="width: 30%;" id="nomempresa"
-                                    class="form-control form-control-sm" placeholder="Nombre de la empresa"
-                                    aria-label="Server" disabled>
-                                <button type="button" onclick="LimpiarEmpresa()" class="btn input-group-text"
-                                    id="nomempresa">
-                                    <i class="fa-solid fa-pen"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--MODAL EMPRESA-->
-                    <div class="modal fade" id="modalFormEmpresa" role="dialog">
-                        <div class="modal-dialog ">
-                            <div class="modal-content">
-                                <div class="modal-header"
-                                    style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
-                                    <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE EMPRESAS</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="input-group input-group-sm" style="width: 100%;">
-                                        <label class="control-label input-group-text" for="empresamodal">EMPRESA</label>
-                                        <input class="form-control form-control-sm " id="empresamodal"
-                                            placeholder="Ingrese el nombre del empleado" required></input>
-                                        <label class="input-group-text form-control-sm" for="empresamodal"><i
-                                                class="fa-solid fa-building mr-1"></i></label>
-                                    </div>
-                                    <div class="row mb-2 mt-2">
-                                        <div class="table-responsive">
-                                            <table
-                                                class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
-                                                id="tableempresamodal" style="display: none;">
-                                                <thead class="thead">
-                                                    <tr>
-                                                        <th scope="col">ACCIÓN</th>
-                                                        <th scope="col">DNI</th>
-                                                        <th scope="col">EMPLEADO</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="bodyempresamodal">
-                                                </tbody>
-                                            </table>
-
-                                        </div>
-                                        <div class="text-center" id="cargaempresamodal" style="display: none;">
-                                            <div class="d-flex justify-content-center align-items-center"
-                                                style="min-height: 5vh;">
-                                                <lottie-player src="/img/jsonimg/Cargahealth.json"
-                                                    background="transparent" speed="1"
-                                                    style="width: 200px; height: 200px;" loop autoplay></lottie-player>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn"
-                                            style="background-color: #793B8E;color: white;border-color: #793B8E;"
-                                            id="cerrarempresa" data-dismiss="modal"> <i
-                                                class="fa-solid fa-circle-xmark"></i>
-                                            Cerrar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="row mt-3">
-                        <div class="col-md-12">
-                            <label for="tipo" class="labels mr-5">
-                                Estado</label>
-                            <label class="form-check-label mr-4" for="estado1">Vigente</label>
-                            <input class="form-check-input" type="radio" id="estado1" name="estado" value="V" required>
-                            <label class="form-check-label mr-4" for="estado2">Histórico</label>
-                            <input class="form-check-input" type="radio" id="estado2" name="estado" value="H" required>
-                            <label class="form-check-label mr-4" for="estado3">Cotización</label>
-                            <input class="form-check-input" type="radio" id="estado3" name="estado" value="C" required>
-
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-12 input-group input-group-sm">
-                            <label class="input-group-text" for="tipo">Tipo</label>
-                            <select class="form-select" id="tipo">
-                            </select>
-                            <label class="input-group-text" for="tipo"><i class="fa-solid fa-list-ul"></i></label>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-12 input-group input-group-sm">
-                            <label class="input-group-text" for="nombre">Nombre</label>
-                            <input type="text" class="form-control form-control-sm" value="" id="nombre"
-                                placeholder="Ingrese el nombre del protocolo" required>
-                            <label class="input-group-text" for="nombre"><i class="fa-solid fa-font"></i></label>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-12 input-group input-group-sm">
-                            <label class="input-group-text" for="nombre">Comentarios</label>
-                            <textarea type="text" class="form-control form-control-sm" value="" id="comentario"
-                                placeholder="Ingrese algún comentario" required></textarea>
-                            <label class="input-group-text" for="comentario"><i class="fa-solid fa-comment"></i></label>
-                        </div>
-                    </div>
-                    <div class="row mt-2">
-                        <div class="col-md-6 input-group input-group-sm">
-                            <label class="input-group-text" for="cadcer">Tiempo de caducidad de
-                                certificado de aptitud</label>
-                            <input type="text" class="form-control form-control-sm"
-                                oninput="limitarCaracteresNumericos(this, 9);" value="" id="cadcer"
-                                placeholder="Ingrese el tiempo en años" required>
-                            <label class="input-group-text" for="cadcer"><i
-                                    class="fa-solid fa-calendar-day"></i></label>
-                        </div>
-                        <div class="col-md-6 input-group input-group-sm">
-                            <label class="input-group-text" for="fecven">Fecha de vencimiento</label>
-                            <input type="date" class="form-control form-control-sm" value="" id="fecven"
-                                placeholder="Ingrese el nombre" required>
-                        </div>
-                    </div>
-                    <div class="body1">
-                        <div class="mt-5 text-center"><button onclick="event.preventDefault();guardar()" class="btn btn2"
-                            type="submit" id="Guardar">
-                            <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
+            <div>
+            </div>
+        </div>        
+        <div class="card-body body1">
+            <div class="row textos " id="filtros"
+                style="display: ; border: 2px solid #D8D8D8; vertical-align: center; padding: 5px; border-radius: 7px;">
+                <div class="col-md-4 form-inline col-sm-12 form-group mb-1 mt-1">
+                    <div class="input-group input-group-sm" style="width: 100%;">
+                        <label class="input-group-text form-control-sm" for="protocolo">Protocolo</label>
+                        <input type="text" id="protocolo" class="form-control form-control-sm"
+                            placeholder="Nombre de protocolo">
+                        <button type="button" class="btn input-group-text" id="search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
-                    </div>
-                    
                 </div>
-                <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
-                    <div class="table-responsive scrollable-modal" id="tablaaccesos">
-                        <table class="records_list table table-sm table-hover letra" id="mydatatable">
-                            <thead class="thead sticky-top">
-                                <tr>
-                                    <th scope="col">GRUPO</th>
-                                    <th scope="col">EXÁMEN</th>
-                                    <th scope="col">CHECK</th>
-                                    <th scope="col">GRUPO ETARIO</th>
-                                    <th scope="col">PRECIO UNITARIO</th>
-                                    <th scope="col">COMENTARIO</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodyexamen">
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="text-center" id="cargaacc" style="display: none;">
-                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
-                            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
-                                background="transparent" speed="1" style="width: 300px; height: 300px;" loop
-                                autoplay></lottie-player>
-                        </div>
+                <div class="col-md-5 form-inline col-sm-12 form-group mb-1 mt-1">
+                    <div class="input-group input-group" style="width: 100%;">
+                        <button type="button" class="btn input-group-text" id="refresh">
+                            <i class="fa-solid fa-retweet"></i>
+                        </button>
+                        <a class="opcionform btn input-group-text" href="/protocolocreate"><i
+                                class="fa-solid fa-plus"></i>
+                        </a>
+                        <button type="button" class="btn input-group-text" id="edit" onclick="navegaredit('mydatatable','protocoloedit')">
+                            <i class="fa-solid fa-pen"></i>
+                        </button>
+                        <button type="button" class="btn input-group-text" id="delete" onclick="eliminar()">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                        <button type="button" class="btn input-group-text" id="download" onclick="exportarprotocolo('mydatatable','exportarprotocolo')">
+                            <i class="fa-solid fa-download"></i>
+                        </button>
                     </div>
                 </div>
-
             </div>
 
+            <div class="table-responsive mt-3">
+                <table
+                    class="records_list table table-sm table-striped table-bordered letra animate__animated animate__fadeInDown"
+                    id="mydatatable" style="display: none;">
+                    <thead class="thead">
+                        <tr>
+                            <th scope="col">CHECK</th>
+                            <th scope="col">NOMBRE DE PROTOCOLO</th>
+                            <th scope="col">EMPRESA</th>
+                            <th scope="col">CLIENTE</th>
+                            <th scope="col">TIPO DE EXAMEN</th>
+                            <th scope="col">ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center" id="carga" style="display: none;">
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                    <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent" speed="1"
+                        style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-
 <script src="/js/entidades/protocolo.js"> </script>
+
+
+ 

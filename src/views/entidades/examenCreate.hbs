@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
+<div>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4 tituloverde">Entidades</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+            <li class="breadcrumb-item active">Cita</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="left-content">
+                    <i class="fas fa-table me-1"></i>
+                    <label id="tituloEncabezado">Ingrese nuevo examen</label>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="container-fluid body1" id="body1">
+                    <form id="formusuarios" class="needs-validation" novalidate>
+                        <div class="row">
+                            <div class="col-md-12 border-right">
+                                <div class="p-3 py-3">
+                                    <div class="row mt-2">
+                                        <div class="col-md-1">
+                                            <label class="labels" for="soexa">ID</label><input type="text"
+                                                class="form-control form-control-sm" placeholder="Ingrese el id"
+                                                id="soexa" value="" required>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="labels" for="desexa">Descripción</label><input type="text"
+                                                class="form-control form-control-sm"
+                                                placeholder="Ingrese la descripción" id="desexa" value="" required>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="labels" for="ordimp">Órden de impresión</label><input
+                                                type="text" class="form-control form-control-sm"
+                                                placeholder="Ingrese la órden de impresión" id="ordimp" value=""
+                                                required>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label class="labels" for="ordprot">Órden de protocolo</label><input
+                                                type="text" class="form-control form-control-sm"
+                                                placeholder="Ingrese el órden de protocolo" id="ordprot" value=""
+                                                required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col bloque" id="starep">
+                                            <label for="" class="labels">Estado de reporte</label>
+                                            <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
+                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                        name="starep" required>SI</label>
+                                                <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                        name="starep" required checked>NO</label>
+                                            </div>
+                                        </div>
+                                        <div class="col bloque" id="staaddfile">
+                                            <label class="labels" for="">Agrega archivo</label>
+                                            <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
+                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                        name="staaddfile" required>SI</label>
+                                                <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                        name="staaddfile" required checked>NO</label>
+                                            </div>
+                                        </div>
+                                        <div class="col bloque" id="reg_cie10">
+                                            <label for="" class="labels">Registra CIE.10</label>
+                                            <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
+                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                        name="reg_cie10" required>SI</label>
+
+                                                <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                        name="reg_cie10" required checked>NO</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-5 text-center"><button class="btn btn2" type="button" onclick="guardarCita()"
+                                id="btnExamen">
+                                <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
+                            </button>
+                        </div>
+                        <input type="text" id="inputid" value="{{id}}" style="display: none;">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Scripts-->
+    <script src="/js/entidades/examenCreate.js"> </script>
+    <script src="/js/jqueryinputmask.min.js"> </script>

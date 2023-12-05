@@ -1,158 +1,157 @@
 $(document).ready(function () {
-  getexamenes();
-  getTipoExamen();
+  getProtocolo();
+  render();
+  const refresh = document.getElementById('refresh');
+  refresh.addEventListener('click', getProtocolo);
+  const search = document.getElementById('search');
+  search.addEventListener('click', getProtocolo);
 });
 
-function getexamenes() {
-  ocultarTabla("mydatatable");
-  mostrarDiv("cargaacc");
+function getProtocolo() {
+  mostrarDiv('carga');
+  ocultarTabla('mydatatable');
+  let protocolo = $('#protocolo').val();
   $.ajax({
-    url: '/examenes',
-    success: function (examenes) {
-      ocultarDiv("cargaacc");
-      mostrarTabla("mydatatable");
-      let tbody = $('#tbodyexamen');
-      tbody.html('');
-      if (Array.isArray(examenes)) {
-        examenes.forEach(examen => {
-          const grupoetario = examen.grupoetario;
-          var selectOptions = "";
-          const grupoetarioArray = JSON.parse(grupoetario);
-          
-          grupoetarioArray.forEach((item) => {
-            selectOptions += `<option value="${item.raneta_id}">${item.desrango}</option>`;
-          });
-          tbody.append(`
-              <tr>
-                <td class="text-left" style="vertical-align: middle;">${examen.desexa}</td>
-                <td class="text-left" style="vertical-align: middle;">${examen.desexadet}</td>
-                <td class="" style="vertical-align: middle;"><input onclick="activar('${examen.soexa}_${examen.codpru_id}')" id="check_${examen.soexa}_${examen.codpru_id}" type="checkbox" class="mt-1" value="${examen.soexa}_${examen.codpru_id}" ></td>
-                <td>
-                  <select class="form-select form-control form-control-sm" name="" id="select_${examen.soexa}_${examen.codpru_id}">
-                    ${selectOptions}
-                  </select>
-                </td>
-                <td>
-                <input type="text" class="form-control form-control-sm" value="" id="precio_${examen.soexa}_${examen.codpru_id}"
-                placeholder="Precio unitario" required>
-                </td>
-                <td>
-                <input type="text" class="form-control form-control-sm" value="" id="comen_${examen.soexa}_${examen.codpru_id}"
-                placeholder="Comentarios" required>
-                </td>
+    url: '/protocololist',
+    method: "GET",
+    data: {
+      protocolo: protocolo,
+    },
+    success: function (Protocolos) {
+      ocultarDiv('carga');
+      mostrarTabla('mydatatable');
+      let tablebody = $('tbody');
+      tablebody.html('');
+      if (Protocolos.length === 0) {
+        tablebody.append(`
+            <tr>
+              <td colspan="6">No hay protocolo con la descripción proporcionada</td>
+            </tr>
+          `);
+      } else {
+        Protocolos.forEach(Protocolo => {
+          let colorestado = '';
+          if (Protocolo.estado === 'VIGENTE') {
+            colorestado = '#2FC458'
+          } else if (Protocolo.estado === 'HISTÓRICO') {
+            colorestado = '#8A8688'
+          } else if (Protocolo.estado === 'COTIZACIÓN') {
+            colorestado = '#FF9E0D'
+          } else if (Protocolo.estado === 'ANULADO') {
+            colorestado = '#FF1111'
+          }
+          tablebody.append(`
+              <tr data-id="${Protocolo.codpro_id}">
+                <td class="align-middle"><input id="check_${Protocolo.codpro_id}" value="id_${Protocolo.codpro_id}" type="checkbox" class="mt-1" ></td>
+                <td style="vertical-align: middle;" class="text-left">${Protocolo.nompro}</td>
+                <td style="vertical-align: middle;" class="text-left">${Protocolo.razsoc}</td>
+                <td style="vertical-align: middle;" class="text-left">${Protocolo.cliente}</td>
+                <td style="vertical-align: middle;" class="text-left">${Protocolo.desexa}</td>
+                <td style="vertical-align: middle;" class="text-center estado"><span class="badge estado" style="background-color:${colorestado}; color:white; font-size:90%" >${Protocolo.estado}</span></td>
               </tr>
             `);
-          activar(examen.soexa + '_' + examen.codpru_id);
         });
-      } else {
-        // Manejar el caso de que "examenes" no sea un array, tal vez mostrar un mensaje de error
-        console.error('La respuesta no es un array de examenes.');
+        mensaje(Protocolos[0].icono, Protocolos[0].mensaje, 1500);
       }
     },
-    error: function (xhr, status, error) {
-      console.error('Error en la solicitud AJAX:', status, error);
-      alert('Error al cargar los examenes');
+    error: function () {
+      $('#error-message').text('Se produjo un error al cargar los protocolos.');
     }
   });
 }
 
-function activar(opcexa) {
-  var checkboxPrincipal = document.getElementById("check_" + opcexa);
-  var select = document.getElementById("select_" + opcexa);
-  var precio = document.getElementById("precio_" + opcexa);
-  var comentario = document.getElementById("comen_" + opcexa);
-  if (checkboxPrincipal.checked) {
-    select.disabled = false;
-    precio.disabled = false;
-    comentario.disabled = false;
+function eliminar() {
+  var table = document.getElementById('mydatatable');
+  if (!table) {
+    console.error('La tabla no se encontró.');
+    return;
+  }
+  var rows = table.querySelectorAll('tbody tr');
+  var seleccionados = [];
+  for (var i = 0; i < rows.length; i++) {
+    var checkbox = rows[i].querySelector('input[type="checkbox"]');
+    
+    if (checkbox && checkbox.checked) {
+      var codpro_id = checkbox.value.split('_')[1];
+      seleccionados.push({ codpro_id: codpro_id });
+    }
+  }
+  if (seleccionados.length === 0) {
+    mensajecentral('error', 'Debes seleccionar algún registro.');
   } else {
-    select.disabled = true;
-    precio.disabled = true;
-    comentario.disabled = true;
+    MensajeSIyNO('warning', '', '¿Está seguro de eliminar los protoclos seleccionados?', function (respuesta) {
+      if (respuesta) {
+        fetch('/protocolodel', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(seleccionados)
+        })
+        .then(response => {
+          if (!response.ok) {
+            console.error('Error en la solicitud');
+            throw new Error('Error en la solicitud');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if(data[0].icono==="success"){
+            for (var i = 0; i < seleccionados.length; i++) {
+              var codpro_id = seleccionados[i].codpro_id;
+              var celda = table.querySelector('tr[data-id="' + codpro_id + '"] .estado');
+              if (celda) {
+                celda.innerHTML = '<span class="badge estado" style="background-color:#FF1111; color:white; font-size:90%" >ANULADO</span>';
+              }
+            }
+          }
+          mensaje(data[0].icono, data[0].mensaje, 1500);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+    });
   }
 }
 
+function exportarprotocolo(iddatatableble, rutaparcial) {
+  var table = document.getElementById(iddatatableble);
+  var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+  var seleccionados = []; // Array para almacenar los elementos checkbox seleccionados
 
-document.getElementById("empresamodal").addEventListener("keydown", function (event) {
-  if (event.keyCode === 13) { // Verifica si se presionó la tecla Enter
-    mostrarDiv('cargaempresamodal');
-    ocultarTabla('tableempresamodal');
-    let empresamodal = $('#empresamodal').val(); // Corregido: agregué el símbolo '#' para seleccionar el elemento por su ID
-    event.preventDefault();
+  for (var i = 0; i < rows.length; i++) {
+    var checkbox = rows[i].querySelector('input[type="checkbox"]');
+    
+    if (checkbox && checkbox.checked) {
+      var id = checkbox.value.split('_')[1];
+      seleccionados.push(id); // Agregar el id al array de seleccionados
+    }
+  }
+
+  if (seleccionados.length === 0) {
+    mensajecentral('error', 'Debes seleccionar algún registro.');
+  } else if (seleccionados.length > 1) {
+    mensajecentral('error', 'Debes seleccionar solo un registro.');
+  } else {
+    var nuevaRuta = `/${rutaparcial}/${seleccionados[0]}`;
     $.ajax({
-      url: '/empresas',
+      url: nuevaRuta,
       method: "GET",
-      data: {
-        empresa: empresamodal,
-      },
-      success: function (lista) {
-        ocultarDiv('cargaempresamodal');
-        mostrarTabla('tableempresamodal');
-        let bodyempleadomodal = $('#bodyempresamodal');
-        bodyempleadomodal.html('');
-        if (lista.length === 0) {
-          bodyempleadomodal.append(`
-      <tr>
-        <td colspan="3">No hay empresas con el nombre proporcionado</td>
-      </tr>
-    `);
-        } else {
-          lista.forEach(list => {
-            bodyempleadomodal.append(`
-        <tr>
-          <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="AgregarEmpresa(this)"><i class="fa-solid fa-plus"></i></button></td>
-          <td style="vertical-align: middle;" class="text-left">${list.codemp}</td>
-          <td style="vertical-align: middle;" class="text-left asignado">${list.razsoc}</td>
-        </tr>
-      `);
-          });
-        }
+      success: function () {
+        window.location.href = nuevaRuta;
       },
       error: function () { // Corregido: eliminé el parámetro "lista" innecesario
         alert('error');
       }
     });
-
   }
-});
-
-function AgregarEmpresa(btn) {
-  event.preventDefault();
-  var filaOrigen = $(btn).closest("tr");
-  var codemp = filaOrigen.find("td:eq(1)").text();
-  var razsoc = filaOrigen.find("td:eq(2)").text();
-  var codempresa = document.getElementById("codempresa");
-  var nomempresa = document.getElementById("nomempresa");
-  codempresa.value = codemp;
-  nomempresa.value = razsoc;
-  var btncerrar = document.getElementById(`cerrarempresa`);
-  btncerrar.click();
 }
 
-function getTipoExamen() {
-  $.ajax({
-    url: '/tipoexamen',
-    method: "GET",
-    success: function (TipoExamenes) {
-      let combo = $('#tipo');
-      combo.html('');
-      TipoExamenes.forEach(TipoExamen => {
-        combo.append(`<option value="${TipoExamen.tipexa_id}">${TipoExamen.desexa}</option>
-  `);
-      });
-      $("#comboesp option[value=0023]").attr("selected", true);
-    },
-    error: function (TipoExamenes) {
-      alert('error');
-    }
-  });
-}
 
-function LimpiarEmpresa(btn){
-  var codempresa = document.getElementById("codempresa");
-  var nomempresa = document.getElementById("nomempresa");
-  codempresa.value = "";
-  nomempresa.value = "";
-}
-  
+
+
+
+
+
 

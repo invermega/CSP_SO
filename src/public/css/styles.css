@@ -13371,6 +13371,12 @@ th {
   border: 4px solid #379FA6; /* Agregar un borde de 2px de ancho, puedes ajustar el color según tus preferencias */
 }
 
+.rectangulo-canvas {
+  overflow: hidden;
+  border: 4px solid #379FA6; /* Borde del rectángulo  */
+  border-radius: 5px; /* Bordes redondeados  */
+}
+
 .archivo-item {
   display: inline-block;
   text-align: center;
@@ -13424,3 +13430,13 @@ th {
   color: white;  
 }
 
+.disable-checkbox {
+  pointer-events: none;
+}
+.disable-checkbox input[type="checkbox"] + label {
+  color: #999;
+  cursor: not-allowed;
+}
+body {
+  overflow: hidden; /* Evita el desplazamiento vertical */
+}
