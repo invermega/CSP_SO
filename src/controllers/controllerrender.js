@@ -146,4 +146,10 @@ module.exports = {
         permisos(parametro, 'entidades/examenCreate', req, res, 0)
     },
 
+    /*Descargas*/
+    async renderinformes(req, res) {
+        const parametro = "IN";
+        permisos(parametro, 'descargas/informes', req, res)
+    },
+
 };
