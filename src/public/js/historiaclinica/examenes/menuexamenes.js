@@ -28,7 +28,8 @@
                 const subopciones = groupedOptions[desexa].map(subopcion => {
                     const ruta = pruebas.find(prueba => prueba.desexadet === subopcion);
                     return `
-                        <a class="nav-link opcionprueba" href="${ruta.ruta}">
+                        <a class="nav-link opcionprueba" href="${ruta.ruta}" data-bs-toggle="collapse" data-bs-target="#${opcionId}"
+                        aria-expanded="false" aria-controls="${opcionId}" style="transition: background-color 0.3s;">
                         <div class="sb-nav-link-icon"><i style="color: #FFCB3D;" class="fa-solid fa-folder-plus"></i></div>
                         ${desexa}
                     </a>`;

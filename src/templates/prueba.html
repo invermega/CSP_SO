@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <style>
+        .sin-bordes>thead,
+        .sin-bordes>tbody,
+        .sin-bordes>tfoot,
+        .sin-bordes>thead>tr,
+        .sin-bordes>tbody>tr,
+        .sin-bordes>tfoot>tr,
+        .sin-bordes>thead>tr>th,
+        .sin-bordes>tbody>tr>td,
+        .sin-bordes>tfoot>tr>td {
+            border: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        footer {
+            background-color: #f2f2f2;
+            padding: 10px;
+            text-align: center;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: avoid;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table class="sin-bordes">
+            <thead>
+                <tr>
+                    <td>
+                        <table class="records_list table-sm table-bordered" style="font-size: 8px; width: 100%; ">
+                            <thead class="fw-bold text-center" style="background-color: gainsboro !important; ">
+                                <th class="p-0" style="width: 6%;">DNI</th>
+                                <th class="p-0" style="width: 24%;">Nombres y Apellidos</th>
+                                <th class="p-0" style="width: 7%;">Fec. Nac.</th>
+                                <th class="p-0" style="width: 6%;">Edad</th>
+                                <th class="p-0" style="width: 7%;">Sexo</th>
+                                <th class="p-0" style="width: 17%;">Cargo</th>
+                                <th class="p-0" style="width: 21%;">Empresa</th>
+                                <th class="p-0" style="width: 12%;">Tipo Evaluación</th>
+                            </thead>
+                            <tbody>
+                                <td class="p-0 ps-1">77284861</td>
+                                <td class="p-0 ps-1">DANTE ANTONIO VELASQUEZ LAOS</td>
+                                <td class="p-0 ps-1">22/05/1995</td>
+                                <td class="p-0 ps-1">18 AÑOS</td>
+                                <td class="p-0 ps-1">MASCULINO</td>
+                                <td class="p-0 ps-1">TRIPULANTE</td>
+                                <td class="p-0 ps-1">PESQUERA JOSE ANTONIO SAC</td>
+                                <td class="p-0 ps-1">RETIRO</td>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <table class="records_list table-sm table-bordered" style="width: 100%; ">
+                            <thead class="fw-bold text-center" style="font-size: 10px; ">
+                                <th class="p-0" style="width: 25%;">ANÁLIIS</th>
+                                <th class="p-0" style="width: 15%;">MÉTODO</th>
+                                <th class="p-0" style="width: 25%;">RESULTADO</th>
+                                <th class="p-0" style="width: 10%;">UNIDAD</th>
+                                <th class="p-0" style="width: 25%;">VALORES DE REFERENCIA</th>
+                            </thead>
+                            <tbody style="font-size: 8px; ">
+
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <table class="records_list table-sm table-bordered" style="width: 100%;">
+                            <thead style="font-size: 10px;">
+                                <tr>
+                                    <th class="p-0 fw-bold text-center"
+                                        style="width: 20%; background-color: gainsboro !important;">
+                                        Nombre del especialista</th>
+                                    <th class="p-0 fw-bold text-center"
+                                        style="width: 20%; background-color: gainsboro !important;">
+                                        Especialidad</th>
+                                    <th class="p-0 fw-bold text-center"
+                                        style="width: 15%; background-color: gainsboro !important;">
+                                        Colegiatura</th>
+                                    <th class="p-0 fw-bold text-center" rowspan="2" style="width: 45%;"></th>
+                                </tr>
+                                <tr style="height: 60px;">
+                                    <th class="p-0 ps-1 fw-light">parametro</th>
+                                    <th class="p-0 ps-1 fw-light">parametro</th>
+                                    <th class="p-0 ps-1 fw-light">parametro</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </td>
+
+                </tr>
+            </tfoot>
+        </table>
+    </main>
+
+</body>
+
+</html>
