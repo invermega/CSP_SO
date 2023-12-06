@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap">
+    <style>
+        @page {
+            size: A4;
+            /* Puedes usar otros tamaños como 'letter', 'legal', etc. */
+            margin: 1cm;
+            /* Márgenes de la página */
+        }
+
+        .sin-bordes>thead,
+        .sin-bordes>tbody,
+        .sin-bordes>tfoot,
+        .sin-bordes>thead>tr,
+        .sin-bordes>tbody>tr,
+        .sin-bordes>tfoot>tr,
+        .sin-bordes>thead>tr>th,
+        .sin-bordes>thead>tr>td,
+        .sin-bordes>tbody>tr>td,
+        .sin-bordes>tfoot>tr>td {
+            border: none;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        footer {
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: avoid;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group;
+
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table class="sin-bordes">
+            <thead class="thead">
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h1 class="fw-bold" style="font-size: 16px;">FICHA MEDICO OCUPACIONAL - 312</h1>
+                            </div>
+                            <div class="col-md-6 text-star mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 1"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                            <div class="col-md-6 text-end mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 2"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <table class="records_list table-sm table-bordered" style="width: 100%; ">
+                            <tbody style="font-size: 10px; ">
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">N° de Ficha Médica</td>
+                                    <td class="p-0 ps-5"></td>
+                                    <td class="p-0 ps-1 fw-bold">Fecha</td>
+                                    <td class="p-0 ps-2" colspan="6"></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Tipo de Evaluación </td>
+                                    <td class="p-0 ps-1 fw-bold">Pre Ocupacional</td>
+                                    <td class="p-0 ps-5"></td>
+                                    <td class="p-0 ps-1 fw-bold">Periódica</td>
+                                    <td class="p-0 ps-5"></td>
+                                    <td class="p-0 ps-1 fw-bold">Retiro</td>
+                                    <td class="p-0 ps-5"></td>
+                                    <td class="p-0 ps-1 fw-bold">Otros</td>
+                                    <td class="p-0 ps-5"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Lugar de Examen</td>
+                                    <td class="p-0 ps-1 fw-bold">Departamento</td>
+                                    <td class="p-0 ps-1" colspan="2"></td>
+                                    <td class="p-0 ps-1 fw-bold">Provincia</td>
+                                    <td class="p-0 ps-5"></td>
+                                    <td class="p-0 ps-1 fw-bold">Distrito</td>
+                                    <td class="p-0 ps-5" colspan="2"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Puesto de Trabajo </td>
+                                    <td class="p-0 ps-1" colspan="2"></td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Área de Trabajo </td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="4"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="9">
+                                        I. DATOS DE LA EMPRESA </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Razón Social </td>
+                                    <td class="p-0 ps-1" colspan="8"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Actividad Economica</td>
+                                    <td class="p-0 ps-1" colspan="8"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Lugar de Trabajo</td>
+                                    <td class="p-0 ps-1" colspan="8"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Ubicación</td>
+                                    <td class="p-0 ps-1 fw-bold">Departamento</td>
+                                    <td class="p-0 ps-1" colspan="2"></td>
+                                    <td class="p-0 ps-1 fw-bold">Provincia</td>
+                                    <td class="p-0 ps-5"></td>
+                                    <td class="p-0 ps-1 fw-bold">Distrito</td>
+                                    <td class="p-0 ps-1" colspan="2"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Puesto al que postula (solo pre
+                                        ocupacional)</td>
+                                    <td class="p-0 ps-1" colspan="7"></td>
+                                </tr>
+
+                                <tr>
+
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="9">
+                                        II. FILIACIÓN DEL TRABAJADOR</td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Nombre y Apellidos</td>
+                                    <td class="p-0 ps-1" colspan="6"></td>
+                                    <td class="p-0 ps-1" colspan="2" rowspan="7"></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Fecha de Nacimiento </td>
+                                    <td class="p-0 ps-1 fw-bold">Día </td>
+                                    <td class="p-0 ps-3"></td>
+                                    <td class="p-0 ps-1 fw-bold">Mes </td>
+                                    <td class="p-0 ps-3"></td>
+                                    <td class="p-0 ps-1 fw-bold">Año </td>
+                                    <td class="p-0 ps-3"> </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Edad </td>
+                                    <td class="p-0 ps-3"> </td>
+                                    <td class="p-0 ps-3" colspan="5"></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 " colspan="4">Documento de Identidad (DNI, carnet de
+                                        extranjería, Pasaporte) </td>
+                                    <td class="p-0 ps-1"> DNI</td>
+                                    <td class="p-0 ps-3" colspan="2"></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " colspan="7">Domicilio Fiscal</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 ">Avenilla/Calle/Jirón/Pasaje </td>
+                                    <td class="p-0 ps-1" colspan="6"></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 "> Número/Departamento/Interior</td>
+                                    <td class="p-0 ps-5"> </td>
+                                    <td class="p-0 ps-1"> Urbanización</td>
+                                    <td class="p-0 ps-3" colspan="4"></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Distrito</td>
+                                    <td class="p-0 ps-5"></td>
+                                    <td class="p-0 ps-1 fw-bold">Provincia</td>
+                                    <td class="p-0 ps-1" colspan="2"></td>
+                                    <td class="p-0 ps-3 fw-bold">Departamento</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="3"> </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Residencia en el lugar de Trabajo</td>
+                                    <td class="p-0 ps-1">Si</td>
+                                    <td class="p-0 ps-5"></td>
+                                    <td class="p-0 ps-1">No</td>
+                                    <td class="p-0 ps-1"></td>
+                                    <td class="p-0 ps-1" colspan="2">Tiempo de Residencia en el Lugar de Trabajo</td>
+                                    <td class="p-0 ps-1 " colspan="2"> </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Essalud</td>
+                                    <td class="p-0 ps-5"></td>
+                                    <td class="p-0 ps-1 fw-bold">EPS</td>
+                                    <td class="p-0 ps-5"></td>
+                                    <td class="p-0 ps-1 fw-bold">Otro</td>
+                                    <td class="p-0 ps-1" colspan="4"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Email</td>
+                                    <td class="p-0 ps-5" colspan="2"></td>
+                                    <td class="p-0 ps-1" colspan="2">Teléfono:</td>
+                                    <td class="p-0 ps-1" colspan="4">Celular: </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Estado Civil</td>
+                                    <td class="p-0 ps-1" colspan="3"></td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Grado de Instrucción</td>
+                                    <td class="p-0 ps-1" colspan="3"></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1">N° Total de Hijos vivos</td>
+                                    <td class="p-0 ps-1" colspan="3"></td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">N° dependientes</td>
+                                    <td class="p-0 ps-1" colspan="3"></td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="9">
+                                        III. ANTECEDENTES OCUPACIONALES</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" rowspan="2">Empresa</td>
+                                    <td class="p-0 ps-1 fw-bold" rowspan="2">Área de Trabajo</td>
+                                    <td class="p-0 ps-1 fw-bold" rowspan="2">Ocupación</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Fecha</td>
+                                    <td class="p-0 ps-1 fw-bold" rowspan="2">Tiempo </td>
+                                    <td class="p-0 ps-1 fw-bold" rowspan="2" colspan="2">Peligros / Riesgos
+                                        Ocupacionales</td>
+                                    <td class="p-0 ps-1 fw-bold" rowspan="2">Ocupación</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Inicio</td>
+                                    <td class="p-0 ps-1 fw-bold">Fin</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " colspan="9"> parametro</td>
+                                </tr>
+
+                                <tr>
+
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="9">
+                                        IV. ANTECEDENTES PATOLOGICOS PERSONALES</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Alergias</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="8"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">RAM</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="8"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Asma</td>
+                                    <td class="p-0 ps-1 "></td>
+                                    <td class="p-0 ps-1 fw-bold">HTA</td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 fw-bold">TBC</td>
+                                    <td class="p-0 ps-1 " colspan="3"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Diabetes</td>
+                                    <td class="p-0 ps-1 "></td>
+                                    <td class="p-0 ps-1 fw-bold">Bronquitis</td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 fw-bold">Hepatitis</td>
+                                    <td class="p-0 ps-1 " colspan="3"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Neoplasia</td>
+                                    <td class="p-0 ps-1 "></td>
+                                    <td class="p-0 ps-1 fw-bold">Convulsiones</td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 fw-bold">ITS</td>
+                                    <td class="p-0 ps-1 " colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Quemaduras</td>
+                                    <td class="p-0 ps-1 "></td>
+                                    <td class="p-0 ps-1 fw-bold">Intoxicaciones</td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 fw-bold">Fiebre tifoidea</td>
+                                    <td class="p-0 ps-1 " colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Cirugías</td>
+                                    <td class="p-0 ps-1 "></td>
+                                    <td class="p-0 ps-1 fw-bold">Actividad Física</td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 fw-bold">Patología renal</td>
+                                    <td class="p-0 ps-1 " colspan="3"></td>
+
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Neumonía</td>
+                                    <td class="p-0 ps-1 "></td>
+                                    <td class="p-0 ps-1 fw-bold">Patologías de tiroides</td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 fw-bold">Fracturas</td>
+                                    <td class="p-0 ps-1 " colspan="3"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Otros</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="8"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold text-center">Habitos Nocivos</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="2"> Tipo </td>
+                                    <td class="p-0 ps-1 fw-bold text-center">Cantidad</td>
+                                    <td class="p-0 ps-1 text-center fw-bold" colspan="5">Frecuencia</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Alcohol</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="2"> </td>
+                                    <td class="p-0 ps-1 fw-bold text-center"></td>
+                                    <td class="p-0 ps-1 text-center fw-bold" colspan="5"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Tabaco</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="2"> </td>
+                                    <td class="p-0 ps-1 fw-bold text-center"></td>
+                                    <td class="p-0 ps-1 text-center fw-bold" colspan="5"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Drogas</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="2"> </td>
+                                    <td class="p-0 ps-1 fw-bold text-center"></td>
+                                    <td class="p-0 ps-1 text-center fw-bold" colspan="5"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Medicamentos</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="2"> </td>
+                                    <td class="p-0 ps-1 fw-bold text-center"></td>
+                                    <td class="p-0 ps-1 text-center fw-bold" colspan="5"></td>
+                                </tr>
+
+
+                                <tr>
+
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="9">
+                                        V. ANTECEDENTES PATALÓGICOS FAMILIARES</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 ">Padre</td>
+                                    <td class="p-0 ps-1" colspan="2"> </td>
+                                    <td class="p-0 ps-1 ">Madre</td>
+                                    <td class="p-0 ps-1" colspan="2"></td>
+                                    <td class="p-0 ps-1">Hermanos</td>
+                                    <td class="p-0 ps-1" colspan="2"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 ">Esposo(a)</td>
+                                    <td class="p-0 ps-1" colspan="4"> </td>
+                                    <td class="p-0 ps-1 ">Hijos Vivos </td>
+                                    <td class="p-0 ps-1">N° </td>
+                                    <td class="p-0 ps-1">Hijos Fallecidos </td>
+                                    <td class="p-0 ps-1">N° </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 ">Otros</td>
+                                    <td class="p-0 ps-1" colspan="8"> </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " colspan="9">Absentismo: Enfermedades y Accidentes
+                                        (asociado a trabajo o no)</td>
+                                    6
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="2" rowspan="2">Enfermedad,
+                                        Accidente</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Asociado al trabajo </td>
+                                    <td class="p-0 ps-1 fw-bold" rowspan="2">Año </td>
+                                    <td class="p-0 ps-1 fw-bold" rowspan="2" colspan="4">Días de descanso </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">SI</td>
+                                    <td class="p-0 ps-1 fw-bold"> NO </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " colspan="2">..</td>
+                                    <td class="p-0 ps-1 "> </td>
+                                    <td class="p-0 ps-1 "> </td>
+                                    <td class="p-0 ps-1 " colspan="4"> </td>
+                                </tr>
+
+                                <tr>
+
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="9">
+                                        VI. EVALUACIÓN MÉDICA</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " >Anamnesis</td>
+                                    <td class="p-0 ps-1 " colspan="8"></td>
+                                  
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " rowspan="2" >Examén Clínico</td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 "></td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 "></td>
+                                </tr>   
+                                <tr>
+                                   
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 "> </td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 " colspan="2"></td>
+                                    <td class="p-0 ps-1 "> </td>
+                                </tr>  
+                                
+                                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            </tbody>
+                        </table>
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </main>
+
+</body>
+
+</html>
