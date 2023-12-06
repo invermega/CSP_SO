@@ -70,7 +70,8 @@
                         <button type="button" class="btn input-group-text" id="refresh" onclick="getPacientesCitados()">
                             <i class="fa-solid fa-retweet"></i>
                         </button>
-                        <button type="button" class="btn input-group-text" id="download" onclick="exportarinforme('mydatatable')">
+                        <button type="button" class="btn input-group-text" id="download"
+                            onclick="exportarinforme('mydatatable')">
                             <i class="fa-solid fa-download"></i>
                         </button>
                     </div>
@@ -79,41 +80,55 @@
 
             <!-- Modal examenes-->
             <div class="modal fade" id="modalFormExamnes" role="dialog">
-                        <div class="modal-dialog ">
-                            <div class="modal-content">
-                                <div class="modal-header"
-                                    style="background-color: #0FA0A7;color: white;border-color: #0FA0A7; ">
-                                    <h4 class="modal-title" id="myModalLabel">Selecione los exámenes del informe</h4>
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header"
+                            style="background-color: #0FA0A7;color: white;border-color: #0FA0A7; ">
+                            <h4 class="modal-title" id="myModalLabel">Selecione los exámenes del informe</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input class="form-check-input ml-4" type="radio" id="consolidado" name="tipodescarga" value="exportarinformeconsolidado"
+                                        required checked>
+                                    <label class="form-check-label ml-5" for="consolidado">Consolidado</label>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="row mb-2 mt-2">
-                                        <div id="examenesmodal">
-                                            
-                                        </div>
-                                        <div class="text-center" id="cargaExamnesmodal" style="display: none;">
-                                            <div class="d-flex justify-content-center align-items-center"
-                                                style="min-height: 5vh;">
-                                                <lottie-player src="/img/jsonimg/Cargahealth.json"
-                                                    background="transparent" speed="1"
-                                                    style="width: 200px; height: 200px;" loop autoplay></lottie-player>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn"
-                                            style="background-color: #793B8E;color: white;border-color: #793B8E;"
-                                            id="cerrarExamnes" onclick="imprimir('examenesmodal')"><i class="bi bi-file-earmark-pdf-fill"></i>
-                                            Exportar PDF</button>   
-                                        <button type="button" class="btn"
-                                            style="background-color: #793B8E;color: white;border-color: #793B8E;"
-                                            id="cerrarExamnes" data-dismiss="modal" onclick="cerrarModal()"> <i
-                                                class="fa-solid fa-circle-xmark"></i>
-                                            Cerrar</button>
+                                <div class="col-md-6">
+                                    <input class="form-check-input ml-4" type="radio" id="detalle" name="tipodescarga" value="exportarinformedetalle"
+                                        required>
+                                    <label class="form-check-label ml-5" for="detalle">Detalle</label>
+                                </div>
+                            </div>
+                            <div class="row mb-2 mt-2">
+
+                                <div id="examenesmodal">
+
+                                </div>
+                                <div class="text-center" id="cargaExamnesmodal" style="display: none;">
+                                    <div class="d-flex justify-content-center align-items-center"
+                                        style="min-height: 5vh;">
+                                        <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent"
+                                            speed="1" style="width: 200px; height: 200px;" loop
+                                            autoplay></lottie-player>
                                     </div>
                                 </div>
                             </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn"
+                                    style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                    id="cerrarExamnes" onclick="imprimir('examenesmodal','mydatatable')"><i
+                                        class="bi bi-file-earmark-pdf-fill"></i>
+                                    Exportar PDF</button>
+                                <button type="button" class="btn"
+                                    style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                    id="cerrarExamnes" data-dismiss="modal" onclick="cerrarModal()"> <i
+                                        class="fa-solid fa-circle-xmark"></i>
+                                    Cerrar</button>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
             <div class="table-responsive mt-3">
                 <table
