@@ -94,14 +94,12 @@ function exportarinforme(iddatatableble) {
 
     if (seleccionados.length === 0) {
         mensajecentral('error', 'Debes seleccionar algún registro.');
-    } else if (seleccionados.length > 1) {
-        mensajecentral('error', 'Debes seleccionar solo un registro.');
     } else {
         mostrarDiv('cargaExamnesmodal');
         ocultarDiv('examenesmodal');
         $('#modalFormExamnes').modal('show');
         $.ajax({
-            url: '/arbolpruebas/' + seleccionados,
+            url: '/descargapruebas/' + seleccionados,
             method: "GET",
             success: function (pruebas) {
                 ocultarDiv('cargaExamnesmodal');
@@ -133,7 +131,21 @@ function cerrarModal() {
     $('#modalFormExamnes').modal('hide');
 }
 
-function imprimir(iddiv) {
+function imprimir(iddiv,iddatatableble) {
+    var table = document.getElementById(iddatatableble);
+    var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+    var seleccionadoscitas = []; // Array para almacenar los elementos checkbox seleccionados
+
+    for (var i = 0; i < rows.length; i++) {
+        var checkbox = rows[i].querySelector('input[type="checkbox"]');
+
+        if (checkbox && checkbox.checked) {
+            var id = checkbox.value.split('_')[1];
+            seleccionadoscitas.push(id); // Agregar el id al array de seleccionados
+        }
+    }
+
+
     var div = document.getElementById(iddiv);
     var checkboxes = div.querySelectorAll('input[type="checkbox"]');
     var seleccionados = [];
@@ -157,20 +169,31 @@ function imprimir(iddiv) {
     });
 
     console.log(idsOrdenados);
+    console.log(seleccionadoscitas);
+    var consolidado = document.getElementById("consolidado");
+    var detalle = document.getElementById("detalle");
+    let tipodescarga;
+    if (consolidado.checked === true) {
+        tipodescarga = consolidado.value;
+    }
+    if (detalle.checked === true) {
+        tipodescarga = detalle.value;
+    }
     $.ajax({
-        url: 'exportarinforme',
-        method: "GET",
+        url: tipodescarga,
+        method: 'GET',
         data: {
             examenes: idsOrdenados,
+            citas_id: seleccionadoscitas
         },
         xhrFields: {
             responseType: 'blob' // Establece el tipo de respuesta como blob (binary large object)
         },
         success: function (blob) {
-            // Crear un enlace temporal y simular un clic para descargar el archivo
+            // Crear un enlace temporal y simular un clic para descargar el archivo ZIP
             var link = document.createElement('a');
             link.href = window.URL.createObjectURL(blob);
-            link.download = 'combined_output.pdf';
+            link.download = 'Informes.zip'; // Cambiado el nombre del archivo a ZIP
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -179,4 +202,5 @@ function imprimir(iddiv) {
             $('#error-message').text('Se produjo un error al cargar los protocolos.');
         }
     });
+    
 }
