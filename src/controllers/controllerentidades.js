@@ -313,13 +313,15 @@ module.exports = {
         res.json(responde.recordset);
     },
     async getmedicolist(req, res) {//listar medicos
-        let  medico  = req.query.medico;
+        let  medico  = req.query.parametro;
+        let  parametro1  = req.query.parametro1;
         const codrolUser = req.user.codrol;
         if (medico === '') {
             medico = '%';
         }
+        console.log(medico,parametro1);
         const pool = await getConnection();
-        const response = await pool.query(`pa_selMedico  '${codrolUser}','${medico}'`);
+        const response = await pool.query(`pa_selMedico  '${codrolUser}','${medico}','${parametro1}'`);
         res.json(response.recordset);
     },
     
