@@ -419,4 +419,56 @@ module.exports = {
         res.json(result.recordset);
     },
     /*********************************************/
+    /**************** Rayos X ******************/
+    async getresultparametrosrayosx(req, res) {
+        let { cita_id,soexa,codpru_id } = req.query;
+        const pool = await getConnection();
+        console.log(cita_id,soexa,codpru_id);
+        const result = await pool.query(`pa_SelParametrosRayosX'${cita_id}','${soexa}','${codpru_id}'`);
+        res.json(result.recordset);
+    },
+    async getresultresultrayosx(req, res) {
+        let { cita_id,soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResultRayosX'${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+    async postrayosx(req, res) {
+        try {
+            const { cita_id, nuncom, soexa, codpru_id, codigo_ref, det_informe, conclusion, datains, doc_adic_id, datainsrec } = req.body;
+
+            const usenam = req.user.usuario;
+            const hostname = '';
+            const codrol = req.user.codrol;
+            const med_id = req.user.med_id;
+            const detalleJsoncie10 = JSON.stringify(datains);
+            const detalleJsonrecomen = JSON.stringify(datainsrec);
+            
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_InsPbRayosX';
+            request.input('cita_id', sql.Int, cita_id);
+            request.input('nuncom', sql.Int, nuncom);
+            request.input('soexa', sql.VarChar(6), soexa);
+            request.input('codpru_id', sql.Int, codpru_id);
+            request.input('med_id', sql.Int, med_id);
+            request.input('doc_adic_id', sql.Int, doc_adic_id);
+            request.input('usenam', sql.VarChar(30), usenam);
+            request.input('hostname', sql.VarChar(20), hostname);
+            request.input('codrol', sql.Int, codrol);
+            request.input('detalleJsoncie10', sql.NVarChar(sql.MAX), detalleJsoncie10);
+            request.input('detalleJsonrecomen', sql.NVarChar(sql.MAX), detalleJsonrecomen);
+            request.input('codigo_ref', sql.VarChar(20), codigo_ref);
+            request.input('det_informe', sql.VarChar(sql.MAX), det_informe);
+            request.input('conclusion', sql.VarChar(sql.MAX), conclusion);
+
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
+    },
+    /*********************************************/
 };

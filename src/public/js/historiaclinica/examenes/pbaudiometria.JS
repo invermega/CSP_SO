@@ -16,12 +16,12 @@ function loadScript(url) {
         await loadScript('https://cdn.jsdelivr.net/npm/chart.js');
         await loadScript('https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels');
         await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js');
-        
+
         await (async () => {
             while (typeof ChartDataLabels === 'undefined' || typeof Chart.helpers === 'undefined') {
                 await new Promise(resolve => setTimeout(resolve, 50));
             }
-            
+
         })();
         await (async () => {
             cargarEquipo();
@@ -214,7 +214,6 @@ function loadScript(url) {
 function cargarEquipo() {
     var codpru_id = $('#codpru_id').val();
     var equi_id = $('#equi_id');
-    //var feccali = $('#feccali');
     var opc = 0;
     var equipos = 0;
     $.ajax({
@@ -227,19 +226,28 @@ function cargarEquipo() {
         },
         success: function (data) {
             equi_id.empty();
-            $.each(data, function (index, parametro) {
+            if (data.length >= 1) {
+                $.each(data, function (index, parametro) {
+                    equi_id.append($('<option>', {
+                        value: parametro.equi_id,
+                        text: parametro.equipo,
+                    }));
+                });
+                $('#feccali').val(data[0].feccali);
+                equi_id.off('change').on('change', function () {
+                    actualizarFeccali(data);
+                });
+                setupOnChange();
+            }else{
                 equi_id.append($('<option>', {
-                    value: parametro.equi_id,
-                    text: parametro.equipo,
+                    value: '',
+                    text: 'SIN REGISTRO',
+                    disabled: true,
+                    selected: true
                 }));
-            });
-            $('#feccali').val(data[0].feccali);
-            equi_id.off('change').on('change', function () {
-                actualizarFeccali(data);
-            });
+                equi_id.prop('disabled', true);
 
-
-            setupOnChange();
+            }
 
         },
         error: function () {

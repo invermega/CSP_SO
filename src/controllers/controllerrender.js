@@ -78,6 +78,10 @@ module.exports = {
         const parametro = "AD";
         permisosprueba(parametro, 'historiaclinica/pruebas/pbaudiometria', req, res);
     },
+    async renderrayosxprueba(req, res) {
+        const parametro = "IM";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbrayosx', req, res);
+    },
     //entidades
     async renderprotocolo(req, res) {
         const parametro = "PT";
