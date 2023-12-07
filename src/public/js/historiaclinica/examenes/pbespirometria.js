@@ -89,7 +89,6 @@ function ObtenerParametros() {
             $('#error-message').text('Se produjo un error al cargar los protocolos.');
         }
     });
-
 };
 //
 function obtenerDataParametros() {
