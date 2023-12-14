@@ -38,9 +38,10 @@
                         <div class="col-md-3 border-right">
                             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                                 <h4 class="text-right">Foto</h4>
-                                <canvas id="canvas" width="300" height="300" class="circle-canvas mb-3"
-                                    required></canvas>
-                                <div class="button-container">
+                                <div style="max-width: 300px;max-height: 300px;">
+                                <canvas id="canvas" width="300px" height="300px" class="circle-canvas mb-3 w-100 h-75%" required></canvas>
+                            </div>
+                                <div class="button-container mt-3">
                                     <input type="file" id="file-input" style="display: none;">
                                     <button id="reset-btn" class="btn btn4"
                                         style="background-color: #793B8E;color: white;border-color: #793B8E;"><i
