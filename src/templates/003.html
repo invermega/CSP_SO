@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap">
+    <style>
+        @page {
+            size: A4;
+            /* Puedes usar otros tamaños como 'letter', 'legal', etc. */
+            margin: 1cm;
+            /* Márgenes de la página */
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid;
+        }
+
+        .border {
+            border: 1px solid;
+        }
+
+        .no-border-bottom {
+            border-bottom: none;
+        }
+
+        .sin-bordes>thead,
+        .sin-bordes>tbody,
+        .sin-bordes>tfoot,
+        .sin-bordes>thead>tr,
+        .sin-bordes>tbody>tr,
+        .sin-bordes>tfoot>tr,
+        .sin-bordes>thead>tr>th,
+        .sin-bordes>thead>tr>td,
+        .sin-bordes>tbody>tr>td,
+        .sin-bordes>tfoot>tr>td {
+            border: none;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        footer {
+            padding: 10px;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: avoid;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group;
+
+        }
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table class="sin-bordes">
+            <thead class="thead">
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h1 class="fw-bold" style="font-size: 16px;">AUDIOMETRÍA
+                                </h1>
+                            </div>
+                            <div class="col-md-6 text-star mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 1"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                            <div class="col-md-6 text-end mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 2"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="records_list table-sm table-bordered" style="font-size: 8px; width: 100%; ">
+                            <thead class="fw-bold text-center" style="background-color: gainsboro">
+                                <th class="p-0" style="width: 6%;">DNI</th>
+                                <th class="p-0" style="width: 24%;">Nombres y Apellidos</th>
+                                <th class="p-0" style="width: 7%;">Fec. Nac.</th>
+                                <th class="p-0" style="width: 6%;">Edad</th>
+                                <th class="p-0" style="width: 7%;">Sexo</th>
+                                <th class="p-0" style="width: 17%;">Cargo</th>
+                                <th class="p-0" style="width: 21%;">Empresa</th>
+                                <th class="p-0" style="width: 12%;">Tipo Evaluación</th>
+                            </thead>
+                            <tbody>
+                                <td class="p-0 ps-1">77284861</td>
+                                <td class="p-0 ps-1">DANTE ANTONIO VELASQUEZ LAOS</td>
+                                <td class="p-0 ps-1">22/05/1995</td>
+                                <td class="p-0 ps-1">18 AÑOS</td>
+                                <td class="p-0 ps-1">MASCULINO</td>
+                                <td class="p-0 ps-1">TRIPULANTE</td>
+                                <td class="p-0 ps-1">PESQUERA JOSE ANTONIO SAC</td>
+                                <td class="p-0 ps-1">RETIRO</td>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </thead>
+            <tbody style="font-size: 10px;">
+                <tr >
+                    <td>
+                        <table>
+                            <tr >
+                                <td class="fw-bold p-0 ps-1" style="width: 15%; background-color: gainsboro;">AUDIÓMETRO</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 10%; background-color: gainsboro;">Marca</td>
+                                <td class="p-0 ps-1" style="width: 15%;"></td>
+                                <td class="fw-bold p-0 ps-1" style="width: 10%; background-color: gainsboro;">Modelo</td>
+                                <td class="p-0 ps-1" style="width: 25%;"></td>
+                                <td class="fw-bold p-0 ps-1" style="width: 15%; background-color: gainsboro;">Fecha Calibra.</td>
+                                <td class="p-0 ps-1" style="width: 10%;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr >
+                    <td>
+                        <table>
+                            <tr class="fw-bold text-center">
+                                <td class="fw-bold p-0 ps-1" style="width: 15%;">Fecha de Atención</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 30%;">Ocupación</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 15%;">Años de trab.</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 10%;">Horas de expos.</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 10%;">Aprec. ruido</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 10%;">Tapones</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 10%;">Orejeras</td>
+                            </tr>
+                            <tr>
+                                <td class="p-0 ps-1">a</td>
+                                <td class="p-0 ps-1"></td>
+                                <td class="p-0 ps-1"></td>
+                                <td class="p-0 ps-1"></td>
+                                <td class="p-0 ps-1"></td>
+                                <td class="p-0 ps-1"></td>
+                                <td class="p-0 ps-1"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table>
+                                    <tr class="fw-bold text-center" style="background-color: gainsboro">
+                                        <td class="p-0 ps-1">Antecedentes relacionados</td>
+                                        <td class="p-0 ps-1">Resultado</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Consumo de tabaco</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">ervicio militar</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Hobbies con exposición al ruido</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Exposición laboral a químicos</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Infección al oído</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Uso de ototóxicos</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Otros</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table>
+                                    <tr class="fw-bold text-center" style="background-color: gainsboro">
+                                        <td class="p-0 ps-1">Síntomas actuales</td>
+                                        <td class="p-0 ps-1">Resultado</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Disminución de audición</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Dolor de oído</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Zumbidos</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Mareos</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Infección al oído</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Estuvo expuesto al ruido 14 horas previas</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Otros</td>
+                                        <td class="p-0 ps-1"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="fw-bold text-center" >
+                    <td>
+                       <h2 style="font-size: 14px;" class="mt-3">OTOSCOPÍA</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table>
+                                    <tr class="fw-bold text-center" style="background-color: gainsboro">
+                                        <td class="p-0 ps-1" colspan="3">Oído derecho</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1" style="width: 30%">Triángulo de luz</td>
+                                        <td class="p-0 ps-1" style="width: 10%"></td>
+                                        <td class="p-0 ps-1" style="width: 60%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Perforaciones</td>
+                                        <td class="p-0 ps-1"></td>
+                                        <td class="p-0 ps-1" style="width: 60%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Abombamiento</td>
+                                        <td class="p-0 ps-1"></td>
+                                        <td class="p-0 ps-1" style="width: 60%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Tapón de Cerumen</td>
+                                        <td class="p-0 ps-1"></td>
+                                        <td class="p-0 ps-1" style="width: 60%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Otros</td>
+                                        <td class="p-0 ps-1"></td>
+                                        <td class="p-0 ps-1" style="width: 60%"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table>
+                                    <tr class="fw-bold text-center" style="background-color: gainsboro">
+                                        <td class="p-0 ps-1" colspan="3">Oído izquierdo</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1" style="width: 30%">Triángulo de luz</td>
+                                        <td class="p-0 ps-1" style="width: 10%"></td>
+                                        <td class="p-0 ps-1" style="width: 60%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Perforaciones</td>
+                                        <td class="p-0 ps-1"></td>
+                                        <td class="p-0 ps-1" style="width: 60%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Abombamiento</td>
+                                        <td class="p-0 ps-1"></td>
+                                        <td class="p-0 ps-1" style="width: 60%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Tapón de Cerumen</td>
+                                        <td class="p-0 ps-1"></td>
+                                        <td class="p-0 ps-1" style="width: 60%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-0 ps-1">Otros</td>
+                                        <td class="p-0 ps-1"></td>
+                                        <td class="p-0 ps-1" style="width: 60%"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr >
+                    <td>
+                        <table>
+                            <tr >
+                                <td class="p-0 ps-1" style="width: 15%; background-color: gainsboro;">Logoaudiometría</td>
+                                <td class="p-0 ps-1" style="width: 10%; background-color: gainsboro;">O.Derecho</td>
+                                <td class="p-0 ps-1" style="width: 15%;"></td>
+                                <td class="p-0 ps-1" style="width: 10%; background-color: gainsboro;">O.Izquierdo</td>
+                                <td class="p-0 ps-1" style="width: 10%;"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </main>
+
+</body>
+
+</html>
