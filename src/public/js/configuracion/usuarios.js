@@ -289,12 +289,12 @@ document.getElementById("medicomodal").addEventListener("keyup", function (event
 function getmedico(parametro) {
     mostrarDiv('cargamedico');
     ocultarDiv('tablamedicomodal');
-    let parametro1=0;
+    let parametro1=1;
     $.ajax({
         url: '/listarmedicos',
         method: 'GET',
         data: {
-            medico: parametro,
+            parametro: parametro,
             parametro1 : parametro1,
         },
         success: function (medicos) {

@@ -61,8 +61,18 @@ router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfi
 router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueleticaprueba);
 router.post('/pbfichamusculoesqueletica', isLoggedIn, controllerHI.postfichamusculoesqueletica);
 router.get('/resultfichamusculoesqueletica', isLoggedIn, controllerHI.getresultfichamusculoesqueletica);
+/**************** Audiometria *********************/
+router.get('/pbaudiometria', isLoggedIn, controllerrender.renderaudiometriaprueba);
+router.post('/pbaudiometria', isLoggedIn, controllerHI.postaudiometria);
+router.get('/equipos', isLoggedIn, controllerHI.getequipos);
+router.get('/resultaudiometria', isLoggedIn, controllerHI.getresultaudiometria);
+/***************************************************/
+/**************** Diagnostico imagen *********************/
+router.get('/pbrayosx', isLoggedIn, controllerrender.renderrayosxprueba);
+router.get('/rayosxparametros', isLoggedIn, controllerHI.getresultparametrosrayosx);
+router.get('/resultrayosx', isLoggedIn, controllerHI.getresultresultrayosx);
+router.post('/pbrayosx', isLoggedIn, controllerHI.postrayosx);
 
-
-
+/***************************************************/
 
 module.exports = router;
