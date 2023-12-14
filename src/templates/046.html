@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap">
+    <style>
+        @page {
+            size: A4;
+            /* Puedes usar otros tamaños como 'letter', 'legal', etc. */
+            margin: 1cm;
+            /* Márgenes de la página */
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid;
+        }
+
+        .border {
+            border: 1px solid;
+        }
+
+        .no-border-bottom {
+            border-bottom: none;
+        }
+
+        .sin-bordes>thead,
+        .sin-bordes>tbody,
+        .sin-bordes>tfoot,
+        .sin-bordes>thead>tr,
+        .sin-bordes>tbody>tr,
+        .sin-bordes>tfoot>tr,
+        .sin-bordes>thead>tr>th,
+        .sin-bordes>thead>tr>td,
+        .sin-bordes>tbody>tr>td,
+        .sin-bordes>tfoot>tr>td {
+            border: none;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        footer {
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: avoid;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group;
+
+        }
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table class="sin-bordes">
+            <thead class="thead">
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h1 class="fw-bold" style="font-size: 16px;">INFORME MÉDICO</h1>
+                            </div>
+                            <div class="col-md-6 text-star mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 1"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                            <div class="col-md-6 text-end mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 2"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+            <tbody style="font-size: 10px; ">
+                <tr>
+                    <td>
+                        <table class="sin-bordes">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 20%;"></td>
+                                    <td style="width: 40%;"></td>
+                                    <td style="width: 15%;"></td>
+                                    <td style="width: 10%;"></td>
+                                    <td style="width: 15%;" class="text-center">Examen</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Nombre completo
+                                    </td>
+                                    <td class="border-bottom" colspan="2">
+                                        dsahdisadijsdijsaodj
+                                    </td>
+                                    <td style="text-align: right;">
+                                        Preocupacional
+                                    </td>
+                                    <td class="border">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        AREA
+                                    </td>
+                                    <td class="border-bottom" colspan="2">
+                                        dsahdisadijsdijsaodj
+                                    </td>
+                                    <td style="text-align: right;">
+                                        Periódica
+                                    </td>
+                                    <td class="border">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Puesto al que postula
+                                    </td>
+                                    <td class="border-bottom" colspan="2">
+                                        dsahdisadijsdijsaodj
+                                    </td>
+                                    <td style="text-align: right;">
+                                        Retiro
+                                    </td>
+                                    <td class="border">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Cargo actual
+                                    </td>
+                                    <td class="border-bottom" colspan="2">
+                                        dsahdisadijsdijsaodj
+                                    </td>
+                                    <td style="text-align: right;">
+                                        Otros
+                                    </td>
+                                    <td class="border">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        DNI:
+                                    </td>
+                                    <td class="border-bottom" colspan="2">
+                                        Fecha del Examen :
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Evaluación Médica
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 20%;">Edad</td>
+                                                    <td style="width: 20%;">IMC</td>
+                                                    <td style="width: 20%;">Peso</td>
+                                                    <td style="width: 20%;">Talla</td>
+                                                    <td style="width: 20%;">PA</td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <table class="sin-bordes">
+                            <tbody style="font-size: 10px; ">
+                                <tr>
+                                    <td style="width: 20%;">Clínico Ocupacional</td>
+                                    <td class="border-bottom" style="width: 40%;"> </td>
+                                    <td style="width: 15%; text-align: right;">Hemoglobina</td>
+                                    <td class="border" style="width: 10%;"></td>
+                                    <td class="border" style="width: 15%;"></td>
+                                </tr>
+                                <tr>
+                                    <td>Psicología</td>
+                                    <td class="border-bottom"> </td>
+                                    <td style="text-align: right;">Glucosa</td>
+                                    <td class="border"></td>
+                                    <td class="border"></td>
+                                </tr>
+                                <tr>
+                                    <td>Musculoesquelético</td>
+                                    <td class="border-bottom"> </td>
+                                    <td style="text-align: right;">Colesterol</td>
+                                    <td class="border"></td>
+                                    <td class="border"></td>
+                                </tr>
+                                <tr>
+                                    <td>Oftalmología</td>
+                                    <td class="border-bottom"> </td>
+                                    <td style="text-align: right;">Triglicéridos</td>
+                                    <td class="border"></td>
+                                    <td class="border"></td>
+                                </tr>
+                                <tr>
+                                    <td>Rx Tórax</td>
+                                    <td class="border-bottom"> </td>
+                                    <td style="text-align: right;">Orina</td>
+                                    <td class="border" colspan="2"></td>
+                                </tr>
+                                <tr>
+                                    <td>Electrocardiograma</td>
+                                    <td class="border-bottom"> </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Audiometría</td>
+                                    <td class="border-bottom"> </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Espirometría</td>
+                                    <td class="border-bottom"> </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tbody style="font-size: 10px; ">
+                                <tr>
+                                    Diagnósticos
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">
+                                        1
+                                    </td>
+                                    <td>
+                                        E66.3 - Sobrepeso
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tbody style="font-size: 10px; ">
+                                <tr>
+                                    Recomendaciones
+                                </tr>
+                                <tr>
+                                    <td style="width: 5%;">
+                                        1
+                                    </td>
+                                    <td>
+                                        Cambio de estilo de vida: dieta baja en grasas y harinas. Actividad física
+                                        diaria.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tbody style="font-size: 10px; ">
+                                <tr>
+                                    <td class="text-center" style="width: 30%;">Restricción</td>
+                                    <td class="text-center" style="width: 9%;">SI</td>
+                                    <td class="text-center" style="width: 9%;">NO</td>
+                                    <td class="no-border-bottom no-border-top" style="width: 4%;"></td>
+                                    <td class="text-center" style="width: 30%;">Restricción</td>
+                                    <td class="text-center" style="width: 9%;">SI</td>
+                                    <td class="text-center" style="width: 9%;">NO</td>
+                                </tr>
+                                <tr>
+                                    <td>Uso de lentes correctores</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="no-border-bottom no-border-top"></td>
+                                    <td>No exponerse a mas de 85 db</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>No realizar manejo manual de cargas</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="no-border-bottom no-border-top"></td>
+                                    <td>No exceder los 25 Kg al cargar peso</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>No exponerse a sustancias químicas</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="no-border-bottom no-border-top"></td>
+                                    <td>No laborar a más de 2500 msnm</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>No conducir vehículos</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="no-border-bottom no-border-top"></td>
+                                    <td>No manipular cables eléctricos</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>No laborar en espacios confinados</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="no-border-bottom no-border-top"></td>
+                                    <td>No realizar trabajos en altura (mas 1.8 mts)</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>No exposición a más de 80 dB, sin uso estricto y
+                                        supervisado de EPP auditivo</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="no-border-bottom no-border-top"></td>
+                                    <td>OTROS:</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="records_list table-sm table-bordered" style="width: 100%; ">
+                            <tbody style="font-size: 10px; ">
+                                <tr>
+                                    <td class="p-0 ps-1" style="width: 30%;">Sello y Firma
+                                    </td>
+                                    <td class="p-0 ps-1" style="height: 100px;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">Médico</td>
+                                    <td class="p-0 ps-1">sdsad</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">Número de CMP: </td>
+                                    <td class="p-0 ps-1">sdsad</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                
+                
+            </tbody>
+            
+        </table>
+    </main>
+
+</body>
+
+</html>
