@@ -1,4 +1,6 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js" integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.8/jquery.inputmask.min.js"
+    integrity="sha512-efAcjYoYT0sXxQRtxGY37CKYmqsFVOIwMApaEbrxJr4RwqVVGw8o+Lfh/+59TU07+suZn1BWq4fDl5fdgyCNkw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <div class="container-fluid px-4">
     <h1 class="mt-4 tituloverde">Espirometría</h1>
     <div class="card mb-4">
@@ -42,31 +44,58 @@
                         <tfoot style="border-top: none;">
                             <tr>
                                 <th colspan="8">
-                                    <div class="col-md-12 form-inline col-sm-12 form-group mb-1 mt-1 px-0">
-                                        <div class="input-group input-group-sm" style="width: 100%;">
-                                            <label class="control-label input-group-text" for="std_fuma">FUMADOR</label>
-                                            <select id="std_fuma" class="form-control form-control-sm">
-                                                <option value="SI">SI</option>
-                                                <option value="NO" selected>NO</option>
-                                            </select>
-                                            <label class="control-label input-group-text" for="Calidad">CALIDAD</label>
-                                            <select id="Calidad" class="form-control form-control-sm">
-                                                <option value="A" selected>A</option>
-                                                <option value="B">B</option>
-                                                <option value="C">C</option>
-                                                <option value="D">D</option>
-                                                <option value="E">E</option>
-                                            </select>
-                                            <label class="control-label input-group-text"
-                                                for="conclusion">CONCLUSIONES</label>
-                                            <select id="conclusion" class="form-control form-control-sm">
-                                                <option value="NORMAL" selected>NORMAL</option>
-                                                <option value="LEVE">LEVE</option>
-                                                <option value="MODERADO">MODERADO</option>
-                                                <option value="MODERADAMENTE_GRAVE">MODERADAMENTE GRAVE</option>
-                                                <option value="GRAVE">GRAVE</option>
-                                                <option value="MUY_GRAVE">MUY GRAVE</option>
-                                            </select>
+                                    <div class="row mt-2">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <div class="input-group input-group-sm">
+                                                        <label class="control-label input-group-text"
+                                                            for="std_fuma">FUMADOR</label>
+                                                        <select id="std_fuma" class="form-control form-control-sm">
+                                                            <option value="SI">SI</option>
+                                                            <option value="NO" selected>NO</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="input-group input-group-sm">
+                                                        <label class="control-label input-group-text"
+                                                            for="Calidad">CALIDAD</label>
+                                                        <select id="Calidad" class="form-control form-control-sm">
+                                                            <option value="A" selected>A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                            <option value="D">D</option>
+                                                            <option value="E">E</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="input-group input-group-sm">
+                                                        <label class="control-label input-group-text"
+                                                            for="tipo">TIPO</label>
+                                                        <select id="tipo" class="form-control form-control-sm">
+                                                            <option value="NORMAL" selected>NORMAL</option>
+                                                            <option value="SÍNDROME RESTRICTIVO">SÍNDROME RESTRICTIVO</option>
+                                                            <option value="SÍNDROME OBSTRUCTIVO">SÍNDROME OBSTRUCTIVO</option>                                                            
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" id="conclusionDiv">
+                                                    <div class="input-group input-group-sm">
+                                                        <label class="control-label input-group-text"
+                                                            for="conclusion">CONCLUSIONES</label>
+                                                        <select id="conclusion" class="form-control form-control-sm">
+                                                            <option value="LEVE" selected>LEVE</option>
+                                                            <option value="MODERADO">MODERADO</option>
+                                                            <option value="MODERADAMENTE_GRAVE">MODERADAMENTE GRAVE
+                                                            </option>
+                                                            <option value="GRAVE">GRAVE</option>
+                                                            <option value="MUY_GRAVE">MUY GRAVE</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </th>
@@ -87,7 +116,7 @@
             {{> recomendaciones }}
             {{> documentoadicionales }}
 
-            
+
         </div>
     </div>
 </div>

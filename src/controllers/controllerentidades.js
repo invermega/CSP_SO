@@ -313,15 +313,18 @@ module.exports = {
         res.json(responde.recordset);
     },
     async getmedicolist(req, res) {//listar medicos
-        let  medico  = req.query.medico;
+        let  medico  = req.query.parametro;
+        let  parametro1  = req.query.parametro1;
         const codrolUser = req.user.codrol;
         if (medico === '') {
             medico = '%';
         }
+        console.log(medico,parametro1);
         const pool = await getConnection();
-        const response = await pool.query(`pa_selMedico  '${codrolUser}','${medico}'`);
+        const response = await pool.query(`pa_selMedico  '${codrolUser}','${medico}','${parametro1}'`);
         res.json(response.recordset);
     },
+    
     async deletemedico(req, res) {//eliminar medico
         const { dni } = req.body;
         const codrolUser = req.user.codrol;
@@ -329,6 +332,7 @@ module.exports = {
         const response = await pool.query(`pa_delMedico '${codrolUser}','${dni}'`);
         res.json(response.recordset);
     },
+    
     /*************Cliente***************/
     async postcliente(req, res) {//agregar cliente
         const { docide, NumDoc, razsoc, actividad_economica, Direccion, contacto, emailcon, celular, telefono, emailmedocu, forpag_id, cadcermed, incfirmmedexa, Incfirpacexa, Inchuepacexa, Incfordatper, incdecjur, Incfirhueforadi, creusucatocu, Encorvctocert, envcorusuexi, notinfmed_medocu, notinfmedpac, opc, piccli } = req.body;

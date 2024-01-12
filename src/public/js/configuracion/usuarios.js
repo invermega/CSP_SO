@@ -289,11 +289,13 @@ document.getElementById("medicomodal").addEventListener("keyup", function (event
 function getmedico(parametro) {
     mostrarDiv('cargamedico');
     ocultarDiv('tablamedicomodal');
+    let parametro1=1;
     $.ajax({
         url: '/listarmedicos',
         method: 'GET',
         data: {
             parametro: parametro,
+            parametro1 : parametro1,
         },
         success: function (medicos) {
             ocultarDiv('cargamedico');
@@ -309,12 +311,13 @@ function getmedico(parametro) {
             } else {
                 medicos.forEach(medico => {
                     tbodymed.append(`
-                    <tr>             
-                    <td>${medico.medapmn}</td>
-                    <td>${medico.nundoc}</td>
+                    <tr>
                     <td>
                     <button onclick="getmedicom('${medico.med_id}','${medico.medapmn}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>                    
                     </td>
+                    <td>${medico.medapmn}</td>
+                    <td>${medico.nundoc}</td>
+                    
                   </tr>
                 `);
                 });

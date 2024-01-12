@@ -18,9 +18,10 @@
             <div class="row mt-2">
                 <div class="col-md-12 input-group input-group-sm">
                     <label class="input-group-text" for="aptitud_espalda">Aptitud de Espalda</label>
-                    <input type="text" class="form-control form-control-sm" value="" id="aptitud_espalda" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '');"
-                        placeholder="Ingrese el valor" required>
-                    <label class="input-group-text"  for="aptitud_espalda">
+                    <input type="text" class="form-control form-control-sm" value="" id="aptitud_espalda"
+                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '');" placeholder="Ingrese el valor"
+                        required>
+                    <label class="input-group-text" for="aptitud_espalda">
                         <i class="fa-solid fa-child"></i></label>
                 </div>
             </div>
@@ -69,8 +70,9 @@
                         }
                     </style>
                     <table class="text-center align-middle layout
-                    records_list table table-sm table-bordered letra animate__animated animate__fadeIn" style="border: revert-layer;" id="tablaFlexFuerza">
-                        <thead class="align-middle sticky-top" >
+                    records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                        style="border: revert-layer;" id="tablaFlexFuerza">
+                        <thead class="align-middle sticky-top">
                             <th style="width: 120px !important;">Flexibilidad / Fuerza</th>
                             <th>Exelente</th>
                             <th>Promedio</th>
@@ -124,7 +126,7 @@
                                 </td>
                                 <td>
                                     <span><strong><input type="text" id="abdomen" value="0" class="text-center valores"
-                                            disabled></strong></span>
+                                                disabled></strong></span>
                                 </td>
                                 <td rowspan="1" class="h-100 textareacont">
                                     <textarea class="form-control" rows="4" placeholder="Observaciones"
@@ -175,7 +177,7 @@
                                 </td>
                                 <td>
                                     <span><strong><input type="text" id="cadera" value="0" class="text-center valores"
-                                            disabled></strong></span>
+                                                disabled></strong></span>
                                 </td>
                                 <td rowspan="1" class="h-100 textareacont">
                                     <textarea class="form-control" rows="4" placeholder="Observaciones"
@@ -226,7 +228,7 @@
                                 </td>
                                 <td>
                                     <span><strong><input type="text" id="muslo" value="0" class="text-center valores"
-                                            disabled></strong></span>
+                                                disabled></strong></span>
                                 </td>
                                 <td rowspan="1" class="h-100 textareacont">
                                     <textarea class="form-control" rows="4" placeholder="Observaciones"
@@ -279,8 +281,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <span><strong><input type="text" id="adlateral" value="0" class="text-center valores"
-                                            disabled></strong></span>
+                                    <span><strong><input type="text" id="adlateral" value="0"
+                                                class="text-center valores" disabled></strong></span>
                                 </td>
                                 <td rowspan="1" class="h-100 textareacont">
                                     <textarea class="form-control" rows="4" placeholder="Observaciones"
@@ -292,14 +294,24 @@
                                         for="totalFlexFuerza"><strong>Total</strong></label></td>
                                 <td>
                                     <span><input type="text" id="totalFlexFuerza" name="totalFlexFuerza" value="0"
-                                            style="border: 0px;width: 40px;" class="text-center valores" disabled></span>
+                                            style="border: 0px;width: 40px;" class="text-center valores"
+                                            disabled></span>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="table-responsive">
-                    <table class="table text-center align-middle records_list  table-sm table-bordered letra animate__animated animate__fadeIn" id="tablaRangosArt">
+                    <style>
+                        th:first-child,
+                        td:first-child {
+                            width: 100px;
+                            /* ajusta el valor según tus necesidades */
+                        }
+                    </style>
+                    <table
+                        class="table text-center align-middle records_list  table-sm table-bordered letra animate__animated animate__fadeIn"
+                        id="tablaRangosArt">
                         <thead class="align-middle sticky-top">
                             <tr class="align-middle">
                                 <th rowspan="2">Rangos articulares</th>
@@ -307,11 +319,11 @@
                                 <th rowspan="2">Limitado</th>
                                 <th rowspan="2">Muy Limitado</th>
                                 <th rowspan="2" colspan="1">Puntos</th>
-                                <th colspan="2">Dolor sobre resistencia</th>
+                                <th colspan="2" style="width: 175px !important;">Dolor sobre resistencia</th>
                             </tr>
                             <tr>
-                                <th><span>SI</span></th>
-                                <th><span>NO</span></th>
+                                <th style="max-width: 106px !important;"><span>SI</span></th>
+                                <th style="max-width: 106px !important;"><span>NO</span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -356,7 +368,8 @@
                                     <input type="radio" value="SI" class="form-check-input position"
                                         name="cmbabduccionh" id="cmbabduccionhS">
                                 </td>
-                                <td><label for="cmbabduccionhN">NO </label><br>
+                                <td>
+                                    <label for="cmbabduccionhN">NO </label><br>
                                     <input type="radio" value="NO" class="form-check-input position position"
                                         name="cmbabduccionh" id="cmbabduccionhN">
                                 </td>

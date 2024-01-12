@@ -1,7 +1,7 @@
-
 (function poblarcampos() {
     let cita_id = document.getElementById('id').value;
     let soexa = document.getElementById('soexa').value;
+    console.log(soexa);
     let nuncom = document.getElementById('nuncom');
     let doc_adic_id = document.getElementById('doc_adic_id');
 

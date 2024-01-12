@@ -12,7 +12,7 @@ router.get('/cmbexamen', isLoggedIn, controllerHI.getcmbexamen);
 
 /*****************Menú examenes genéricos*****************/
 router.get('/pacienteexamen/:id/', isLoggedIn, controllerHI.getpacienteexamen);
-router.get('/arbolpruebas/:id/:opcion', isLoggedIn, controllerHI.getarbolpruebas);
+router.get('/arbolpruebas/:id', isLoggedIn, controllerHI.getarbolpruebas);
 /*********************************************************/
 
 /*****************CIE 1O*****************/
@@ -26,7 +26,7 @@ router.delete('/eliminardocumento', isLoggedIn, controllerHI.deldocumento);
 /************************************************/
 
 /*************Menú de examenes y pruebas*************/
-router.get('/menuexamenes/:soexa/:id', isLoggedIn, controllerrender.rendermenuexamenes);
+router.get('/menuexamenes/:id', isLoggedIn, controllerrender.rendermenuexamenes);
 /************************************************/
 
 /*****************Pruebas*****************/
@@ -35,5 +35,49 @@ router.post('/pbsignosvitales', isLoggedIn, controllerHI.postsignosvitales);
 router.get('/resultsignosvitales', isLoggedIn, controllerHI.getresultsignosvitales);
 
 router.get('/pblaboratorio', isLoggedIn, controllerrender.renderlaboratorioprueba); 
+router.get('/pruebascards', isLoggedIn, controllerHI.getpruebascards); 
+router.get('/parametros', isLoggedIn, controllerHI.getparametros); 
+router.post('/pblaboratorio', isLoggedIn, controllerHI.postlaboratorio);
+router.get('/resultlaboratorio', isLoggedIn, controllerHI.getresultlaboratorio);
+/****************Espirometria*****************/
+router.get('/pbespirometria', isLoggedIn, controllerrender.renderespirometriaprueba);
+router.get('/resultespirometria', isLoggedIn, controllerHI.getresultespirometria);
+router.get('/parametrosespiro', isLoggedIn, controllerHI.getparametrosespiro);
+router.post('/pbespirometria', isLoggedIn, controllerHI.postespirometria);
+/**********************************************/
+/****************Cuestionario Espirometria*****************/
+router.get('/pbcuestionarioespirometria', isLoggedIn, controllerrender.rendercuestionarioespirometriaprueba);
+router.get('/resultcuestionarioespirometria', isLoggedIn, controllerHI.getresultcuestionarioespirometria);
+router.post('/pbcuestionarioespiromeria', isLoggedIn, controllerHI.postcuestionarioespiromeria);
+/*********************************************/
+/****************Psicologia*****************/
+router.get('/pbpsicologia', isLoggedIn, controllerrender.renderpsicologiaprueba);
+router.get('/resultpsicologia', isLoggedIn, controllerHI.getresultpsicologia);
+/*********************************************/
+/****************Ficha medico ocupacional 312*****************/
+router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfichamedicoocupacional312prueba);
+router.post('/pbfichamedicoocupacional312', isLoggedIn, controllerHI.postfichamedicoocupacional312);
+router.get('/resultfichamedicoocupacional312', isLoggedIn, controllerHI.getresultfichamedicoocupacional312);
+router.get('/datosPacienteFicha312', isLoggedIn, controllerHI.getdatosPacienteFicha312);
+
+
+/************************************************/
+/*****************Ficha Musculo Esqueletica*****************/
+router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueleticaprueba);
+router.post('/pbfichamusculoesqueletica', isLoggedIn, controllerHI.postfichamusculoesqueletica);
+router.get('/resultfichamusculoesqueletica', isLoggedIn, controllerHI.getresultfichamusculoesqueletica);
+/**************** Audiometria *********************/
+router.get('/pbaudiometria', isLoggedIn, controllerrender.renderaudiometriaprueba);
+router.post('/pbaudiometria', isLoggedIn, controllerHI.postaudiometria);
+router.get('/equipos', isLoggedIn, controllerHI.getequipos);
+router.get('/resultaudiometria', isLoggedIn, controllerHI.getresultaudiometria);
+/***************************************************/
+/**************** Diagnostico imagen *********************/
+router.get('/pbrayosx', isLoggedIn, controllerrender.renderrayosxprueba);
+router.get('/rayosxparametros', isLoggedIn, controllerHI.getresultparametrosrayosx);
+router.get('/resultrayosx', isLoggedIn, controllerHI.getresultresultrayosx);
+router.post('/pbrayosx', isLoggedIn, controllerHI.postrayosx);
+
+/***************************************************/
 
 module.exports = router;

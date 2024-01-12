@@ -42,9 +42,9 @@ module.exports = {
         permisos(parametro, 'historiaclinica/pacientescitados', req, res);
     },
     async rendermenuexamenes(req, res) {
-        const { soexa, id } = req.params;
-        console.log(soexa, id);
-        res.render('historiaclinica/menuexamenes/menuexamenes', { id, soexa, layout: false });
+        const { id } = req.params;
+        console.log(id);
+        res.render('historiaclinica/menuexamenes/menuexamenes', { id, layout: false });
     },
     async rendersignosvitalesprueba(req, res) {
         const parametro = "SG";
@@ -54,6 +54,35 @@ module.exports = {
         const parametro = "LB";
         permisosprueba(parametro, 'historiaclinica/pruebas/pblaboratorio', req, res);
     },
+    async renderespirometriaprueba(req, res) {
+        const parametro = "ES";
+        permisos(parametro,'historiaclinica/pruebas/pbespirometria', req, res,0)
+    },
+    async rendercuestionarioespirometriaprueba(req, res) {
+        const parametro = "CE";
+        permisos(parametro,'historiaclinica/pruebas/pbcuestionarioespirometria', req, res,0)
+    },
+    async renderpsicologiaprueba(req, res) {
+        const parametro = "TP";
+        permisos(parametro,'historiaclinica/pruebas/pbpsicologia', req, res,0)
+    },
+    async renderfichamusculoesqueleticaprueba(req, res) {
+        const parametro = "ME";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamusculoesqueletica', req, res);
+    },
+    async renderfichamedicoocupacional312prueba(req, res) {
+        const parametro = "MO";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbfichamedicoocupacional312', req, res);
+    },
+    async renderaudiometriaprueba(req, res) {
+        const parametro = "AD";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbaudiometria', req, res);
+    },
+    async renderrayosxprueba(req, res) {
+        const parametro = "IM";
+        permisosprueba(parametro, 'historiaclinica/pruebas/pbrayosx', req, res);
+    },
+    //entidades
     async renderprotocolo(req, res) {
         const parametro = "PT";
         permisos(parametro, 'entidades/protocolo', req, res);
@@ -123,6 +152,12 @@ module.exports = {
     async renderexamencreate(req, res) {
         const parametro = "EX";
         permisos(parametro, 'entidades/examenCreate', req, res, 0)
+    },
+
+    /*Descargas*/
+    async renderinformes(req, res) {
+        const parametro = "IN";
+        permisos(parametro, 'descargas/informes', req, res)
     },
 
 };

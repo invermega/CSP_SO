@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap">
+    <style>
+        @page {
+            size: A4;
+            /* Puedes usar otros tamaños como 'letter', 'legal', etc. */
+            margin: 1cm;
+            /* Márgenes de la página */
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid;
+        }
+
+        .border {
+            border: 1px solid;
+        }
+
+        .no-border-bottom {
+            border-bottom: none;
+        }
+
+        .sin-bordes>thead,
+        .sin-bordes>tbody,
+        .sin-bordes>tfoot,
+        .sin-bordes>thead>tr,
+        .sin-bordes>tbody>tr,
+        .sin-bordes>tfoot>tr,
+        .sin-bordes>thead>tr>th,
+        .sin-bordes>thead>tr>td,
+        .sin-bordes>tbody>tr>td,
+        .sin-bordes>tfoot>tr>td {
+            border: none;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        footer {
+            padding: 10px;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: avoid;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group;
+
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table class="sin-bordes">
+            <thead class="thead">
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h1 class="fw-bold" style="font-size: 16px;">FICHA MÚSCULO ESQUELÉTICA
+                                </h1>
+                            </div>
+                            <div class="col-md-6 text-star mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 1"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                            <div class="col-md-6 text-end mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 2"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="sin-bordes">
+                            <tbody style="font-size: 10px;">
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">APELLIDOS Y NOMBRES DEL TRABAJADOR</td>
+                                    <td class="p-0 ps-1" colspan="3"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="width: 27%;">EMPRESA</td>
+                                    <td class="p-0 ps-1" style="width: 21%;"></td>
+                                    <td class="p-0 ps-1 fw-bold" style="width: 21%;">FECHA</td>
+                                    <td class="p-0 ps-1" style="width: 21%;"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">PUESTO DE TRABAJO</td>
+                                    <td class="p-0 ps-1"></td>
+                                    <td class="p-0 ps-1 fw-bold">TIEMPO EN EL TRABAJO</td>
+                                    <td class="p-0 ps-1"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </thead>
+            <tbody style="font-size: 10px;">
+                <tr>
+                    <td>
+                        <table>
+                            <tbody>
+                                <tr class="text-center fw-bold" style=" background-color: gainsboro;">
+                                    <td class="p-0 ps-1" style="width: 18%;">Flexibilidad / Fuerza</td>
+                                    <td class="p-0 ps-1" style="width: 14%;">Excelente : 1</td>
+                                    <td class="p-0 ps-1" style="width: 14%;">Promedio : 2</td>
+                                    <td class="p-0 ps-1" style="width: 14%;">Regular : 3</td>
+                                    <td class="p-0 ps-1" style="width: 14%;">Pobre : 4</td>
+                                    <td class="p-0 ps-1" style="width: 5%;">Ptos</td>
+                                    <td class="p-0 ps-1" style="width: 21%;">Observaciones</td>
+                                </tr>
+                                <tr class="text-center" style="height: 60px;">
+                                    <td class="p-0 fw-bold">ABDOMEN</td>
+                                    <td class="p-0"><img style="height: 55px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abdomen_excelente.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 55px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abdomen_promedio.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 50px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abdomen_regular.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abdomen_pobre.webp" alt=""></td>
+                                    <td class="p-0"></td>
+                                    <td class="p-0 ps-1" rowspan="5"></td>
+                                </tr>
+                                <tr class="text-center" style="height: 60px;">
+                                    <td class="p-0 fw-bold">CADERA</td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/cadera_excelente.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/cadera_promedio.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/cadera_regular.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/cadera_pobre.webp" alt=""></td>
+                                    <td class="p-0"></td>
+                                </tr>
+                                <tr class="text-center" style="height: 60px;">
+                                    <td class="p-0 fw-bold" >MUSLO</td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/muslo_excelente.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/muslo_promedio.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/muslo_regular.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/muslo_pobre.webp" alt=""></td>
+                                    <td class="p-0"></td>
+                                </tr>
+                                <tr class="text-center" style="height: 60px;">
+                                    <td class="p-0 fw-bold">ABDOMEN LATERAL</td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abdomen_lateral_excelente.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abdomen_lateral_promedio.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abdomen_lateral_regular.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abdomen_lateral_pobre.webp" alt=""></td>
+                                    <td class="p-0"></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 fw-bold text-end pe-1" colspan="5">TOTAL</td>
+                                    <td class="p-0"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tbody>
+                                <tr class="text-center fw-bold" style=" background-color: gainsboro;">
+                                    <td class="p-0 ps-1" style="width: 25%;">RANGOS ARTICULARES</td>
+                                    <td class="p-0 ps-1" style="width: 18%;">Optimo : 1</td>
+                                    <td class="p-0 ps-1" style="width: 18%;">Limitado : 2</td>
+                                    <td class="p-0 ps-1" style="width: 18%;">Muy Limitado : 3</td> 
+                                    <td class="p-0 ps-1" style="width: 5%;">Ptos</td>
+                                    <td class="p-0 ps-1" style="width: 16%;"><p class="m-0 p-0">Dolor contra la resistencia</p><p class="m-0 p-0">SI / NO</p></td>
+                                </tr>
+                                <tr class="text-center" style="height: 60px;">
+                                    <td class="p-0 fw-bold">Abducción de hombro (Normal 0° - 180°) </td>
+                                    <td class="p-0"><img style="height: 45px; width: 60px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abd_homb_nor_op.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abd_homb_nor_lim.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 45px; width: 90px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abd_homb_nor_mlim.webp" alt=""></td>
+                                    <td class="p-0"></td>
+                                    <td class="p-0 ps-1" rowspan="5"></td>
+                                </tr>
+                                <tr class="text-center" style="height: 60px;">
+                                    <td class="p-0 fw-bold">Aducción de hombro ( 0° - 80°)</td>
+                                    <td class="p-0"><img style="height: 50px; width: 50px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abd_hom_op.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 50px; width: 50px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abd_homb_lim.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 50px; width: 50px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/abd_homb_mlim.webp" alt=""></td>
+                                    <td class="p-0"></td>
+                                </tr>
+                                <tr class="text-center" style="height: 60px;">
+                                    <td class="p-0 fw-bold" >Rotación externa ( 0° - 90°)</td>
+                                    <td class="p-0"><img style="height: 55px; width: 50px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/rot_ext_op.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 55px; width: 50px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/rot_ext_lim.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 55px; width: 50px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/rot_ext_mlim.webp" alt=""></td>
+                                    <td class="p-0"></td>
+                                </tr>
+                                <tr class="text-center" style="height: 60px;">
+                                    <td class="p-0 fw-bold" >Rotación interna de hombro</td>
+                                    <td class="p-0"><img style="height: 50px; width: 50px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/rot_ext_homb_op.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 50px; width: 50px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/rot_ext_homb_lim.webp" alt=""></td>
+                                    <td class="p-0"><img style="height: 50px; width: 50px;" src="https://grupo.clinicasanpedro.com/src/public/img/fichas/mus-esq/rot_ext_homb_mlim.webp" alt=""></td>
+                                    <td class="p-0"></td>
+                                </tr>
+                                <tr class="fw-bold" style=" background-color: gainsboro;">
+                                    <td class="p-0 fw-bold text-start ps-1" colspan="4">OBSERVACIONES</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1" colspan="6">
+                                        a
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table style="width: 100%; ">
+                            <tbody>
+                                <tr class="fw-bold text-center" style=" background-color: gainsboro;">
+                                    <td class="p-0" colspan="2">IMPRESIÓN DIAGNÓSTICO</td>
+                                </tr>
+                                <tr class="fw-bold text-center" style=" background-color: gainsboro;">
+                                    <td class="p-0 w-50">CIE10</td>
+                                    <td class="p-0 w-50">DESCRIPCIÓN</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table style="width: 100%; ">
+                            <tbody>
+                                <tr class="fw-bold text-center" style=" background-color: gainsboro;">
+                                    <td class="p-0 w-75">Recomendaciones y controles</td>
+                                    <td class="p-0 w-25">Control</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="records_list table-sm table-bordered" style="width: 100%;">
+                            <tbody style="font-size: 10px;">
+                                <tr>
+                                    <td class="p-0 fw-bold text-center"
+                                        style="width: 25%; background-color: gainsboro !important;">
+                                        Nombre del especialista</td>
+                                    <td class="p-0 fw-bold text-center"
+                                        style="width: 25%; background-color: gainsboro !important;">
+                                        Especialidad</td>
+                                    <td class="p-0 fw-bold text-center"
+                                        style="width: 25%; background-color: gainsboro !important;">
+                                        Colegiatura</td>
+
+                                    <td class="p-0 fw-bold text-center" rowspan="2" style="width: 25%;"></td>
+                                </tr>
+                                <tr style="height: 60px;">
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                    <td class="p-0 ps-1">parametro</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+</body>
+
+</html>

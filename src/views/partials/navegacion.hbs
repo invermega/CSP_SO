@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
 {{> head }}
+
 <body class="sb-nav-fixed">
     <div class="jm-loadingpage">
         <lottie-player src="/img/jsonimg/loadingintro.json" class="" background="transparent" speed="1"
             style="width: 650px; height: 650px;" loop autoplay></lottie-player>
     </div>
-    <div class="content">
+    <div class="">
         {{> menucabecera }}
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 {{> menulateral }}
             </div>
             <div id="layoutSidenav_content">
-                <main id="contenedoropciones" style="max-height: 930px; overflow-y: auto;">
-                    <div class="d-flex flex-column align-items-center" style="max-height: 100vh; overflow-y: auto;">
+                <main id="contenedoropciones" style="max-height: 90vh;">
+                    <div class="d-flex flex-column align-items-center" >
                         <div class="flex-grow-1 d-flex justify-content-center align-items-center">
                             <div class="container-fluid px-4">
                                 <div class="container">
@@ -23,12 +24,11 @@
                                             <div>
                                                 <h2 class="">Bienvenido</h2>
                                                 <h1 style="color:#0FA0A7"><strong
-                                                        style="color:#793B8E">CSP</strong><strong
+                                                        style="color:#793B8E">SO</strong><strong
                                                         style="color:#0FA0A7">Net</strong><span
                                                         style="font-weight: lighter;"></span></h1>
-                                                <p class="">Bienvenido a la intranet de la Clínica San Pedro, donde
-                                                    podrá
-                                                    visualizar los diferentes tipos
+                                                <p class="">Bienvenido al sistema de Salud Ocupacional de la Clínica San
+                                                    Pedro, donde podrá visualizar los diferentes tipos
                                                     de reportes y funcionalidades. Si tiene alguna pregunta, no dude en
                                                     ponerse en contacto con el área de
                                                     sistemas de la Clínica San Pedro.</p>
@@ -87,7 +87,9 @@
 
             mostraretiqueta("historiaclinica");
             mostraretiqueta("entidades");
+            mostraretiqueta("descargas");
             mostraretiqueta("configuracion");
+
 
             const contentContainer = $('#contenedoropciones');
             const loadingHtml = `

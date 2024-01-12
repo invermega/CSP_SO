@@ -1,4 +1,5 @@
 
+
 (function poblarcampos() {
     let cita_id = document.getElementById('id').value;
     let soexa = document.getElementById('soexa').value;
@@ -33,7 +34,7 @@
     let recomendacion3 = document.getElementById('recomendacion3');
     let control3 = document.getElementById('control3');
     $.ajax({
-        url: '/resultfichamusculoesqueletica',
+        url: '/resultsignosvitales',
         method: "GET",
         data: {
             cita_id: cita_id,
@@ -52,8 +53,8 @@
                 peab.value = result[0].pead;
                 temp.value = result[0].temp;
                 doc_adic_id.value = result[0].doc_adic_id;
-                if(result[0].doc_adic_id!='0'){
-                    resultcrearMiniatura(result[0].rutarch,result[0].nomarch);
+                if (result[0].doc_adic_id != '0') {
+                    resultcrearMiniatura(result[0].rutarch, result[0].nomarch);
                 }
                 if (result[0].diagnosticos) {
                     let diagnosticosArray = JSON.parse(result[0].diagnosticos);
