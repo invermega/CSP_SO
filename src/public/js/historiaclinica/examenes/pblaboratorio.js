@@ -1,5 +1,3 @@
-
-
 (function poblarcampos() {
     let cita_id = document.getElementById('id').value;
     let soexa = document.getElementById('soexa').value;
