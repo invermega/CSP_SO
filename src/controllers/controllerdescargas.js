@@ -151,6 +151,17 @@ module.exports = {
         const pruebas = await pool.query(`pa_SelDescargaExamenes '${id}'`);
         res.json(pruebas.recordset);
     },
+
+    async getpacientesdescargalist(req, res) {
+        let { fechainicio, fechafin, protocolo, empresa } = req.query;
+        const pool = await getConnection();
+        const pacientescitados = await pool.query(`pa_SelPacientesDescargaList '${fechainicio}','${fechafin}','${protocolo}','${empresa}'`);
+        if (pacientescitados.recordset === undefined) {
+            res.json([]);
+        } else {
+            res.json(pacientescitados.recordset);
+        }
+    }
 };
 
 // Función para combinar varios PDFs en uno solo
@@ -164,6 +175,8 @@ async function mergePDFs(pdfBuffers) {
     }
     return combinedPdfDoc.save();
 };
+
+
 
 
 

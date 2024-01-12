@@ -1,42 +1,42 @@
 $(document).ready(function () {
     fechahoy('fechainicio');
     fechahoy('fechafin');
-    getExamen();
 
 });
 
-function getPacientesCitados() {
-    mostrarDiv('carga');
-    ocultarTabla('mydatatable');
-    let fechainicio = $('#fechainicio').val();
-    let fechafin = $('#fechafin').val();
-    let paciente = $('#paciente').val();
-    let estado = $('#estado').val();
-    let examen = $('#examen').val();
-    $.ajax({
-        url: '/pacientescitadoslist',
-        method: "GET",
-        data: {
-            fechainicio: fechainicio,
-            fechafin: fechafin,
-            paciente: paciente,
-            estado: estado,
-            examen: examen
-        },
-        success: function (Pacientes) {
-            ocultarDiv('carga');
-            mostrarTabla('mydatatable');
-            let tablebody = $('tbody');
-            tablebody.html('');
-            if (Pacientes.length === 0) {
-                tablebody.append(`
+function getPacientesDescarga() {
+    var select = document.getElementById('codpro_id');
+    var selectedValue = select.value;
+    if (selectedValue !== '') {
+        mostrarDiv('carga');
+        ocultarTabla('mydatatable');
+        let fechainicio = $('#fechainicio').val();
+        let fechafin = $('#fechafin').val();
+        let protocolo = $('#codpro_id').val();
+        let empresa = $('#cli_id').val();
+        $.ajax({
+            url: '/pacientesdescargalist',
+            method: "GET",
+            data: {
+                fechainicio: fechainicio,
+                fechafin: fechafin,
+                protocolo: protocolo,
+                empresa: empresa
+            },
+            success: function (Pacientes) {
+                ocultarDiv('carga');
+                mostrarTabla('mydatatable');
+                let tablebody = $('#tbodypac');
+                tablebody.html('');
+                if (Pacientes.length === 0) {
+                    tablebody.append(`
               <tr>
                 <td colspan="8">No hay pacientes con los filtros proporcionados</td>
               </tr>
             `);
-            } else {
-                Pacientes.forEach(Paciente => {
-                    tablebody.append(`
+                } else {
+                    Pacientes.forEach(Paciente => {
+                        tablebody.append(`
             <tr data-id="${Paciente.ID}">
             <td class="align-middle"><input id="check_${Paciente.ID}" value="id_${Paciente.ID}" type="checkbox" class="mt-1" ></td>
                 <td style="vertical-align: middle;" class="text-left">${Paciente.FECHADECITA}</td>
@@ -47,35 +47,19 @@ function getPacientesCitados() {
                   <td style="vertical-align: middle;" class="text-left">${Paciente.HADM}</td>
                 </tr>
               `);
-                });
-                mensaje(Pacientes[0].ICONO, Pacientes[0].MENSAJE, 1500);
+                    });
+                    mensaje(Pacientes[0].ICONO, Pacientes[0].MENSAJE, 1500);
 
+                }
+            },
+            error: function () {
+                $('#error-message').text('Se produjo un error al cargar los pacientes citados.');
             }
-        },
-        error: function () {
-            $('#error-message').text('Se produjo un error al cargar los pacientes citados.');
-        }
-    });
-}
+        });
+    } else {
+        mensajecentral('error', 'Debes seleccionar un protocolo');
+    }
 
-function getExamen() {
-    $.ajax({
-        url: '/cmbexamen',
-        method: "GET",
-        success: function (Examenes) {
-            let combo = $('#examen');
-            combo.html('');
-            combo.append(`<option value="%">Todos</option>`);
-            Examenes.forEach(Examen => {
-                combo.append(`<option value="${Examen.desexa}">${Examen.desexa}</option>
-      `);
-            });
-            getPacientesCitados()
-        },
-        error: function (Examenes) {
-            alert('error');
-        }
-    });
 }
 
 function exportarinforme(iddatatableble) {
@@ -131,7 +115,7 @@ function cerrarModal() {
     $('#modalFormExamnes').modal('hide');
 }
 
-function imprimir(iddiv,iddatatableble) {
+function imprimir(iddiv, iddatatableble) {
     var table = document.getElementById(iddatatableble);
     var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
     var seleccionadoscitas = []; // Array para almacenar los elementos checkbox seleccionados
@@ -202,5 +186,101 @@ function imprimir(iddiv,iddatatableble) {
             $('#error-message').text('Se produjo un error al cargar los protocolos.');
         }
     });
-    
+
+}
+
+document.getElementById("empresamodal").addEventListener("keydown", function (event) {
+    if (event.key === 'Enter') {
+        var parametro = $('#empresamodal').val();
+        mostrarDiv('cargaEmpresa');
+        ocultarDiv('tableEmpresamodal');
+        $.ajax({
+            url: '/empresas',
+            method: 'GET',
+            data: {
+                empresa: parametro,
+            },
+            success: function (clientes) {
+                ocultarDiv('cargaEmpresa');
+                mostrarDiv('tableEmpresamodal');
+                const tbodycli = $('#bodyEmpresa');
+                tbodycli.empty();
+                if (clientes.length === 0) {
+                    tbodycli.append(`
+                    <tr class="text-center">
+                        <td colspan="3">No hay resultados disponibles</td>
+                    </tr>
+                `);
+                } else {
+                    clientes.forEach(cliente => {
+                        tbodycli.append(`
+            <tr>
+              <td>
+               <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>              
+              </td>
+              <td>${cliente.razsoc}</td>
+              <td>${cliente.NumDoc}</td>
+              
+            </tr>
+          `);
+                    });
+
+                }
+
+            },
+            error: function () {
+                alert('Error en la solicitud AJAX');
+            },
+        });
+    }
+});
+
+function getempresam(razsoc, cli_id) {
+    $('#razsoc').val(razsoc);
+    $('#cli_id').val(cli_id);
+    getprotocolo(cli_id);
+    var btncerrar = document.getElementById(`cerrarEmpresaModal`);
+    btncerrar.click();
+    event.preventDefault();
+}
+function getprotocolo(parametro) {
+    $.ajax({
+        url: '/listarprotocolo',
+        method: 'GET',
+        data: {
+            parametro: parametro,
+        },
+        success: function (lista) {
+            let codpro_id = $('#codpro_id');
+            codpro_id.html('');
+            if (lista.length === 0) {
+                let defaultOption = '<option value=""></option>';
+                codpro_id.append(defaultOption);
+            } else {
+                lista.forEach(item => {
+                    let option = `<option value="${item.id}">${item.descripcion}</option>`;
+                    codpro_id.append(option);
+                });
+                codpro_id.on('change', function () {
+                    let tercerColumna = obtenerTerceraColumna(lista, $(this).val());
+                    $('#tipexa_id').val(tercerColumna);
+                });
+                codpro_id.trigger('change');
+            }
+
+        },
+        error: function () {
+            alert('Error en la solicitud AJAX');
+        },
+    });
+}
+
+function obtenerTerceraColumna(lista, idSeleccionado) {
+    let tercerColumnaValor = '';
+    lista.forEach(item => {
+        if (item.id === idSeleccionado) {
+            tercerColumnaValor = item.desexa;
+        }
+    });
+    return tercerColumnaValor;
 }

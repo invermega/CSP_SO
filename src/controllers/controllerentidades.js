@@ -37,11 +37,9 @@ module.exports = {
     },
     async getempresas(req, res) {
         const empresa = req.query.empresa;
-        console.log(empresa);
         const codrol = req.user.codrol;
         const pool = await getConnection();
         const empresas = await pool.query(`sp_selEmpresa '${empresa}','${codrol}'`);
-        console.log(empresa,empresas);
         res.json(empresas.recordset);
     },
     async getTipoExamenes(req, res) {
