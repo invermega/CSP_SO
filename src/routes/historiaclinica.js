@@ -56,6 +56,11 @@ router.get('/resultpsicologia', isLoggedIn, controllerHI.getresultpsicologia);
 /*********************************************/
 /****************Ficha medico ocupacional 312*****************/
 router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfichamedicoocupacional312prueba);
+router.post('/pbfichamedicoocupacional312', isLoggedIn, controllerHI.postfichamedicoocupacional312);
+router.get('/resultfichamedicoocupacional312', isLoggedIn, controllerHI.getresultfichamedicoocupacional312);
+router.get('/datosPacienteFicha312', isLoggedIn, controllerHI.getdatosPacienteFicha312);
+
+
 /************************************************/
 /*****************Ficha Musculo Esqueletica*****************/
 router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueleticaprueba);

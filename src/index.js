@@ -12,7 +12,6 @@ const cookieParser = require('cookie-parser');
 const Sequelize = require('sequelize');
 const MSSQLStore = require('express-session-sequelize')(session.Store);
 
-
 const requerirAuth = function(req, res, next) {
   if (req.path.startsWith('/img/paciente')) {
     if (req.isAuthenticated()) {
@@ -99,19 +98,8 @@ app.use(require('./routes/configuracion'));
 app.use(require('./routes/historiaclinica'));
 app.use(require('./routes/entidades'));
 app.use(require('./routes/descargas'));
-/*
-const auth = (req, res, next) => {
-  const credentials = basicAuth(req);
 
-  if (!credentials || credentials.name !== 'usuario' || credentials.pass !== 'contraseña') {
-    res.set('WWW-Authenticate', 'Basic realm="example"');
-    return res.status(401).send('Authentication required.');
-  }
-
-  next();
-};
-app.use('/img/paciente', auth, express.static(path.join(__dirname, 'public', 'img', 'paciente')));*/
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(requerirAuth, express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), () => {
   console.log('Server on port', app.get('port'));

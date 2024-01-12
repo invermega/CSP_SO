@@ -9,6 +9,8 @@ router.get('/informes', isLoggedIn, controllerrender.renderinformes);
 router.get('/exportarinformeconsolidado', isLoggedIn, controllerDs.getexportarinformeconsolidado);
 router.get('/exportarinformedetalle', isLoggedIn, controllerDs.getexportarinformedetalle);
 router.get('/descargapruebas/:id', isLoggedIn, controllerDs.getdescargapruebas);
+router.get('/pacientesdescargalist', isLoggedIn, controllerDs.getpacientesdescargalist);
+
 
 
 
