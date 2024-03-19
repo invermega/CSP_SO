@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+        @page {
+            size: A4;
+            /* Puedes usar otros tamaños como 'letter', 'legal', etc. */
+            margin: 1cm;
+            /* Márgenes de la página */
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid;
+        }
+
+        .border {
+            border: 1px solid;
+        }
+
+        .no-border-bottom {
+            border-bottom: none;
+        }
+
+        .sin-bordes>thead,
+        .sin-bordes>tbody,
+        .sin-bordes>tfoot,
+        .sin-bordes>thead>tr,
+        .sin-bordes>tbody>tr,
+        .sin-bordes>tfoot>tr,
+        .sin-bordes>thead>tr>th,
+        .sin-bordes>thead>tr>td,
+        .sin-bordes>tbody>tr>td,
+        .sin-bordes>tfoot>tr>td {
+            border: none;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        footer {
+            padding: 10px;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: avoid;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group;
+
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table class="sin-bordes">
+            <thead class="thead">
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h1 class="fw-bold" style="font-size: 16px;">AUDIOMETRÍA
+                                </h1>
+                            </div>
+                            <div class="col-md-6 text-star mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 1"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                            <div class="col-md-6 text-end mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 2"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table class="records_list table-sm table-bordered" style="font-size: 8px; width: 100%; ">
+                            <thead class="fw-bold text-center" style="background-color: gainsboro">
+                                <th class="p-0" style="width: 6%;">DNI</th>
+                                <th class="p-0" style="width: 24%;">Nombres y Apellidos</th>
+                                <th class="p-0" style="width: 7%;">Fec. Nac.</th>
+                                <th class="p-0" style="width: 6%;">Edad</th>
+                                <th class="p-0" style="width: 7%;">Sexo</th>
+                                <th class="p-0" style="width: 17%;">Cargo</th>
+                                <th class="p-0" style="width: 21%;">Empresa</th>
+                                <th class="p-0" style="width: 12%;">Tipo Evaluación</th>
+                            </thead>
+                            <tbody>
+                                <td class="p-0 ps-1">{{numdoc}}</td>
+                                <td class="p-0 ps-1">{{appm_nom}}</td>
+                                <td class="p-0 ps-1">{{fecnac}}</td>
+                                <td class="p-0 ps-1">{{Edad}}</td>
+                                <td class="p-0 ps-1">{{des_sexo}}</td>
+                                <td class="p-0 ps-1">{{cargo_actual}}</td>
+                                <td class="p-0 ps-1">{{razsoc}}</td>
+                                <td class="p-0 ps-1">{{destipcon}}</td>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </thead>
+            <tbody style="font-size: 10px;">
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="fw-bold p-0 ps-1" style="width: 15%; background-color: gainsboro;">AUDIÓMETRO
+                                </td>
+                                <td class="fw-bold p-0 ps-1" style="width: 10%; background-color: gainsboro;">Marca</td>
+                                <td class="p-0 ps-1" style="width: 15%;">{{desequi}}</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 10%; background-color: gainsboro;">Modelo
+                                </td>
+                                <td class="p-0 ps-1" style="width: 25%;">{{modelo}}</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 15%; background-color: gainsboro;">Fecha
+                                    Calibra.</td>
+                                <td class="p-0 ps-1" style="width: 10%;">{{feccali}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tr class="fw-bold text-center">
+                                <td class="fw-bold p-0 ps-1" style="width: 14%;">Fecha de Atención</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 31%;">Ocupación</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 15%;">Años de trab.</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 15%;">Horas de expos.</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 10%;">Aprec. ruido</td>
+                                <td class="fw-bold p-0 ps-1" style="width: 8%;">Uso de protector auditivo</td>
+
+                            </tr>
+                            <tr>
+                                <td class="p-0 ps-1" style="text-align: center; font-size: xx-small;">{{fecaten}}</td>
+                                <td class="p-0 ps-1" style="font-size: xx-small;">{{cargo_actual}}</td>
+                                <td class="p-0 ps-1">{{fecing_empresa}}</td>
+                                <td class="p-0 ps-1" style="text-align: center; font-size: xx-small;">{{tiem_exp_hrs}}H
+                                </td>
+                                <td class="p-0 ps-1" style="font-size: xx-small;">{{apre_ruido}}</td>
+                                <td class="p-0 ps-1">{{uso_pro_uditivo}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table>
+                                    <tr class="fw-bold text-center" style="background-color: gainsboro">
+
+                                        <td class="p-0 ps-1">Antecedentes relacionados</td>
+                                        <td class="p-0 ps-1">Resultado</td>
+                                        {{#ante_relacionadoArray}}
+                                    <tr>
+                                        <td class="p-0 ps-1">{{texto}}</td>
+                                        <td class="p-0 ps-1">{{valor}}</td>
+                                    </tr>
+                                    {{/ante_relacionadoArray}}
+                </tr>
+        </table>
+        </div>
+        <div class="col-md-6">
+            <table>
+                <tr class="fw-bold text-center" style="background-color: gainsboro">
+                    <td class="p-0 ps-1">Síntomas actuales</td>
+                    <td class="p-0 ps-1">Resultado</td>
+                </tr>
+                {{#sintomas_actualesArray}}
+                <tr>
+                    <td class="p-0 ps-1">{{texto}}</td>
+                    <td class="p-0 ps-1">{{valor}}</td>
+                </tr>
+                {{/sintomas_actualesArray}}
+            </table>
+        </div>
+        </div>
+        </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="row">
+                    <div class="col-md-12 fw-bold text-center">
+                        <h2 style="font-size: 14px;">OTOSCOPÍA</h2>
+                    </div>
+                    <div class="col-md-6">
+                        <table>
+                            <tr class="fw-bold text-center" style="background-color: gainsboro">
+                                <td class="p-0 ps-1" colspan="3">Oído derecho</td>
+                            </tr>
+                            {{#otos_oido_derechoArray}}
+                            <tr>
+                                <td class="p-0 ps-1">{{texto}}</td>
+                                <td class="p-0 ps-1">{{valor}}</td>
+                                <td class="p-0 ps-1">{{obs}}</td>
+                            </tr>
+                            {{/otos_oido_derechoArray}}
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table>
+                            <tr class="fw-bold text-center" style="background-color: gainsboro">
+                                <td class="p-0 ps-1" colspan="3">Oído izquierdo</td>
+                            </tr>
+                            {{#otos_oido_izquierdoArray}}
+                            <tr>
+                                <td class="p-0 ps-1">{{texto}}</td>
+                                <td class="p-0 ps-1">{{valor}}</td>
+                                <td class="p-0 ps-1">{{obs}}</td>
+                            </tr>
+                            {{/otos_oido_izquierdoArray}}
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td class="p-0 ps-1" style="width: 15%; background-color: gainsboro;">Logoaudiometría
+                        </td>
+                        <td class="p-0 ps-1" style="width: 10%; background-color: gainsboro;">O.Derecho</td>
+                        <td class="p-0 ps-1" style="width: 15%;">{{logoaudiometriaDer}}</td>
+                        <td class="p-0 ps-1" style="width: 10%; background-color: gainsboro;">O.Izquierdo</td>
+                        <td class="p-0 ps-1" style="width: 10%;">{{logoaudiometriaIzq}}</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="row">
+                    <div class="col-md-6">
+                        <table id="val_oido_derecho">
+                            <tbody>
+                                <tr class="fw-bold text-center">
+                                    <td class="p-0 ps-1" colspan="10" rowspan="1">OÍDO DERECHO</td>
+                                </tr>
+                                <tr class="fw-bold">
+                                    <td class="p-0 ps-1"></td>
+                                    <td class="p-0 ps-1">125</td>
+                                    <td class="p-0 ps-1">250</td>
+                                    <td class="p-0 ps-1">500</td>
+                                    <td class="p-0 ps-1">1000</td>
+                                    <td class="p-0 ps-1">2000</td>
+                                    <td class="p-0 ps-1">3000</td>
+                                    <td class="p-0 ps-1">4000</td>
+                                    <td class="p-0 ps-1">6000</td>
+                                    <td class="p-0 ps-1">8000</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold"><span>V.A.</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_D_125">{{VA_D_125}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_D_250">{{VA_D_250}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_D_500">{{VA_D_500}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_D_1000">{{VA_D_1000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_D_2000">{{VA_D_2000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_D_3000">{{VA_D_3000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_D_4000">{{VA_D_4000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_D_6000">{{VA_D_6000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_D_8000">{{VA_D_8000}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold"><span>V.O.</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_D_125">{{VO_D_125}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_D_250">{{VO_D_250}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_D_500">{{VO_D_500}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_D_1000">{{VO_D_1000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_D_2000">{{VO_D_2000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_D_3000">{{VO_D_3000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_D_4000">{{VO_D_4000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_D_6000">{{VO_D_6000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_D_8000">{{VO_D_8000}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table id="val_oido_izquierdo">
+                            <tbody>
+                                <tr class="fw-bold text-center">
+                                    <td class="p-0 ps-1" colspan="10" rowspan="1">OÍDO IZQUIERDO</td>
+                                </tr>
+                                <tr class="fw-bold">
+                                    <td class="p-0 ps-1"></td>
+                                    <td class="p-0 ps-1">125</td>
+                                    <td class="p-0 ps-1">250</td>
+                                    <td class="p-0 ps-1">500</td>
+                                    <td class="p-0 ps-1">1000</td>
+                                    <td class="p-0 ps-1">2000</td>
+                                    <td class="p-0 ps-1">3000</td>
+                                    <td class="p-0 ps-1">4000</td>
+                                    <td class="p-0 ps-1">6000</td>
+                                    <td class="p-0 ps-1">8000</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold"><span>V.A.</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_E_125">{{VA_E_125}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_E_250">{{VA_E_250}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_E_500">{{VA_E_500}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_E_1000">{{VA_E_1000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_E_2000">{{VA_E_2000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_E_3000">{{VA_E_3000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_E_4000">{{VA_E_4000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_E_6000">{{VA_E_6000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VA_E_8000">{{VA_E_8000}}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold"><span>V.O.</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_E_125">{{VO_E_125}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_E_250">{{VO_E_250}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_E_500">{{VO_E_500}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_E_1000">{{VO_E_1000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_E_2000">{{VO_E_2000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_E_3000">{{VO_E_3000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_E_4000">{{VO_E_4000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_E_6000">{{VO_E_6000}}</span></td>
+                                    <td class="p-0 ps-1"><span id="VO_E_8000">{{VO_E_8000}}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="w-50">
+                                <canvas id="graf_OD" style="max-width: 95%; height: 300px;"></canvas>
+                            </td>
+                            <td class="w-50">
+                                <canvas id="graf_OI" style="max-width: 95%; height: 300px;"></canvas>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; ">
+                    <tbody>
+                        <tr class="fw-bold text-center">
+                            <td class="p-0" colspan="2">IMPRESIÓN DIAGNÓSTICO</td>
+                        </tr>
+                        <tr class="fw-bold text-center">
+                            <td class="p-0 w-50">CIE10</td>
+                            <td class="p-0 w-50">DESCRIPCIÓN</td>
+                        </tr>
+                        {{#cie10}}
+                        <tr>
+                            <td class="p-0 ps-1">{{diacod}}</td>
+                            <td class="p-0 ps-1">{{diades}}</td>
+                        </tr>
+                        {{/cie10}}
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table style="width: 100%; ">
+                    <tbody>
+                        <tr class="fw-bold text-center">
+                            <td class="p-0 w-75">Recomendaciones y controles</td>
+                            <td class="p-0 w-25">Control</td>
+                        </tr>
+                        {{#recomendaciones}}
+                        <tr>
+                            <td class="p-0 ps-1">{{desrec}}</td>
+                            <td class="p-0 ps-1">{{des_control}}</td>
+                        </tr>
+                        {{/recomendaciones}}
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="records_list table-sm table-bordered" style="width: 100%;">
+                    <tbody style="font-size: 10px;">
+                        <tr>
+                            <td class="p-0 fw-bold text-center" style="width: 25%; height: 20px; background-color: gainsboro !important;">
+                                Profesional que realiza la audiometría
+                            </td>
+                            <td class="p-0 text-center" rowspan="2" style="width: 25%; align-items: center;">
+                                <input type="hidden" value={{med_firma}} class="firma" id="firma1">
+                                <canvas class="canvas" id="canvas1" style="width: 95%; margin: 5px;"></canvas>
+                            </td>
+                            <td class="p-0 fw-bold text-center" style="width: 25%; background-color: gainsboro !important;">
+                                Nombre del especialista
+                            </td>
+                            <td class="p-0 text-center" rowspan="2" style="width: 25%;">
+                                <input type="hidden" value={{med_firma}} class="firma" id="firma2">       
+                                <canvas class="canvas" id="canvas2" style="width: 95%; margin: 5px;"></canvas>
+                            </td>
+                        </tr>
+                        <tr style="height: 60px;">
+                            <td class="p-0 ps-1">{{medapmn}}</td>
+                            <td class="p-0 ps-1">{{medapmn}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+        </table>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            cargarFirma("firma1", "canvas1");
+            cargarFirma("firma2", "canvas2");         
+            od();
+        });
+
+        function cargarFirma(inputId, canvasId) {
+            let imgb64 = "";
+            imgb64 = document.getElementById(inputId).value;
+            
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext("2d");
+
+            const imagen = new Image();
+            imagen.onload = function () {
+                // Calcular el ancho y alto del canvas en función de la relación de aspecto de la imagen
+                const aspectRatio = imagen.width / imagen.height;
+
+                // Establecer el ancho y alto del canvas para que coincida con las dimensiones de la imagen
+                canvas.width = canvas.clientWidth;
+                canvas.height = canvas.clientWidth / aspectRatio;
+
+                // Dibujar la imagen en el canvas
+                ctx.drawImage(imagen, 0, 0, canvas.width, canvas.height);
+            };
+
+            imagen.src = "data:image/jpeg;base64," + imgb64;
+        }
+
+
+        async function od() {
+            const ctx = document.getElementById('graf_OD').getContext('2d');
+            var valuesVA = [null,
+                parseInt(document.getElementById('VA_D_125').innerText, 10),
+                parseInt(document.getElementById('VA_D_250').innerText, 10),
+                parseInt(document.getElementById('VA_D_500').innerText, 10),
+                parseInt(document.getElementById('VA_D_1000').innerText, 10),
+                parseInt(document.getElementById('VA_D_2000').innerText, 10),
+                parseInt(document.getElementById('VA_D_3000').innerText, 10),
+                parseInt(document.getElementById('VA_D_4000').innerText, 10),
+                parseInt(document.getElementById('VA_D_6000').innerText, 10),
+                parseInt(document.getElementById('VA_D_8000').innerText, 10),
+                null];
+            var valuesVO = [null,
+                parseInt(document.getElementById('VO_D_125').innerText, 10),
+                parseInt(document.getElementById('VO_D_250').innerText, 10),
+                parseInt(document.getElementById('VO_D_500').innerText, 10),
+                parseInt(document.getElementById('VO_D_1000').innerText, 10),
+                parseInt(document.getElementById('VO_D_2000').innerText, 10),
+                parseInt(document.getElementById('VO_D_3000').innerText, 10),
+                parseInt(document.getElementById('VO_D_4000').innerText, 10),
+                parseInt(document.getElementById('VO_D_8000').innerText, 10),
+                , null];
+
+            const existingChart = ctx.chart;
+            if (existingChart) {
+                existingChart.destroy();
+            }
+            Chart.register(ChartDataLabels);
+
+            const maxDataValue = Math.max(...valuesVA, ...valuesVO);
+            const maxYValue = maxDataValue < 25 ? 30 : (Math.ceil(maxDataValue / 10) * 10) + 10;
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [null, '125', '250', '500', '1000', '2000', '3000', '4000', '6000', '8000', null],
+                    datasets: [{
+                        label: 'Oído derecho',
+                        data: valuesVO,
+                        borderWidth: 1,
+                        borderColor: 'red',
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                    }, {
+                        label: 'Nuevo conjunto de datos',
+                        data: valuesVA,
+                        borderWidth: 1,
+                        borderColor: 'red',
+                        pointRadius: 4,
+                        pointStyle: 'circle',
+                        pointBackgroundColor: 'white',
+                        pointBorderColor: 'red',
+                        fill: false,
+                    }]
+                },
+                options: {
+                    maintainAspectRatio: false, // Permite ajustar el tamaño del gráfico independientemente del contenedor
+                    responsive: true,
+                    scales: {
+                        x: {
+                            grid: {
+                                drawBorder: false,
+                            },
+                        },
+                        y: {
+                            min: -10,
+                            max: 120,
+                            beginAtZero: false,
+                            reverse: true,
+                            grid: {
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                stepSize: 10,
+                            }
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        datalabels: {
+                            display: false,
+
+                        },
+                    },
+                    elements: {
+                        line: {
+                            tension: 0.2
+                        }
+                    },
+                },
+                plugins: [{
+                    afterDraw: function (chart) {
+                        var ctx = chart.ctx;
+                        ctx.strokeStyle = 'gray';
+                        ctx.lineWidth = 2;
+                        ctx.setLineDash([]);
+                        const yValue = chart.scales.y.getPixelForValue(25);
+                        ctx.fillStyle = 'gray';
+                        ctx.fillRect(chart.scales.x.left, yValue - 2.5, chart.scales.x.width, 5);
+                        ctx.beginPath();
+                        ctx.moveTo(chart.scales.x.left, yValue);
+                        ctx.lineTo(chart.scales.x.right, yValue);
+                        ctx.stroke();
+                        ctx.closePath();
+
+                        chart.data.datasets.forEach(function (dataset, datasetIndex) {
+                            var meta = chart.getDatasetMeta(datasetIndex);
+                            if (!meta.hidden) {
+                                meta.data.forEach(function (element, index) {
+                                    if (datasetIndex === 0 && valuesVO[index] !== null) {
+                                        ctx.fillStyle = 'red';
+                                        ctx.font = '12px Arial';
+                                        ctx.textAlign = 'center';
+                                        ctx.textBaseline = 'middle';
+                                        ctx.fillText('<', element.x, element.y);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }]
+            });
+            ctx.chart = myChart;
+            oi();
+        };
+        async function oi() {
+            const ctx = document.getElementById('graf_OI').getContext('2d');
+
+            var valuesVA = [null,
+                document.getElementById('VA_E_125').innerText,
+                document.getElementById('VA_E_250').innerText,
+                document.getElementById('VA_E_500').innerText,
+                document.getElementById('VA_E_1000').innerText,
+                document.getElementById('VA_E_2000').innerText,
+                document.getElementById('VA_E_3000').innerText,
+                document.getElementById('VA_E_4000').innerText,
+                document.getElementById('VA_E_6000').innerText,
+                document.getElementById('VA_E_8000').innerText,
+                null
+            ];
+
+            var valuesVO = [null,
+                document.getElementById('VO_E_125').innerText,
+                document.getElementById('VO_E_250').innerText,
+                document.getElementById('VO_E_500').innerText,
+                document.getElementById('VO_E_1000').innerText,
+                document.getElementById('VO_E_2000').innerText,
+                document.getElementById('VO_E_3000').innerText,
+                document.getElementById('VO_E_4000').innerText,
+                document.getElementById('VO_E_6000').innerText,
+                document.getElementById('VO_E_8000').innerText,
+                null
+            ];
+            const existingChart = ctx.chart;
+            if (existingChart) {
+                existingChart.destroy();
+            }
+            Chart.register(ChartDataLabels);
+            const maxDataValue = Math.max(...valuesVA, ...valuesVO);
+            const maxYValue = maxDataValue < 25 ? 30 : (Math.ceil(maxDataValue / 10) * 10) + 10;
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: [null, '125', '250', '500', '1000', '2000', '3000', '4000', '6000', '8000', null],
+                    datasets: [{
+                        label: 'Oído derecho',
+                        data: valuesVO,
+                        borderWidth: 1,
+                        borderColor: 'blue',
+                        borderDash: [5, 5],
+                        pointRadius: 0,
+                    }, {
+                        label: 'Nuevo conjunto de datos',
+                        data: valuesVA,
+                        borderWidth: 1,
+                        borderColor: 'blue',
+                        pointRadius: 0,
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            grid: {
+                                drawBorder: false,
+                            },
+                        },
+                        y: {
+                            min: -10,
+                            max: 120,
+                            beginAtZero: false,
+                            reverse: true,
+                            grid: {
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                stepSize: 10,
+
+                            }
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        datalabels: {
+                            display: false
+                        }
+                    },
+                    elements: {
+                        line: {
+                            tension: 0.2
+                        }
+                    },
+                },
+                plugins: [{
+                    afterDraw: function (chart) {
+                        var ctx = chart.ctx;
+                        ctx.strokeStyle = 'gray';
+                        ctx.lineWidth = 2;
+                        ctx.setLineDash([]);
+                        const yValue = chart.scales.y.getPixelForValue(25);
+                        ctx.fillStyle = 'gray';
+                        ctx.fillRect(chart.scales.x.left, yValue - 2.5, chart.scales.x.width, 5);
+                        ctx.beginPath();
+                        ctx.moveTo(chart.scales.x.left, yValue);
+                        ctx.lineTo(chart.scales.x.right, yValue);
+                        ctx.stroke();
+                        ctx.closePath();
+
+                        chart.data.datasets.forEach(function (dataset, datasetIndex) {
+                            var meta = chart.getDatasetMeta(datasetIndex);
+                            if (!meta.hidden) {
+                                meta.data.forEach(function (element, index) {
+                                    if (datasetIndex === 0 && valuesVO[index] !== null) {
+                                        ctx.fillStyle = 'blue';
+                                        ctx.font = '12px Arial';
+                                        ctx.textAlign = 'center';
+                                        ctx.textBaseline = 'middle';
+                                        ctx.fillText('>', element.x, element.y);
+                                    }
+                                    if (datasetIndex === 1 && valuesVA[index] !== null) {
+                                        ctx.fillStyle = 'blue';
+                                        ctx.font = '12px Arial';
+                                        ctx.textAlign = 'center';
+                                        ctx.textBaseline = 'middle';
+                                        ctx.fillText('X', element.x, element.y);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }]
+            });
+            ctx.chart = myChart;
+
+
+            
+        };
+    </script>
+</body>
+
+</html>

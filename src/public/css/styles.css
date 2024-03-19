@@ -13437,6 +13437,3 @@ th {
   color: #999;
   cursor: not-allowed;
 }
-body {
-  overflow: hidden; /* Evita el desplazamiento vertical */
-}

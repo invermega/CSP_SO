@@ -15,19 +15,7 @@ $(document).ready(function () {
             //...
         }
     });
-    const id = document.getElementById("inputid").value;
-    if (id === "0") {
-        var fecha = new Date().toISOString().slice(0, 10);
-        document.getElementById("fecprocitaDate").value = fecha;
-        document.getElementById("fecing_cargo").value = fecha;
-        document.getElementById("fecing_area").value = fecha;
-        document.getElementById("fecing_empresa").value = fecha;
-        var horaActual = new Date();
-        var horaInicial = horaActual.getHours() + ':' + horaActual.getMinutes();
-        $('#fecprocitaTime').clockTimePicker('value', horaInicial);
-    } else {
-        getcitas(id);
-    }
+
 });
 function getcitas(id) {
     let fecini = '';//fecha inicio
@@ -52,38 +40,37 @@ function getcitas(id) {
             parametro6: parametro6
         },
         success: function (citas) {
-
             $('#cli_id').val(citas[0].cli_id);
             $('#razsoc').val(citas[0].razsoc);
-            getempresam(citas[0].razsoc, citas[0].cli_id);
-            $('#codpro_id').val(citas[0].codpro_id);
-            $('#tipexa_id').val(citas[0].tipexa_id);
-            $('#pachis').val(citas[0].pachis);
-            $('#appm_nom').val(citas[0].appm_nom);
-            $('#fecprocitaDate').val(citas[0].fecprocitaDate);
-            $('#fecprocitaTime').val(citas[0].fecprocitaTime);
-            $('#obscita').val(citas[0].obscita);
-            $('#cargo_actual').val(citas[0].cargo_actual);
-            $('#fecing_cargo').val(citas[0].fecing_cargo);
-            $('#area_actual').val(citas[0].area_actual);
-            $('#fecing_area').val(citas[0].fecing_area);
-            $('#fecing_empresa').val(citas[0].fecing_empresa);
-            $('#altilab_id').val(citas[0].altilab_id);
-            $('#superf_id').val(citas[0].superf_id);
-            $('#tipseg_id').val(citas[0].tipseg_id);
-            $('#valapt_id').val(citas[0].valapt_id);
-            $('#cond_vehiculo').val(citas[0].cond_vehiculo);
-            $('#ope_equipo_pesado').val(citas[0].ope_equipo_pesado);
-            $('#envresult_correo').val(citas[0].envresult_correo);
-            $('#com_info_medica').val(citas[0].com_info_medica);
-            $('#ent_result_fisico').val(citas[0].ent_result_fisico);
-            $('#usa_firma_formatos').val(citas[0].usa_firma_formatos);
-            $('#res_lugar_trabajo').val(citas[0].res_lugar_trabajo);
+            getempresam(citas[0].razsoc, citas[0].cli_id).then(function () {
+                $('#codpro_id').val(citas[0].codpro_id);
+                $('#tipexa_id').val(citas[0].tipexa_id);
+                $('#pachis').val(citas[0].pachis);
+                $('#appm_nom').val(citas[0].appm_nom);
+                $('#fecprocitaDate').val(citas[0].fecprocitaDate);
+                $('#fecprocitaTime').val(citas[0].fecprocitaTime);
+                $('#obscita').val(citas[0].obscita);
+                $('#cargo_actual').val(citas[0].cargo_actual);
+                $('#fecing_cargo').val(citas[0].fecing_cargo);
+                $('#area_actual').val(citas[0].area_actual);
+                $('#fecing_area').val(citas[0].fecing_area);
+                $('#fecing_empresa').val(citas[0].fecing_empresa);
+                $('#altilab_id').val(citas[0].altilab_id);
+                $('#superf_id').val(citas[0].superf_id);
+                $('#tipseg_id').val(citas[0].tipseg_id);
+                $('#valapt_id').val(citas[0].valapt_id);
+                $('#cond_vehiculo').val(citas[0].cond_vehiculo);
+                $('#ope_equipo_pesado').val(citas[0].ope_equipo_pesado);
+                $('#envresult_correo').val(citas[0].envresult_correo);
+                $('#com_info_medica').val(citas[0].com_info_medica);
+                $('#ent_result_fisico').val(citas[0].ent_result_fisico);
+                $('#usa_firma_formatos').val(citas[0].usa_firma_formatos);
+                $('#res_lugar_trabajo').val(citas[0].res_lugar_trabajo);
 
-            //$('#iduser').val(iduserM);
-            //'<tr data-id="${citas.id}"></tr>'
-
-            mensaje(citas[0].tipo, citas[0].response, 1500)
+                mensaje(citas[0].tipo, citas[0].response, 1500);
+            }).catch(function (error) {
+                console.error('Error en getempresam:', error);
+            });
         },
         error: function () {
             alert('Error en la solicitud AJAX');
@@ -104,10 +91,10 @@ function getPacienteCombos() {
             tipseg_id.html('');
             valapt_id.html('');
             lista.forEach(item => {
-                let option = `<option value="${item.id}">${item.descripcion}</option>`;
+                let option = `<option value="${item.id}">${item.descripcion}</option>`;//sirve para que liste todos los combo
                 if (item.tabla === 'altitud_labor') {
                     //altitud_labor
-                    altilab_id.append(option);
+                    altilab_id.append(option); //Hace que liste el combo
                 } else if (item.tabla === 'superficie') {
                     superf_id.append(option);
                 } else if (item.tabla === 'tipo_seguros') {
@@ -117,6 +104,23 @@ function getPacienteCombos() {
                 }
             });
             valapt_id.val("6");
+            console.log(valapt_id.val());
+
+
+            const id = document.getElementById("inputid").value;
+            console.log(id);
+            if (id === "0") {
+                var fecha = new Date().toISOString().slice(0, 10);
+                document.getElementById("fecprocitaDate").value = fecha;
+                document.getElementById("fecing_cargo").value = fecha;
+                document.getElementById("fecing_area").value = fecha;
+                document.getElementById("fecing_empresa").value = fecha;
+                var horaActual = new Date();
+                var horaInicial = horaActual.getHours() + ':' + horaActual.getMinutes();
+                $('#fecprocitaTime').clockTimePicker('value', horaInicial);
+            } else {
+                getcitas(id);
+            }
         },
         error: function () {
             alert('error');
@@ -125,7 +129,8 @@ function getPacienteCombos() {
 }
 document.getElementById("pacientemodal").addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-        var parametro = $('#pacientemodal').val();
+        let parametro = 0;
+        var parametro1 = $('#pacientemodal').val();
         mostrarDiv('carga');
         ocultarDiv('tablapacientemodal');
         $.ajax({
@@ -133,6 +138,7 @@ document.getElementById("pacientemodal").addEventListener("keydown", function (e
             method: 'GET',
             data: {
                 parametro: parametro,
+                parametro1: parametro1,
             },
             success: function (pacientes) {
                 ocultarDiv('carga');
@@ -167,7 +173,6 @@ document.getElementById("pacientemodal").addEventListener("keydown", function (e
 
     }
 });
-
 function getpacientem(btn) {
     event.preventDefault();
     var filaorigen = $(btn).closest("tr");
@@ -178,9 +183,10 @@ function getpacientem(btn) {
     var btncerrar = document.getElementById(`cerrarPacienteModal`);
     btncerrar.click();
     event.preventDefault();
+
 }
 document.getElementById("empresamodal").addEventListener("keydown", function (event) {
-    if (event.key ) {
+    if (event.key) {
         var parametro = $('#empresamodal').val();
         mostrarDiv('cargaEmpresa');
         ocultarDiv('tableEmpresamodal');
@@ -225,11 +231,9 @@ document.getElementById("empresamodal").addEventListener("keydown", function (ev
         });
     }
 });
-
 function getclientes(parametro) {
     mostrarDiv('cargaempresamodal');
     ocultarDiv('tableempresamodal');
-    console.log(parametro);
     $.ajax({
         url: '/empresas',
         method: 'GET',
@@ -270,42 +274,50 @@ function getclientes(parametro) {
     });
 }
 function getempresam(razsoc, cli_id) {
-    $('#razsoc').val(razsoc);
-    $('#cli_id').val(cli_id);
-    getprotocolo(cli_id);
-    var btncerrar = document.getElementById(`cerrarEmpresaModal`);
-    btncerrar.click();
-    event.preventDefault();
+    return new Promise(function (resolve, reject) {
+        $('#razsoc').val(razsoc);
+        $('#cli_id').val(cli_id);
+        getprotocolo(cli_id).then(function () {
+            var btncerrar = document.getElementById(`cerrarEmpresaModal`);
+            btncerrar.click();
+            resolve();
+        }).catch(function (error) {
+            reject(error);
+        });
+    });
 }
-function getprotocolo(parametro) {
-    $.ajax({
-        url: '/listarprotocolo',
-        method: 'GET',
-        data: {
-            parametro: parametro,
-        },
-        success: function (lista) {
-            let codpro_id = $('#codpro_id');
-            codpro_id.html('');
-            if (lista.length === 0) {
-                let defaultOption = '<option value=""></option>';
-                codpro_id.append(defaultOption);
-            } else {
-                lista.forEach(item => {
-                    let option = `<option value="${item.id}">${item.descripcion}</option>`;
-                    codpro_id.append(option);
-                });
-                codpro_id.on('change', function () {
-                    let tercerColumna = obtenerTerceraColumna(lista, $(this).val());
-                    $('#tipexa_id').val(tercerColumna);
-                });
-                codpro_id.trigger('change');
-            }
 
-        },
-        error: function () {
-            alert('Error en la solicitud AJAX');
-        },
+function getprotocolo(parametro) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: '/listarprotocolo',
+            method: 'GET',
+            data: {
+                parametro: parametro,
+            },
+            success: function (lista) {
+                let codpro_id = $('#codpro_id');
+                codpro_id.html('');
+                if (lista.length === 0) {
+                    let defaultOption = '<option value=""></option>';
+                    codpro_id.append(defaultOption);
+                } else {
+                    lista.forEach(item => {
+                        let option = `<option value="${item.id}">${item.descripcion}</option>`;
+                        codpro_id.append(option);
+                    });
+                    codpro_id.on('change', function () {
+                        let tercerColumna = obtenerTerceraColumna(lista, $(this).val());
+                        $('#tipexa_id').val(tercerColumna);
+                    });
+                    codpro_id.trigger('change');
+                }
+                resolve();
+            },
+            error: function (error) {
+                reject(error);
+            },
+        });
     });
 }
 function obtenerTerceraColumna(lista, idSeleccionado) {

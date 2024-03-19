@@ -11,53 +11,57 @@
                                         style="background-color: #793B8E; color: white; padding:0px" id="btnGrabar"
                                         onclick="Grabar()" data-toggle="modal" data-target="#modalFormProtocolo">
                                         <i class="fa-regular fa-floppy-disk" style="margin: 8px 12px;"></i>
+                                        <!--<button type="button" class="mr-2" data-toggle="modal"
+                                                                        data-target="#modalFormatos"
+                                                                        onclick="llenarmodalFormato('005')">prueba</button>-->
                         </div>
                 </div>
 
                 <div class="card-body " style="max-height: 70vh; overflow-y: auto; ">
                         <input type="text" id="nuncom" style="display: none;" value="0">
-                        <input type="text" id="codpru_id" style="display: none;">
+                        <input style="display: none;" type="text" id="soexa" value="020">
+                        <input type="text" id="codpru_id" style="display: none;" value="20">
                         <div class="table-responsive mt-3" id="fichageneral">
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablageneral" style="font-size: 11px; ">
                                         <tbody id="tbodygeneral">
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">N° de Ficha Médica</td>
-                                                        <td><span id="Nroficha">--</span></td>
+                                                        <td><span id="Nroficha"></span></td>
                                                         <td class="fw-bold">Fecha</td>
-                                                        <td colspan="6"><span id="fechaficha">--</span></td>
+                                                        <td colspan="6"><span id="fechaficha"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Tipo de Evaluación
                                                         </td>
                                                         <td class="fw-bold">Pre Ocupacional</td>
-                                                        <td><span id="preocuficha">--</span></td>
+                                                        <td><span id="preocuficha"></span></td>
                                                         <td class="fw-bold">Periódica</td>
-                                                        <td><span id="periodicaficha">--</span></td>
+                                                        <td><span id="periodicaficha"></span></td>
                                                         <td class="fw-bold">Retiro</td>
-                                                        <td><span id="retiroficha">--</span></td>
+                                                        <td><span id="retiroficha"></span></td>
                                                         <td class="fw-bold">Otros</td>
-                                                        <td><span id="otrosficha">--</span></td>
+                                                        <td><span id="otrosficha"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Lugar de Examen</td>
                                                         <td class="fw-bold">Departamento</td>
-                                                        <td colspan="2"><span id="depaficha">--</span></td>
+                                                        <td colspan="2"><span id="depaficha">LIMA</span></td>
                                                         <td class="fw-bold">Provincia</td>
-                                                        <td><span id="provficha">--</span></td>
+                                                        <td><span id="provficha">HUAURA</span></td>
                                                         <td class="fw-bold">Distrito</td>
-                                                        <td colspan="2"><span id="distficha">--</span></td>
+                                                        <td colspan="2"><span id="distficha">HUACHO</span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Puesto de Trabajo</td>
-                                                        <td colspan="2"><span id="puestraficha">--</span></td>
+                                                        <td colspan="2"><span id="puestraficha"></span></td>
                                                         <td class="fw-bold" colspan="2">Área de trabajo</td>
-                                                        <td colspan="4"><span id="artraficha">--</span></td>
+                                                        <td colspan="4"><span id="artraficha"></span></td>
                                                 </tr>
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tabladatosempresa" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
@@ -69,34 +73,34 @@
                                         <tbody id="tbodydatosempresa">
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Razón Social</td>
-                                                        <td colspan="6"><span id="razemp">--</span></td>
+                                                        <td colspan="6"><span id="razemp"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Actividad Económica</td>
-                                                        <td colspan="6"><span id="actecoemp">--</span></td>
+                                                        <td colspan="6"><span id="actecoemp"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Lugar de trabajo</td>
-                                                        <td colspan="6"><span id="trabjemp">--</span></td>
+                                                        <td colspan="6"><span id="trabjemp"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Lugar de Examen</td>
+                                                        <td class="fw-bold">Ubicación</td>
                                                         <td class="fw-bold">Departamento</td>
-                                                        <td><span id="depaemp">--</span></td>
+                                                        <td><span id="depaemp"></span></td>
                                                         <td class="fw-bold">Provincia</td>
-                                                        <td><span id="provemp">--</span></td>
+                                                        <td><span id="provemp"></span></td>
                                                         <td class="fw-bold">Distrito</td>
-                                                        <td><span id="distemp">--</span></td>
+                                                        <td><span id="distemp"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold" colspan="2">Puesto al que postula (solo pre
                                                                 ocupacional)</td>
-                                                        <td colspan="5"><span id="puespostemp">--</span></td>
+                                                        <td colspan="5"><span id="puespostemp"></span></td>
                                                 </tr>
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablafiliaciontrabajador" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
@@ -107,98 +111,98 @@
                                         <tbody id="tbodyfiliaciontrabajador">
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold" colspan="2">Nombre y Apellidos</td>
-                                                        <td colspan="6"><span id="nombapefiltra">--</span></td>
+                                                        <td colspan="6"><span id="nombapefiltra"></span></td>
                                                         <td class="text-center" rowspan="7" style="width: 100px;"><img
                                                                         src="/img/usuario/default.webp" alt=""></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold" colspan="2">Fecha de Nacimiento</td>
                                                         <td class="fw-bold">Día</td>
-                                                        <td><span id="diafiltra">--</span></td>
+                                                        <td><span id="diafiltra"></span></td>
                                                         <td class="fw-bold">Mes</td>
-                                                        <td><span id="mesfiltra">--</span></td>
+                                                        <td><span id="mesfiltra"></span></td>
                                                         <td class="fw-bold">Año</td>
-                                                        <td><span id="añofiltra">--</span></td>
+                                                        <td><span id="añofiltra"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold" colspan="2">Edad</td>
-                                                        <td><span id="edadfiltra">--</span></td>
-                                                        <td colspan="5"><span id="edadobsfiltra">--</span></td>
+                                                        <td><span id="edadfiltra"></span></td>
+                                                        <td colspan="5"><span id="edadobsfiltra"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td colspan="5">Documento de Identidad (DNI, carnet de
                                                                 extranjería, Pasaporte)</td>
                                                         <td colspan="2">DNI</td>
-                                                        <td><span id="dnifiltra">--</span></td>
+                                                        <td><span id="dnifiltra"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold" colspan="8">Domicilio Fiscal</td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold" colspan="2">Avenida/Calle/Jirón/Pasaje</td>
-                                                        <td colspan="6"><span id="dirfiltra">--</span></td>
+                                                        <td colspan="6"><span id="dirfiltra"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold" colspan="2">Número/Departamento/Interior
                                                         </td>
-                                                        <td colspan="6"><span id="numfiltra">--</span></td>
+                                                        <td colspan="6"><span id="numfiltra"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Distrito</td>
-                                                        <td colspan="2"><span id="distfiltra">--</span></td>
+                                                        <td colspan="2"><span id="distfiltra"></span></td>
                                                         <td class="fw-bold">Provincia</td>
-                                                        <td colspan="2"><span id="provfiltra">--</span></td>
+                                                        <td colspan="2"><span id="provfiltra"></span></td>
                                                         <td class="fw-bold">Departamento</td>
-                                                        <td colspan="2"><span id="depafiltra">--</span></td>
+                                                        <td colspan="2"><span id="depafiltra"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold" colspan="2">Residencia en el lugar de
                                                                 Trabajo</td>
                                                         <td class="fw-bold">Si</td>
-                                                        <td><span id="sifiltra">--</span></td>
+                                                        <td><span id="sifiltra"></span></td>
                                                         <td class="fw-bold">No</td>
-                                                        <td><span id="nofiltra">--</span></td>
+                                                        <td><span id="nofiltra"></span></td>
                                                         <td class="fw-bold" colspan="2">Tiempo de Residencia en el Lugar
                                                                 de Trabajo</td>
-                                                        <td><span id="trfiltra">--</span></td>
+                                                        <td><span id="trfiltra"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Essalud</td>
-                                                        <td><span id="essaludfiltra">--</span></td>
+                                                        <td><span id="essaludfiltra"></span></td>
                                                         <td class="fw-bold">EPS</td>
-                                                        <td><span id="epsfiltra">--</span></td>
+                                                        <td><span id="epsfiltra"></span></td>
                                                         <td class="fw-bold">Otro</td>
-                                                        <td colspan="4"><span id="otrofiltra">--</span></td>
+                                                        <td colspan="4"><span id="otrofiltra"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Email</td>
-                                                        <td colspan="3"><span id="mailfiltra">--</span></td>
+                                                        <td colspan="3"><span id="mailfiltra"></span></td>
                                                         <td class="fw-bold">Teléfono</td>
-                                                        <td><span id="telfiltra">--</span></td>
+                                                        <td><span id="telfiltra"></span></td>
                                                         <td class="fw-bold">Celular</td>
-                                                        <td colspan="3"><span id="celfiltra">--</span></td>
+                                                        <td colspan="3"><span id="celfiltra"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold" colspan="2">Estado Civil</td>
-                                                        <td colspan="3"><span id="escivfiltra">--</span></td>
+                                                        <td colspan="3"><span id="escivfiltra"></span></td>
                                                         <td class="fw-bold" colspan="2">Grado de instrucción</td>
-                                                        <td colspan="2"><span id="grinsfiltra">--</span></td>
+                                                        <td colspan="2"><span id="grinsfiltra"></span></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold" colspan="2">N° Total de Hijos vivos</td>
-                                                        <td colspan="3"><span id="hvfiltra">--</span></td>
+                                                        <td colspan="3"><span id="hvfiltra"></span></td>
                                                         <td class="fw-bold" colspan="2">N° de dependientes</td>
-                                                        <td colspan="2"><span id="depfiltra">--</span></td>
+                                                        <td colspan="2"><span id="depfiltra"></span></td>
                                                 </tr>
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablaantocupacionales" style="font-size: 11px;">
                                         <thead>
                                                 <tr class="text-start align-middle">
                                                         <th class="fw-bold" colspan="8">III.
-                                                                ANTEDECENTES OCUPACIONALES</th>
+                                                                ANTECEDENTES OCUPACIONALES</th>
                                                 </tr>
                                                 <tr class="text-center align-middle">
                                                         <th class="fw-bold align-middle" rowspan="2">Empresa</th>
@@ -221,17 +225,20 @@
                                         </thead>
                                         <tbody id="tbodyantocupacionales">
                                                 <tr class="text-start align-middle">
+                                                        <td style="display: none;">
+                                                                <input type="text" id="ord_so_antocu_id_1" value="1">
+                                                        </td>
                                                         <td><input style="height: 25px;" type="text" id="empantocu1"
                                                                         class="form-control"></td>
                                                         <td><input style="height: 25px;" type="text" id="areaantocu1"
                                                                         class="form-control"></td>
                                                         <td><input style="height: 25px;" type="text" id="ocupantocu1"
                                                                         class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="fechaantocu1"
+                                                        <td><input style="height: 25px;" type="date" id="inicioantocu1"
                                                                         class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="inicioantocu1"
+                                                        <td><input style="height: 25px;" type="date" id="finantocu1"
                                                                         class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="finantocu1"
+                                                        <td><input style="height: 25px;" type="text" id="tiempoocu1"
                                                                         class="form-control"></td>
                                                         <td><input style="height: 25px;" type="text" id="peliantocu1"
                                                                         class="form-control"></td>
@@ -239,17 +246,20 @@
                                                                         class="form-control"></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
+                                                        <td style="display: none;">
+                                                                <input type="text" id="ord_so_antocu_id_2" value="2">
+                                                        </td>
                                                         <td><input style="height: 25px;" type="text" id="empantocu2"
                                                                         class="form-control"></td>
                                                         <td><input style="height: 25px;" type="text" id="areaantocu2"
                                                                         class="form-control"></td>
                                                         <td><input style="height: 25px;" type="text" id="ocupantocu2"
                                                                         class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="fechaantocu2"
+                                                        <td><input style="height: 25px;" type="date" id="inicioantocu2"
                                                                         class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="inicioantocu2"
+                                                        <td><input style="height: 25px;" type="date" id="finantocu2"
                                                                         class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="finantocu2"
+                                                        <td><input style="height: 25px;" type="text" id="tiempoocu2"
                                                                         class="form-control"></td>
                                                         <td><input style="height: 25px;" type="text" id="peliantocu2"
                                                                         class="form-control"></td>
@@ -257,17 +267,20 @@
                                                                         class="form-control"></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
+                                                        <td style="display: none;">
+                                                                <input type="text" id="ord_so_antocu_id_3" value="3">
+                                                        </td>
                                                         <td><input style="height: 25px;" type="text" id="empantocu3"
                                                                         class="form-control"></td>
                                                         <td><input style="height: 25px;" type="text" id="areaantocu3"
                                                                         class="form-control"></td>
                                                         <td><input style="height: 25px;" type="text" id="ocupantocu3"
                                                                         class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="fechaantocu3"
+                                                        <td><input style="height: 25px;" type="date" id="inicioantocu3"
                                                                         class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="inicioantocu3"
+                                                        <td><input style="height: 25px;" type="date" id="finantocu3"
                                                                         class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="finantocu3"
+                                                        <td><input style="height: 25px;" type="text" id="tiempoocu3"
                                                                         class="form-control"></td>
                                                         <td><input style="height: 25px;" type="text" id="peliantocu3"
                                                                         class="form-control"></td>
@@ -277,7 +290,7 @@
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablaantpatoper" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
@@ -290,130 +303,247 @@
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">ALERGIAS</td>
                                                         <td colspan="8"><input style="height: 25px;" type="text"
-                                                                        id="alerantpato" class="form-control"></td>
+                                                                        id="alerantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">RAM</td>
                                                         <td colspan="8"><input style="height: 25px;" type="text"
-                                                                        id="ramantpato" class="form-control"></td>
+                                                                        id="ramantpato" class="form-control"
+                                                                        value="NIEGA">
+                                                        </td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Asma</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="asmaantpato" class="form-control"></td>
+                                                                        id="asmaantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                         <td class="fw-bold">HTA</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="htaantpato" class="form-control"></td>
+                                                                        id="htaantpato" class="form-control"
+                                                                        value="NIEGA">
+                                                        </td>
                                                         <td class="fw-bold">TBC</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="tbcantpato" class="form-control"></td>
+                                                                        id="tbcantpato" class="form-control"
+                                                                        value="NIEGA">
+                                                        </td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Diabetes</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="diabeantpato" class="form-control"></td>
+                                                                        id="diabeantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                         <td class="fw-bold">Bronquitis</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="bronqantpato" class="form-control"></td>
+                                                                        id="bronqantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                         <td class="fw-bold">Hepatitis</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="hepaantpato" class="form-control"></td>
+                                                                        id="hepaantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Neoplasia</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="neoantpato" class="form-control"></td>
+                                                                        id="neoantpato" class="form-control"
+                                                                        value="NIEGA">
+                                                        </td>
                                                         <td class="fw-bold">Convulsiones</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="convantpato" class="form-control"></td>
+                                                                        id="convantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                         <td class="fw-bold">ITS</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="itsantpato" class="form-control"></td>
+                                                                        id="itsantpato" class="form-control"
+                                                                        value="NIEGA">
+                                                        </td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Quemaduras</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="quemantpato" class="form-control"></td>
+                                                                        id="quemantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                         <td class="fw-bold">Intoxicaciones</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="intoxantpato" class="form-control"></td>
+                                                                        id="intoxantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                         <td class="fw-bold">Fiebre tifoidea</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="fitiantpato" class="form-control"></td>
+                                                                        id="fitiantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Cirugías</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="cirantpato" class="form-control"></td>
+                                                                        id="cirantpato" class="form-control"
+                                                                        value="NIEGA">
+                                                        </td>
                                                         <td class="fw-bold">Actividad Física</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="acfiantpato" class="form-control"></td>
+                                                                        id="acfiantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                         <td class="fw-bold">Patología renal</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="pareantpato" class="form-control"></td>
+                                                                        id="pareantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Neumonía</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="neuantpato" class="form-control"></td>
+                                                                        id="neuantpato" class="form-control"
+                                                                        value="NIEGA">
+                                                        </td>
                                                         <td class="fw-bold">Patologías de tiroides</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="patiantpato" class="form-control"></td>
+                                                                        id="patiantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                         <td class="fw-bold">Fracturas</td>
                                                         <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="fracantpato" class="form-control"></td>
+                                                                        id="fracantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
                                                         <td class="fw-bold">Otros</td>
                                                         <td colspan="8"><input style="height: 25px;" type="text"
-                                                                        id="otrosantpato" class="form-control"></td>
+                                                                        id="otrosantpato" class="form-control"
+                                                                        value="NIEGA"></td>
                                                 </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold" colspan="2">Hábitosnocivos</td>
-                                                        <td class="fw-bold" colspan="2">Tipo</td>
-                                                        <td class="fw-bold">Cantidad</td>
-                                                        <td class="fw-bold" colspan="4">Frecuencia</td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold" colspan="2">Alcohol</td>
-                                                        <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="altipoantpato" class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="alcantantpato"
-                                                                        class="form-control"></td>
-                                                        <td colspan="4"><input style="height: 25px;" type="text"
-                                                                        id="alfrecantpato" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold" colspan="2">Tabaco</td>
-                                                        <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="tatipoantpato" class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="tacantantpato"
-                                                                        class="form-control"></td>
-                                                        <td colspan="4"><input style="height: 25px;" type="text"
-                                                                        id="tafrecantpato" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold" colspan="2">Drogas</td>
-                                                        <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="drtipoantpato" class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="drcantantpato"
-                                                                        class="form-control"></td>
-                                                        <td colspan="4"><input style="height: 25px;" type="text"
-                                                                        id="drfrecantpato" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold" colspan="2">Medicamentos</td>
-                                                        <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="mdtipoantpato" class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="mdcantantpato"
-                                                                        class="form-control"></td>
-                                                        <td colspan="4"><input style="height: 25px;" type="text"
-                                                                        id="mdfrecantpato" class="form-control"></td>
+                                                <tr>
+                                                        <td colspan="8">
+                                                                <table style="width: 100%;" id="habitosnocivos">
+                                                                        <thead
+                                                                                style="background-color: white; color: black;">
+                                                                                <tr>
+                                                                                        <td class="fw-bold" colspan="2">
+                                                                                                Hábitos nocivos</td>
+                                                                                        <td class="fw-bold" colspan="2">
+                                                                                                Tipo
+                                                                                        </td>
+                                                                                        <td class="fw-bold">Cantidad
+                                                                                        </td>
+                                                                                        <td class="fw-bold" colspan="4">
+                                                                                                Frecuencia</td>
+                                                                                </tr>
+                                                                        </thead>
+                                                                        <tbody>
+
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold" colspan="2">
+                                                                                                Alcohol
+                                                                                                <input style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="habito1"
+                                                                                                        value="Alcohol">
+                                                                                        </td>
+                                                                                        <td colspan="2"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="altipoantpato"
+                                                                                                        class="form-control"
+                                                                                                        value="NIEGA">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="alcantantpato"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                        <td colspan="4"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="alfrecantpato"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold" colspan="2">
+                                                                                                Tabaco
+                                                                                                <input style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="habito2"
+                                                                                                        value="Tabaco">
+                                                                                        </td>
+                                                                                        <td colspan="2"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="tatipoantpato"
+                                                                                                        class="form-control"
+                                                                                                        value="NIEGA">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="tacantantpato"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                        <td colspan="4"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="tafrecantpato"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold" colspan="2">
+                                                                                                Drogas
+                                                                                                <input style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="habito3"
+                                                                                                        value="Drogas">
+                                                                                        </td>
+                                                                                        <td colspan="2"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="drtipoantpato"
+                                                                                                        class="form-control"
+                                                                                                        value="NIEGA">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="drcantantpato"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                        <td colspan="4"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="drfrecantpato"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold" colspan="2">
+                                                                                                Medicamentos
+                                                                                                <input style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="habito4"
+                                                                                                        value="Medicamentos">
+                                                                                        </td>
+                                                                                        <td colspan="2"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="mdtipoantpato"
+                                                                                                        class="form-control"
+                                                                                                        value="NIEGA">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="mdcantantpato"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                        <td colspan="4"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="mdfrecantpato"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                        </tbody>
+                                                                </table>
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablaantoatofam" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
@@ -440,10 +570,12 @@
                                                                         id="espantoatofam" class="form-control"></td>
                                                         <td class="fw-bold">Hijos Vivos</td>
                                                         <td><input style="height: 25px;" type="text" id="hvantoatofam"
+                                                                        oninput="limitarCaracteresNumericos(this, 2)"
                                                                         class="form-control"></td>
                                                         <td class="fw-bold">Hijos Fallecidos
                                                         </td>
                                                         <td><input style="height: 25px;" type="text" id="hfantoatofam"
+                                                                        oninput="limitarCaracteresNumericos(this, 2)"
                                                                         class="form-control"></td>
                                                 </tr>
                                                 <tr class="text-start align-middle">
@@ -456,38 +588,162 @@
                                                                 Absentismo: Enfermedades y Accidnetes (asociado a
                                                                 trabajo o no)</td>
                                                 </tr>
-                                                <tr class="text-center">
-                                                        <td class="fw-bold align-middle" rowspan="2" colspan="3">
-                                                                Enfermedad,
-                                                                Accidente</td>
-                                                        <td class="fw-bold align-middle" colspan="4">
-                                                                Asociado al trabajo</td>
-                                                        <td class="fw-bold align-middle" rowspan="2">Año
+                                                <tr>
+                                                        <td colspan="11">
+                                                                <table style="width: 100%;" id="absentismo">
+                                                                        <thead
+                                                                                style="background-color: white; color: black;">
+                                                                                <tr class="text-center">
+                                                                                        <td class="fw-bold align-middle"
+                                                                                                rowspan="2" colspan="3">
+                                                                                                Enfermedad,
+                                                                                                Accidente</td>
+                                                                                        <td class="fw-bold align-middle"
+                                                                                                colspan="4">
+                                                                                                Asociado al trabajo</td>
+                                                                                        <td class="fw-bold align-middle"
+                                                                                                rowspan="2">Año
+                                                                                        </td>
+                                                                                        <td class="fw-bold align-middle"
+                                                                                                rowspan="2" colspan="2">
+                                                                                                Días de
+                                                                                                descanso
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-center align-middle">
+                                                                                        <td class="fw-bold" colspan="2">
+                                                                                                SI</td>
+                                                                                        <td class="fw-bold" colspan="2">
+                                                                                                NIEGA</td>
+                                                                                </tr>
+                                                                        </thead>
+                                                                        <tbody id="tbodyEnfermeAcci">
+
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td style="display: none;">
+                                                                                                <input type="text"
+                                                                                                        id="ord1"
+                                                                                                        value="1">
+                                                                                        </td>
+                                                                                        <td colspan="3"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="enfantoatofam1"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                        <td colspan="2"
+                                                                                                class="text-center">
+                                                                                                <input style="height: 25px;"
+                                                                                                        type="radio"
+                                                                                                        id="siantoatofam1"
+                                                                                                        name="radio1">
+                                                                                        </td>
+                                                                                        <td colspan="2"
+                                                                                                class="text-center">
+                                                                                                <input style="height: 25px;"
+                                                                                                        type="radio"
+                                                                                                        id="noantoatofam1"
+                                                                                                        name="radio1"
+                                                                                                        checked>
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="añoantoatofam1"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                        <td colspan="2"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="desantoatofam1"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td style="display: none;">
+                                                                                                <input type="text"
+                                                                                                        id="ord2"
+                                                                                                        value="2">
+                                                                                        </td>
+                                                                                        <td colspan="3"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="enfantoatofam2"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                        <td colspan="2"
+                                                                                                class="text-center">
+                                                                                                <input style="height: 25px;"
+                                                                                                        type="radio"
+                                                                                                        id="siantoatofam2"
+                                                                                                        name="radio2">
+                                                                                        </td>
+                                                                                        <td colspan="2"
+                                                                                                class="text-center">
+                                                                                                <input style="height: 25px;"
+                                                                                                        type="radio"
+                                                                                                        id="noantoatofam2"
+                                                                                                        name="radio2"
+                                                                                                        checked>
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="añoantoatofam2"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                        <td colspan="2"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="desantoatofam2"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td style="display: none;">
+                                                                                                <input type="text"
+                                                                                                        id="ord3"
+                                                                                                        value="3">
+                                                                                        </td>
+                                                                                        <td colspan="3"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="enfantoatofam3"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                        <td colspan="2"
+                                                                                                class="text-center">
+                                                                                                <input style="height: 25px;"
+                                                                                                        type="radio"
+                                                                                                        id="siantoatofam3"
+                                                                                                        name="radio3">
+                                                                                        </td>
+                                                                                        <td colspan="2"
+                                                                                                class="text-center">
+                                                                                                <input style="height: 25px;"
+                                                                                                        type="radio"
+                                                                                                        id="noantoatofam3"
+                                                                                                        name="radio3"
+                                                                                                        checked>
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="añoantoatofam3"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                        <td colspan="2"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="desantoatofam3"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                        </tbody>
+                                                                </table>
                                                         </td>
-                                                        <td class="fw-bold align-middle" rowspan="2" colspan="2">Días de
-                                                                descanso
-                                                        </td>
-                                                </tr>
-                                                <tr class="text-center align-middle">
-                                                        <td class="fw-bold" colspan="2">SI</td>
-                                                        <td class="fw-bold" colspan="2">NO</td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td colspan="3"><input style="height: 25px;" type="text"
-                                                                        id="enfantoatofam" class="form-control"></td>
-                                                        <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="siantoatofam" class="form-control"></td>
-                                                        <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="noantoatofam" class="form-control"></td>
-                                                        <td><input style="height: 25px;" type="text" id="añoantoatofam"
-                                                                        class="form-control"></td>
-                                                        <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="desantoatofam" class="form-control"></td>
                                                 </tr>
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablaevamed" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
@@ -533,324 +789,512 @@
                                                         <td class="fw-bold" colspan="6">EXAMEN
                                                                 FÍSICO</td>
                                                 </tr>
-                                                <tr class="text-center align-middle">
-                                                        <td class="fw-bold">Órgano o Sistema</td>
-                                                        <td class="fw-bold">Sin Hallazgo</td>
-                                                        <td class="fw-bold" colspan="4">Hallazgos</td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Piel</td>
-                                                        <td><input style="height: 25px;" type="text" id="pielsinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="pielconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Cabello</td>
-                                                        <td><input style="height: 25px;" type="text" id="cabesinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="cabeconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Ojos y Anexos</td>
-                                                        <td><input style="height: 25px;" type="text" id="ojansinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="ojanconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Oídos</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="oidossinhevamed" class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="oidosconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Nariz</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="narizsinhevamed" class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="narizconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Boca</td>
-                                                        <td><input style="height: 25px;" type="text" id="bocasinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="bocaconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Faringe</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="faringesinhevamed" class="form-control">
+                                                <tr>
+                                                        <td colspan="8">
+                                                                <table style="width: 100%;" id="examenfisico">
+                                                                        <thead
+                                                                                style="background-color: white; color: black;">
+                                                                                <tr class="text-center align-middle">
+                                                                                        <td class="fw-bold">Órgano o
+                                                                                                Sistema</td>
+                                                                                        <td class="fw-bold">Sin Hallazgo
+                                                                                        </td>
+                                                                                        <td class="fw-bold" colspan="4">
+                                                                                                Hallazgos</td>
+                                                                                </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Piel<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OPiel"
+                                                                                                        value="Piel">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="pielsinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="pielconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">
+                                                                                                Cabello<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OCabello"
+                                                                                                        value="Cabello">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="cabesinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="cabeconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Ojos y
+                                                                                                Anexos<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OOjosyanexos"
+                                                                                                        value="Ojosyanexos">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="ojansinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="ojanconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Oídos<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OOidos"
+                                                                                                        value="Oidos">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="oidossinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="oidosconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Nariz<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="ONariz"
+                                                                                                        value="Nariz">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="narizsinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="narizconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Boca<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OBoca"
+                                                                                                        value="Boca">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="bocasinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="bocaconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">
+                                                                                                Faringe<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OFaringe"
+                                                                                                        value="Faringe">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="faringesinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="faringeconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Cuello<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OCuello"
+                                                                                                        value="Cuello">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="cuellosinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="cuelloconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Aparato
+                                                                                                Respiratorio<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OAparatorespiratorio"
+                                                                                                        value="Aparatorespiratorio">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="arsinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="arconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Aparato
+                                                                                                Cardiovascular<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OAparatocardiovascular"
+                                                                                                        value="Aparatocardiovascular">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="acsinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="acconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Aparato
+                                                                                                Digestivo<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OAparatodigestivo"
+                                                                                                        value="Aparatodigestivo">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="adsinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="adconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Aparato
+                                                                                                Genitourinario<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OAparatogenitourinario"
+                                                                                                        value="Aparatogenitourinario">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="agsinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="agconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Aparato
+                                                                                                Locomotor<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OAparatolocomotor"
+                                                                                                        value="Aparatolocomotor">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="alsinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="alconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Marcha<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OMarcha"
+                                                                                                        value="Marcha">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="marchasinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="marchaconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">
+                                                                                                Columna<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OColumna"
+                                                                                                        value="Columna">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="columsinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="columconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Miembros
+                                                                                                Superiores<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OMiembrosSuperiores"
+                                                                                                        value="MiembrosSuperiores">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="mssinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="msconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Miembros
+                                                                                                Inferiores<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OMiembrosInferiores"
+                                                                                                        value="MiembrosInferiores">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="misinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="miconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Sistema
+                                                                                                Linfático<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OSistemaLinfatico"
+                                                                                                        value="SistemaLinfatico">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="slsinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="slconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                                <tr class="text-start align-middle">
+                                                                                        <td class="fw-bold">Sistema
+                                                                                                Nervioso<input
+                                                                                                        style="display: none;"
+                                                                                                        type="text"
+                                                                                                        id="OSistemaNervioso"
+                                                                                                        value="SistemaNervioso">
+                                                                                        </td>
+                                                                                        <td><input style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="snsinhevamed"
+                                                                                                        class="form-control"
+                                                                                                        value="X">
+                                                                                        </td>
+                                                                                        <td colspan="5"><input
+                                                                                                        style="height: 25px;"
+                                                                                                        type="text"
+                                                                                                        id="snconhevamed"
+                                                                                                        class="form-control">
+                                                                                        </td>
+                                                                                </tr>
+                                                                        </tbody>
+                                                                </table>
                                                         </td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="faringeconhevamed" class="form-control">
-                                                        </td>
                                                 </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Cuello</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="cuellosinhevamed" class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="cuelloconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Aparato Respiratorio
-                                                        </td>
-                                                        <td><input style="height: 25px;" type="text" id="arsinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="arconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Aparato
-                                                                Cardiovascular</td>
-                                                        <td><input style="height: 25px;" type="text" id="acsinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="acconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Aparato Digestivo
-                                                        </td>
-                                                        <td><input style="height: 25px;" type="text" id="adsinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="adconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Aparato
-                                                                Genitourinario</td>
-                                                        <td><input style="height: 25px;" type="text" id="agsinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="agconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Aparato Locomotor
-                                                        </td>
-                                                        <td><input style="height: 25px;" type="text" id="alsinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="alconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Marcha</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="marchasinhevamed" class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="marchaconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Columna</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="columsinhevamed" class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="columconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Miembros Superiores
-                                                        </td>
-                                                        <td><input style="height: 25px;" type="text" id="mssinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="msconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Miembros Inferiores
-                                                        </td>
-                                                        <td><input style="height: 25px;" type="text" id="misinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="miconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Sistema Linfático
-                                                        </td>
-                                                        <td><input style="height: 25px;" type="text" id="slsinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="slconhevamed" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Sistema Nervioso
-                                                        </td>
-                                                        <td><input style="height: 25px;" type="text" id="snsinhevamed"
-                                                                        class="form-control"></td>
-                                                        <td colspan="5"><input style="height: 25px;" type="text"
-                                                                        id="snconhevamed" class="form-control"></td>
-                                                </tr>
-
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablaconevapsico" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
                                                         <th class="fw-bold text-start align-middle"
                                                                 style="background-color: #379FA6; color: white;">
-                                                                VII. CONCLUSIONES DE EVALUACIÓN PSICOLÓGICA</th>
+                                                                <span class="mr-3">VII. CONCLUSIONES DE EVALUACIÓN
+                                                                        PSICOLÓGICA</span>
+                                                                <button type="button" class="btn btn-sm"
+                                                                        style="background-color: #793B8E; color: white;padding: .05rem .15rem;font-size: .675rem;"
+                                                                        onclick="llenarfichas('032')" id="btn">Mostrar
+                                                                        resultados
+                                                                </button>
+                                                        </th>
                                                 </tr>
                                         </thead>
                                         <tbody id="tbodyconevapsico">
                                                 <tr>
-                                                        <td class="text-start"><input style="height: 25px;" type="text"
-                                                                        id="conevapsico" class="form-control"></td>
+                                                        <td class="text-start"><textarea style="height: 25px;"
+                                                                        id="conevapsico"
+                                                                        class="form-control"></textarea>
                                                 </tr>
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablaconradio" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
                                                         <th class="fw-bold text-start align-middle"
                                                                 style="background-color: #379FA6; color: white;">
-                                                                VIII. CONCLUSIONES RADIOGRÁFICAS</th>
+                                                                <span class="mr-3">VIII. CONCLUSIONES
+                                                                        RADIOGRÁFICAS</span>
+                                                                <button type="button" class="btn btn-sm"
+                                                                        style="background-color: #793B8E; color: white;padding: .05rem .15rem;font-size: .675rem"
+                                                                        onclick="llenarfichas('013')">Mostrar
+                                                                        resultados
+                                                                </button>
+                                                        </th>
                                                 </tr>
                                         </thead>
                                         <tbody id="tbodyconradio">
                                                 <tr>
-                                                        <td class="text-start"><input style="height: 25px;" type="text"
-                                                                        id="conradio" class="form-control"></td>
+                                                        <td class="text-start"><textarea style="height: 25px;"
+                                                                        id="conradio" class="form-control"></textarea>
                                                 </tr>
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablahallpatolab" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
-                                                        <th class="fw-bold text-start align-middle" colspan="7"
+                                                        <th class="fw-bold text-start align-middle"
                                                                 style="background-color: #379FA6; color: white;">
-                                                                IX. HALLAZGOS PATOLÓGICOS DE LABORATORIO</th>
+                                                                <span class="mr-3">IX.
+                                                                        HALLAZGOS PATOLÓGICOS DE LABORATORIO</span>
+
+                                                                <button type="button" class="btn btn-sm"
+                                                                        style="background-color: #793B8E; color: white;padding: .05rem .15rem;font-size: .675rem;"
+                                                                        data-toggle="modal" data-target="#modalFormatos"
+                                                                        onclick="llenarmodalFormato('009')">Mostrar
+                                                                        resultados
+                                                                </button>
+                                                        </th>
                                                 </tr>
                                         </thead>
                                         <tbody id="tbodyhallpatolab">
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold" rowspan="2">Perfil
-                                                                Lipíico</td>
-                                                        <td class="fw-bold">Triglicéridos</td>
-                                                        <td><input style="height: 25px;" type="text" id="trihallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold">Coleterol Total</td>
-                                                        <td><input style="height: 25px;" type="text" id="colhallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold"></td>
-                                                        <td class="fw-bold"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">HDL</td>
-                                                        <td><input style="height: 25px;" type="text" id="hdlhallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold">LDL</td>
-                                                        <td><input style="height: 25px;" type="text" id="ldlhallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold">VLDL</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="vldlhallpatolab" class="form-control"></td>
-
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold" rowspan="3">
-                                                                Hemograma
-                                                        </td>
-                                                        <td class="fw-bold">Hemoglobina</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="hemoglobinahallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold">Hematrocito</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="hematrocitohallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold">Hematíes</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="hematieshallpatolab" class="form-control">
-                                                        </td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Leucocitos</td>
-                                                        <td><input style="height: 25px;" type="text" id="leuhallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold">Plaquetas</td>
-                                                        <td><input style="height: 25px;" type="text" id="plahallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold">VPM</td>
-                                                        <td><input style="height: 25px;" type="text" id="vpmhallpatolab"
-                                                                        class="form-control">
-                                                        </td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Linfocitos</td>
-                                                        <td><input style="height: 25px;" type="text" id="linhallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold">Monocitos</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="monohallpatolab" class="form-control"></td>
-                                                        <td class="fw-bold">Segmentados</td>
-                                                        <td><input style="height: 25px;" type="text" id="seghallpatolab"
-                                                                        class="form-control">
-                                                        </td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold" rowspan="2">
-                                                                Examen Completo de Orina
-                                                        </td>
-                                                        <td class="fw-bold">Aspecto</td>
-                                                        <td><input style="height: 25px;" type="text" id="asphallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold">PH</td>
-                                                        <td><input style="height: 25px;" type="text" id="phhallpatolab"
-                                                                        class="form-control"></td>
-                                                        <td class="fw-bold">Densidad</td>
-                                                        <td><input style="height: 25px;" type="text" id="denhallpatolab"
-                                                                        class="form-control">
-                                                        </td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Conslusión</td>
-                                                        <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="conhallpatolab" class="form-control"></td>
-                                                        <td class="fw-bold">Observaciones</td>
-                                                        <td colspan="2"><input style="height: 25px;" type="text"
-                                                                        id="obshallpatolab" class="form-control"></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Toxicológico</td>
-                                                        <td class="fw-bold">Cocaína</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="cocahallpatolab" class="form-control"></td>
-                                                        <td class="fw-bold">Marihuana</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="marihallpatolab" class="form-control"></td>
-                                                        <td class="fw-bold">Extasis</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="extahallpatolab" class="form-control">
-                                                        </td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Glucosa</td>
-                                                        <td><input style="height: 25px;" type="text"
-                                                                        id="glucohallpatolab" class="form-control"></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
+                                                <tr>
+                                                        <td class="text-start"><input style="height: 25px;" type="text"
+                                                                        id="hallpatolab" class="form-control"></td>
                                                 </tr>
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablaconaudio" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
                                                         <th class="fw-bold text-start align-middle"
                                                                 style="background-color: #379FA6; color: white;">
-                                                                X. CONCLUSIÓN AUDIOMETRÍA</th>
+                                                                <span class="mr-3">X.
+                                                                        CONCLUSIÓN AUDIOMETRÍA</span>
+                                                                <button type="button" class="btn btn-sm"
+                                                                        style="background-color: #793B8E; color: white;padding: .05rem .15rem;font-size: .675rem;"
+                                                                        data-toggle="modal" data-target="#modalFormatos"
+                                                                        onclick="llenarmodalFormato('003')">Mostrar
+                                                                        resultados
+                                                                </button>
+                                                        </th>
+
                                                 </tr>
                                         </thead>
                                         <tbody id="tbodyconaudio">
@@ -861,13 +1305,21 @@
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablaconespiro" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
                                                         <th class="fw-bold text-start align-middle"
-                                                                style="background-color: #379FA6; color: white;">
-                                                                XI. CONCLUSIÓN ESPIROMETRÍA</th>
+                                                                style="background-color: #379FA6; color: white">
+                                                                <span class="mr-3">XI.
+                                                                        CONCLUSIÓN ESPIROMETRÍA</span>
+                                                                <button type="button" class="btn btn-sm"
+                                                                        style="background-color: #793B8E; color: white;padding: .05rem .15rem;font-size: .675rem;"
+                                                                        data-toggle="modal" data-target="#modalFormatos"
+                                                                        onclick="llenarmodalFormato('005')">Mostrar
+                                                                        resultados
+                                                                </button>
+                                                        </th>
                                                 </tr>
                                         </thead>
                                         <tbody id="tbodyotros">
@@ -878,7 +1330,7 @@
                                         </tbody>
                                 </table>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablaotros" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
@@ -890,110 +1342,244 @@
                                         <tbody id="tbodyotros">
                                                 <tr>
                                                         <td class="text-start"><input style="height: 25px;" type="text"
-                                                                        id="otros" class="form-control"></td>
+                                                                        id="concluotros" class="form-control"></td>
                                                 </tr>
                                         </tbody>
                                 </table>
-
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <div class="container text-center mb-1">
+                                        <button type="button" class="btn btn-sm"
+                                                style="background-color: #793B8E; color: white;" data-bs-toggle="modal"
+                                                data-bs-target="#modalFormCIE10312" id="diagnosticocie10">AGREGAR
+                                                DIAGNÓSTICO
+                                        </button>
+                                </div>
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tabladiagmedocu" style="font-size: 11px;">
                                         <thead>
                                                 <tr class="text-start align-middle">
-                                                        <th class="fw-bold" colspan="8">XIII.
+                                                        <th class="fw-bold" colspan="7">XIII.
                                                                 DIAGNÓSTICO MÉDICO OCUPACIONAL</th>
-                                                        <th class="fw-bold">P</th>
-                                                        <th class="fw-bold">D</th>
-                                                        <th class="fw-bold">R</th>
-                                                        <th class="fw-bold">CIE - 10</th>
+                                                        <th class="fw-bold text-center">P</th>
+                                                        <th class="fw-bold text-center">D</th>
+                                                        <th class="fw-bold text-center">R</th>
+                                                        <th class="fw-bold text-center">CIE - 10</th>
+                                                        <th class="fw-bold text-center">ACCIÓN</th>
                                                 </tr>
-                                        </thead>
-                                        <tbody id="tbodydiagmedocu">
-                                                <tr class="text-start align-middle">
+                                                <tr class="text-start align-middle"
+                                                        style="background-color: white; color: black;">
                                                         <td class="fw-bold" colspan="12">Otros
                                                                 Diagnósticos</td>
                                                 </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td colspan="8"></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td colspan="8"></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td colspan="8"></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td colspan="8"></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td colspan="8"></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td></td>
-                                                </tr>
-                                                <tr class="text-start align-middle">
-                                                        <td class="fw-bold">Apto</td>
-                                                        <td></td>
-                                                        <td class="fw-bold">Apto con
-                                                                restricciones</td>
-                                                        <td></td>
-                                                        <td class="fw-bold">No Apto</td>
-                                                        <td></td>
-                                                        <td class="fw-bold">Con Observaciones
-                                                        </td>
-                                                        <td></td>
-                                                        <td class="fw-bold">Evaluado</td>
-                                                        <td></td>
-                                                        <td class="fw-bold">Pendiente</td>
-                                                        <td></td>
-                                                </tr>
+                                        </thead>
+                                        <tbody id="tbodydiagmedocu">
                                         </tbody>
+                                        <tfoot>
+                                                <tr>
+                                                        <td class="fw-bold text-center"> Apto</td>
+                                                        <td class="text-center"><input type="radio" name="estado"
+                                                                        value="1" id="Apto"></td>
+                                                        <td class="fw-bold text-center"> Apto con restricciones</td>
+                                                        <td class="text-center"><input type="radio" name="estado"
+                                                                        value="3" id="AptoRestricciones"></td>
+                                                        <td class="fw-bold text-center"> No Apto</td>
+                                                        <td class="text-center"><input type="radio" name="estado"
+                                                                        value="2" id="NoApto"></td>
+                                                        <td class="fw-bold text-center"> Con observaciones</td>
+                                                        <td class="text-center"><input type="radio" name="estado"
+                                                                        value="4" id="ConObservaciones"></td>
+                                                        <td class="fw-bold text-center"> Evaluado</td>
+                                                        <td class="text-center"><input type="radio" name="estado"
+                                                                        value="5" id="Evaluado"></td>
+                                                        <td class="fw-bold text-center"> Pendiente</td>
+                                                        <td class="text-center"><input type="radio" name="estado"
+                                                                        value="6" id="Pendiente"></td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="fw-bold text-center">Restricciones</td>
+                                                        <td colspan="11">
+                                                                <textarea id="restricciones" rows="2" class="w-100 form-control"></textarea>
+                                                        </td>
+                                                </tr>
+                                        </tfoot>
                                 </table>
+                                <div class="container text-center mb-1">
+                                        <button type="button" class="btn btn-sm"
+                                                style="background-color: #793B8E; color: white;" data-bs-toggle="modal"
+                                                data-bs-target="#modalFormrecomendaciones312"
+                                                id="recomendaciones312">AGREGAR
+                                                RECOMENDACIONES
+                                        </button>
+                                </div>
 
-                                <table class="records_list table table-sm table-bordered table-hover letra animate__animated animate__fadeIn text-start"
+                                <table class="records_list table table-sm table-bordered letra animate__animated animate__fadeIn text-start"
                                         id="tablarecomencontrol" style="font-size: 11px;">
                                         <thead>
                                                 <tr>
-                                                        <th class="fw-bold text-center align-middle"
-                                                                style="background-color: #379FA6; color: white;">
-                                                                XIV. RECOMENDACIONES Y CONTROLES</th>
+                                                        <th class="fw-bold text-start align-middle"
+                                                                style="background-color: #379FA6; color: white;"
+                                                                colspan="2">
+                                                                XIV. RECOMENDACIONES Y CONTROLES </th>
+                                                        <th class="fw-bold">ACCIÓN</th>
                                                 </tr>
                                         </thead>
                                         <tbody id="tbodyrecomencontrol">
-                                                <tr>
-                                                        <td class="text-start"><input style="height: 25px;" type="text"
-                                                                        id="recomencontrol1" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                        <td class="text-start"><input style="height: 25px;" type="text"
-                                                                        id="recomencontrol2" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                        <td class="text-start"><input style="height: 25px;" type="text"
-                                                                        id="recomencontrol3" class="form-control"></td>
-                                                </tr>
-                                                <tr>
-                                                        <td class="text-start"><input style="height: 25px;" type="text"
-                                                                        id="recomencontrol4" class="form-control"></td>
-                                                </tr>
+
                                         </tbody>
                                 </table>
+
+                                <!-- MODAL CIE10-->
+                                <div class="modal fade" id="modalFormCIE10312" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                        <div class="modal-header"
+                                                                style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                                                <h4 class="modal-title" id="exampleModalLabel">
+                                                                        CIE 10</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                                <div class="row mb-2">
+                                                                        <div class="col">
+                                                                                <button style="color:white; float: right;"
+                                                                                        type="button"
+                                                                                        class="btn btn-sm btn-primary"
+                                                                                        id="btnagregarcie10"
+                                                                                        onclick="agregarFila();">Agregar<i
+                                                                                                class="fa-solid fa-plus"></i></button>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="row mb-2 mt-2">
+                                                                        <div>
+                                                                                <div class="input-group input-group-sm">
+                                                                                        <label class="control-label input-group-text"
+                                                                                                style="width: 150px;"
+                                                                                                for="modalcie10cod">CIE
+                                                                                                10 - COD</label>
+                                                                                        <input class="form-control"
+                                                                                                type="text"
+                                                                                                id="modalcie10cod">
+                                                                                </div>
+                                                                                <div
+                                                                                        class="input-group input-group-sm mt-3">
+                                                                                        <label class="control-label input-group-text"
+                                                                                                style="width: 150px;"
+                                                                                                for="modalcie10desc">CIE
+                                                                                                10 -DESC</label>
+                                                                                        <input class="form-control"
+                                                                                                type="text"
+                                                                                                id="modalcie10desc">
+                                                                                </div>
+                                                                                <div
+                                                                                        class="input-group input-group-sm mt-3">
+                                                                                        <label class="control-label input-group-text"
+                                                                                                style="width: 150px;"
+                                                                                                for="modalCombocie10">TIPO</label>
+                                                                                        <select name=""
+                                                                                                id="modalCombocie10"
+                                                                                                class="form-control form-control-sm">
+                                                                                                <option value="P">
+                                                                                                        PRESUNTIVO
+                                                                                                </option>
+                                                                                                <option value="D">
+                                                                                                        DEFINITIVO
+                                                                                                </option>
+                                                                                                <option value="R">
+                                                                                                        REPETITIVO
+                                                                                                </option>
+                                                                                        </select>
+                                                                                </div>
+
+
+                                                                        </div>
+
+                                                                        <div class="text-center" id="cargamodalcie10"
+                                                                                style="display: none;">
+                                                                                <div class="d-flex justify-content-center align-items-center"
+                                                                                        style="min-height: 5vh;">
+                                                                                        <lottie-player
+                                                                                                src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                                                                                background="transparent"
+                                                                                                speed="1"
+                                                                                                style="width: 300px; height: 300px;"
+                                                                                                loop
+                                                                                                autoplay></lottie-player>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                                <button type="button" class="btn "
+                                                                        data-bs-dismiss="modal"
+                                                                        style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                                                        id="cerrarbusquedaesp"><i
+                                                                                class="fa-solid fa-circle-xmark"></i>
+                                                                        Cerrar</button>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <!-- MODAL RECOMENDACIONES-->
+                                <div class="modal fade" id="modalFormrecomendaciones312" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                        <div class="modal-header"
+                                                                style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                                                <h4 class="modal-title" id="exampleModalLabel">
+                                                                        RECOMENDACIONES Y CONTROLES</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                                <div class="row mb-2">
+                                                                        <div class="col">
+                                                                                <button style="color:white; float: right;"
+                                                                                        type="button"
+                                                                                        class="btn btn-sm btn-primary"
+                                                                                        id="btnagregarcie10"
+                                                                                        onclick="agregarFilarec();">Agregar<i
+                                                                                                class="fa-solid fa-plus"></i></button>
+                                                                        </div>
+                                                                </div>
+                                                                <div class="row mb-2 mt-2">
+                                                                        <div>
+                                                                                <div class="input-group input-group-sm">
+                                                                                        <label class="control-label input-group-text"
+                                                                                                style="width: 150px;"
+                                                                                                for="modalrec312">DESCRIPCIÓN</label>
+                                                                                        <input class="form-control"
+                                                                                                type="text"
+                                                                                                id="modalrec312">
+                                                                                </div>
+
+
+                                                                        </div>
+
+                                                                        <div class="text-center" id="cargamodalcie10"
+                                                                                style="display: none;">
+                                                                                <div class="d-flex justify-content-center align-items-center"
+                                                                                        style="min-height: 5vh;">
+                                                                                        <lottie-player
+                                                                                                src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                                                                                background="transparent"
+                                                                                                speed="1"
+                                                                                                style="width: 300px; height: 300px;"
+                                                                                                loop
+                                                                                                autoplay></lottie-player>
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                                <button type="button" class="btn "
+                                                                        data-bs-dismiss="modal"
+                                                                        style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                                                        id="cerrarbusquedaesp"><i
+                                                                                class="fa-solid fa-circle-xmark"></i>
+                                                                        Cerrar</button>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
 
 
 
@@ -1001,3 +1587,42 @@
                 </div>
         </div>
 </div>
+<!--MODAL FORMATOS-->
+<div class="modal fade" id="modalFormatos" role="dialog">
+        <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                        <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                                <h4 class="modal-title" id="titleMFormatos"></h4>
+                        </div>
+                        <div class="modal-body">
+                                <div class="row mb-2 mt-2">
+                                        <div id="contenedorFormato" class="container">
+
+                                        </div>
+                                        <div class="text-center" id="cargaFormato" style="display: none;">
+                                                <div class="d-flex justify-content-center align-items-center"
+                                                        style="min-height: 5vh;">
+                                                        <lottie-player
+                                                                src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                                                background="transparent" speed="1"
+                                                                style="width: 300px; height: 300px;" loop
+                                                                autoplay></lottie-player>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                        <button type="button" class="btn"
+                                                style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                                id="cerrarFormatosModal" data-dismiss="modal"> <i
+                                                        class="fa-solid fa-circle-xmark"></i>
+                                                Cerrar</button>
+                                </div>
+                        </div>
+
+                </div>
+        </div>
+</div>
+
+
+
+<script src="/js/historiaclinica/examenes/pbfichamedicoocupacional312.js"></script>

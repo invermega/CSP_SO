@@ -28,12 +28,14 @@ router.get('/exportarprotocolo/:id',isLoggedIn, controllerEn.getexportarprotocol
 
 /*****************Paciente*****************/
 router.get('/paciente', isLoggedIn, controllerrender.renderpaciente);
+router.get('/pacientecreate', isLoggedIn, controllerrender.renderpacientecreate);
+router.get('/pacienteedit/:id', isLoggedIn, controllerrender.renderpacienteedit);
+router.get('/listarpacientes',isLoggedIn,controllerEn.getpaciente)
+router.delete('/deletePac',isLoggedIn,controllerEn.deletepaciente);
 router.get('/listarCombosPac', isLoggedIn, controllerEn.getPacienteCombos);
 router.get('/listardistrito',isLoggedIn,controllerEn.getDistrito);
 router.get('/listarpais',isLoggedIn,controllerEn.getPais);
 router.post('/paciente',isLoggedIn,controllerEn.postpaciente);
-router.get('/listarpacientes',isLoggedIn,controllerEn.getpaciente)
-router.delete('/deletePac',isLoggedIn,controllerEn.deletepaciente);
 
 /******************************************/
 /*****************Citas*****************/
@@ -51,13 +53,12 @@ router.post('/listarcinf', isLoggedIn, controllerEn.getListaConsetimientoInf);
 router.get('/listarempresa', isLoggedIn, controllerEn.getempresaCita);
 
 /*****************Médico*******************/
-router.get('/medicocreate', isLoggedIn, controllerrender.rendermedicocreate);
 router.get('/medico', isLoggedIn, controllerrender.renderemedico);
+router.get('/medicocreate', isLoggedIn, controllerrender.rendermedicocreate);
 router.post('/medico',isLoggedIn,controllerEn.postmedico);
 router.get('/listarmedicos',isLoggedIn,controllerEn.getmedicolist);
 router.delete('/deleteMed',isLoggedIn,controllerEn.deletemedico);
 router.get('/medicoedit/:id', isLoggedIn, controllerrender.rendermedicoedit);
-router.get('/medicodatos/:id', isLoggedIn, controllerEn.getmedicodatos);
 
 /****************Cliente******************/
 

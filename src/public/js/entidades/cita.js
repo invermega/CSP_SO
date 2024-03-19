@@ -74,8 +74,8 @@ function getcitas() {
             }
 
         },
-        error: function () {
-            alert('Error en la solicitud AJAX');
+        error: function (error) {
+            console.error('Error:', error);
         },
     });
 }
@@ -109,7 +109,6 @@ document.getElementById("empresamodal").addEventListener("keyup", function (even
 function getclientes(parametro) {
     mostrarDiv('cargaEmpresa');
     ocultarDiv('tableEmpresamodal');
-    console.log(parametro);
     $.ajax({
         url: '/empresas',
         method: 'GET',
@@ -174,11 +173,7 @@ function getprotocolo(parametro) {
                     let option = `<option value="${item.id}">${item.descripcion}</option>`;
                     codpro_id.append(option);
                 });
-                codpro_id.on('change', function () {
-                    let tercerColumna = obtenerTerceraColumna(lista, $(this).val());
-                    $('#tipexa_id').val(tercerColumna);
-                });
-                codpro_id.trigger('change');
+                
             }
 
         },
@@ -187,6 +182,67 @@ function getprotocolo(parametro) {
         },
     });
 }
+document.getElementById("pacientemodal").addEventListener("keydown", function (event) {
+    getPaciente();
+});
+function getPaciente() {
+    if (event.key === "Enter") {
+        let parametro=0;
+        var parametro1 = $('#pacientemodal').val();
+        mostrarDiv('cargaPaciente');
+        ocultarDiv('tablapacientemodal');
+        $.ajax({
+            url: '/listarpacientes',
+            method: 'GET',
+            data: {
+                parametro: parametro,
+                parametro1: parametro1,
+            },
+            success: function (pacientes) {
+                ocultarDiv('cargaPaciente');
+                mostrarDiv('tablapacientemodal');
+                const tbodypac = $('#bodypacientemodal');
+                tbodypac.empty();
+                if (pacientes.length === 0) {
+                    tbodypac.append(`
+                    <tr>
+                        <td colspan="3" class="text-center">No hay resultados disponibles </td>
+                    </tr>
+                `);
+                } else {
+                    pacientes.forEach(paciente => {
+                        tbodypac.append(`
+                        <tr>  
+                        <td>              
+                            <button onclick="getpacientem(this)" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>              
+                        </td>           
+                        <td>${paciente.appm_nom}</td>
+                        <td>${paciente.pachis}</td>
+                        </tr>
+                    `);
+                    });
+
+                }
+            },
+            error: function () {
+                alert('Error en la solicitud AJAX');
+            },
+        });
+
+    }
+}
+function getpacientem(btn) {
+    event.preventDefault();
+    var filaorigen = $(btn).closest("tr");
+    var appm_nom = filaorigen.find("td:eq(1)").text();
+    var pachis = filaorigen.find("td:eq(2)").text();
+    
+    $('#paciente').val(appm_nom);
+    var btncerrar = document.getElementById(`cerrarPacienteModal`);
+    btncerrar.click();
+    event.preventDefault();    
+}
+
 function eliminar() {
     var table = document.getElementById('mydatatable');
     if (!table) {
@@ -207,7 +263,6 @@ function eliminar() {
         mensajecentral('error', 'Debes seleccionar algún registro.');
     } else {
         MensajeSIyNO('warning', '', '¿Está seguro de eliminar las citas seleccionadas?', function (respuesta) {
-            console.log(seleccionados);
             if (respuesta) {
                 fetch('/citadel', {
                     method: 'DELETE',
@@ -286,10 +341,15 @@ function imprimirHojaRuta(cabeceraData, detalleData) {
         ventanaImpresion.print();
         ventanaImpresion.close();
     };
+
+    // Cambiar el nombre del archivo al guardar como PDF
+    ventanaImpresion.addEventListener('beforeprint', function () {
+        const fileName = cabeceraData.nombres;
+        ventanaImpresion.document.title = fileName;
+    });
 }
 function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
 
-    console.log(cabeceraData.numhoja, detalleData);
     // Construir el contenido del contenedor de imagen y título
     var contenedorImagenTitulo = "<div style='display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 20px;'>";
     contenedorImagenTitulo += "<img src='/img/logo.png' alt='Logo' style='width: 120px; height: 75px; margin-right: 10px;'>";
@@ -332,7 +392,7 @@ function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
     contenidoCabecera += "</tr>";
     contenidoCabecera += "<tr>";
     contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
-    contenidoCabecera += "<strong style='font-size: 12px;'>Fecha cita:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.edad + "</label>";
+    contenidoCabecera += "<strong style='font-size: 12px;'>Edad:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.edad + "</label>";
     contenidoCabecera += "</td>";
     contenidoCabecera += "<td style='vertical-align: center; border: 1px solid #ccc;'>";
     contenidoCabecera += "<strong style='font-size: 12px;'>Tipo de Exámen:</strong><label style='font-size: 10px;'>&nbsp;&nbsp;" + cabeceraData.tipexa + "</label><br>";
@@ -356,7 +416,7 @@ function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
     // Agregar filas de datos de la tabla
     contenidoDetalle += "<tbody>";
     detalleData.forEach(function (detalle) {
-        contenidoDetalle += "<tr style='height: 120px;'>";
+        contenidoDetalle += "<tr style='height: 120px;page-break-inside: avoid;'>";
         contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; padding-top: 5x; padding-left: 10px; vertical-align: top;height: 120px;width: 250px;padding-right: 10px;'><span style='font-size: 12px;'><strong>" + detalle.exa + "</span></strong><br><br><span style='font-size: 10px;'>" + detalle.deta + "</span></td>";
         contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; vertical-align: top;font-size: 10px;height: 120px;width: 400px;'>" + detalle.firma + "</td>";
         contenidoDetalle += "<td style='border: 1px solid #ccc; text-align: left; padding-top: 5x; padding-left: 10px; vertical-align: top;font-size: 12px;height: 120px;width: 250px;'><span style='font-size: 12px;'><strong>" + detalle.exa1 + "</span></strong><br><br><span style='font-size: 10px;'>" + detalle.deta1 + "</span></td>";
@@ -372,7 +432,7 @@ function obtenerContenidoHojaRuta(cabeceraData, detalleData) {
     // Agregar pie de página
     // Agregar pie de página
     var fechaHoraImpresion = new Date().toLocaleString();
-    var contadorPaginas = "<div style='position: fixed; bottom: 20px; left: 20px; font-size: 10px;'>" +
+    var contadorPaginas = "<div style='position: fixed; bottom: 20px; left: 20px; font-size: 10px;width: calc(100% - 40px);'>" +
         "Ultima actualización : medicoocupacional@clinicasanpedro.com - " + fechaHoraImpresion +
         "</div>";
     // Construir el contenido final de la guía
@@ -454,7 +514,6 @@ function obtenerDatosDetalle(idcita) {
         });
     });
 }
-
 //Imprimir Consentimiento Informado
 async function navegargetidci(iddatatableble) {
     var table = document.getElementById(iddatatableble);
@@ -480,7 +539,6 @@ async function navegargetidci(iddatatableble) {
         });
     }
 }
-
 function imprimirConsentimientoInf(cabeceraData) {
 
     // Obtener el contenido de la guía
@@ -524,7 +582,6 @@ function obtenerConsentimientoInf(cabeceraData) {
     // Retornar el contenido de la guía
     return contenidoGuia;
 }
-
 function obtenerDatosCI(idcita) {
     return new Promise(function (resolve, reject) {
         $.ajax({
@@ -553,7 +610,6 @@ function obtenerDatosCI(idcita) {
         });
     });
 }
-
 // Ejemplo de cómo usar la función con async/await
 async function obtenerYManipularDatos(idcita) {
     try {

@@ -1,9 +1,21 @@
 $(document).ready(function () {
-  fechahoy('fechainicio');
-  fechahoy('fechafin');
+  //fechahoy('fechainicio');
+  //fechahoy('fechafin');
+  var fechaActual = new Date().toISOString().split('T')[0];
+  var fechaActual = new Date().toISOString().split('T')[0];
+  $("#fechainicio").val(fechaActual);
+  $("#fechafin").val(fechaActual);
   getExamen();
 
+  document.getElementById("paciente").addEventListener("keyup", function (event) {
+    if (event.key === "Enter") {
+      getPacientesCitados();
+    }
+  });
+
 });
+
+
 
 function getPacientesCitados() {
   mostrarDiv('carga');

@@ -1,10 +1,10 @@
-document.addEventListener('contextmenu', function (event) {
+/*document.addEventListener('contextmenu', function (event) {
   var target = event.target;
   if (target.tagName === 'A') {
     event.preventDefault();
     alert("Acceso no permitido en nueva pestaña.");
   }
-});
+});*/
 
 function render() {
   const contentContainer = $('#contenedoropciones');
@@ -568,7 +568,7 @@ function horatime(input) {
 function validarNumeroDecimal(input) {
   const inputValue = input.value;
   if (!/^-?\d*\.?\d*$/.test(inputValue)) {
-      input.value = inputValue.slice(0, -1);
+    input.value = inputValue.slice(0, -1);
   }
 }
 
@@ -577,18 +577,24 @@ function resultcrearMiniatura(ruta, nombreArchivo) {
   const btnSubir = document.getElementById('btnSubir');
   const fileInput = document.getElementById('archivos');
   const btnEliminar = document.getElementById('btnEliminar');
-  miniaturasDiv.style.display="block";
-  btnSubir.disabled=true;
-  fileInput.disabled=true;
-  btnEliminar.disabled=false;
+  miniaturasDiv.style.display = "block";
+  btnSubir.disabled = true;
+  fileInput.disabled = true;
+  btnEliminar.disabled = false;
 
   const miniaturaDiv = document.createElement("div");
   miniaturaDiv.className = "archivo-item";
+  let imgIcon;
+  if (nombreArchivo.toLowerCase().endsWith('.pdf')) {
+    imgIcon = "pdficono";
+  } else {
+    imgIcon = "imgicono";
+  }
 
   const pdfIcon = document.createElement("a");
   pdfIcon.href = `${window.location.origin}${ruta}`;
   pdfIcon.target = "_blank"; // Abrir el enlace en una nueva pestaña
-  pdfIcon.innerHTML = `<img src="/img/pdficono.webp" width="90" height="90">`;
+  pdfIcon.innerHTML = `<img src="/img/${imgIcon}.webp" width="90" height="90">`;
   miniaturaDiv.appendChild(pdfIcon);
 
   const nombreArchivoParrafo = document.createElement("p");
@@ -601,25 +607,65 @@ function resultcrearMiniatura(ruta, nombreArchivo) {
 function validarInputs(ids) {
   var idsArray = ids.split(',');
   var camposInvalidos = false;
-  idsArray.forEach(function(id) {
-      var input = document.getElementById(id.trim());
-      if (input) {
-          input.classList.remove('is-valid', 'is-invalid');
-          if (input.value.trim() !== '') {
-              input.classList.add('is-valid'); // Input válido
-          } else {
-              input.classList.add('is-invalid'); // Input inválido
-              camposInvalidos = true;
-          }
+  idsArray.forEach(function (id) {
+    var input = document.getElementById(id.trim());
+    if (input) {
+      input.classList.remove('is-valid', 'is-invalid');
+      if (input.value.trim() !== '') {
+        input.classList.add('is-valid'); // Input válido
+      } else {
+        input.classList.add('is-invalid'); // Input inválido
+        camposInvalidos = true;
       }
+    }
   });
   if (camposInvalidos) {
-      mensaje('error', 'Por favor, complete todos los campos.', 1800);
-      return false;
+    mensaje('error', 'Por favor, complete todos los campos.', 1800);
+    return false;
   }
   return true;
 }
 
 
+function limitarInput(event, maxlength) {
+  var $input = $(event.target);
+  var id = $input.attr('id');
+  var valorData = $input.data('nombre');
+  var $inputGroup = $input.closest('.input-group');
+  var $container = $inputGroup.parent(); // Seleccionar el contenedor del input-group
 
+  $input.attr('maxlength', maxlength);
+
+  if ($input.val().length >= maxlength) {
+    $input.val($input.val().slice(0, maxlength));
+
+    var errorMessageId = id + '-error';
+    var $errorMessageElement = $('#' + errorMessageId);
+
+    if ($errorMessageElement.length === 0) {
+      $errorMessageElement = $('<span>').attr('id', errorMessageId).addClass('error-message').text(`(!) Ha excedido el límite de caracteres permitidos para ${valorData}`);
+      $container.append($errorMessageElement);
+    }
+  } else {
+    var errorMessageId = id + '-error';
+    $('#' + errorMessageId).remove();
+  }
+}
+
+//errorMessageElement = $('<span>').attr('id', errorMessageId).css('font-size', '9px').css('color','#dc3545').text(`(!) Ha excedido el límite de caracteres permitidos para ${valorData}`);
+
+/*function showErrorMessage(inputId, valorData) {
+  var errorMessageId = inputId + '-error';
+  var errorMessageElement = $('#' + errorMessageId);
+  if (errorMessageElement.length === 0) {
+    errorMessageElement = $('<span>').attr('id', errorMessageId).css('font-size', '7px').text(`(!) Ha excedido el límite de caracteres permitidos para ${valorData}`);
+    $('#' + inputId).before(errorMessageElement);
+  }
+}
+
+function hideErrorMessage(inputId) {
+  var errorMessageId = inputId + '-error';
+  $('#' + errorMessageId).remove();
+}*/
+//(!) Ha excedido el límite de caracteres permitidos para ${valorData}
 

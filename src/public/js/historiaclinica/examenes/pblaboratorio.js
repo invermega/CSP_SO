@@ -3,7 +3,6 @@
 (function poblarcampos() {
     let cita_id = document.getElementById('id').value;
     let soexa = document.getElementById('soexa').value;
-    console.log(soexa);
     let nuncom = document.getElementById('nuncom');
     let doc_adic_id = document.getElementById('doc_adic_id');
 
@@ -31,6 +30,7 @@
             soexa: soexa
         },
         success: function (result) {
+            console.log(result);
             if (result[0].mensaje != 'sin datos') {
                 nuncom.value = result[0].nuncom;
                 doc_adic_id.value = result[0].doc_adic_id;
@@ -130,18 +130,21 @@ function ObtenerParametros(codpru_id) {
     let inputcodpru_id = document.getElementById('codpru_id');
     inputcodpru_id.value = codpru_id;
     let nuncom = document.getElementById('nuncom').value;
-    ocultarTabla("tablaparametros");
     mostrarDiv("cargaparametros");
+    ocultarDiv("tableparametros");
+    
     $.ajax({
         url: '/parametros',
         method: "GET",
         data: {
             codpru_id: codpru_id,
-            nuncom: nuncom
+            nuncom: nuncom,
+            pachis:dni
         },
         success: function (parametros) {
+            console.log(parametros);
             ocultarDiv("cargaparametros");
-            mostrarTabla("tablaparametros");
+            mostrarDiv("tableparametros");
             let tbody = $('#tbodyparametros');
             tbody.html('');
             parametros.forEach(parametro => {
@@ -195,7 +198,6 @@ function Grabar() {
         return;
     }
     var datains = obtenerDataIns();
-    console.log(datains);
     var datainsrec = obtenerDataInsRec();
     var dataparametros = obtenerDataParametros();
     const datosCompletos = {

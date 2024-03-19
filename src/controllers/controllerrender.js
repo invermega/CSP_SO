@@ -43,7 +43,7 @@ module.exports = {
     },
     async rendermenuexamenes(req, res) {
         const { id } = req.params;
-        console.log(id);
+        
         res.render('historiaclinica/menuexamenes/menuexamenes', { id, layout: false });
     },
     async rendersignosvitalesprueba(req, res) {
@@ -103,11 +103,11 @@ module.exports = {
     },
     async renderpacientecreate(req, res) {
         const parametro = "PC";
-        permisos(parametro, 'entidades/paciente', req, res, 0);
+        permisos(parametro, 'entidades/pacienteCreate', req, res, 0);
     }, async renderpacienteedit(req, res) {
         const { id } = req.params;
         const parametro = "PC";
-        permisos(parametro, 'entidades/paciente', req, res, id);
+        permisos(parametro, 'entidades/pacienteCreate', req, res, id);
     },
     /*Cita */
     async rendercita(req, res) {
@@ -126,8 +126,7 @@ module.exports = {
     /**Medico */
     async renderemedico(req, res) {
         const parametro = "MD";
-        permisos(parametro,'entidades/medicos', req,res)
-        res.render('entidades/medicos', { layout: false });
+        permisos(parametro,'entidades/medicos', req,res)        
     },
     async rendermedicocreate(req, res) {
         const parametro = "MD";
@@ -141,8 +140,7 @@ module.exports = {
     /**Cliente */
     async rendercliente(req, res) {
         const parametro = "CL";
-        permisos(parametro,'entidades/cliente', req,res)
-        res.render('entidades/cliente', { layout: false });
+        permisos(parametro,'entidades/cliente', req,res);        
     },
     /*Examen */
     async renderexamen(req, res) {
@@ -152,6 +150,12 @@ module.exports = {
     async renderexamencreate(req, res) {
         const parametro = "EX";
         permisos(parametro, 'entidades/examenCreate', req, res, 0)
+    },
+
+    /*Descargas*/
+    async renderinformes(req, res) {
+        const parametro = "IN";
+        permisos(parametro, 'descargas/informes', req, res)
     },
 
 };

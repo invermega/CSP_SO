@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documento PDF</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap">
+    <style>
+        @page {
+            size: A4;
+            /* Puedes usar otros tamaños como 'letter', 'legal', etc. */
+            margin: 1cm;
+            /* Márgenes de la página */
+        }
+
+        .sin-bordes>thead,
+        .sin-bordes>tbody,
+        .sin-bordes>tfoot,
+        .sin-bordes>thead>tr,
+        .sin-bordes>tbody>tr,
+        .sin-bordes>tfoot>tr,
+        .sin-bordes>thead>tr>th,
+        .sin-bordes>thead>tr>td,
+        .sin-bordes>tbody>tr>td,
+        .sin-bordes>tfoot>tr>td {
+            border: none;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header,
+        footer {
+            background-color: #f2f2f2;
+            padding: 10px;
+        }
+
+        main {
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            page-break-inside: avoid;
+        }
+        
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            
+        }
+
+        thead {
+            display: table-header-group;
+        }
+
+        tfoot {
+            display: table-footer-group;
+
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            thead {
+                display: table-header-group;
+            }
+
+            tfoot {
+                display: table-footer-group;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <table class="sin-bordes">
+            <thead class="thead">
+                <tr>
+                    <td>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <h1 class="fw-bold" style="font-size: 16px;">FICHA MEDICO OCUPACIONAL - 312</h1>
+                            </div>
+                            <div class="col-md-6 text-star mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 1"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                            <div class="col-md-6 text-end mb-1">
+                                <img src="https://grupo.clinicasanpedro.com/src/public/img/logo.png" alt="Imagen 2"
+                                    class="img-fluid" style="width: 120px; height: auto;">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <table class="records_list table-sm table-bordered" style="width: 100%; ">
+                            <tbody style="font-size: 10px; ">
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">N° de Ficha Médica</td>
+                                    <td class="p-0 ps-1" colspan="2">{{pachis}}</td>
+                                    <td class="p-0 ps-1 fw-bold">Fecha</td>
+                                    <td class="p-0 ps-2" colspan="8">{{fecaten}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="1">Tipo de Evaluación </td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Pre Ocupacional</td>
+                                    <td class="p-0 ps-1 text-center" colspan="1">{{preocuficha}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Periódica</td>
+                                    <td class="p-0 ps-1 text-center" colspan="1">{{periodicaficha}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Retiro</td>
+                                    <td class="p-0 ps-1 text-center" colspan="1">{{retiroficha}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="1">Otros</td>
+                                    <td class="p-0 ps-1 text-center" colspan="1">{{otrosficha}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Lugar de Examen</td>
+                                    <td class="p-0 ps-1 fw-bold">Departamento</td>
+                                    <td class="p-0 ps-1 text-center" colspan="3">Lima</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Provincia</td>
+                                    <td class="p-0 ps-1 text-center" colspan="2">Huaura</td>
+                                    <td class="p-0 ps-1 fw-bold">Distrito</td>
+                                    <td class="p-0 ps-1 text-center" colspan="2">Huacho</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Puesto de Trabajo </td>
+                                    <td class="p-0 ps-1" colspan="4">{{cargo_actual}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Área de Trabajo </td>
+                                    <td class="p-0 ps-1" colspan="5">{{area_actual}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        I. DATOS DE LA EMPRESA </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Razón Social </td>
+                                    <td class="p-0 ps-1" colspan="11">{{razsoc}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Actividad Economica</td>
+                                    <td class="p-0 ps-1" colspan="11">{{actividad_economica_clie}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Lugar de Trabajo</td>
+                                    <td class="p-0 ps-1" colspan="11">{{dire_clie}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Ubicación</td>
+                                    <td class="p-0 ps-1 fw-bold">Departamento</td>
+                                    <td class="p-0 ps-1" colspan="2">{{departamentoCLI}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Provincia</td>
+                                    <td class="p-0 ps-1" colspan="2">{{provinciaCLI}}</td>
+                                    <td class="p-0 ps-1 fw-bold">Distrito</td>
+                                    <td class="p-0 ps-1" colspan="3">{{distritoCLI}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="3">Puesto al que postula (solo pre
+                                        ocupacional)</td>
+                                    <td class="p-0 ps-1" colspan="9">{{cargo_actual}}</td>
+                                </tr>
+
+                                <tr>
+
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        II. FILIACIÓN DEL TRABAJADOR</td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Nombre y Apellidos</td>
+                                    <td class="p-0 ps-1" colspan="8">{{appm_nom}}</td>
+                                    <td class="p-0 ps-1" colspan="2" rowspan="7">
+                                        <input type="hidden" value={{foto}} class="firma" id="foto">
+                                        <canvas class="canvas" id="canvasfoto" style="width: 90%; height: 100%; margin: 5px;"></canvas>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Fecha de Nacimiento </td>
+                                    <td class="p-0 ps-1 fw-bold">Día </td>
+                                    <td class="p-0 ps-1" colspan="2">{{dia}}</td>
+                                    <td class="p-0 ps-1 fw-bold">Mes </td>
+                                    <td class="p-0 ps-1" colspan="2">{{mes}}</td>
+                                    <td class="p-0 ps-1 fw-bold">Año </td>
+                                    <td class="p-0 ps-1" colspan="1">{{anio}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Edad </td>
+                                    <td class="p-0 ps-3">{{Edad}}</td>
+                                    <td class="p-0 ps-3" colspan="7"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 " colspan="6">Documento de Identidad (DNI, carnet de
+                                        extranjería, Pasaporte) </td>
+                                    <td class="p-0 ps-1" colspan="2"> DNI</td>
+                                    <td class="p-0 ps-3" colspan="2">{{numdoc}}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " colspan="10">Domicilio Fiscal</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 " colspan="2">Avenilla/Calle/Jirón/Pasaje </td>
+                                    <td class="p-0 ps-1" colspan="8">{{dire_paci}}</td>
+                                </tr>
+
+                                <tr>                                                                 
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="1">Distrito</td>
+                                    <td class="p-0 ps-1 text-center" colspan="2">{{distritoPAC}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Provincia</td>
+                                    <td class="p-0 ps-1 text-center" colspan="2">{{provinciaPAC}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Departamento</td>
+                                    <td class="p-0 ps-1 text-center" colspan="3">{{departamentoPAC}}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Residencia en el lugar de Trabajo</td>
+                                    <td class="p-0 ps-1 text-center" colspan="1">Si</td>
+                                    <td class="p-0 ps-1 text-center" colspan="2">{{ResiSi}}</td>
+                                    <td class="p-0 ps-1 text-center" colspan="2">No</td>
+                                    <td class="p-0 ps-1 text-center" colspan="2">{{ResiNO}}</td>
+
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Tiempo de Residencia en el Lugar de Trabajo</td>
+                                    <td class="p-0 ps-1 " colspan="1">{{fecing_empresa}}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Essalud</td>
+                                    <td class="p-0 ps-1">{{Essalud}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">EPS</td>
+                                    <td class="p-0 ps-1" colspan="2">{{EPS}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Otro</td>
+                                    <td class="p-0 ps-1" colspan="4">{{Otro}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Email</td>
+                                    <td class="p-0 ps-1" colspan="4">{{correo}}</td>
+                                    <td class="p-0 ps-1" colspan="3">Teléfono: {{telefono}}</td>
+                                    <td class="p-0 ps-1" colspan="4">Celular: {{celular}}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Estado Civil</td>
+                                    <td class="p-0 ps-1" colspan="5">{{desestciv}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Grado de Instrucción</td>
+                                    <td class="p-0 ps-1" colspan="4">{{desgrainst}}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1" colspan="2">N° Total de Hijos vivos</td>
+                                    <td class="p-0 ps-1" colspan="4">{{num_hijos_vivos}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">N° dependientes</td>
+                                    <td class="p-0 ps-1" colspan="4">{{numdep}}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        III. ANTECEDENTES OCUPACIONALES</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold text-center" rowspan="2">Empresa</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" rowspan="2">Área de Trabajo</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" rowspan="2" colspan="2">Ocupación</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="4">Fecha</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" rowspan="2 " colspan="1">Tiempo </td>
+                                    <td class="p-0 ps-1 fw-bold text-center" rowspan="2" colspan="2">Peligros / Riesgos
+                                        Ocupacionales</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" rowspan="2" colspan="1">Equipo de Protección Personal</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="2">Inicio</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="1">Fin</td>
+                                </tr>
+                                {{#antecedentes_ocupacionalesArray}}
+                                <tr>
+                                    <td class="p-0 ps-1">{{empresa}}</td>
+                                    <td class="p-0 ps-1">{{area_trabajo}}</td>
+                                    <td class="p-0 ps-1" colspan="2">{{ocupacion}}</td>
+                                    <td class="p-0 ps-1" colspan="2" style="width: 8%;">{{fec_ini}}</td>
+                                    <td class="p-0 ps-1" colspan="2" style="width: 4%;"">{{fec_fin}}</td>
+                                    <td class="p-0 ps-1" colspan="1">{{tiempo}}</td>
+                                    <td class="p-0 ps-1" colspan="2">{{pel_ries_ocup}}</td>
+                                    <td class="p-0 ps-1" colspan="1">{{epp}}</td>                         
+                                </tr>
+                                {{/antecedentes_ocupacionalesArray}}
+
+                                <tr>
+
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        IV. ANTECEDENTES PATOLOGICOS PERSONALES</td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Alergias</td>
+                                    <td class="p-0 ps-1" colspan="11">{{ap_alergias}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">RAM</td>
+                                    <td class="p-0 ps-1" colspan="11">{{ap_RAM}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Asma</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_asma}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">HTA</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_HTA}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">TBC</td>
+                                    <td class="p-0 ps-1 " colspan="3">{{ap_TBC}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Diabetes</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_diabetes}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Bronquitis</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_bronquitis}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Hepatitis</td>
+                                    <td class="p-0 ps-1 " colspan="3">{{ap_hepatitis}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Neoplasia</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_neoplasia}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Convulsiones</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_convulsiones}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">ITS</td>
+                                    <td class="p-0 ps-1 " colspan="3">{{ap_ITS}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Quemaduras</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_quemaduras}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Intoxicaciones</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_intoxicaciones}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Fiebre tifoidea</td>
+                                    <td class="p-0 ps-1 " colspan="3">{{ap_fiebre_tiroidea}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Cirugías</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_cirugias}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Actividad Física</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_actividad_fisica}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Patología renal</td>
+                                    <td class="p-0 ps-1 " colspan="3">{{ap_patologia_renal}}</td>
+
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Neumonía</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_neumonia}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Patologías de tiroides</td>
+                                    <td class="p-0 ps-1 " colspan="2">{{ap_pato_tiroides}}</td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2">Fracturas</td>
+                                    <td class="p-0 ps-1 " colspan="3">{{ap_fracturas}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">Otros</td>
+                                    <td class="p-0 ps-1" colspan="11">{{ap_otros}}</td>
+                                </tr>
+                                
+                                
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold text-center">Habitos Nocivos</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="4"> Tipo </td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="4">Cantidad</td>
+                                    <td class="p-0 ps-1 text-center fw-bold" colspan="3">Frecuencia</td>
+                                </tr>
+                                {{#js_habitos_nocibosArray}}
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold">{{habito}}</td>
+                                    <td class="p-0 ps-1" colspan="4">{{tipo}}</td>
+                                    <td class="p-0 ps-1" colspan="4">{{cantidad}}</td>
+                                    <td class="p-0 ps-1" colspan="3">{{frecuencia}}</td>
+                                </tr>
+                                {{/js_habitos_nocibosArray}}
+                            
+                                <tr>
+
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        V. ANTECEDENTES PATALÓGICOS FAMILIARES</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 ">Padre</td>
+                                    <td class="p-0 ps-1" colspan="2">{{ant_padre}}</td>
+                                    <td class="p-0 ps-1 " colspan="3">Madre</td>
+                                    <td class="p-0 ps-1" colspan="2">{{ant_madre}}</td>
+                                    <td class="p-0 ps-1" colspan="2">Hermanos</td>
+                                    <td class="p-0 ps-1" colspan="2">{{ant_hermanos}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 ">Esposo(a)</td>
+                                    <td class="p-0 ps-1" colspan="2">{{ant_esposa}}</td>
+                                    <td class="p-0 ps-1" colspan="3">Hijos Vivos </td>
+                                    <td class="p-0 ps-1" colspan="2">N° {{num_hijos_vivos}}</td>
+                                    <td class="p-0 ps-1" colspan="2">Hijos Fallecidos </td>
+                                    <td class="p-0 ps-1" colspan="2">N° {{num_hijos_fallecidos}}</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 ">Otros</td>
+                                    <td class="p-0 ps-1" colspan="11">{{ant_otros}}</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " colspan="12">Absentismo: Enfermedades y Accidentes
+                                        (asociado a trabajo o no)</td>
+                                    
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="2" rowspan="2">Enfermedad,
+                                        Accidente</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="4">Asociado al trabajo </td>
+                                    <td class="p-0 ps-1 fw-bold" colspan="2" rowspan="2">Año </td>
+                                    <td class="p-0 ps-1 fw-bold" rowspan="2" colspan="4">Días de descanso </td>
+
+                                </tr>                               
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="2">SI</td>
+                                    <td class="p-0 ps-1 fw-bold text-center" colspan="2"> NO </td>
+
+                                </tr>
+                                {{#datojs_enferm_acciArray}}
+                                <tr>
+                                    <td class="p-0 ps-1" colspan="2">{{enfermedad}}</td>
+                                    <td class="p-0 ps-1 text-center" colspan="2">{{asostrab_Si}}</td>
+                                    <td class="p-0 ps-1 text-center" colspan="2">{{asostrab_No}}</td>
+                                    <td class="p-0 ps-1" colspan="2">{{año}}</td>
+                                    <td class="p-0 ps-1"colspan="4">{{diasdescanso}}</td>
+
+                                </tr>
+                                {{/datojs_enferm_acciArray}}
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        VI. EVALUACIÓN MÉDICA</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " >Anamnesis</td>
+                                    <td class="p-0 ps-1 " colspan="11">{{ev_ananesis}}</td>
+                                  
+                                </tr>
+
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" rowspan="2" >Examén Clínico</td>
+                                    <td class="p-0 ps-1 " colspan="2">Talla: {{Talla}} {{Tallamed}}</td>
+                                    <td class="p-0 ps-1 " colspan="2">Peso: {{Peso}} {{Pesomed}}</td>
+                                    <td class="p-0 ps-1 " colspan="2">IMC: {{IMC}} {{IMCmed}}</td>
+                                    <td class="p-0 ps-1 " colspan="3">Per. Abdominal: {{PerimetroAbdo}} {{PerimetroAbdomed}}</td>
+                                    <td class="p-0 ps-1 " colspan="2">FR: {{FR}} {{FRmed}}</td>
+                                </tr>   
+                                <tr>
+                                    <td class="p-0 ps-1 " colspan="2">FC: {{FC}} {{FCmed}}</td>
+                                    <td class="p-0 ps-1 " colspan="2">PA: {{PA}} {{PAmed}}</td>
+                                    <td class="p-0 ps-1 " colspan="2">Per. Cadera:</td>
+                                    <td class="p-0 ps-1 " colspan="3">Tempº: {{Temp}} {{Tempmed}}</td>
+                                    <td class="p-0 ps-1 " colspan="2">ICC: </td>
+                                </tr>  
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " >Ectoscopía</td>
+                                    <td class="p-0 ps-1 " colspan="11">{{ev_ectoscopia}}</td>
+                                  
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold " >Estado Mental</td>
+                                    <td class="p-0 ps-1 " colspan="11">{{ev_estado_mental}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="12">
+                                        EXAMEN FÍSICO</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 text-center fw-bold" >Órgano o Sistema</td>
+                                    <td class="p-0 ps-1 text-center fw-bold" colspan="2">Sin Hallazgo</td>
+                                    <td class="p-0 ps-1 text-center fw-bold" colspan="9">Hallazgo</td>
+                                </tr>
+                                {{#js_examen_fisicoArray}}
+                                <tr>
+                                    <td class="p-0 ps-1 text-center fw-bold" >{{organo}}</td>
+                                    <td class="p-0 ps-1 text-center" colspan="2">{{sinhallazgo}}</td>
+                                    <td class="p-0 ps-1 text-center" colspan="9">{{conhallazgo}}</td>
+                                </tr>
+                                {{/js_examen_fisicoArray}}
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        VII. CONCLUSIONES DE EVALUACIÓN PSICOLÓGICA</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="12" >{{con_eva_psicologica}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        VIII. CONCLUSIONES RADIOGRÁFICAS</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="12" >{{con_radiograficas}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        IX. HALLAZGOS PATOLÓGICOS DE LABORATORIO</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="12" >{{con_laboratorio}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        X. CONCLUSIÓN AUDIOMETRÍA</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="12" >{{con_audiometria}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        XI. CONCLUSIÓN ESPIROMETRÍA</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="12" >{{con_espirometria}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        XII. OTROS</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="12" >{{con_otros}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="8">
+                                        XIII. DIAGNÓSTICO MÉDICO OCUPACIONAL</td>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="1">
+                                        P</td>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="1">
+                                        D</td>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="1">
+                                        R</td>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="1">
+                                        CIE-10</td>        
+                                </tr>                
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" colspan="12" >Otros Diagnósticos</td>
+                                </tr>
+                                {{#cie10}}
+                                <tr>
+                                    <td class="p-0 ps-1" colspan="8">{{diades}}</td>
+                                    <td class="p-0 ps-1 text-center" colspan="1">{{P}}</td>
+                                    <td class="p-0 ps-1 text-center" colspan="1">{{D}}</td>  
+                                    <td class="p-0 ps-1 text-center" colspan="1">{{R}}</td>                               
+                                    <td class="p-0 ps-1">{{diacod}}</td>
+                                </tr>
+                                {{/cie10}}                        
+                                <tr>          
+                                    <td class="p-0 ps-1 text-center" style="width: 1%;">Apto</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">{{Apto}}</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">Apto con restricciones</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">{{AptoRestri}}</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">No Apto</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">{{NoApto}}</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">Con Observaciones</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">{{Obser}}</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">Evaluado</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">{{Evaluado}}</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">Pendiente</td>
+                                    <td class="p-0 ps-1 text-center" style="width: 2%;">{{Pendiente}}</td>                               
+                                </tr>                                                                                                                                                                                                                                                    
+                                <tr>
+                                    <td class="p-0 ps-1 fw-bold" style="color:white;background-color:grey" colspan="12">
+                                        XIV. RECOMENDACIONES Y CONTROLES</td>
+                                </tr>
+                                {{#recomendaciones}}
+                                <tr>
+                                    <td class="p-0 ps-1" colspan="12">{{desrec}}</td>
+                                </tr>
+                                {{/recomendaciones}}
+                            </tbody>                         
+                        </table>
+                        <tr>
+                            <td>
+                                <table class="records_list table-sm table-bordered" style="width: 100%; border-collapse: collapse; ">
+                                    <tbody style="font-size: 10px;">
+                                        <tr style="height: 100px;">
+                                            <td class="text-center">
+                                                <input type="hidden" value={{firma}} id="firma1">
+                                                <canvas id="canvas1" style="display: block; margin: auto; width: 200px; height: 100px;"></canvas>
+                                                
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="hidden" value={{med_firma}} id="firma2">
+                                                <canvas id="canvas2" style="display: block; margin: auto; width: 200px; height: 100px;"></canvas>                                                
+                                            </td>
+                                            <td class="text-center">
+                                                <input type="hidden" value={{med_firma}} id="firma3">
+                                                <canvas id="canvas3" style="display: block; margin: auto; width: 200px; height: 100px;"></canvas> 
+                                            </td>
+                                                                            
+                                        </tr> 
+                                        <tr style="height: 10px;">
+                                            <td class="p-0 ps-1 text-center" style="vertical-align: top; ">Huella digital y firma del paciente</td>
+                                            <td class="p-0 ps-1 text-center" style="vertical-align: top;">Firma y Sello de Médico Evaluador</td>
+                                            <td class="p-0 ps-1 text-center" style="vertical-align: top;">Firma y Sello de Médico Ocupacional</td>                                   
+                                        </tr>
+                                        <tr style="height: 10px;">
+                                            <td class="p-0 ps-1 text-center" style="vertical-align: top; border-top: hidden;">LA CRUZ MINAYA</td>
+                                            <td class="p-0 ps-1 text-center" style="vertical-align: top; border-top: hidden">Bernal Ramos, Olga Monica</td>
+                                            <td class="p-0 ps-1 text-center" style="vertical-align: top; border-top: hidden">Palma Serrano, Walther Carlos</td>
+                                        </tr>
+                                        <tr style="height: 10px;">
+                                            <td class="p-0 ps-1 text-center" style="vertical-align: top; border-top: hidden">DNI: 67672</td>
+                                            <td class="p-0 ps-1 text-center" style="vertical-align: top; border-top: hidden">CMP: 079175</td>
+                                            <td class="p-0 ps-1 text-center" style="vertical-align: top; border-top: hidden">CMP: 51505</td>
+                                        </tr>                   
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            cargarFoto("foto", "canvasfoto");
+            cargarFirma("firma1", "canvas1");
+            cargarFirma("firma2", "canvas2");
+            cargarFirma("firma3", "canvas3");           
+            od();
+        });
+
+        function cargarFirma(inputId, canvasId) {
+            let imgb64 = "";
+            imgb64 = document.getElementById(inputId).value;
+            
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext("2d");
+
+            const imagen = new Image();
+            imagen.onload = function () {
+                // Calcular el ancho y alto del canvas en función de la relación de aspecto de la imagen
+                const aspectRatio = imagen.width / imagen.height;
+
+                // Establecer el ancho y alto del canvas para que coincida con las dimensiones de la imagen
+                canvas.width = canvas.clientWidth;
+                canvas.height = canvas.clientWidth / aspectRatio;
+
+                // Dibujar la imagen en el canvas
+                ctx.drawImage(imagen, 0, 0, canvas.width, canvas.height);
+            };
+
+            imagen.src = "data:image/jpeg;base64," + imgb64;
+        }
+        function cargarFoto(inputId, canvasId) {
+            let imgb64 = "";
+            imgb64 = document.getElementById(inputId).value;
+
+            const canvas = document.getElementById(canvasId);
+            const ctx = canvas.getContext("2d");
+
+            const imagen = new Image();
+            imagen.onload = function () {
+                // Ajusta las dimensiones del canvas
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+
+                // Calcula las escalas para ajustar la imagen al canvas
+                const escalaX = canvas.width / imagen.width;
+                const escalaY = canvas.height / imagen.height;
+
+                // Utiliza la escala más pequeña para mantener la proporción de aspecto
+                const escala = Math.max(escalaX, escalaY);
+
+                // Calcula las nuevas dimensiones de la imagen
+                const nuevaAnchura = imagen.width * escala;
+                const nuevaAltura = imagen.height * escala;
+
+                // Calcula las coordenadas para centrar la imagen verticalmente
+                const x = (canvas.width - nuevaAnchura) / 2;
+                const y = (canvas.height - nuevaAltura) / 2;
+
+                // Dibuja la imagen escalada y centrada en el canvas
+                ctx.drawImage(imagen, x, y, nuevaAnchura, nuevaAltura);
+            };
+
+            imagen.src = "data:image/jpeg;base64," + imgb64;
+            }
+
+    </script>
+
+</body>
+
+</html>

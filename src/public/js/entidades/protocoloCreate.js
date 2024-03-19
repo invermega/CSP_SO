@@ -1,4 +1,16 @@
 $(document).ready(function () {
+  ocultarDiv("cotiza_cant_pac");
+  document.querySelectorAll('input[name="estado"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+      let estado = this.value;  // Asignar el valor actual del radio button a la variable estado
+      if (estado === 'C') {
+        mostrarDiv("cotiza_cant_pac");
+      }else{
+        ocultarDiv("cotiza_cant_pac");
+      }
+    });
+  });
+
   const id = document.getElementById("inputid").value;
   getexamenes(id);
   getTipoExamen();
@@ -70,6 +82,7 @@ function llenarFormulario(id) {
 }
 
 function getexamenes(id) {
+  $("#mydatatable").DataTable().destroy();
   var btncerrar = document.getElementById(`cerrarprotocolo`);
   btncerrar.click();
   const ruta = (id === "0") ? '/examenes' : '/examenes/' + id;
@@ -114,8 +127,8 @@ function getexamenes(id) {
               </tr>
             `);
           activar(examen.soexa + '_' + examen.codpru_id);
-          
         });
+        paginaciontabla('#mydatatable', 0, "desc");
       } else {
         // Manejar el caso de que "examenes" no sea un array, tal vez mostrar un mensaje de error
         console.error('La respuesta no es un array de examenes.');
@@ -288,6 +301,11 @@ function CalcularFecVen() {
 }
 
 function Guardar() {
+  let empresa = document.getElementById("nomempresa").value;
+  if (empresa === "") {
+    mensajecentral('error', 'Debe registrar un cliente.');
+    return;
+  }
   const id = document.getElementById("inputid").value;
   var table = document.getElementById('mydatatable');
   var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
@@ -323,19 +341,27 @@ function Guardar() {
     var vigente = document.getElementById("vigente");
     var historico = document.getElementById("historico");
     var cotizacion = document.getElementById("cotizacion");
+    //var data_cantidad_pacientes = document.getElementById("cant_paci").value
     var anulado = document.getElementById("anulado");
     let estado;
+    //let cantidad_pacientes;
+
+   
     if (vigente.checked === true) {
       estado = vigente.value;
+      data_cantidad_pacientes = 0;
     }
     if (historico.checked === true) {
       estado = historico.value;
+      data_cantidad_pacientes = 0;
     }
     if (cotizacion.checked === true) {
       estado = cotizacion.value;
+      cantidad_pacientes =  data_cantidad_pacientes;
     }
     if (anulado.checked === true) {
       estado = anulado.value;
+      //data_cantidad_pacientes = 0;
     }
     const tiemval_cermed = document.getElementById("tiemval_cermed").value
     const fecvcto_cermed = document.getElementById("fecvcto_cermed").value
@@ -346,6 +372,7 @@ function Guardar() {
       comentarios: comentarios,
       tipexa_id: tipexa_id,
       estado: estado,
+      //cantidad_pac : cantidad_pac,
       tiemval_cermed: tiemval_cermed,
       fecvcto_cermed: fecvcto_cermed,
       id: id,

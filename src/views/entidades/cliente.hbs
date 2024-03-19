@@ -21,17 +21,17 @@
                     data-target="#modalFormactcliente"
                     style="background-color: #793B8E;color: white;border-color: #793B8E;">
                     <i class="fa-solid fa-pencil-alt"></i>
-                    Editar Cliente
+                    Clientes
                 </button>
-                <button class="btn position-relative" id="btneliminarusu" data-toggle="modal"
+                <!--<button class="btn position-relative" id="btneliminarusu" data-toggle="modal"
                     data-target="#modalFormactcliente" onclick="eliminarCli()"
                     style="background-color: #793B8E;color: white;border-color: #793B8E;">
                     <i class="fa-solid fa-trash-alt"></i>
                     Eliminar
-                </button>
+                </button>-->
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body " style="max-height: 70vh; overflow-y: auto;">
             <div class="container-fluid body1">
                 <form id="formcliente" class="needs-validation" novalidate>
                     <ul class="nav nav-tabs mb-3" id="p1" role="tablist">
@@ -304,10 +304,9 @@
                                 <label class="control-label input-group-text" for="clientemodal">CLIENTES</label>
                                 <input class="form-control form-control-sm " id="clientemodal"
                                     placeholder="Ingrese número de documento" required></input>
-
-                                <label class="input-group-text form-control-sm" for="clientemodal" onclick="mostar()">
-                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                </label>
+                                <button type="button" class="btn input-group-text" id="searchCliente">
+                                    <i class="fa-solid fa-magnifying-glass"></i></label>
+                                </button>
                             </div>
                             <div class="row mb-2 mt-2">
                                 <div class="table-responsive">

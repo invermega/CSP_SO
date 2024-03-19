@@ -7,7 +7,7 @@
 
         for (let i = 0; i < selectedFiles.length; i++) {
             const file = selectedFiles[i];
-            const allowedExtensions = ['.pdf'];
+            const allowedExtensions = ['.pdf', '.jpg', '.jpeg', '.png'];
             const fileExtension = file.name.split('.').pop().toLowerCase();
             if (!allowedExtensions.includes('.' + fileExtension)) {
                 mensaje('error', 'El archivo ' + file.name + ' no es un tipo de archivo permitido.', 2000);
@@ -46,6 +46,13 @@ function mostrarMiniaturas() {
             pdfIcon.innerHTML = `<img src="/img/pdficono.webp" width="90" height="90">`;
             miniaturaDiv.appendChild(pdfIcon);
             miniaturasDict[archivo.name] = pdfIcon;
+        } else {
+            const imgIcon = document.createElement("a");
+            imgIcon.href = URL.createObjectURL(archivo);
+            imgIcon.target = "_blank";
+            imgIcon.innerHTML = `<img src="/img/imgicono.webp" width="90" height="90">`;
+            miniaturaDiv.appendChild(imgIcon);
+            miniaturasDict[archivo.name] = imgIcon;
         }
 
         const nombreArchivoParrafo = document.createElement("p");
@@ -75,12 +82,12 @@ function SubirDocumento() {
         const response = await fetch(url);
         const blob = await response.blob();
         return new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result);
-          reader.onerror = reject;
-          reader.readAsDataURL(blob);
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = reject;
+            reader.readAsDataURL(blob);
         });
-      }
+    }
 
     // Almacenar los archivos en un objeto
     const archivosBase64 = {};
@@ -88,31 +95,56 @@ function SubirDocumento() {
     let soexa = document.getElementById('soexa').value;
     let codpru_id = document.getElementById('codpru_id').value;
 
+    let tipoExtension = '';
+    const nombreArchivo = fileInput.files[0].name;
+    const extension = nombreArchivo.split('.').pop();
+    tipoExtension = extension.toLowerCase();
+
+    // Función para convertir una imagen a PDF
+    async function imagenAPDF(url) {
+        const pdfDoc = await PDFLib.PDFDocument.create();
+        const img = await pdfDoc.embedJpg(url);
+        const page = pdfDoc.addPage([img.width, img.height]);
+        page.drawImage(img, {
+            x: 0,
+            y: 0,
+            width: img.width,
+            height: img.height,
+        });
+        return await pdfDoc.save();
+    }
+
     (async () => {
         for (const archivoItem of archivoItems) {
             const enlace = archivoItem.querySelector("a");
             const url = enlace.getAttribute("href");
             const nombreArchivo = archivoItem.querySelector("p").textContent;
-  
-            try {
-              const base64Data = await urlToBase64(url);
-              archivosBase64[nombreArchivo] = base64Data;
-            } catch (error) {
-              console.error(`Error al convertir ${nombreArchivo} a Base64:`, error);
-            }
-          }
 
-        console.log(archivosBase64);
+            try {
+                let base64Data;
+                // Si la extensión es de imagen, conviértela a PDF
+                if (['jpg', 'jpeg', 'png', 'gif'].includes(tipoExtension)) {
+                    base64Data = await imagenAPDF(url);
+                } else {
+                    base64Data = await urlToBase64(url);
+                }
+                archivosBase64[nombreArchivo] = base64Data;
+            } catch (error) {
+                console.error(`Error al convertir ${nombreArchivo} a Base64:`, error);
+            }
+        }
+
         const datosAEnviar = {
-            cita_id:cita_id,
-            soexa:soexa,
-            codpru_id:codpru_id,
-            archivosBase64: archivosBase64
-          };
+            cita_id: cita_id,
+            soexa: soexa,
+            codpru_id: codpru_id,
+            archivosBase64: archivosBase64,
+            tipoExtension: tipoExtension
+        };
         $.ajax({
             url: '/subirdocumento', // Asegúrate de que la URL sea la correcta
             method: "POST",
-            data:JSON.stringify(datosAEnviar),
+            data: JSON.stringify(datosAEnviar),
             contentType: 'application/json',
             success: function (lista) {
                 let doc_adic_id = document.getElementById('doc_adic_id');
@@ -135,6 +167,7 @@ function SubirDocumento() {
     })();
 }
 
+
 function EliminarDocumento() {
     let doc_adic_id = document.getElementById('doc_adic_id');
     const miniaturasDiv = document.getElementById("miniaturas");
@@ -151,13 +184,12 @@ function EliminarDocumento() {
         url: '/eliminardocumento', // Asegúrate de que la URL sea la correcta
         method: "DELETE",
         data: {
-            cita_id:cita_id,
-            soexa:soexa,
-            codpru_id:codpru_id,
-            doc_adic_id : doc_adic_id.value
+            cita_id: cita_id,
+            soexa: soexa,
+            codpru_id: codpru_id,
+            doc_adic_id: doc_adic_id.value
         },
         success: function (lista) {
-            console.log(lista);
             if (lista[0].icono === 'success') {
                 miniaturasDiv.style.display = "none";
                 fileInput.disabled = false;

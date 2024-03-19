@@ -1,3 +1,15 @@
+<style>
+    hr {
+        opacity: 10%;
+        margin-block: 2%;
+    }
+
+    @media (max-width: 700px) {
+        .container-fluid px-4 {
+            font-size: 1px;
+        }
+    }
+</style>
 <div class="container-fluid px-4">
     <h1 class="mt-4 tituloverde">Psicología</h1>
     <div class="card mb-4">
@@ -15,334 +27,908 @@
         </div>
         <div class="card-body " style="max-height: 70vh; overflow-y: auto; ">
             <input type="text" id="nuncom" style="display: none;" value="0">
-            <input type="text" id="codpru_id" style="display: none;" value="33">
+            <input type="text" id="codpru_id" style="display: none;" value="32">
             <input type="text" id="soexa" style="display: none;" value="032">
-            <div>
-                <div class="table-responsive" style="text-align: start;">
+            <div class="row">
+                <table
+                    class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                    style="width: 100%; font-size: 15px">
+                    <thead class="text-start">
+                        <th colspan="4">I.- MOTIVO DE EVALUACIÓN</th>
+                    </thead>
+                    <tbody class="text-start col-md-12">
+                        <tr>
+                            <td colspan="3">
+                                <div style="width:100%">
+                                    <textarea class="form-control form-control-sm col-md-12" name="" id="mot_eva"
+                                        cols="30" rows="3"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table
+                    class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                    style="width: 100%; font-size: 15px">
+                    <thead class="text-start">
+                        <th colspan="12">II.- DATOS OCUPACIONALES</th>
+                    </thead>
+                    <tbody class="text-start col-md-12">
+                        <tr>
+                            <th colspan="12">3.1 EMPRESA ACTUAL (postula, trabaja o trabajó)</th>
+                        </tr>
 
-                    <table class="table-responsive">
-                        <!--style="width: 70%; float:left;margin-right: 2px"-->
-                        <div> 
-                            <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                                <thead class="thead sticky-top">
-                                    <tr>
-                                        <th colspan="8">OBSERVACIÓN DE CONDUCTAS</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>Prestación</th>
-                                        <td colspan="2">Adecuado</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td colspan="2">Inadecuado</td>
-                                        <td colspan="2"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Postura</th>
-                                        <td colspan="2">Erguida</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td colspan="2">Encorvada</td>
-                                        <td colspan="2"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th rowspan="3">Discurso</th>
-                                        <th>Ritmo</th>
-                                        <td>Lento</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Rapido</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Fluido</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <th>Tono</th>
-                                        <td>Alto</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Moderado</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Bajo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Articulación</th>
-                                        <td>Con dificultad</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Sin dificultad</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th rowspan="3">Orientación</th>
-                                        <th>Tiempo</th>
-                                        <td>Orientado</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td colspan="2">Desorientado</td>
-                                        <td colspan="2"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni"></td>
+                        <tr>
+                            <td class="col-md-2">Área de trabajo</td>
+                            <td colspan="10">
+                                
+                                <div class="row">
+                                    <div class="col-md-12 input-group input-group-sm">
+                                        <label class="input-group-text" for="tiem_lab">Tiempo total
+                                            laborando</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                            oninput="limitarCaracteresNumericos(    , 2);" id="tiem_lab"
+                                            placeholder="Ingrese el tiempo en horas" required>
+                                        <label class="input-group-text" for="tiem_lab"><i
+                                                class="fa-solid fa-calendar-day"></i></label>
+                                    </div>
+                                </div>                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold" colspan="12"><u>Principales Riesgos:</u></td>
+                        </tr>
+                        <tr>
+                            <td colspan="12">
+                                <div style="width:100%">
+                                    <textarea class="form-control form-control-sm col-md-12" name="" id="prin_riesgos"
+                                        cols="30" rows="3"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold" colspan="12"><u>Medidas de Seguridad:</u></td>
+                        </tr>
+                        <tr>
+                            <td colspan="12">
+                                <div style="width:100%">
+                                    <textarea class="form-control form-control-sm col-md-12" name="" id="med_seguridad"
+                                        cols="30" rows="3"></textarea>
+                                </div>
+                            </td>
+                        </tr>
 
-                                    </tr>
-                                    
-                                    <tr>
-                                        <th>Espacio</th>
-                                        <td>Orientado</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td colspan="2">Desorientado</td>
-                                        <td colspan="2"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Persona</th>
-                                        <td>Orientado</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td colspan="2">Desorientado</td>
-                                        <td colspan="2"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <tr>
+                            <td class="fw-bold" colspan="12">3.2 ANTERIORES EMPRESAS: (experiencia laboral)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="12">
+                                <table class="records_list table table-sm table-bordered letra" id="tablaEmpresaAnt">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Nombre de la Empresa</th>
+                                            <th scope="col">Act. de la Empresa</th>
+                                            <th scope="col">Puesto</th>
+                                            <th scope="col">Tiempo</th>
+                                            <th scope="col">Causa del Retiro</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input type="text" id=""
+                                                    class="form-control form-control-sm text-center">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="ant_empresas1"
+                                                    class="form-control form-control-sm">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="" class="form-control form-control-sm">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="" class="form-control form-control-sm">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <input type="text" id="" class="form-control form-control-sm">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="" class="form-control form-control-sm">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="text" id=""
+                                                    class="form-control form-control-sm text-center">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="ant_empresas2"
+                                                    class="form-control form-control-sm">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="" class="form-control form-control-sm">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="" class="form-control form-control-sm">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <input type="text" id="" class="form-control form-control-sm">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="" class="form-control form-control-sm">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <input type="text" id=""
+                                                    class="form-control form-control-sm text-center">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="ant_empresas3"
+                                                    class="form-control form-control-sm">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="" class="form-control form-control-sm">
+                                            </td>
+                                            <td>
+                                                <input type="text" id="" class="form-control form-control-sm">
+                                            </td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <input type="text" id="" class="form-control form-control-sm">
+                                                    
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" id="" class="form-control form-control-sm">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
 
-                            <!--<table class="records_list table table-sm table-bordered letra" style="width: 25%; float:right;">
-                                <thead class="thead sticky-top">
-                                    <th colspan="2">NOMBRES</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>NO PRESENTA</td>
-                                        <td>Test de Yoshitake (Fatiga)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>LEVE</td>
-                                        <td>Test de Epworth (Somnoloencia)</td>
-                                    </tr>
-                                </tbody>
-                            </table>-->
+                    </tbody>
+                </table>
 
-                            <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                                <thead class="thead sticky-top">
-                                    <th colspan="7">PROCESOS COGNITIVOS</th>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th>Lúcido, atento</th>
-                                        <td colspan="6"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni" placeholder="Conservado">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Pensamiento</th>
-                                        <td colspan="6"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni" placeholder="Conservado">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Percepción</th>
-                                        <td colspan="6"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni" placeholder="Conservado">
-                                        </td>
-                                    </tr>
+                <table
+                    class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                    style="width: 100%; font-size: 15px">
+                    <thead class="text-start">
+                        <th colspan="4">III.- HISTORIA FAMILIAR
+                        </th>
+                    </thead>
+                    <tbody class="text-start col-md-12">
+                        <tr>
+                            <td colspan="3">
+                                <div style="width:100%">
+                                    <textarea class="form-control form-control-sm col-md-12" name=""
+                                        id="historia_familiar" cols="30" rows="3"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                                    <tr>
-                                        <th rowspan="2">Memoria</th>
-                                        <td>Corto Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        </td>
-                                        <td>Mediano Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Largo Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Corto y Largo Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        </td>
-                                        <td>Mediano y Largo Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Corto, Mediano y Largo Plazo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
 
-                                    <tr>
-                                        <th rowspan="3">Inteligencia</th>
-                                        <td>Muy Superior</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        </td>
-                                        <td>Superior</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Promedio alto</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>Promedio</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        </td>
-                                        <td>Promedio Bajo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        <td>Inferior o Bajo</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Deficiencia Mental</td>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni">
-                                        </td>
-                                        </td>
-                                        <td colspan="4"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Apetito</th>
-                                        <td colspan="6"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni" placeholder="">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Sueño</th>
-                                        <td colspan="6"><input class="form-control form-control-sm" maxlength="50"
-                                                type="text" id="dni" placeholder="">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                <table
+                    class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                    style="width: 100%; font-size: 15px">
+                    <thead class="text-start">
+                        <th colspan="4">IV.- ACCIDENTES Y ENFERMEDADES (durante el tiempo de trabajo)
+                        </th>
+                    </thead>
+                    <tbody class="text-start col-md-12">
+                        <tr>
+                            <td colspan="3">
+                                <div style="width:100%">
+                                    <textarea class="form-control form-control-sm col-md-12" name="" id="accid_enfer"
+                                        cols="30" rows="3"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                            <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                                <thead class="thead sticky-top">
-                                    <th colspan="2">RESULTADOS DE EVALUACIÓN</th>
-                                </thead>
 
-                                <tbody>
-                                    <tr>
-                                        <th>Nivel Intelectual</th>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni" placeholder="">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Coordinación Visomotriz</th>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni" placeholder="">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nivel de Memoria</th>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni" placeholder="">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Personalidad</th>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni"
-                                                placeholder="">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th>Afectividad</th>
-                                        <td><input class="form-control form-control-sm" maxlength="50" type="text"
-                                                id="dni" placeholder="">
-                                        </td>
-                                    </tr>
-                                </tbody>
+                <table
+                    class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                    style="width: 100%; font-size: 15px">
+                    <thead class="text-start">
+                        <th colspan="4">V.- HÁBITOS (pasatiempos, consumo de tabaco, alcohol y/o drogas)
+                        </th>
+                    </thead>
+                    <tbody class="text-start col-md-12">
+                        <tr>
+                            <td colspan="3">
+                                <div style="width:100%">
+                                    <textarea class="form-control form-control-sm col-md-12" name="" id="habitos"
+                                        cols="30" rows="3"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                            </table>
-                        </div>
 
-                    </table>
+                <table
+                    class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                    style="width: 100%; font-size: 15px">
+                    <thead class="text-start">
+                        <th colspan="4">VI.- OTRAS OBSERVACIONES</th>
+                    </thead>
+                    <tbody class="text-start col-md-12">
+                        <tr>
+                            <td colspan="3">
+                                <div style="width:100%">
+                                    <textarea class="form-control form-control-sm col-md-12" name="" id="otras_observ"
+                                        cols="30" rows="3"></textarea>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                    <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                        <thead class="thead sticky-top">
-                            <th colspan="2">CONCLUSIONES</th>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <th>Área Cognitiva</th>
-                                <td><input class="form-control form-control-sm" maxlength="200" type="text" id="dni">
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>Área Emocional</th>
-                                <td><input class="form-control form-control-sm" maxlength="200" type="text" id="dni">
-                                </td>
-                            </tr>
-                        </tbody>
-
-                    </table>
-
-                    <table class="records_list table table-sm table-bordered letra" id="tabladatos">
-                        <tbody>
-                            <tr>
-
-                                <td>Aptitud</td>
-                                <td>
-                                    <input class="form-control form-control-sm" maxlength="200" type="text" id="dni">
-                                </td>
-                            </tr>
-                    </table>
-
-                </div>
             </div>
 
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="row">
+                        <table
+                            class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                            style="width: 100%; font-size: 15px">
+                            <thead class="text-start">
+                                <th colspan="4">RESULTADOS DE EVALUACIÓN</th>
+                            </thead>
+                            <tbody class="text-start">
+                                <tr>
+                                    <td><span class="fw-bold">Nivel Intelectual</span></td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width:100%">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="re_nivel_inte" style="width:100%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><span class="fw-bold">Coordinación Visomotriz</span>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width:100%">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="re_coord_visomotriz" style="width:100%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="fw-bold">Nivel de Memoria</span></td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width:100%">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="re_nivel_memoria" style="width:100%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="fw-bold">Personalidad</span></td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width:100%">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="re_personalidad" style="width:100%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="fw-bold">Afectividad</span></td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width:100%">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="re_afectividad" style="width:100%">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <table
+                            class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                            style="width: 100%; font-size: 15px">
+                            <thead class="text-start">
+                                <th colspan="7">VII.- EXAMEN MENTAL:</th>
+                            </thead>
+                            <tbody class="text-start">
+                                <tr>
+                                    <td class="text-start" colspan="12">8.1 <u>OBSERVACIÓN DE
+                                            CONDUCTAS</u></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="fw-bold">Presentacion</span></td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline d-flex justify-content-center"
+                                                style="width:100%">
+                                                <input class="form-check-input" type="radio" name="cod_present"
+                                                    id="cod_present_ade" value="ADECUADO">
+                                                <label class="form-check-label text-center"
+                                                    for="cod_present_ade">Adecuado</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline d-flex justify-content-center"
+                                                style="width:100%">
+                                                <input class="form-check-input" type="radio" name="cod_present"
+                                                    id="cod_present_ina" value="INADECUADO">
+                                                <label class="form-check-label" for="cod_present_ina">Inadecuado</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td><span class="fw-bold">Postura</span></td>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline d-flex justify-content-center">
+                                                <input class="form-check-input" type="radio" name="cod_postura"
+                                                    id="cod_postura_erg" value="ERGUIDA" checked>
+                                                <label class="form-check-label" for="cod_postura_erg">Erguida</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline d-flex justify-content-center">
+                                                <input class="form-check-input" type="radio" name="cod_postura"
+                                                    id="cod_postura_enc" value="ENCORVADA">
+                                                <label class="form-check-label" for="cod_postura_enc">Encorvada</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="3" style="vertical-align: middle;"><span
+                                            class="fw-bold">Discurso</span></td>
+
+                                    <td rowspan="3" style="vertical-align: middle;">
+                                        <div class="text-center fw-bold">
+                                            <span>Ritmo:</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm ">
+                                                <input class="form-check-input" type="radio" name="dis_ritmo"
+                                                    id="dis_ritmo_len" value="LENTO">
+                                                <label class="form-check-label" for="dis_ritmo_len">Lento</label>
+                                            </div>
+                                        </div>
+                                    </td>
+
+
+                                    <td rowspan="3" style="vertical-align: middle;">
+                                        <div class="text-center fw-bold">
+                                            <span>Tono:</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm">
+                                                <input class="form-check-input" type="radio" name="dis_tono"
+                                                    id="dis_tono_baj" value="BAJO">
+                                                <label class="form-check-label" for="dis_tono_baj">Bajo</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td rowspan="3" style="vertical-align: middle;">
+                                        <div class="text-center fw-bold">
+                                            <span>Articulación:</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm">
+                                                <input class="form-check-input" type="radio" name="dis_articulacion"
+                                                    id="dis_articulacion_con_dif" value="CON DIFICULTAD" checked>
+                                                <label class="form-check-label" for="dis_articulacion_con_dif">Con
+                                                    dificultad</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm ">
+                                                <input class="form-check-input" type="radio" name="dis_ritmo"
+                                                    id="dis_ritmo_rap" value="RAPIDO">
+                                                <label class="form-check-label" for="dis_ritmo_rap">Rápido</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm">
+                                                <input class="form-check-input" type="radio" name="dis_tono"
+                                                    id="dis_tono_mod" value="MODERADO" checked>
+                                                <label class="form-check-label" for="dis_tono_mod">Moderado</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm">
+                                                <input class="form-check-input" type="radio" name="dis_articulacion"
+                                                    id="dis_articulacion_sin_dif" value="SIN DIFICULTAD" checked>
+                                                <label class="form-check-label" for="dis_articulacion_sin_dif">Sin
+                                                    dificultad</label>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm ">
+                                                <input class="form-check-input" type="radio" name="dis_ritmo"
+                                                    id="dis_ritmo_flu" value="FLUIDO" checked>
+                                                <label class="form-check-label" for="dis_ritmo_flu">Fluido</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="col-sm ">
+                                                <input class="form-check-input" type="radio" name="dis_tono"
+                                                    id="dis_tono_alt" value="ALTO">
+                                                <label class="form-check-label" for="dis_tono_alt">Alto</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2" style="vertical-align: middle;"><span
+                                            class="fw-bold">Orientación</span></td>
+                                    <td rowspan="2">
+                                        <div class="text-center fw-bold" style="vertical-align: middle;">
+                                            <span>Tiempo</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm ">
+                                                <input class="form-check-input" type="radio" name="ori_tiempo"
+                                                    id="ori_tiempo_ori" value="ORIENTADO" checked>
+                                                <label class="form-check-label" for="ori_tiempo_ori">Orientado</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td rowspan="2">
+                                        <div class="text-center fw-bold" style="vertical-align: middle;">
+                                            <span>Espacio</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm ">
+                                                <input class="form-check-input" type="radio" name="ori_espacio"
+                                                    id="ori_espacio_ori" value="ORIENTADO" checked>
+                                                <label class="form-check-label" for="ori_espacio_ori">Orientado</label>
+                                            </div>
+                                        </div>
+                                    </td>
+
+
+                                    <td rowspan="2">
+                                        <div class="text-center fw-bold" style="vertical-align: middle;">
+                                            <span>Persona</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm ">
+                                                <input class="form-check-input" type="radio" name="ori_persona"
+                                                    id="ori_persona_ori" value="ORIENTADO" checked>
+                                                <label class="form-check-label" for="ori_persona_ori">Orientado</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm ">
+                                                <input class="form-check-input" type="radio" name="ori_tiempo"
+                                                    id="ori_tiempo_des" value="DESORIENTADO">
+                                                <label class="form-check-label"
+                                                    for="ori_tiempo_des">Desorientado</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm ">
+                                                <input class="form-check-input" type="radio" name="ori_espacio"
+                                                    id="ori_espacio_des" value="DESORIENTADO">
+                                                <label class="form-check-label"
+                                                    for="ori_espacio_des">Desorientado</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="col-sm ">
+                                                <input class="form-check-input" type="radio" name="ori_persona"
+                                                    id="ori_persona_des" value="DESORIENTADO">
+                                                <label class="form-check-label"
+                                                    for="ori_persona_des">Desorientado</label>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table
+                            class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                            style="font-size: 15px">
+                            <tbody class="text-start">
+                                <tr>
+                                    <td class="text-start" colspan="7">8.2 <u>PROCESOS COGNITIVOS</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="fw-bold">Lúcido, atento</span></td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width: 100%;">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="pro_cog_lucido_atento">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="fw-bold">Pensamiento</span></td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width: 100%;">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="pro_cog_pensamiento">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="fw-bold">Percepción</span></td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width: 100%;">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="pro_cog_percepcion">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <span class="fw-bold">Memoria</span>
+                                    </td>
+
+                                    <td style="width: 30%;">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline d-flex justify-content-center">
+                                                <input class="form-check-input" type="radio" name="pro_cog_memoria"
+                                                    id="pro_cog_memoria_cor_pla" value="CORTO PLAZO">
+                                                <label class="form-check-label" for="pro_cog_memoria_cor_pla">Corto
+                                                    Plazo</label>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="form-check form-check-inline d-flex justify-content-center">
+                                                    <input class="form-check-input" type="radio" name="pro_cog_memoria"
+                                                        id="pro_cog_memoria_med_pla" value="MEDIANO PLAZO">
+                                                    <label class="form-check-label"
+                                                        for="pro_cog_memoria_med_pla">Mediano
+                                                        Plazo</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="width: 30%;">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="form-check form-check-inline d-flex justify-content-center">
+                                                    <input class="form-check-input" type="radio" name="pro_cog_memoria"
+                                                        id="pro_cog_memoria_lar_pla" value="LARGO PLAZO">
+                                                    <label class="form-check-label" for="pro_cog_memoria_lar_pla">Largo
+                                                        Plazo</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td><span class="fw-bold">Inteligencia</span></td>
+                                    <td colspan="3">
+                                        <table style="width: 100%;">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="col-sm ">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="pro_cog_inteligencia"
+                                                                    id="pro_cog_inteligencia_muy_sup"
+                                                                    value="MUY SUPERIOR">
+                                                                <label class="form-check-label"
+                                                                    for="pro_cog_inteligencia_muy_sup">Muy
+                                                                    Superior</label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="col-sm ">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="pro_cog_inteligencia"
+                                                                    id="pro_cog_inteligencia_sup" value="SUPERIOR">
+                                                                <label class="form-check-label"
+                                                                    for="pro_cog_inteligencia_sup">Superior</label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="col-sm ">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="pro_cog_inteligencia"
+                                                                    id="pro_cog_inteligencia_nor_bri" value="NORMAL">
+                                                                <label class="form-check-label"
+                                                                    for="pro_cog_inteligencia_nor_bri">Normal
+                                                                    Brillante</label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="col-sm ">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="pro_cog_inteligencia"
+                                                                    id="pro_cog_inteligencia_nor_pro"
+                                                                    value="NORMAL PROMEDIO" checked>
+                                                                <label class="form-check-label"
+                                                                    for="pro_cog_inteligencia_nor_pro">Normal
+                                                                    Promedio</label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="col-sm ">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="pro_cog_inteligencia"
+                                                                    id="pro_cog_inteligencia_nor_tor"
+                                                                    value="NORMAL TORPE">
+                                                                <label class="form-check-label"
+                                                                    for="pro_cog_inteligencia_nor_tor">Normal
+                                                                    Torpe
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="col-sm ">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="pro_cog_inteligencia"
+                                                                    id="pro_cog_inteligencia_fro" value="FRONTERIZO">
+                                                                <label class="form-check-label"
+                                                                    for="pro_cog_inteligencia_fro">Fronterizo
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="col-sm ">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="pro_cog_inteligencia"
+                                                                    id="pro_cog_inteligencia_rm_lev" value="RM LEVE">
+                                                                <label class="form-check-label"
+                                                                    for="pro_cog_inteligencia_rm_lev">RM Leve
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="col-sm ">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="pro_cog_inteligencia"
+                                                                    id="pro_cog_inteligencia_rm_mod"
+                                                                    value="RM MODERADO">
+                                                                <label class="form-check-label"
+                                                                    for="pro_cog_inteligencia_rm_mod">RM
+                                                                    Moderado
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="col-sm ">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="pro_cog_inteligencia"
+                                                                    id="pro_cog_inteligencia_rm_sev" value="RM SEVERO">
+                                                                <label class="form-check-label"
+                                                                    for="pro_cog_inteligencia_rm_sev">RM
+                                                                    Severo
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="container">
+                                                            <div class="col-sm ">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="pro_cog_inteligencia"
+                                                                    id="pro_cog_inteligencia_rm_pro"
+                                                                    value="RM PROFUNDO">
+                                                                <label class="form-check-label"
+                                                                    for="pro_cog_inteligencia_rm_pro">RM
+                                                                    Profundo
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td><span class="fw-bold">Apetito</span></td>
+                                    <td colspan="3">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width: 100%;">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="pro_cog_apetito">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="fw-bold">Sueño</span></td>
+                                    <td colspan="6">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width: 100%;">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    id="pro_cog_sueño">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><span class="fw-bold">Conducta Sexual</span></td>
+                                    <td colspan="6">
+                                        <div class="container">
+                                            <div class="form-check form-check-inline" style="width: 100%;">
+                                                <input class="form-control form-control-sm" type="text" id="">
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <table
+                            class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                            style="width: 100%; font-size: 15px">
+                            <thead class="text-start">
+                                <th colspan="4">VIII.- DIAGNÓSTICO FINAL:</th>
+                            </thead>
+                            <tbody class="text-start">
+                                <tr>
+                                    <td class="col-md-2"><span class="fw-bold">Área Cognitiva</span></td>
+                                    <td colspan="3">
+                                        <div style="width:100%">
+                                            <textarea class="form-control form-control-sm " name="con_area_cognitiva"
+                                                id="con_area_cognitiva" cols="30" rows="3"></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-2"><span class="fw-bold">Área Emocional</span></td>
+                                    <td colspan="3">
+                                        <div style="width:100%">
+                                            <textarea class="form-control form-control-sm " name="con_area_emocional"
+                                                id="con_area_emocional" cols="30" rows="3"></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="row">
+                        <div class="input-group input-group-sm">
+                            <label class="control-label input-group-text" for="">Aptitud</label>
+                            <select class="form-select" name="" id="tipresult_id">
+                                <option selected>Apto</option>
+                                <option value="1">No Apto</option>
+                                <option value="2">Si Apto</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <table
+                        class="align-middle records_list table table-sm table-bordered letra animate__animated animate__fadeIn"
+                        style="width: 100%; font-size: 15px" id="tablaPsicologiaTest">
+                        <thead>
+                            <tr>
+                                <th>Resultado</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodytest">
+
+                        </tbody>
+                        <div class="text-center" id="cargatabla" style="display: none;">
+                            <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                                <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent" speed="1"
+                                    style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+                            </div>
+                        </div>
+                    </table>
+                </div>
+            </div>
 
             {{> cie10 }}
             {{> recomendaciones }}
             {{> documentoadicionales }}
+
+
+
         </div>
     </div>
 </div>

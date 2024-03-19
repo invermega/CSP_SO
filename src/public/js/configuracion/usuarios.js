@@ -102,7 +102,7 @@ function guardarusuario() {
     let correo = $('#correo');
     let direccion = $('#direccion');
     let codrol = $('#codrol');
-    let sexo = $('#sexo');    
+    let sexo = $('#sexo');
     let med_id = $('#med_id');
     var picuser = canvas.toDataURL();
     $.ajax({
@@ -128,10 +128,13 @@ function guardarusuario() {
         },
         success: function (response) {
             btnUsuario.disabled = false;
-            getpermisos();
-            limpiarinputs();
-            activarCampo();
-            $('input[type="text"]').val("");
+            if (response[0].response === 'success') {
+                getpermisos();
+                limpiarinputs();
+                activarCampo();
+                $('input[type="text"]').val("");
+            }
+
             mensaje(response[0].tipo, response[0].response, 1500);
         },
         error: function () {
@@ -223,7 +226,7 @@ function eliminarUser(iduser) {
         }
     });
 }
-function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, fecnacM, correoM, direccionM, codrolM, sexoM,med_idM,medapmnM) {
+function getusuariosm(iduserM, usuarioM, NombresM, appM, apmM, DNIM, celularM, fecnacM, correoM, direccionM, codrolM, sexoM, med_idM, medapmnM) {
     $('#iduser').val(iduserM);
     $('#usuario').val(usuarioM);
     $('#Nombres').val(NombresM);
@@ -286,16 +289,16 @@ document.getElementById("medicomodal").addEventListener("keyup", function (event
     }
 });
 
-function getmedico(parametro) {
+function getmedico(parametro1) {
     mostrarDiv('cargamedico');
     ocultarDiv('tablamedicomodal');
-    let parametro1=1;
+    let parametro = 0;
     $.ajax({
         url: '/listarmedicos',
         method: 'GET',
         data: {
             parametro: parametro,
-            parametro1 : parametro1,
+            parametro1: parametro1,
         },
         success: function (medicos) {
             ocultarDiv('cargamedico');
@@ -330,7 +333,7 @@ function getmedico(parametro) {
     });
 }
 
-function getmedicom(med_idM, medapmnM, ) {    
+function getmedicom(med_idM, medapmnM,) {
     $('#med_id').val(med_idM);
     $('#medapmn').val(medapmnM);
     var btncerrar = document.getElementById(`cerrarmedicomodal`);

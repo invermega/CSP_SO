@@ -86,6 +86,11 @@ document.getElementById("clientemodal").addEventListener("keyup", function (even
     }
 });
 
+document.getElementById("searchCliente").addEventListener("click", function () {
+    var parametro = document.getElementById("clientemodal").value;
+    getcliente(parametro);
+});
+
 function getcliente(parametro) {
     mostrarDiv('carga');
     ocultarDiv('tablaclientemodal');
@@ -348,8 +353,12 @@ function guardarcliente() {
             piccli: piccli,
         },
         success: function (response) {
-            $('input[type="text"]').val("");
-            mensaje(response[0].tipo, response[0].response, 1500);
+            if(response[0].tipo === 'success'){
+                $('input[type="text"]').val("");
+                mensaje(response[0].tipo, response[0].response, 1500);
+            }else{
+                mensaje(response[0].tipo, response[0].response, 1500);
+            }
         },
         error: function () {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);

@@ -53,9 +53,21 @@ router.post('/pbcuestionarioespiromeria', isLoggedIn, controllerHI.postcuestiona
 /****************Psicologia*****************/
 router.get('/pbpsicologia', isLoggedIn, controllerrender.renderpsicologiaprueba);
 router.get('/resultpsicologia', isLoggedIn, controllerHI.getresultpsicologia);
+router.post('/pbpsicologia', isLoggedIn, controllerHI.postpsicologia);
+router.get('/tablapsicologiatest', isLoggedIn, controllerHI.getpsicologiatest);
+//pa_SelTablaPsicologiaTest
+
 /*********************************************/
 /****************Ficha medico ocupacional 312*****************/
 router.get('/pbfichamedicoocupacional312', isLoggedIn, controllerrender.renderfichamedicoocupacional312prueba);
+router.post('/pbfichamedicoocupacional312', isLoggedIn, controllerHI.postfichamedicoocupacional312);
+router.get('/resultfichamedicoocupacional312', isLoggedIn, controllerHI.getresultfichamedicoocupacional312);
+router.get('/datosPacienteFicha312', isLoggedIn, controllerHI.getdatosPacienteFicha312);
+router.get('/getdatosformatosficha312', isLoggedIn, controllerHI.getdatosformatosficha312);
+router.get('/getresultadosfichas', isLoggedIn, controllerHI.getresultadofichas);
+
+
+
 /************************************************/
 /*****************Ficha Musculo Esqueletica*****************/
 router.get('/pbfichamusculoesqueletica', isLoggedIn, controllerrender.renderfichamusculoesqueleticaprueba);
@@ -70,9 +82,12 @@ router.get('/resultaudiometria', isLoggedIn, controllerHI.getresultaudiometria);
 /**************** Diagnostico imagen *********************/
 router.get('/pbrayosx', isLoggedIn, controllerrender.renderrayosxprueba);
 router.get('/rayosxparametros', isLoggedIn, controllerHI.getresultparametrosrayosx);
-router.get('/resultrayosx', isLoggedIn, controllerHI.getresultresultrayosx);
+router.get('/resultrayosx', isLoggedIn, controllerHI.getresultrayosx);
 router.post('/pbrayosx', isLoggedIn, controllerHI.postrayosx);
 
 /***************************************************/
+
+/*************** Formato Salud Ocupacional *****************/
+router.get('/resultformatosaludocupacional', isLoggedIn, controllerHI.getresultformatosaludocupacional);
 
 module.exports = router;

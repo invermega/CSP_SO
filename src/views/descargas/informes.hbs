@@ -1,0 +1,207 @@
+<div class="container-fluid px-4">
+    <h1 class="mt-4 tituloverde">Descargas</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+        <li class="breadcrumb-item active">Pacientes</li>
+    </ol>
+    <div class="card mb-4">
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="left-content">
+                <i class="fas fa-table me-1"></i>
+                Pacientes
+            </div>
+            <div>
+
+            </div>
+        </div>
+
+        <div class="card-body body1 " style="max-height: 70vh; overflow-y: auto;">
+            <div class="row textos " id="filtros"
+                style="display: ; border: 2px solid #D8D8D8; vertical-align: center; padding: 5px; border-radius: selectCHEC7px;">
+                <div class="col-md-3 form-inline col-sm-12 form-group mb-1 mt-1">
+                    <div class="input-group input-group-sm" style="width: 100%;">
+                        <label class="input-group-text form-control-sm" for="fechainicio">Inicio</label>
+                        <input type="date" class="form-control form-control-sm custom-date-input" id="fechainicio"
+                            name="fechainicio" min="2000-01-01" max="2100-12-31" step="1" required>
+                        <label class="input-group-text form-control-sm" for="fechafin">Fin</label>
+                        <input type="date" class="form-control form-control-sm" id="fechafin" name="fechafin"
+                            min="2000-01-01" max="2100-12-31" step="1" required>
+                    </div>
+                </div>
+                <div class="col-md-3 form-inline col-sm-12 form-group mb-1 mt-1">
+                    <div class="input-group input-group-sm" style="width: 100%;">
+                        <label class="input-group-text form-control-sm" for="razsoc">Empresa</label>
+                        <input type="hidden" id="cli_id" value="0">
+                        <input type="text" id="razsoc" class="form-control form-control-sm"
+                            placeholder="Nombre de la empresa" aria-label="" disabled>
+                        <button type="button" class="btn input-group-text" data-toggle="modal"
+                            data-target="#modalFormEmpresa">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col-md-3 form-inline col-sm-12 form-group mb-1 mt-1">
+                    <div class="input-group input-group-sm" style="width: 100%;">
+                        <label class="input-group-text form-control-sm" for="codpro_id">Protocolo</label>
+                        <select class="form-select form-control form-control-sm" id="codpro_id"
+                            aria-label="Default select example" required>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2 form-inline col-sm-12 form-group mb-1 mt-1">
+                    <div class="input-group input-group" style="width: 100%;">
+                        <button type="button" class="btn input-group-text" id="search" onclick="getPacientesDescarga()">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <button type="button" class="btn input-group-text" id="refresh" onclick="">
+                            <i class="fa-solid fa-retweet"></i>
+                        </button>
+                        <button type="button" class="btn input-group-text" id="download"
+                            onclick="exportarinforme('mydatatable')">
+                            <i class="fa-solid fa-download"></i>
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--MODAL EMPRESA-->
+            <div class="modal fade" id="modalFormEmpresa" role="dialog">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                            <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE
+                                EMPRESA</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                                <label class="control-label input-group-text" for="empresamodal">EMPRESA</label>
+                                <input class="form-control form-control-sm " id="empresamodal"
+                                    placeholder="Ingrese el nombre de la empresa" required></input>
+                                <button type="button" class="btn input-group-text" id="searchCliente">
+                                    <i class="fa-solid fa-magnifying-glass"></i></label>
+                                </button>
+                            </div>
+                            <div class="row mb-2 mt-2">
+                                <div class="table-responsive">
+                                    <table
+                                        class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                                        id="tableEmpresamodal" style="display: none;">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th scope="col">ACCIÓN</th>
+                                                <th scope="col">RAZON SOCIAL</th>
+                                                <th scope="col">RUC</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bodyEmpresa" style="text-align: left;">
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="text-center" id="cargaEmpresa" style="display: none;">
+                                    <div class="d-flex justify-content-center align-items-center"
+                                        style="min-height: 5vh;">
+                                        <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent"
+                                            speed="1" style="width: 200px; height: 200px;" loop
+                                            autoplay></lottie-player>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn"
+                                    style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                    id="cerrarEmpresaModal" data-dismiss="modal"> <i
+                                        class="fa-solid fa-circle-xmark"></i>
+                                    Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal examenes-->
+            <div class="modal fade" id="modalFormExamnes" role="dialog">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header"
+                            style="background-color: #0FA0A7;color: white;border-color: #0FA0A7; ">
+                            <h4 class="modal-title" id="myModalLabel">Selecione los exámenes del informe</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input class="form-check-input ml-4" type="radio" id="consolidado"
+                                        name="tipodescarga" value="exportarinformeconsolidado" required checked>
+                                    <label class="form-check-label ml-5" for="consolidado">Consolidado</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-check-input ml-4" type="radio" id="detalle" name="tipodescarga"
+                                        value="exportarinformedetalle" required>
+                                    <label class="form-check-label ml-5" for="detalle">Detalle</label>
+                                </div>
+                            </div>
+                            <div class="row mb-2 mt-2">
+
+                                <div id="examenesmodal">
+                                </div>
+                                <div class="text-center" id="cargaExamnesmodal" style="display: none;">
+                                    <div class="d-flex justify-content-center align-items-center"
+                                        style="min-height: 5vh;">
+                                        <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent"
+                                            speed="1" style="width: 200px; height: 200px;" loop
+                                            autoplay></lottie-player>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn"
+                                    style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                    id="cerrarExamnes" onclick="imprimir('examenesmodal','mydatatable')"><i
+                                        class="bi bi-file-earmark-pdf-fill"></i>
+                                    Exportar PDF</button>
+                                <button type="button" class="btn"
+                                    style="background-color: #793B8E;color: white;border-color: #793B8E;"
+                                    id="cerrarExamnes" data-dismiss="modal" onclick="cerrarModal()"> <i
+                                        class="fa-solid fa-circle-xmark"></i>
+                                    Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="table-responsive mt-3">
+                <table
+                    class="records_list table table-sm table-striped table-bordered letra animate__animated animate__fadeInDown"
+                    id="mydatatable" style="display: none;">
+                    <thead class="thead">
+                        <th scope="col"><input type="checkbox" id="CheckTodos" onclick="CheckTodos()" /></th>
+                        </th>
+                        <th scope="col">FECHA DE CITA</th>
+                        <th scope="col">PACIENTE</th>
+                        <th scope="col">EDAD</th>
+                        <th scope="col">CLIENTE</th>
+                        <th scope="col">TIPO EX.</th>
+                        <th scope="col">H. ADM</th>
+                    </thead>
+                    <tbody id="tbodypac">
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center" id="carga" style="display: none;">
+                <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                    <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent" speed="1"
+                        style="width: 300px; height: 300px; " loop autoplay></lottie-player>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<script src="/js/descargas/informes.js"> </script>

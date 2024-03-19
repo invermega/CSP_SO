@@ -1,4 +1,8 @@
 (function CrearCards() {
+    let btnGrabar = document.getElementById('btnGrabar');
+    btnGrabar.disabled = true;
+    ocultarDiv("cards");
+    mostrarDiv("cargacards");
     let soexa = document.getElementById('soexa').value;
     let cita_id = document.getElementById('id').value;
     $.ajax({
@@ -14,29 +18,33 @@
             pruebas.forEach(prueba => {
                 cards.append(`
                 <div class="col-xl-12 col-md-6 mt-2">
-                    <div class "card text-white mb-4" style="background-color: #793B8E; color: white">
-                        
+                    <div class "card text-white mb-4" style="background-color: #793B8E; color: white">                        
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" onclick="ObtenerParametros('${prueba.codpru_id}')" href="#" >${prueba.desexadet}</a>
+                            <a class="small text-white stretched-link" onclick="ObtenerParametros(${prueba.codpru_id},${prueba.nuncom})" href="#" >${prueba.desexadet}</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
                </div>
             `)
             });
-            poblarcampos();
+
+            mostrarDiv("cards");
+            ocultarDiv("cargacards");
         },
         error: function () {
             $('#error-message').text('Se produjo un error al cargar los protocolos.');
         }
     });
 })();
-function ObtenerParametros(codpru_id) {
+function ObtenerParametros(codpru_id, nuncomInput) {
+    let btnGrabar = document.getElementById('btnGrabar');
+    btnGrabar.disabled = false;
     let inputcodpru_id = document.getElementById('codpru_id');
     inputcodpru_id.value = codpru_id;
-    let cita_id = document.getElementById('id').value;
-    let soexa = document.getElementById('soexa').value;
-    console.log(codpru_id,cita_id,soexa);
+    let nuncom = document.getElementById('nuncom');
+    nuncom.value = nuncomInput;
+    let nref = $('#dni').val() + ' - ' + $('#id').val();
+
     mostrarDiv("cargaparametros");
     ocultarDiv("detInforme");
     $.ajax({
@@ -44,16 +52,14 @@ function ObtenerParametros(codpru_id) {
         method: "GET",
         data: {
             codpru_id: codpru_id,
-            cita_id: cita_id,
-            soexa: soexa
+            nuncom: nuncomInput
         },
         success: function (parametros) {
-            console.log(parametros,codpru_id,cita_id,soexa);
             var contenedor = document.getElementById("detInforme");
             var codigoHTML = `
                 <div class="col-md-12 input-group input-group-sm mt-2">
                     <label class="col-sm-2 input-group-text" for="codigo_ref">Nro referencia</label>
-                    <input type="text" class="form-control form-control-sm" id="codigo_ref" value='${parametros[0].codigo_ref}' placeholder="Ingrese el valor" required>
+                    <input type="text" class="form-control form-control-sm" id="codigo_ref" value='${nref}' placeholder="Ingrese el valor" disabled>
                     <label class="input-group-text" style="width: 35px; color: #773C8D;" for="codigo_ref"><i class="fa-solid fa-heart-pulse"></i></label>
                 </div>
                 <div class="col-md-12 input-group input-group-sm mt-2">
@@ -67,11 +73,11 @@ function ObtenerParametros(codpru_id) {
                     <label class="input-group-text" style="width: 35px; color: #773C8D;" for="conclusion"><i class="fa-solid fa-heart-pulse"></i></label>
                 </div>
             `;
-            contenedor.innerHTML = codigoHTML;       
-        
+            contenedor.innerHTML = codigoHTML;
+
             ocultarDiv("cargaparametros");
             mostrarDiv("detInforme");
-
+            poblarcampos();
         },
         error: function () {
             $('#error-message').text('Se produjo un error al cargar los protocolos.');
@@ -81,17 +87,20 @@ function ObtenerParametros(codpru_id) {
 function poblarcampos() {
     let cita_id = document.getElementById('id').value;
     let soexa = document.getElementById('soexa').value;
-    let nuncom = document.getElementById('nuncom');
+    let nuncom = document.getElementById('nuncom').value;
 
     let doc_adic_id = document.getElementById('doc_adic_id');
     let codcie101 = document.getElementById('1codcie10');
     let codcie10desc1 = document.getElementById('1codcie10desc');
+    let combocie101 = document.getElementById('combocie101');
     let codcie10comen1 = document.getElementById('1codcie10comen');
     let codcie102 = document.getElementById('2codcie10');
     let codcie10desc2 = document.getElementById('2codcie10desc');
+    let combocie102 = document.getElementById('combocie102');
     let codcie10comen2 = document.getElementById('2codcie10comen');
     let codcie103 = document.getElementById('3codcie10');
     let codcie10desc3 = document.getElementById('3codcie10desc');
+    let combocie103 = document.getElementById('combocie103');
     let codcie10comen3 = document.getElementById('3codcie10comen');
 
     let recomendacion1 = document.getElementById('recomendacion1');
@@ -100,24 +109,32 @@ function poblarcampos() {
     let control2 = document.getElementById('control2');
     let recomendacion3 = document.getElementById('recomendacion3');
     let control3 = document.getElementById('control3');
-
     $.ajax({
         url: '/resultrayosx',
         method: "GET",
         data: {
-            cita_id: cita_id,
+            nuncom: nuncom,
             soexa: soexa
         },
         success: function (result) {
-            console.log(result);
             if (result[0].mensaje != 'sin datos') {
-                console.log(result[0].numcon);
+                let divMiniatura = document.getElementById('miniaturas');
+                divMiniatura.innerHTML = '';
+                let archivos = document.getElementById('archivos');
+                archivos.value = '';
                 nuncom.value = result[0].numcon;
                 doc_adic_id.value = result[0].doc_adic_id;
                 if (result[0].doc_adic_id != '0') {
                     resultcrearMiniatura(result[0].rutarch, result[0].nomarch);
+                } else {
+                    const btnSubir = document.getElementById('btnSubir');
+                    const btnEliminar = document.getElementById('btnEliminar');
+                    const fileInput = document.getElementById('archivos');
+                    fileInput.disabled = false;
+                    btnSubir.disabled = false;
+                    btnEliminar.disabled = true;
                 }
-                if (result[0].diagnosticos) {
+                if (result[0].diagnosticos != '0') {
                     let diagnosticosArray = JSON.parse(result[0].diagnosticos);
                     for (let i = 0; i < diagnosticosArray.length && i < 3; i++) {
                         let registro = diagnosticosArray[i];
@@ -143,8 +160,21 @@ function poblarcampos() {
                             codcie10comen3.value = comentario;
                         }
                     }
+                } else {
+                    codcie101.value = '';
+                    codcie10desc1.value = '';
+                    combocie101.value = '';
+                    codcie10comen1.value = '';
+                    codcie102.value = '';
+                    codcie10desc2.value = '';
+                    combocie102.value = '';
+                    codcie10comen2.value = '';
+                    codcie103.value = '';
+                    codcie10desc3.value = '';
+                    combocie103.value = '';
+                    codcie10comen3.value = '';
                 }
-                if (result[0].recomendaciones) {
+                if (result[0].recomendaciones != '0') {
                     let recomendacionArray = JSON.parse(result[0].recomendaciones);
                     for (let i = 0; i < recomendacionArray.length && i < 3; i++) {
                         let registro = recomendacionArray[i];
@@ -162,7 +192,39 @@ function poblarcampos() {
                             control3.value = des_control;
                         }
                     }
+                } else {
+                    recomendacion1.value = '';
+                    control1.value = '';
+                    recomendacion2.value = '';
+                    control2.value = '';
+                    recomendacion3.value = '';
+                    control3.value = '';
                 }
+            } else if (result[0].mensaje === 'sin datos') {
+                nuncom.value = '1';
+                doc_adic_id.value = '0';
+                codcie101.value = '';
+                codcie10desc1.value = '';
+                combocie101.value = '';
+                codcie10comen1.value = '';
+                codcie102.value = '';
+                codcie10desc2.value = '';
+                combocie102.value = '';
+                codcie10comen2.value = '';
+                codcie103.value = '';
+                codcie10desc3.value = '';
+                combocie103.value = '';
+                codcie10comen3.value = '';
+                recomendacion1.value = '';
+                control1.value = '';
+                recomendacion2.value = '';
+                control2.value = '';
+                recomendacion3.value = '';
+                control3.value = '';
+                let divMiniatura = document.getElementById('miniaturas');
+                divMiniatura.innerHTML = '';
+                let archivos = document.getElementById('archivos');
+                archivos.value = '';
             }
         },
         error: function (Examenes) {
@@ -184,16 +246,22 @@ function Grabar() {
     let codpru_id = document.getElementById('codpru_id').value;
     let codigo_ref = document.getElementById('codigo_ref').value;
     let det_informe = document.getElementById('det_informe').value;
-    let conclusion = document.getElementById('conclusion').value;    
+    let conclusion = document.getElementById('conclusion').value;
+    var datains = obtenerDataIns();
+    var datainsrec = obtenerDataInsRec();
+
     const datosCompletos = {
         cita_id: cita_id,
         nuncom: nuncom,
         soexa: soexa,
         doc_adic_id: doc_adic_id,
         codpru_id: codpru_id,
-        codigo_ref:codigo_ref,
-        det_informe:det_informe,
-        conclusion:conclusion,
+        codigo_ref: codigo_ref,
+        det_informe: det_informe,        
+        conclusion: conclusion,
+        datainsrec: datainsrec,
+        datains: datains
+
     };
     fetch('/pbrayosx', {
         method: 'POST',
@@ -220,3 +288,4 @@ function Grabar() {
         });
 
 }
+

@@ -64,6 +64,7 @@
                     $('input[type="radio"][name="ce_pre25"][value="' + registro.ce_pre25 + '"]').prop('checked', true);
                     $('input[type="radio"][name="ce_pre26"][value="' + registro.ce_pre26 + '"]').prop('checked', true);
                     $('input[type="radio"][name="ce_pre27"][value="' + registro.ce_pre27 + '"]').prop('checked', true);
+                    $('#ce_pre21_rpta').val(registro.ce_pre21_rpta);
                 }
                 //$('input[type="radio"][name="ce_pre1"][value="' + valor + '"]').prop('checked', true);
 
@@ -135,6 +136,7 @@ function Grabar() {
     let doc_adic_id = document.getElementById('doc_adic_id').value;
     var datains = obtenerDataIns();
     var datainsrec = obtenerDataInsRec();
+
     var dataparametros = obtenerDataParametros();
     const datosCompletos = {
         cita_id: cita_id,
@@ -175,15 +177,27 @@ function Grabar() {
 function obtenerDataParametros() {
     var data = [];
     var elements = document.querySelectorAll('#formPreguntas input[type="radio"]:checked');
-    var rowData = {};
-    elements.forEach(function (element) {
-        var name = element.name;
-        var value = element.value;
-        rowData[name] = value;
-    });
-    data.push(rowData);
+    
+    if (elements.length > 0) {
+        var rowData = {};
+        elements.forEach(function (element) {
+            var name = element.name;
+            var value = element.value;
+            rowData[name] = value;
+        });
+
+        // Suponiendo que ce_pre21_rpta es un ID único
+        var ce_pre21_rpta = document.getElementById('ce_pre21_rpta');
+        if (ce_pre21_rpta) {
+            rowData['ce_pre21_rpta'] = ce_pre21_rpta.value;
+        }
+        
+        data.push(rowData);
+    }
+    
     return data;
 }
+
 
 function obtenerDataParametros1() {
     var data = [];
@@ -215,6 +229,7 @@ function obtenerDataParametros1() {
     var ce_pre26 = document.querySelector('input[name="ce_pre26"]:checked').value;
     var ce_pre27 = document.querySelector('input[name="ce_pre27"]:checked').value;
 
+    var ce_pre21_rpta = document.getElementById('ce_pre21_rpta').value;
     var rowData = {
         ce_pre1: ce_pre1,
         ce_pre2: ce_pre2,
@@ -243,6 +258,7 @@ function obtenerDataParametros1() {
         ce_pre25: ce_pre25,
         ce_pre26: ce_pre26,
         ce_pre27: ce_pre27,
+        ce_pre21_rpta:ce_pre21_rpta,
     };
 
     data.push(rowData);

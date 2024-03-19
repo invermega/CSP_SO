@@ -11,26 +11,42 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const Sequelize = require('sequelize');
 const MSSQLStore = require('express-session-sequelize')(session.Store);
+const fs = require('fs');
+const util = require('util');
+//const logger1 = require('./logger');
 
-
-const requerirAuth = function(req, res, next) {
+const requerirAuth = function (req, res, next) {
   if (req.path.startsWith('/img/paciente')) {
     if (req.isAuthenticated()) {
-      return next(); 
+      return next();
     }
     res.status(401).send('Acceso no autorizado');
-  }else if (req.path.startsWith('/documentos')) {
+  } else if (req.path.startsWith('/documentos')) {
     if (req.isAuthenticated()) {
-      return next(); 
+      return next();
     }
     res.status(401).send('Acceso no autorizado');
-  }  
+  } else if (req.path.startsWith('/templates')) {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    res.status(401).send('Acceso no autorizado');
+  } else if (req.path.startsWith('/img/medicos')) {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    res.status(401).send('Acceso no autorizado');
+  }
   else {
-    return next(); 
+    return next();
   }
 };
 
 const app = express();
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'logfile.log'), { flags: 'a' });
+app.use(morgan('combined', { stream: accessLogStream }));
+
+
 
 //a
 require('./lib/passport');
@@ -40,7 +56,7 @@ process.on('uncaughtException', (err) => {
   console.error('Uncaught Exception:', err);
 });
 
-app.set('port', process.env.PORT || 4000);
+app.set('port', process.env.PORT || 4100);
 app.set('views', path.join(__dirname, 'views'));
 const exphbs = create({
   extname: '.hbs',
@@ -81,7 +97,21 @@ app.use(
 
 app.use(flash());
 
+
+const logFile = fs.createWriteStream('./logfile.log', { flags: 'a' });
+
+console.log = (msg) => {
+  process.stdout.write(msg + '\n');
+  logFile.write(util.format(msg) + '\n');
+};
+
+console.error = (msg) => {
+  process.stderr.write(msg + '\n');
+  logFile.write(util.format(msg) + '\n');
+};
+
 app.use(morgan('dev'));
+
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ limit: '10mb', extended: false }));
 app.use(passport.initialize());
@@ -98,20 +128,10 @@ app.use(require('./routes/'));
 app.use(require('./routes/configuracion'));
 app.use(require('./routes/historiaclinica'));
 app.use(require('./routes/entidades'));
-/*
-const auth = (req, res, next) => {
-  const credentials = basicAuth(req);
+app.use(require('./routes/descargas'));
 
-  if (!credentials || credentials.name !== 'usuario' || credentials.pass !== 'contraseña') {
-    res.set('WWW-Authenticate', 'Basic realm="example"');
-    return res.status(401).send('Authentication required.');
-  }
-
-  next();
-};
-app.use('/img/paciente', auth, express.static(path.join(__dirname, 'public', 'img', 'paciente')));*/
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(requerirAuth, express.static(path.join(__dirname, 'public')));
 
 app.listen(app.get('port'), () => {
-  console.log('Server on port', app.get('port'));
+  console.log('Server on port', process.env.PORT);
 });
