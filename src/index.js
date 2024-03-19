@@ -56,7 +56,7 @@ process.on('uncaughtException', (err) => {
   console.error('Uncaught Exception:', err);
 });
 
-app.set('port', process.env.PORT || 4100);
+app.set('port', process.env.PORT || 4000);
 app.set('views', path.join(__dirname, 'views'));
 const exphbs = create({
   extname: '.hbs',
