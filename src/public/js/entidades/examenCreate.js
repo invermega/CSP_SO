@@ -14,7 +14,7 @@ function Grabar() {
     let reg_cie10 = document.querySelector("input[name='reg_cie10']:checked").value;
     validarFormulario('');
     $.ajax({
-        url: '/insexamenes',
+        url: '/examenes',
         method: "POST",
         data: {
             soexa: soexa.val(),
