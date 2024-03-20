@@ -12,7 +12,7 @@ function getexamenes() {
     ocultarDiv('mydatatable');
     mostrarDiv('carga');
     $.ajax({
-        url: '/listarexamen',
+        url: '/examenes',
         method: 'GET',
         data: {            
         },

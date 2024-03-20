@@ -52,9 +52,9 @@ app.use(morgan('combined', { stream: accessLogStream }));
 require('./lib/passport');
 
 // Manejo de uncaughtException
-process.on('uncaughtException', (err) => {
+/*process.on('uncaughtException', (err) => {
   console.error('Uncaught Exception:', err);
-});
+});*/
 
 app.set('port', process.env.PORT || 4000);
 app.set('views', path.join(__dirname, 'views'));

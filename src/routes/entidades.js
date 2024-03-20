@@ -72,7 +72,9 @@ router.delete('/deleteCli',isLoggedIn,controllerEn.deletecliente);
 
 router.get('/examen', isLoggedIn, controllerrender.renderexamen);
 router.get('/examencreate', isLoggedIn, controllerrender.renderexamencreate);
-router.get('/listarexamen', isLoggedIn, controllerEn.getListaExamenes);
+router.get('/equiposedit/:id', isLoggedIn, controllerrender.renderequiposedit);
+router.get('/examenes', isLoggedIn, controllerEn.getListaExamenes);
+router.post('/examen', isLoggedIn, controllerEn.postExamenes);
 /******************************************/
 /**************Equipos****************/
 

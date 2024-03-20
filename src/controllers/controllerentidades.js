@@ -321,11 +321,14 @@ module.exports = {
         res.json(response.recordset);
     },
     async postExamenes(req, res) {//insertar examenes
-        const { soexa, desexa, ordimp, ordprot, starep, staaddfile, reg_cie10, opc } = req.query;
+        const { desexa, ordimp, ordprot, starep, staaddfile, reg_cie10, inputid } = req.body;
         const codrolUser = req.user.codrol;
+        const hostname = '';
         const usenam = req.user.usuario;
         const pool = await getConnection();
-        const response = await pool.query(`pa_InsExamenes '${soexa}','${desexa}','${ordimp}','${ordprot}','${starep}','${staaddfile}','${reg_cie10}','${codrolUser}','${usenam}','${opc}'`);
+        console.log(`pa_InsExamenes '${desexa}','${ordimp}','${ordprot}','${starep}','${staaddfile}','${reg_cie10}','${codrolUser}','${usenam}','${hostname}','${inputid}'`);
+        const response = await pool.query(`pa_InsExamenes '${desexa}','${ordimp}','${ordprot}','${starep}','${staaddfile}','${reg_cie10}','${codrolUser}','${usenam}','${hostname}','${inputid}'`);
+
         res.json(response.recordset);
     },
     /*************************/

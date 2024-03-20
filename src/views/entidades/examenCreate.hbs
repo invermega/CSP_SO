@@ -14,83 +14,70 @@
                     <label id="tituloEncabezado">Ingrese nuevo exámen</label>
                 </div>
                 <button class="btn position-relative" style="background-color: #793B8E; color: white; padding:0px"
-                    id="btnCita" type="submit" onclick="Grabar()">
+                    id="btnGrabar" type="submit" onclick="Grabar()">
                     <i class="fa-regular fa-floppy-disk" style="margin: 8px 12px;"></i>
                 </button>
             </div>
             <div class="card-body " style="max-height: 70vh; overflow-y: auto;">
                 <div class="container-fluid body1" id="body1">
-                    <form id="formusuarios" class="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-12 border-right">
-                                <div class="p-3 py-3">
-                                    <div class="row mt-1">
-                                        <div class="col-md-1">
-                                            <label class="labels" for="soexa">SOEXA</label><input type="text"
-                                                class="form-control form-control-sm" placeholder="Ingrese el soexa"
-                                                id="soexa" value="" required>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="labels" for="desexa">Descripción</label><input type="text"
-                                                class="form-control form-control-sm"
-                                                placeholder="Ingrese la descripción" id="desexa" value="" required>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label class="labels" for="ordimp">Órden de impresión</label><input
-                                                type="text" class="form-control form-control-sm"
-                                                placeholder="Ingrese el órden de impresión" id="ordimp" value=""
-                                                required>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label class="labels" for="ordprot">Órden de protocolo</label><input
-                                                type="text" class="form-control form-control-sm"
-                                                placeholder="Ingrese el órden de protocolo" id="ordprot" value=""
-                                                required>
+                    <div class="row">
+                        <div class="col-md-12 border-right">
+                            <div class="p-3 py-3">
+                                <div class="row mt-1">
+                                    
+                                    <div class="col-md-4">
+                                        <label class="labels" for="desexa">Descripción</label><input type="text"
+                                            class="form-control form-control-sm" placeholder="Ingrese la descripción"
+                                            id="desexa" value="" required>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="labels" for="ordimp">Órden de impresión</label><input type="text"
+                                            class="form-control form-control-sm"
+                                            placeholder="Ingrese el órden de impresión" id="ordimp" value="" required>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="labels" for="ordprot">Órden de protocolo</label><input type="text"
+                                            class="form-control form-control-sm"
+                                            placeholder="Ingrese el órden de protocolo" id="ordprot" value="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mt-4">
+                                    <div class="col bloque" id="starep">
+                                        <label for="" class="labels">Estado de reporte</label>
+                                        <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
+                                            <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                    name="starep" required>SI</label>
+                                            <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                    name="starep" required checked>NO</label>
                                         </div>
                                     </div>
-
-                                    <div class="row mt-4">
-                                        <div class="col bloque" id="starep">
-                                            <label for="" class="labels">Estado de reporte</label>
-                                            <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
-                                                        name="starep" required>SI</label>
-                                                <label for="" class=""><input type="radio" class="me-2" value="N"
-                                                        name="starep" required checked>NO</label>
-                                            </div>
+                                    <div class="col bloque" id="staaddfile">
+                                        <label class="labels" for="">Agrega archivo</label>
+                                        <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
+                                            <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                    name="staaddfile" required>SI</label>
+                                            <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                    name="staaddfile" required checked>NO</label>
                                         </div>
-                                        <div class="col bloque" id="staaddfile">
-                                            <label class="labels" for="">Agrega archivo</label>
-                                            <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
-                                                        name="staaddfile" required>SI</label>
-                                                <label for="" class=""><input type="radio" class="me-2" value="N"
-                                                        name="staaddfile" required checked>NO</label>
-                                            </div>
-                                        </div>
-                                        <div class="col bloque" id="reg_cie10">
-                                            <label for="" class="labels">Registra CIE.10</label>
-                                            <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
-                                                <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
-                                                        name="reg_cie10" required>SI</label>
+                                    </div>
+                                    <div class="col bloque" id="reg_cie10">
+                                        <label for="" class="labels">Registra CIE.10</label>
+                                        <div class="form-inline col-sm-12 form-group" style="padding: 0px;">
+                                            <label for="" class="mr-4"><input type="radio" class="me-2" value="S"
+                                                    name="reg_cie10" required>SI</label>
 
-                                                <label for="" class=""><input type="radio" class="me-2" value="N"
-                                                        name="reg_cie10" required checked>NO</label>
-                                            </div>
+                                            <label for="" class=""><input type="radio" class="me-2" value="N"
+                                                    name="reg_cie10" required checked>NO</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn2" type="button" onclick="guardarCita()"
-                                id="btnExamen">
-                                <span><i class="fa-regular fa-floppy-disk"></i> Grabar</span>
-                            </button>
-                        </div>
-                        <input type="text" id="inputid" value="{{id}}" style="display: none;">
-                    </form>
+                    </div>
+                    
+                    <input type="text" id="inputid" value="{{id}}" style="display: none;">
                 </div>
-
             </div>
         </div>
     </div>
