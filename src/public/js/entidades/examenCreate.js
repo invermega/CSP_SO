@@ -2,8 +2,8 @@ $(document).ready(function () {
     
 
 });
-var opc = 0;
-function guardarExamen() {
+
+function Grabar() {
     $("#btnExamen").prop("disabled", true);
     let soexa = $('#soexa');
     let desexa = $('#desexa');

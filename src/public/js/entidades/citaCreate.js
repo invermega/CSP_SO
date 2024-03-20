@@ -335,7 +335,7 @@ document.getElementById("codpro_id").addEventListener("change", function (event)
         getclientes(parametro);
     }
 });
-function guardarCita() {
+function Grabar() {
     var btnCita = document.getElementById("btnCita");
     btnCita.disabled = true;
     //$("#btnCita").prop("disabled", true);
