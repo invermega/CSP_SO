@@ -67,13 +67,23 @@ router.post('/cliente',isLoggedIn,controllerEn.postcliente);
 router.post('/cliente',isLoggedIn,controllerEn.postcliente);
 router.get('/listarcliente',isLoggedIn,controllerEn.getcliente);
 router.delete('/deleteCli',isLoggedIn,controllerEn.deletecliente);
-
 /******************************************/
 /****************Examenes******************/
+
 router.get('/examen', isLoggedIn, controllerrender.renderexamen);
 router.get('/examencreate', isLoggedIn, controllerrender.renderexamencreate);
 router.get('/listarexamen', isLoggedIn, controllerEn.getListaExamenes);
-
-
 /******************************************/
+/**************Equipos****************/
+
+router.get('/equipo', isLoggedIn, controllerrender.renderequipo);
+router.get('/listarequipos',isLoggedIn,controllerEn.getequipos);
+router.get('/equiposcreate', isLoggedIn, controllerrender.renderequiposcreate);
+router.post('/equipos',isLoggedIn,controllerEn.postequipos);
+router.get('/equiposedit/:id', isLoggedIn, controllerrender.renderequiposedit);
+router.delete('/equiposdel',isLoggedIn,controllerEn.deleteequipos);
+/******************************************/
+
+
+
 module.exports = router;

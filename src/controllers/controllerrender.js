@@ -1,13 +1,18 @@
 const { getConnection } = require('../database/conexionsql');
 
 async function permisos(opcsis, ruta, req, res, id) {
-    const pool = await getConnection();
-    const permiso = await pool.query(`sp_selVerificarPermisos '${req.user.codrol}','${opcsis}'`);
-    if (permiso.recordset[0].acceso === 1) {
-        res.render(ruta, { layout: false, id: id });
-    } else {
-        res.render('configuracion/401', { layout: false });
+    try {
+        const pool = await getConnection();
+        const permiso = await pool.query(`sp_selVerificarPermisos '${req.user.codrol}','${opcsis}'`);
+        if (permiso.recordset[0].acceso === 1) {
+            res.render(ruta, { layout: false, id: id });
+        } else {
+            res.render('configuracion/401', { layout: false });
+        }
+    } catch (error) {
+        console.log(error);
     }
+
 }
 async function permisosprueba(opcsis, ruta, req, res, id) {
     const pool = await getConnection();
@@ -43,7 +48,7 @@ module.exports = {
     },
     async rendermenuexamenes(req, res) {
         const { id } = req.params;
-        
+
         res.render('historiaclinica/menuexamenes/menuexamenes', { id, layout: false });
     },
     async rendersignosvitalesprueba(req, res) {
@@ -56,15 +61,15 @@ module.exports = {
     },
     async renderespirometriaprueba(req, res) {
         const parametro = "ES";
-        permisos(parametro,'historiaclinica/pruebas/pbespirometria', req, res,0)
+        permisos(parametro, 'historiaclinica/pruebas/pbespirometria', req, res, 0)
     },
     async rendercuestionarioespirometriaprueba(req, res) {
         const parametro = "CE";
-        permisos(parametro,'historiaclinica/pruebas/pbcuestionarioespirometria', req, res,0)
+        permisos(parametro, 'historiaclinica/pruebas/pbcuestionarioespirometria', req, res, 0)
     },
     async renderpsicologiaprueba(req, res) {
         const parametro = "TP";
-        permisos(parametro,'historiaclinica/pruebas/pbpsicologia', req, res,0)
+        permisos(parametro, 'historiaclinica/pruebas/pbpsicologia', req, res, 0)
     },
     async renderfichamusculoesqueleticaprueba(req, res) {
         const parametro = "ME";
@@ -86,7 +91,7 @@ module.exports = {
     async renderprotocolo(req, res) {
         const parametro = "PT";
         permisos(parametro, 'entidades/protocolo', req, res);
-    },    
+    },
     async renderprotocolocreate(req, res) {
         const parametro = "PT";
         permisos(parametro, 'entidades/protocoloCreate', req, res, 0);
@@ -126,7 +131,7 @@ module.exports = {
     /**Medico */
     async renderemedico(req, res) {
         const parametro = "MD";
-        permisos(parametro,'entidades/medicos', req,res)        
+        permisos(parametro, 'entidades/medicos', req, res)
     },
     async rendermedicocreate(req, res) {
         const parametro = "MD";
@@ -140,7 +145,7 @@ module.exports = {
     /**Cliente */
     async rendercliente(req, res) {
         const parametro = "CL";
-        permisos(parametro,'entidades/cliente', req,res);        
+        permisos(parametro, 'entidades/cliente', req, res);
     },
     /*Examen */
     async renderexamen(req, res) {
@@ -154,8 +159,23 @@ module.exports = {
 
     /*Descargas*/
     async renderinformes(req, res) {
+
         const parametro = "IN";
         permisos(parametro, 'descargas/informes', req, res)
+    },
+    /*Equipos*/
+    async renderequipo(req, res) {
+        const parametro = "Eq";
+        permisos(parametro, 'entidades/equipos', req, res)
+    },
+    async renderequiposcreate(req, res) {
+        const parametro = "EQ";
+        permisos(parametro, 'entidades/equiposCreate', req, res, 0)
+    },
+    async renderequiposedit(req, res) {
+        const { id } = req.params;
+        const parametro = "EQ";
+        permisos(parametro, 'entidades/equiposCreate', req, res, id)
     },
 
 };

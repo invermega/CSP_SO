@@ -418,4 +418,38 @@ module.exports = {
         const response = await pool.query(`pa_delCliente '${codrolUser}','${dni}'`);
         res.json(response.recordset);
     },
+    /*************Equipos***************/
+    async getequipos(req, res) {//listar equipos
+        const { opc, equipos } = req.query;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_SelEquiposForm '','${equipos}','${opc}'`);
+        res.json(response.recordset);
+    },
+    async postequipos(req, res) {//agregar equipo
+        const { inputid, marca, modelo, soexa, desequi, feccali, fecfab } = req.body;
+        const usenam = req.user.usuario;
+        const codrolUser = req.user.codrol;
+        const pool = await getConnection();
+        const response = await pool.query(`pa_InsEquipos ${inputid}, '${marca}', '${modelo}', '${soexa}', '${desequi}','${feccali}', '${fecfab}', ${codrolUser}, '${usenam}'`);
+        res.json(response.recordset);
+    },
+    async deleteequipos(req, res) {
+        try {
+            const seleccionados = req.body;
+            const detalleJson = JSON.stringify(seleccionados);
+            const codrol = req.user.codrol;
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_DelEquipos';
+            request.input('codrol', sql.Int, codrol);
+            request.input('EquiposJson', sql.NVarChar(sql.MAX), detalleJson);
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
+    },
+    /**************************************/
 };
