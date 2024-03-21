@@ -134,7 +134,30 @@
                                 <div class="col-md-6"><label for="dirpac" class="labels">Dirección</label><input
                                         type="text" class="form-control form-control-sm" placeholder="Ingrese dirección"
                                         id="dirpac" value="" required></div>
-                                <div class="col-md-4 form-inline col-sm-12 form-group ">
+                                <div class="col-md-3"><label for="dir_nrodpptoint" class="labels">Nro departamento</label><input
+                                        type="text" class="form-control form-control-sm" placeholder="Ingrese numero de departameto o interior"
+                                        id="dir_nrodpptoint" value="" required></div>
+                                <div class="col-md-3"><label for="nom_urba" class="labels">Nombre urbanizacion</label><input
+                                        type="text" class="form-control form-control-sm" placeholder="Ingrese nombre de urbanización"
+                                        id="nom_urba" value="" required></div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-md-3"><label for="telefono" class="labels">Teléfono</label><input
+                                        type="text" class="form-control form-control-sm" placeholder="Ingrese teléfono"
+                                        id="telefono" value="" maxlength="11" oninput="formatPhoneNumber(this);"></div>
+                                <div class="col-md-3"><label for="celular" class="labels">Celular</label><input
+                                        type="text" class="form-control form-control-sm" placeholder="Ingrese celular"
+                                        id="celular" value="" maxlength="9" required
+                                        oninput="this.value=this.value.replace(/\D/g,'')"></div>
+                                <div class="col-md-6"><label for="correo" class="labels">Correo</label><input
+                                        type="text" class="form-control form-control-sm" placeholder="Ingrese email"
+                                        id="correo" value=""></div>
+
+
+                            </div>
+                            <div class="row mt-2">                                
+                                <div class="col-md-4 form-inline col-sm-12 form-group">
                                     <label class="labels mb-2">Distrito</label>
                                     <div class="input-group input-group-sm" style="width: 100%;">
                                         <input type="hidden" id="cod_ubigeo2" value="0">
@@ -154,24 +177,6 @@
                                         <option value="NO" selected>NO</option>
                                     </select>
                                 </div>
-
-                            </div>
-
-                            <div class="row mt-2">
-                                <div class="col-md-3"><label for="telefono" class="labels">Teléfono</label><input
-                                        type="text" class="form-control form-control-sm" placeholder="Ingrese teléfono"
-                                        id="telefono" value="" maxlength="11" oninput="formatPhoneNumber(this);"></div>
-                                <div class="col-md-3"><label for="celular" class="labels">Celular</label><input
-                                        type="text" class="form-control form-control-sm" placeholder="Ingrese celular"
-                                        id="celular" value="" maxlength="9" required
-                                        oninput="this.value=this.value.replace(/\D/g,'')"></div>
-                                <div class="col-md-6"><label for="correo" class="labels">Correo</label><input
-                                        type="text" class="form-control form-control-sm" placeholder="Ingrese email"
-                                        id="correo" value=""></div>
-
-
-                            </div>
-                            <div class="row mt-2">
                                 <div class="col-md-2"><label for="numhijos" class="labels">Nro.
                                         hijos</label><input type="number" class="form-control form-control-sm"
                                         placeholder="Ingrese nro de hijos" id="numhijos" value="0" required>
@@ -181,7 +186,6 @@
                                     <input type="number" class="form-control form-control-sm"
                                         placeholder="Ingrese nro de dependientes" id="numdep" value="0" required>
                                 </div>
-
                             </div>
 
                         </div>

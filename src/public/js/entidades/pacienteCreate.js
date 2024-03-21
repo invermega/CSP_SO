@@ -6,9 +6,9 @@ $(document).ready(function () {
         let nacionalidad = document.getElementById('nacionalidad');
         idPais.value = '9589';
         nacionalidad.value = 'PERÚ';
-        initializeCanvas('foto', '../img/logo.png');
-        initializeCanvas('huella', '../img/logo.png');
-        initializeCanvas('firma', '../img/logo.png');
+        initializeCanvas('foto', '../img/fondo.png');
+        initializeCanvas('huella', '../img/fondo.png');
+        initializeCanvas('firma', '../img/fondo.png');
     } else {
         getpacientes(inputid);
     }
@@ -25,9 +25,9 @@ $(document).ready(function () {
 
 });
 function getpacientes(id) {
-    initializeCanvas('foto', '../img/logo.png');
-    initializeCanvas('huella', '../img/logo.png');
-    initializeCanvas('firma', '../img/logo.png');
+    initializeCanvas('foto', '../img/fondo.png');
+    initializeCanvas('huella', '../img/fondo.png');
+    initializeCanvas('firma', '../img/fondo.png');
     let parametro = id;
     let parametro1 = '';
 
@@ -52,7 +52,6 @@ function getpacientes(id) {
             $('#cod_ubigeo').val(pacientes[0].cod_ubigeo);
             $('#des_ubigeo1').val(pacientes[0].des1);
             $('#fecnac').val(pacientes[0].fecnac);
-            console.log(pacientes[0].ippais)
             $('#ippais').val(pacientes[0].ippais);
             $('#nacionalidad').val(pacientes[0].nacionalidad);
             $('#dirpac').val(pacientes[0].dirpac);
@@ -64,6 +63,8 @@ function getpacientes(id) {
             $('#correo').val(pacientes[0].correo);
             $('#numhijos').val(pacientes[0].numhijos);
             $('#numdep').val(pacientes[0].numdep);
+            $('#dir_nrodpptoint').val(pacientes[0].dir_nrodpptoint);
+            $('#nom_urba').val(pacientes[0].nom_urba);
             cargarImagenEnCanvas('foto', './img/paciente/foto', pacientes[0].foto);
             cargarImagenEnCanvas('huella', './img/paciente/huella', pacientes[0].huella);
             cargarImagenEnCanvas('firma', './img/paciente/firma', pacientes[0].firma);
@@ -336,6 +337,9 @@ function Grabar() {
     let celular = $('#celular');
     let numhijos = $('#numhijos');
     let numdep = $('#numdep');
+    let dir_nrodpptoint = $('#dir_nrodpptoint');
+    let nom_urba = $('#nom_urba');
+    
     let pcd = $('#pcd');
     const canvasfoto = document.getElementById('foto');
     const canvashuella = document.getElementById('huella');
@@ -373,6 +377,8 @@ function Grabar() {
             celular: celular.val(),
             numhijos: numhijos.val(),
             numdep: numdep.val(),
+            dir_nrodpptoint:dir_nrodpptoint.val(),
+            nom_urba:nom_urba.val(),
             pcd: pcd.val(),
             foto: foto,
             huella: huella,
@@ -424,7 +430,7 @@ function cargarImagenEnCanvas(canvasId, ruta, nombre) {
 
         image.src = `${ruta}/${nombre}`;
     } else {
-        initializeCanvas(`${canvasId}`, '../img/logo.png');
+        initializeCanvas(`${canvasId}`, '../img/fondo.png');
 
     }
 }

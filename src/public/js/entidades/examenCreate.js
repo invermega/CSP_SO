@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    
+    let inputid = $('#inputid').val();
+    getexamenes(inputid);
 
 });
 
@@ -45,5 +46,37 @@ function Grabar() {
             mensaje('error', 'Error al guardar, intente nuevamente', 1500);
             $("#btnGrabar").prop("disabled", false);
         }
+    });
+}
+
+function getexamenes(id) {
+    $("#tituloEncabezado").text("Edición de exámen");
+    let busqueda = '';
+    let soexa = id;
+    
+    $.ajax({
+        url: '/listarexamenes',
+        method: 'GET',
+        data: {
+            busqueda: busqueda,
+            soexa: soexa,
+        },
+        success: function (resultado) { 
+            if (resultado.length !== 0) {
+                
+                $('#desexa').val(resultado[0].desexa);
+                $('#ordimp').val(resultado[0].ordimp);
+                $('#ordprot').val(resultado[0].ordprot);
+                $('input[type="radio"][name="starep"][value="' + resultado[0].starep + '"]').prop('checked', true);
+                $('input[type="radio"][name="staaddfile"][value="' + resultado[0].staaddfile + '"]').prop('checked', true);
+                $('input[type="radio"][name="reg_cie10"][value="' + resultado[0].reg_cie10 + '"]').prop('checked', true);
+                
+                
+                mensaje(resultado[0].tipo, resultado[0].mensaje, 1500);
+            }
+        },
+        error: function () {
+            alert('Error en la solicitud AJAX');
+        },
     });
 }

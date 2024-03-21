@@ -9,6 +9,7 @@ $(document).ready(function () {
             getpaciente();
         }
     });
+    getpaciente();
 });
 
 function getpaciente() {    

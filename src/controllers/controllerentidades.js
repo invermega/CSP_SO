@@ -189,7 +189,7 @@ module.exports = {
         res.json(response.recordset);
     },
     async postpaciente(req, res) {//agregar paciente
-        const { pachis, appaterno, apmaterno, nombres, fecnac, cod_ubigeo, docide, numdoc, dirpac, cod_ubigeo2, correo, telefono, celular, numhijos, numdep, pcd, foto, huella, firma, sexo_id, grainst_id, estciv_id, codtipcon, ippais, inputid } = req.body;
+        const { pachis, appaterno, apmaterno, nombres, fecnac, cod_ubigeo, docide, numdoc, dirpac, cod_ubigeo2, correo, telefono, celular, numhijos, numdep, pcd, foto, huella, firma, sexo_id, grainst_id, estciv_id, codtipcon, ippais, inputid,dir_nrodpptoint,nom_urba } = req.body;
         const nombreFoto = `FO_${numdoc}.webp`;
         const nombreHuella = `HU_${numdoc}.webp`;
         const nombreFirma = `FI_${numdoc}.webp`;
@@ -201,7 +201,7 @@ module.exports = {
         const hostname = '';
         const codrolUser = req.user.codrol;
         const pool = await getConnection();
-        const response = await pool.query(`sp_insPaciente '${appaterno.toUpperCase()}','${apmaterno.toUpperCase()}','${nombres.toUpperCase()}','${fecnac}','${cod_ubigeo}','${docide}','${numdoc}','${dirpac}','${cod_ubigeo2}','${correo.toUpperCase()}','${telefono.trim()}', '${celular}','${numhijos}','${numdep}','${pcd}','${nombreFoto}','${nombreHuella}','${nombreFirma}','${sexo_id}','${grainst_id}','${estciv_id}','${codtipcon}','${ippais}','${usenam}','${codrolUser}','${inputid}'`);
+        const response = await pool.query(`sp_insPaciente '${appaterno.toUpperCase()}','${apmaterno.toUpperCase()}','${nombres.toUpperCase()}','${fecnac}','${cod_ubigeo}','${docide}','${numdoc}','${dirpac}','${cod_ubigeo2}','${correo.toUpperCase()}','${telefono.trim()}', '${celular}','${numhijos}','${numdep}','${pcd}','${nombreFoto}','${nombreHuella}','${nombreFirma}','${sexo_id}','${grainst_id}','${estciv_id}','${codtipcon}','${ippais}','${usenam}','${codrolUser}','${inputid}','${dir_nrodpptoint}','${nom_urba}'`);
 
         res.json(response.recordset);
     },
@@ -315,9 +315,9 @@ module.exports = {
     /*************************/
     /************Examenes*************/
     async getListaExamenes(req, res) {//listar los examenes        
-        const codrolUser = req.user.codrol;
+        let { busqueda,soexa } = req.query;
         const pool = await getConnection();
-        const response = await pool.query(`pa_selExamenes '${codrolUser}'`);
+        const response = await pool.query(`pa_selExamenes '${busqueda}','${soexa}'`);        
         res.json(response.recordset);
     },
     async postExamenes(req, res) {//insertar examenes
@@ -326,10 +326,27 @@ module.exports = {
         const hostname = '';
         const usenam = req.user.usuario;
         const pool = await getConnection();
-        console.log(`pa_InsExamenes '${desexa}','${ordimp}','${ordprot}','${starep}','${staaddfile}','${reg_cie10}','${codrolUser}','${usenam}','${hostname}','${inputid}'`);
         const response = await pool.query(`pa_InsExamenes '${desexa}','${ordimp}','${ordprot}','${starep}','${staaddfile}','${reg_cie10}','${codrolUser}','${usenam}','${hostname}','${inputid}'`);
-
         res.json(response.recordset);
+    },
+    async delexamen(req, res) {
+        try {
+            const seleccionados = req.body;
+            const detalleJson = JSON.stringify(seleccionados);
+            const codrol = req.user.codrol;
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_DelExamenes';
+            request.input('codrol', sql.Int, codrol);
+            console.log(codrol,detalleJson);
+            request.input('ExamenesJson', sql.NVarChar(sql.MAX), detalleJson);
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
     },
     /*************************/
 

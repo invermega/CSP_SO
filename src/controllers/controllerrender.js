@@ -156,6 +156,11 @@ module.exports = {
         const parametro = "EX";
         permisos(parametro, 'entidades/examenCreate', req, res, 0)
     },
+    async renderexamenedit(req, res) {
+        const { id } = req.params;
+        const parametro = "EX";
+        permisos(parametro, 'entidades/examenCreate', req, res, id);
+    },
 
     /*Descargas*/
     async renderinformes(req, res) {

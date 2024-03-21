@@ -27,7 +27,7 @@ router.get('/exportarprotocolo/:id',isLoggedIn, controllerEn.getexportarprotocol
 /******************************************/
 
 /*****************Paciente*****************/
-router.get('/paciente', isLoggedIn, controllerrender.renderpaciente);
+router.get('/paciente', isLoggedIn, controllerrender.renderpaciente);//renderpaciente
 router.get('/pacientecreate', isLoggedIn, controllerrender.renderpacientecreate);
 router.get('/pacienteedit/:id', isLoggedIn, controllerrender.renderpacienteedit);
 router.get('/listarpacientes',isLoggedIn,controllerEn.getpaciente)
@@ -72,9 +72,10 @@ router.delete('/deleteCli',isLoggedIn,controllerEn.deletecliente);
 
 router.get('/examen', isLoggedIn, controllerrender.renderexamen);
 router.get('/examencreate', isLoggedIn, controllerrender.renderexamencreate);
-router.get('/equiposedit/:id', isLoggedIn, controllerrender.renderequiposedit);
-router.get('/examenes', isLoggedIn, controllerEn.getListaExamenes);
+router.get('/examenedit/:id', isLoggedIn, controllerrender.renderexamenedit);
+router.get('/listarexamenes', isLoggedIn, controllerEn.getListaExamenes);
 router.post('/examen', isLoggedIn, controllerEn.postExamenes);
+router.delete('/deleteExamenes',isLoggedIn,controllerEn.delexamen);
 /******************************************/
 /**************Equipos****************/
 
