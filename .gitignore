@@ -1,3 +1,10 @@
 node_modules/
 .env
 **/logfile.log
+src/public/img/cliente/*
+src/public/img/documentos/*
+src/public/img/medicos/*
+src/public/img/paciente/firma/*
+src/public/img/paciente/foto/*
+src/public/img/paciente/huella/*
+src/public/img/usuario/*
