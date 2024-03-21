@@ -53,26 +53,26 @@ function getcitas() {
                 `);
             } else {
                 citas.forEach(cita => {
+                    const cert = cita.CERT === 'S' ? '<i class="fa-solid fa-circle-check text-success"></i>' : '<i class="fa-solid fa-circle-xmark text-danger"></i>';
                     tbody.append(`
-            <tr data-id="${cita.id}">
-              <td class="align-middle"><input id="check_${cita.id}" value="id_${cita.id}" type="checkbox" class="mt-1" ></td>
-              <td>${cita.Fecha}</td>
-              <td>${cita.Hora}</td> 
-              <td>${cita.Turno}</td>
-              <td>${cita.razsoc}</td>
-              <td>${cita.appm_nom}</td>
-              <td>${cita.numdoc}</td>
-              <td>${cita.nompro}</td>
-              <td>${cita.dessta}</td> 
-              <td>${cita.desvalapt}</td>
-              <td>${cita.CERT}</td>
-              <td>${cita.INF}</td>
-            </tr>
-          `);
+                        <tr data-id="${cita.id}">
+                            <td class="align-middle"><input id="check_${cita.id}" value="id_${cita.id}" type="checkbox" class="mt-1" ></td>
+                            <td>${cita.Fecha}</td>
+                            <td>${cita.Hora}</td> 
+                            <td>${cita.Turno}</td>
+                            <td>${cita.razsoc}</td>
+                            <td>${cita.appm_nom}</td>
+                            <td>${cita.numdoc}</td>
+                            <td>${cita.nompro}</td>
+                            <td>${cita.dessta}</td> 
+                            <td>${cita.des_result}</td>
+                            <td>${cert}</td>
+                            <td>${cert}</td>
+                        </tr>
+                    `);
                 });
                 mensaje(citas[0].tipo, citas[0].response, 1500);
             }
-
         },
         error: function (error) {
             console.error('Error:', error);
@@ -129,19 +129,17 @@ function getclientes(parametro) {
             } else {
                 clientes.forEach(cliente => {
                     tbodycli.append(`
-            <tr>             
-              <td>${cliente.razsoc}</td>
-              <td>${cliente.NumDoc}</td>
-              <td>
-              <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-circle btn-sm btn-warning mr-1"><i class="fa-regular fa-pen-to-square"></i></button>
-              
-              </td>
-            </tr>
-          `);
+                        <tr>  
+                            <td>
+                                <button onclick="getempresam('${cliente.razsoc}','${cliente.cli_id}')" class="btn btn-info btn-circle btn-sm"><i class="fa-solid fa-plus"></i></button>              
+                            </td>           
+                            <td>${cliente.razsoc}</td>
+                            <td>${cliente.NumDoc}</td>                        
+                        </tr>
+                    `);
                 });
 
             }
-            //mensaje(clientes[0].icono, clientes[0].mensaje, 1500);
         },
         error: function () {
             alert('Error en la solicitud AJAX');

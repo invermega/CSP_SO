@@ -274,6 +274,7 @@ module.exports = {
             }
 
             const pool = await getConnection();
+            console.log(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`)
             const response = await pool.query(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`);
             res.json(response.recordset);
         } catch (error) {
