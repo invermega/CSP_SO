@@ -211,10 +211,10 @@ document.getElementById("protocolomodal").addEventListener("keydown", function (
     let protocolomodal = $('#protocolomodal').val();
     event.preventDefault();
     $.ajax({
-      url: '/protocololist',
+      url: '/protocololistimport',
       method: "GET",
       data: {
-        protocolo: protocolomodal,
+        protocolo: protocolomodal,        
       },
       success: function (lista) {
         ocultarDiv('cargaprotocolomodal');

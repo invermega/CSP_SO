@@ -11,6 +11,7 @@ const { } = require('../lib/permisos');
 /*****************Protocolo*****************/
 router.get('/protocolo', isLoggedIn, controllerrender.renderprotocolo);
 router.get('/protocololist', isLoggedIn, controllerEn.getprotocololist);
+router.get('/protocololistimport', isLoggedIn, controllerEn.getprotocololistimport);
 //router.get('/protocolocreate', isLoggedIn, controllerrender.renderprotocolocreate);
 
 //router.get('/protocoloedit/:id', isLoggedIn, controllerrender.renderprotocoloedit);

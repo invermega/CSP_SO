@@ -29,12 +29,27 @@ module.exports = {
     /*****************Protocolo*****************/
     async getprotocololist(req, res) {
         let protocolo = req.query.protocolo;
+        let cli_id = req.query.cli_id;
+        const codrol = req.user.codrol;
+        if (protocolo === '') {
+            protocolo = '%';
+        }
+        if (cli_id === '') {
+            cli_id = '%';
+        }
+        const pool = await getConnection();
+        const Protocolos = await pool.query(`sp_selProtocolo '${protocolo}','${cli_id}','${codrol}'`);
+        res.json(Protocolos.recordset);
+    },
+
+    async getprotocololistimport(req, res) {
+        let protocolo = req.query.protocolo;        
         const codrol = req.user.codrol;
         if (protocolo === '') {
             protocolo = '%';
         }
         const pool = await getConnection();
-        const Protocolos = await pool.query(`sp_selProtocolo '${protocolo}','${codrol}'`);
+        const Protocolos = await pool.query(`sp_selProtocoloimport '${protocolo}','${codrol}'`);
         res.json(Protocolos.recordset);
     },
     async getprotocolodatos(req, res) {

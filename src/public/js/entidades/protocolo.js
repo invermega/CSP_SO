@@ -11,16 +11,18 @@ function getProtocolo() {
   mostrarDiv('carga');
   ocultarTabla('mydatatable');
   let protocolo = $('#protocolo').val();
+  let cli_id = $('#cli_id').val();
   $.ajax({
     url: '/protocololist',
     method: "GET",
     data: {
       protocolo: protocolo,
+      cli_id:cli_id,
     },
     success: function (Protocolos) {
       ocultarDiv('carga');
       mostrarTabla('mydatatable');
-      let tablebody = $('tbody');
+      let tablebody = $('#tablebody');
       tablebody.html('');
       if (Protocolos.length === 0) {
         tablebody.append(`
@@ -58,6 +60,65 @@ function getProtocolo() {
       $('#error-message').text('Se produjo un error al cargar los protocolos.');
     }
   });
+}
+document.getElementById("empresamodal").addEventListener("keydown", function (event) {
+  if (event.key === 'Enter') {
+    buscarEmpresa();
+  }
+});
+function buscarEmpresa() {
+  mostrarDiv('cargaempmodal');
+  ocultarDiv('tablaempmodal');
+  let empresamodal = $('#empresamodal').val();
+  //event.preventDefault();
+  $.ajax({
+    url: '/empresas',
+    method: "GET",
+    data: {
+      empresa: empresamodal,
+    },
+    success: function (lista) {
+      ocultarDiv('cargaempmodal');
+      mostrarDiv('tablaempmodal');
+      let bodyempleadomodal = $('#bodyempmodal');
+      bodyempleadomodal.html('');
+      if (lista.length === 0) {
+        bodyempleadomodal.append(`
+          <tr>
+            <td colspan="3">No hay empresas con el nombre proporcionado</td>
+          </tr>
+        `);
+      } else {
+
+        lista.forEach(list => {
+          bodyempleadomodal.append(`
+            <tr>
+              <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="AgregarEmpresa(this)"><i class="fa-solid fa-plus"></i></button></td>
+              <td style="vertical-align: middle;" class="text-left">${list.cli_id}</td>
+              <td style="vertical-align: middle;" class="text-left asignado">${list.razsoc}</td>
+            </tr>
+          `);
+        });
+        mensaje(lista[0].icono, lista[0].mensaje, 1500);
+      }
+    },
+    error: function () { // Corregido: eliminé el parámetro "lista" innecesario
+      alert('error');
+    }
+  });
+}
+
+function AgregarEmpresa(btn) {
+  event.preventDefault();
+  var filaorigen = $(btn).closest("tr");
+  var cli_id = filaorigen.find("td:eq(1)").text();
+  var razsoc = filaorigen.find("td:eq(2)").text();
+
+  $('#cli_id').val(cli_id);
+  $('#razsoc').val(razsoc);
+  var btncerrar = document.getElementById(`cerrarempresa`);
+  btncerrar.click();
+  event.preventDefault();
 }
 
 function eliminar() {
@@ -147,69 +208,3 @@ function exportarprotocolo(iddatatableble, rutaparcial) {
     });
   }
 }
-
-document.getElementById("empresamodal").addEventListener("keydown", function (event) {
-  if (event.key === 'Enter') {
-    buscarEmpresa();
-  }
-});
-function buscarEmpresa() {
-  mostrarDiv('cargaempmodal');
-  ocultarDiv('tablaempmodal');
-  let empresamodal = $('#empresamodal').val();
-  event.preventDefault();
-  $.ajax({
-    url: '/empresas',
-    method: "GET",
-    data: {
-      empresa: empresamodal,
-    },
-    success: function (lista) {
-      ocultarDiv('cargaempmodal');
-      mostrarDiv('tablaempmodal');
-      let bodyempleadomodal = $('#bodyempmodal');
-      bodyempleadomodal.html('');
-      if (lista.length === 0) {
-        bodyempleadomodal.append(`
-          <tr>
-            <td colspan="3">No hay empresas con el nombre proporcionado</td>
-          </tr>
-        `);
-      } else {
-
-        lista.forEach(list => {
-          bodyempleadomodal.append(`
-            <tr>
-              <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="AgregarEmpresa(this)"><i class="fa-solid fa-plus"></i></button></td>
-              <td style="vertical-align: middle;" class="text-left">${list.cli_id}</td>
-              <td style="vertical-align: middle;" class="text-left asignado">${list.razsoc}</td>
-            </tr>
-          `);
-        });
-        mensaje(lista[0].icono, lista[0].mensaje, 1500);
-      }
-    },
-    error: function () { // Corregido: eliminé el parámetro "lista" innecesario
-      alert('error');
-    }
-  });
-}
-
-function AgregarEmpresa(btn) {
-  event.preventDefault();
-  var filaorigen = $(btn).closest("tr");
-  var cli_id = filaorigen.find("td:eq(1)").text();
-  var razsoc = filaorigen.find("td:eq(2)").text();
-
-  $('#cli_id').val(cli_id);
-  $('#razsoc').val(razsoc);
-  var btncerrar = document.getElementById(`cerrarempresa`);
-  btncerrar.click();
-  event.preventDefault();
-}
-
-
-
-
-
-
