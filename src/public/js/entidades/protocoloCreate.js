@@ -159,7 +159,11 @@ function activar(opcexa) {
 
 document.getElementById("empresamodal").addEventListener("keydown", function (event) {
   if (event.key === 'Enter') { // Verifica si se presionó la tecla Enter
-    mostrarDiv('cargaempresamodal');
+    buscarEmpresa();
+  }
+});
+function buscarEmpresa(){
+  mostrarDiv('cargaempresamodal');
     ocultarTabla('tableempresamodal');
     let empresamodal = $('#empresamodal').val(); // Corregido: agregué el símbolo '#' para seleccionar el elemento por su ID
     event.preventDefault();
@@ -198,9 +202,7 @@ document.getElementById("empresamodal").addEventListener("keydown", function (ev
         alert('error');
       }
     });
-
-  }
-});
+}
 
 document.getElementById("protocolomodal").addEventListener("keydown", function (event) {
   if (event.key === 'Enter') {

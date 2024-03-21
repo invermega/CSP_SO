@@ -12,21 +12,33 @@
             </div>
             <div>
             </div>
-        </div>        
+        </div>
         <div class="card-body body1 " style="max-height: 70vh; overflow-y: auto;">
             <div class="row textos " id="filtros"
                 style="display: ; border: 2px solid #D8D8D8; vertical-align: center; padding: 5px; border-radius: 7px;">
                 <div class="col-md-4 form-inline col-sm-12 form-group mb-1 mt-1">
                     <div class="input-group input-group-sm" style="width: 100%;">
-                        <label class="input-group-text form-control-sm" for="protocolo">Protocolo</label>
-                        <input type="text" id="protocolo" class="form-control form-control-sm"
+                        <label class="input-group-text form-control-sm" for="search">Protocolo</label>
+                        <input type="text" id="search" class="form-control form-control-sm"
                             placeholder="Nombre de protocolo">
                         <button type="button" class="btn input-group-text" id="search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </button>
                     </div>
                 </div>
-                <div class="col-md-5 form-inline col-sm-12 form-group mb-1 mt-1">
+                <div class="col-md-4 form-inline col-sm-12 form-group mb-1 mt-1">
+                    <div class="input-group input-group-sm" style="width: 100%;">
+                        <label class="control-label input-group-text" for="razsoc">Cliente</label>
+                        <input type="hidden" id="cli_id">
+                        <input type="text" style="width: 30%;" id="razsoc" class="form-control form-control-sm"
+                            placeholder="Nombre de la empresa" disabled>
+                        <button type="button" data-toggle="modal" data-target="#modalFormEmpresa"
+                            class="btn input-group-text" id="empresa">
+                            <i class="fa-solid fa-building mr-1"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4 form-inline col-sm-12 form-group mb-1 mt-1">
                     <div class="input-group input-group" style="width: 100%;">
                         <button type="button" class="btn input-group-text" id="refresh">
                             <i class="fa-solid fa-retweet"></i>
@@ -34,13 +46,15 @@
                         <a class="opcionform btn input-group-text" href="/protocolocreate"><i
                                 class="fa-solid fa-plus"></i>
                         </a>
-                        <button type="button" class="btn input-group-text" id="edit" onclick="navegaredit('mydatatable','protocoloedit')">
+                        <button type="button" class="btn input-group-text" id="edit"
+                            onclick="navegaredit('mydatatable','protocoloedit')">
                             <i class="fa-solid fa-pen"></i>
                         </button>
                         <button type="button" class="btn input-group-text" id="delete" onclick="eliminar()">
                             <i class="fa-solid fa-trash"></i>
                         </button>
-                        <button type="button" class="btn input-group-text" id="download" onclick="exportarprotocolo('mydatatable','exportarprotocolo')">
+                        <button type="button" class="btn input-group-text" id="download"
+                            onclick="exportarprotocolo('mydatatable','exportarprotocolo')">
                             <i class="fa-solid fa-download"></i>
                         </button>
                     </div>
@@ -74,8 +88,53 @@
         </div>
     </div>
 </div>
+<!--MODAL EMPRESA-->
+<div class="modal fade" id="modalFormEmpresa" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE EMPRESAS</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group input-group-sm" style="width: 100%;">
+                    <label class="control-label input-group-text" for="empresamodal">EMPRESA</label>
+                    <input class="form-control form-control-sm " id="empresamodal"
+                        placeholder="Ingrese el nombre de la empresa" required></input>
+                    <label class="input-group-text form-control-sm" for="empresamodal"><i
+                            class="fa-solid fa-building mr-1"></i></label>
+                </div>
+                <div class="row mb-2 mt-2">
+                    <div class="table-responsive">
+                        <table
+                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                            id="tablaempmodal" style="display: none;">
+                            <thead class="thead">
+                                <tr>
+                                    <th scope="col">ACCIÓN</th>
+                                    <th scope="col">CÓDIGO</th>
+                                    <th scope="col">EMPRESA</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodyempmodal">
+                            </tbody>
+                        </table>
 
+                    </div>
+                    <div class="text-center" id="cargaempmodal" style="display: none;">
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                            <lottie-player src="/img/jsonimg/Cargahealth.json" background="transparent" speed="1"
+                                style="width: 200px; height: 200px;" loop autoplay></lottie-player>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn"
+                        style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrarempresa"
+                        data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
+                        Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="/js/entidades/protocolo.js"> </script>
-
-
- 

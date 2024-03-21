@@ -70,7 +70,7 @@ function eliminar() {
   var seleccionados = [];
   for (var i = 0; i < rows.length; i++) {
     var checkbox = rows[i].querySelector('input[type="checkbox"]');
-    
+
     if (checkbox && checkbox.checked) {
       var codpro_id = checkbox.value.split('_')[1];
       seleccionados.push({ codpro_id: codpro_id });
@@ -88,28 +88,28 @@ function eliminar() {
           },
           body: JSON.stringify(seleccionados)
         })
-        .then(response => {
-          if (!response.ok) {
-            console.error('Error en la solicitud');
-            throw new Error('Error en la solicitud');
-          }
-          return response.json();
-        })
-        .then(data => {
-          if(data[0].icono==="success"){
-            for (var i = 0; i < seleccionados.length; i++) {
-              var codpro_id = seleccionados[i].codpro_id;
-              var celda = table.querySelector('tr[data-id="' + codpro_id + '"] .estado');
-              if (celda) {
-                celda.innerHTML = '<span class="badge estado" style="background-color:#FF1111; color:white; font-size:90%" >ANULADO</span>';
+          .then(response => {
+            if (!response.ok) {
+              console.error('Error en la solicitud');
+              throw new Error('Error en la solicitud');
+            }
+            return response.json();
+          })
+          .then(data => {
+            if (data[0].icono === "success") {
+              for (var i = 0; i < seleccionados.length; i++) {
+                var codpro_id = seleccionados[i].codpro_id;
+                var celda = table.querySelector('tr[data-id="' + codpro_id + '"] .estado');
+                if (celda) {
+                  celda.innerHTML = '<span class="badge estado" style="background-color:#FF1111; color:white; font-size:90%" >ANULADO</span>';
+                }
               }
             }
-          }
-          mensaje(data[0].icono, data[0].mensaje, 1500);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+            mensaje(data[0].icono, data[0].mensaje, 1500);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
       }
     });
   }
@@ -122,7 +122,7 @@ function exportarprotocolo(iddatatableble, rutaparcial) {
 
   for (var i = 0; i < rows.length; i++) {
     var checkbox = rows[i].querySelector('input[type="checkbox"]');
-    
+
     if (checkbox && checkbox.checked) {
       var id = checkbox.value.split('_')[1];
       seleccionados.push(id); // Agregar el id al array de seleccionados
@@ -148,7 +148,65 @@ function exportarprotocolo(iddatatableble, rutaparcial) {
   }
 }
 
+document.getElementById("empresamodal").addEventListener("keydown", function (event) {
+  if (event.key === 'Enter') {
+    buscarEmpresa();
+  }
+});
+function buscarEmpresa() {
+  mostrarDiv('cargaempmodal');
+  ocultarDiv('tablaempmodal');
+  let empresamodal = $('#empresamodal').val();
+  event.preventDefault();
+  $.ajax({
+    url: '/empresas',
+    method: "GET",
+    data: {
+      empresa: empresamodal,
+    },
+    success: function (lista) {
+      ocultarDiv('cargaempmodal');
+      mostrarDiv('tablaempmodal');
+      let bodyempleadomodal = $('#bodyempmodal');
+      bodyempleadomodal.html('');
+      if (lista.length === 0) {
+        bodyempleadomodal.append(`
+          <tr>
+            <td colspan="3">No hay empresas con el nombre proporcionado</td>
+          </tr>
+        `);
+      } else {
 
+        lista.forEach(list => {
+          bodyempleadomodal.append(`
+            <tr>
+              <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="AgregarEmpresa(this)"><i class="fa-solid fa-plus"></i></button></td>
+              <td style="vertical-align: middle;" class="text-left">${list.cli_id}</td>
+              <td style="vertical-align: middle;" class="text-left asignado">${list.razsoc}</td>
+            </tr>
+          `);
+        });
+        mensaje(lista[0].icono, lista[0].mensaje, 1500);
+      }
+    },
+    error: function () { // Corregido: eliminé el parámetro "lista" innecesario
+      alert('error');
+    }
+  });
+}
+
+function AgregarEmpresa(btn) {
+  event.preventDefault();
+  var filaorigen = $(btn).closest("tr");
+  var cli_id = filaorigen.find("td:eq(1)").text();
+  var razsoc = filaorigen.find("td:eq(2)").text();
+
+  $('#cli_id').val(cli_id);
+  $('#razsoc').val(razsoc);
+  var btncerrar = document.getElementById(`cerrarempresa`);
+  btncerrar.click();
+  event.preventDefault();
+}
 
 
 
