@@ -290,7 +290,7 @@ module.exports = {
     },
     async postfichamusculoesqueletica(req, res) {
         try {
-            const { cita_id, nuncom, soexa, codpru_id, aptitud_espalda, flex_fuerza, rangos_articulares, datains, doc_adic_id, datainsrec } = req.body;
+            const { cita_id, nuncom, soexa, codpru_id, aptitud_espalda, flex_fuerza, rangos_articulares, datains, doc_adic_id, datainsrec,conclusion } = req.body;
 
             const usenam = req.user.usuario;
             const hostname = '';
@@ -312,6 +312,7 @@ module.exports = {
             request.input('usenam', sql.VarChar(30), usenam);
             request.input('hostname', sql.VarChar(20), hostname);
             request.input('codrol', sql.Int, codrol);
+            request.input('conclusion', sql.VarChar(sql.MAX), conclusion);
             request.input('detalleJsoncie10', sql.NVarChar(sql.MAX), detalleJsoncie10);
             request.input('detalleJsonrecomen', sql.NVarChar(sql.MAX), detalleJsonrecomen);
             request.input('aptitud_espalda', sql.VarChar(40), aptitud_espalda);

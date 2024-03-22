@@ -38,6 +38,7 @@
     let control2 = document.getElementById('control2');
     let recomendacion3 = document.getElementById('recomendacion3');
     let control3 = document.getElementById('control3');
+    let conclusion = $('#conclusion');
     //var flex_fuerza = obtenerDataTFlex();
     //var rangos_articulares = obtenerDataTRang();
     $.ajax({
@@ -51,6 +52,7 @@
             if (result[0].mensaje != 'sin datos') {
                 nuncom.value = result[0].nuncom;
                 aptitud_espaldainput.value = result[0].aptitud_espalda;
+                conclusion.val(result[0].conclusion);
                 if (result[0].flex_fuerza) {
                     let flex_fuerzaArray = JSON.parse(result[0].flex_fuerza);
                     for (let i = 0; i < flex_fuerzaArray.length && i < 4; i++) {
@@ -280,7 +282,7 @@ function Grabar() {
     let aptitud_espalda = document.getElementById('aptitud_espalda').value;
     var flex_fuerza = obtenerDataTFlex();
     var rangos_articulares = obtenerDataTRang();
-
+    var conclusion = $('#conclusion').val();
     let incluirIds = 'aptitud_espalda';
     validarFormulario2(incluirIds);
     if (!aptitud_espalda) {
@@ -300,6 +302,7 @@ function Grabar() {
             aptitud_espalda: aptitud_espalda,
             flex_fuerza: flex_fuerza,
             rangos_articulares: rangos_articulares,
+            conclusion:conclusion
         };
 
         fetch('/pbfichamusculoesqueletica', {
