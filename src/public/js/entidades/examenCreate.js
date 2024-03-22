@@ -1,6 +1,8 @@
 $(document).ready(function () {
     let inputid = $('#inputid').val();
-    getexamenes(inputid);
+    if(inputid !=='0'){
+        getexamenes(inputid);
+    }    
 
 });
 
