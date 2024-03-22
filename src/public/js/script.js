@@ -659,7 +659,11 @@ function mascaraDocumentoIdentidad(docID, numDocID) {
   } else {
     $(numDocID).inputmask("numeric", {
       rightAlign: false,
-      placeholder: ''
+      digits: 0,
+      digitsOptional: false,
+      placeholder: '',
+      allowPlus: false,
+      allowMinus: false,
     });
   }
 }

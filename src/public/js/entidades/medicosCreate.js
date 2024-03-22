@@ -3,7 +3,7 @@ $(document).ready(function () {
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
     const originalImage = new Image();
-    let originalImageSrc = '../img/medicos/default.webp'; // Almacena la URL de la imagen original  
+    let originalImageSrc = '../img/fondo.png'; // Almacena la URL de la imagen original  
     originalImage.onload = function () {
         drawImageOnCanvas(originalImage);
     };
@@ -44,6 +44,35 @@ $(document).ready(function () {
             };
             reader.readAsDataURL(file);
         }
+    });
+
+
+    const docideSelect = $('#docide');
+    const numDocInput = $('#nundoc');
+
+    mascaraDocumentoIdentidad(docideSelect, numDocInput);
+
+    $('#docide').on('change', function () {
+        mascaraDocumentoIdentidad(docideSelect, numDocInput);
+    });
+
+    $("#medcel").inputmask("999 999 999", {
+        placeholder: "999 999 999",
+    });
+    $("#medTelfij").inputmask("999 9999", {
+        placeholder: "999 9999",
+        rightAlign: false
+    });
+
+    $('#med_cmp').inputmask({
+        alias: 'numeric',
+        rightAlign: false,
+        placeholder: '',
+    });
+    $('#med_rne').inputmask({
+        alias: 'numeric',
+        rightAlign: false,
+        placeholder: '',
     });
 
 });
@@ -140,8 +169,8 @@ function Grabar() {
     let nundoc = $('#nundoc');
     let med_cmp = $('#med_cmp');
     let med_rne = $('#med_rne');
-    let medTelfij = $('#medTelfij');
-    let medcel = $('#medcel');
+    let medTelfij = $('#medTelfij').inputmask('unmaskedvalue');
+    let medcel = $('#medcel').inputmask('unmaskedvalue');
     let med_correo = $('#med_correo');
     let meddir = $('#meddir');
     let esp_id = $('#esp_id');
@@ -159,8 +188,8 @@ function Grabar() {
             nundoc: nundoc.val(),
             med_cmp: med_cmp.val(),
             med_rne: med_rne.val(),
-            medTelfij: medTelfij.val(),
-            medcel: medcel.val(),
+            medTelfij: medTelfij,
+            medcel: medcel,
             med_correo: med_correo.val(),
             meddir: meddir.val(),
             esp_id: esp_id.val(),
