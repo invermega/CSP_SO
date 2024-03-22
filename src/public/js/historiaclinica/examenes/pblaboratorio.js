@@ -1,5 +1,3 @@
-
-
 (function poblarcampos() {
     let cita_id = document.getElementById('id').value;
     let soexa = document.getElementById('soexa').value;
@@ -130,6 +128,7 @@ function ObtenerParametros(codpru_id) {
     let inputcodpru_id = document.getElementById('codpru_id');
     inputcodpru_id.value = codpru_id;
     let nuncom = document.getElementById('nuncom').value;
+    let dni = document.getElementById('dni').value;
     mostrarDiv("cargaparametros");
     ocultarDiv("tableparametros");
     

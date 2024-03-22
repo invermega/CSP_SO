@@ -190,7 +190,6 @@ module.exports = {
         console.log(codpru_id, nuncom);
         const pool = await getConnection();
         const parametros = await pool.query(`pa_selparametroslab '${codpru_id}','${nuncom}',${pachis}`);
-        console.log(parametros.recordset);
         res.json(parametros.recordset);
     },
     async postlaboratorio(req, res) {
