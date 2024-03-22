@@ -643,7 +643,7 @@ function limitarInput(event, maxlength) {
     var $errorMessageElement = $('#' + errorMessageId);
 
     if ($errorMessageElement.length === 0) {
-      $errorMessageElement = $('<span>').attr('id', errorMessageId).addClass('error-message').text(`(!) Ha excedido el límite de caracteres permitidos para ${valorData}`);
+      $errorMessageElement = $('<span>').attr('id', errorMessageId).addClass('error-message').css('font-size', '9px').css('color','#dc3545').text(`(!) Ha excedido el límite de caracteres permitidos para ${valorData}`);
       $container.append($errorMessageElement);
     }
   } else {
