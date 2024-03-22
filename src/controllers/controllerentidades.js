@@ -83,7 +83,7 @@ module.exports = {
     },
     async postprotocolo(req, res) {
         try {
-            const { codemp, nompro, comentarios, tipexa_id, estado, tiemval_cermed, fecvcto_cermed, id, datains } = req.body;
+            const { codemp, nompro, comentarios, tipexa_id, estado, tiemval_cermed, fecvcto_cermed, id, datains,fec_emi,cant_pac,med_id } = req.body;
             const usenam = req.user.usuario;
             const hostname = '';
             const codrol = req.user.codrol;
@@ -102,6 +102,9 @@ module.exports = {
             request.input('usenam', sql.VarChar(30), usenam);
             request.input('hostname', sql.VarChar(20), hostname);
             request.input('codrol', sql.Int, codrol);
+            request.input('fec_emi', sql.Date(), fec_emi);
+            request.input('cant_pac', sql.Int, cant_pac);
+            request.input('med_id', sql.Int, med_id);
             request.input('DetalleProtocoloJson', sql.NVarChar(sql.MAX), detalleJson);
             const result = await request.execute(PROCEDURE_NAME);
             pool.close();

@@ -9,6 +9,7 @@ $(document).ready(function () {
         ocultarDiv("cotiza_cant_pac");
       }
     });
+
   });
 
   const id = document.getElementById("inputid").value;
@@ -43,7 +44,10 @@ function llenarFormulario(id) {
     nompro: document.getElementById('nompro'),
     comentarios: document.getElementById('comentarios'),
     tiemval_cermed: document.getElementById('tiemval_cermed'),
-    fecvcto_cermed: document.getElementById('fecvcto_cermed')
+    fecvcto_cermed: document.getElementById('fecvcto_cermed'),
+    fec_emi:document.getElementById('fec_emi'),
+    cant_pac:document.getElementById('cant_pac'),
+    med_id:document.getElementById('med_id'),
   };
 
   $.ajax({
@@ -73,6 +77,9 @@ function llenarFormulario(id) {
       formElements.comentarios.value = data.comentarios;
       formElements.tiemval_cermed.value = data.tiemval_cermed;
       formElements.fecvcto_cermed.value = new Date(data.fecvcto_cermed).toISOString().split('T')[0];
+      formElements.fec_emi.value = data.fec_emi;
+      formElements.cant_pac.value = data.cant_pac;
+      formElements.med_id.value = data.med_id;
     },
     error: function (xhr, status, error) {
       console.error('Error en la solicitud AJAX:', status, error);
@@ -319,13 +326,14 @@ function Guardar() {
     var codpru_id = value.split('_')[1];
     var select = document.getElementById(`select_${soexa}_${codpru_id}`).value;
     var precio = document.getElementById(`precio_${soexa}_${codpru_id}`).value;
-    var comen = document.getElementById(`comen_${soexa}_${codpru_id}`).value;
+    var comen = document.getElementById(`comen_${soexa}_${codpru_id}`).value;    
     var rowData = {
       codpru_id: codpru_id,
       soexa: soexa,
       raneta_id: select,
       precio: precio,
       obs: comen
+      
     };
 
     if (checkboxes[0].checked) {
@@ -340,6 +348,9 @@ function Guardar() {
     const nompro = document.getElementById("nompro").value
     const comentarios = document.getElementById("comentarios").value
     const tipexa_id = document.getElementById("tipexa_id").value
+    const fec_emi = document.getElementById("fec_emi").value
+    const cant_pac = document.getElementById("cant_pac").value
+    const med_id = document.getElementById("med_id").value
     var vigente = document.getElementById("vigente");
     var historico = document.getElementById("historico");
     var cotizacion = document.getElementById("cotizacion");
@@ -351,15 +362,15 @@ function Guardar() {
    
     if (vigente.checked === true) {
       estado = vigente.value;
-      data_cantidad_pacientes = 0;
+      //data_cantidad_pacientes = 0;
     }
     if (historico.checked === true) {
       estado = historico.value;
-      data_cantidad_pacientes = 0;
+      //data_cantidad_pacientes = 0;
     }
     if (cotizacion.checked === true) {
       estado = cotizacion.value;
-      cantidad_pacientes =  data_cantidad_pacientes;
+      //cantidad_pacientes =  data_cantidad_pacientes;
     }
     if (anulado.checked === true) {
       estado = anulado.value;
@@ -374,7 +385,9 @@ function Guardar() {
       comentarios: comentarios,
       tipexa_id: tipexa_id,
       estado: estado,
-      //cantidad_pac : cantidad_pac,
+      fec_emi : fec_emi,
+      cant_pac:cant_pac,
+      med_id:med_id,
       tiemval_cermed: tiemval_cermed,
       fecvcto_cermed: fecvcto_cermed,
       id: id,
@@ -413,6 +426,64 @@ function Guardar() {
 }
 
 
+
+document.getElementById("medicomodal").addEventListener("keyup", function (event) {
+  if (event.key === "Enter") {
+      var parametro = this.value;
+      getmedico(parametro);
+  }
+});
+
+function getmedico(parametro1) {
+  mostrarDiv('cargamedico');
+  ocultarDiv('tablamedicomodal');
+  let parametro = 0;
+  $.ajax({
+      url: '/listarmedicos',
+      method: 'GET',
+      data: {
+          parametro: parametro,
+          parametro1: parametro1,
+      },
+      success: function (medicos) {
+          ocultarDiv('cargamedico');
+          mostrarDiv('tablamedicomodal');
+          const tbodymed = $('#bodymedicomodal');
+          tbodymed.empty();
+          if (medicos.length === 0) {
+              tbodymed.append(`
+                  <tr>
+                      <td colspan="2" class="text-center">No hay resultados disponibles </td>
+                  </tr>
+              `);
+          } else {
+              medicos.forEach(medico => {
+                  tbodymed.append(`
+                  <tr>
+                  <td>
+                  <button onclick="getmedicom('${medico.med_id}','${medico.medapmn}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>                    
+                  </td>
+                  <td>${medico.medapmn}</td>
+                  <td>${medico.nundoc}</td>
+                  
+                </tr>
+              `);
+              });
+              mensaje(medicos[0].tipo, medicos[0].response, 1500);
+          }
+      },
+      error: function () {
+          alert('Error en la solicitud AJAX');
+      },
+  });
+}
+
+function getmedicom(med_idM, medapmnM,) {
+  $('#med_id').val(med_idM);
+  $('#medapmn').val(medapmnM);
+  var btncerrar = document.getElementById(`cerrarmedicomodal`);
+  btncerrar.click();
+}
 
 
 

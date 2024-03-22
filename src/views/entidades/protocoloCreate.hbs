@@ -191,15 +191,7 @@
                         </div>
                     </div>
 
-                    <div class="row mt-2" id="cotiza_cant_pac">
-                        <div class="col-md-6 input-group input-group-sm">
-                            <label class="input-group-text" for="cant_paci">Cantidad Pacientes</label>
-                            <input type="text" class="form-control form-control-sm"
-                                value="1"
-                                id="cant_paci" placeholder="Ingrese la cantidad de pacientes" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
-                            <label class="input-group-text" for="cant_paci"><i class="fa-solid fa-list-ul"></i></label>
-                        </div>
-                    </div>
+                    
                     <div class="row mt-2">
                         <div class="col-md-12 input-group input-group-sm">
                             <label class="input-group-text" for="tipexa_id">Tipo</label>
@@ -241,6 +233,32 @@
                                 placeholder="Ingrese el nombre" required disabled>
                         </div>
                     </div>
+                    <div class="row mt-2">
+                        <div class="col-md-3 input-group input-group-sm">
+                            <label class="input-group-text" for="fec_emi">Fecha de emision</label>
+                            <input type="date" class="form-control form-control-sm" id="fec_emi"
+                                placeholder="Ingrese la fecha emision" required>
+                        </div>
+                        <div class="col-md-3 input-group input-group-sm" id="cotiza_cant_pac">
+                            <label class="input-group-text" for="cant_pacLabel">Cantidad Pacientes</label>
+                            <input type="text" class="form-control form-control-sm" value="0" id="cant_pac"
+                                placeholder="Ingrese la cantidad de pacientes"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                            <label class="input-group-text" for="cant_pac"><i class="fa-solid fa-list-ul"></i></label>
+                        </div>
+                        <div class="col-md-3 form-inline col-sm-12 form-group mb-1 mt-1">
+                            <div class="input-group input-group-sm" style="width: 100%;">
+                                <label class="control-label input-group-text" for="medapmn">Médico</label>
+                                <input type="hidden" id="med_id" value="0">
+                                <input type="text" id="medapmn" class="form-control form-control-sm"
+                                    placeholder="Nombre del médico" aria-label="medapmn" disabled>
+                                <button type="button" data-toggle="modal" data-target="#modalFormmedico"
+                                    class="btn input-group-text">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>                               
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
                 <div class="tab-pane fade" id="ex1-tabs-2" role="tabpanel" aria-labelledby="ex1-tab-2">
@@ -274,3 +292,55 @@
 </div>
 
 <script src="/js/entidades/protocoloCreate.js"> </script>
+
+
+<!--MODAL MEDICO-->
+<div class="modal fade" id="modalFormmedico" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #0FA0A7;color: white;border-color: #0FA0A7;">
+                <h4 class="modal-title" id="myModalLabel">BUSQUEDA DE MÉDICO</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group input-group-sm" style="width: 100%;">
+                    <label class="control-label input-group-text" for="medicomodal">Médico</label>
+                    <input class="form-control form-control-sm " id="medicomodal"
+                        placeholder="Ingrese los nombres o el DNI del médico" required></input>
+                    <label class="input-group-text form-control-sm"><i class="fa-solid fa-user"></i></label>
+                </div>
+                <div class="row mb-2 mt-2">
+                    <div class="table-responsive">
+                        <table
+                            class="records_list table table-sm table-hover letra animate__animated animate__fadeInDown"
+                            id="tablamedicomodal" style="display: none;">
+                            <thead class="thead">
+                                <tr>
+                                    <th scope="col">ACCIONES</th>
+                                    <th scope="col">APELLIDOS Y NOMBRES</th>
+                                    <th scope="col">DNI</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bodymedicomodal">
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="text-center" id="cargamedico" style="display: none;">
+                        <div class="d-flex justify-content-center align-items-center" style="min-height: 5vh;">
+                            <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_ginda0jy.json"
+                                background="transparent" speed="1" style="width: 300px; height: 300px;" loop
+                                autoplay></lottie-player>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn"
+                        style="background-color: #793B8E;color: white;border-color: #793B8E;" id="cerrarmedicomodal"
+                        data-dismiss="modal"> <i class="fa-solid fa-circle-xmark"></i>
+                        Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
