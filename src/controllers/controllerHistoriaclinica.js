@@ -880,7 +880,7 @@ module.exports = {
         let soexa = '001,003,005,009,013,020,033,004'*/
         let { cita_id, soexa } = req.query;
         const pool = await getConnection();
-        const result = await pool.query(`pa_SelExaFormatos'${cita_id}','${soexa}'`);
+        const result = await pool.query(`pa_SelExaFormatos'${cita_id}'`);
         res.json(result.recordset);
     },
 
