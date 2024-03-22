@@ -459,9 +459,9 @@ module.exports = {
     },
     /*************Equipos***************/
     async getequipos(req, res) {//listar equipos
-        const { opc, equipos } = req.query;
+        const { opc, equipos,codpru_id } = req.query;
         const pool = await getConnection();
-        const response = await pool.query(`pa_SelEquiposForm '','${equipos}','${opc}'`);
+        const response = await pool.query(`pa_SelEquiposForm '${codpru_id}','${equipos}','${opc}'`);
         res.json(response.recordset);
     },
     async postequipos(req, res) {//agregar equipo

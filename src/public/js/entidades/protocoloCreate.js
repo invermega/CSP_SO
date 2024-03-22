@@ -48,11 +48,13 @@ function llenarFormulario(id) {
     fec_emi:document.getElementById('fec_emi'),
     cant_pac:document.getElementById('cant_pac'),
     med_id:document.getElementById('med_id'),
+    medapmn:document.getElementById('medapmn'),
   };
 
   $.ajax({
     url: '/protocolodatos/' + id,
     success: function (datos) {
+      console.log(datos)
       var data = datos[0];
       formElements.codemp.value = data.codemp;
       formElements.nomempresa.value = data.razsoc;
@@ -77,9 +79,11 @@ function llenarFormulario(id) {
       formElements.comentarios.value = data.comentarios;
       formElements.tiemval_cermed.value = data.tiemval_cermed;
       formElements.fecvcto_cermed.value = new Date(data.fecvcto_cermed).toISOString().split('T')[0];
-      formElements.fec_emi.value = data.fec_emi;
+      formElements.fec_emi.value = new Date(data.fec_emi).toISOString().split('T')[0];
+
       formElements.cant_pac.value = data.cant_pac;
       formElements.med_id.value = data.med_id;
+      formElements.medapmn.value = data.medapmn;
     },
     error: function (xhr, status, error) {
       console.error('Error en la solicitud AJAX:', status, error);
