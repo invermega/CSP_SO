@@ -67,12 +67,18 @@ $(document).ready(function () {
     $('#med_cmp').inputmask({
         alias: 'numeric',
         rightAlign: false,
+        digitsOptional: false,
         placeholder: '',
+        allowPlus: false,
+        allowMinus: false,
     });
     $('#med_rne').inputmask({
         alias: 'numeric',
         rightAlign: false,
+        digitsOptional: false,
         placeholder: '',
+        allowPlus: false,
+        allowMinus: false,
     });
 
 });
@@ -89,7 +95,7 @@ function getmedicos(id) {
             parametro1: parametro1,
         },
         success: function (medicos) {
-            console.log(medicos,id);
+            console.log(medicos, id);
             if (medicos.length !== 0) {
                 $('#medap').val(medicos[0].medap);
                 $('#medam').val(medicos[0].medam);
@@ -142,10 +148,10 @@ function getPacienteCombos() {
             $("#docide").val("01");
             $('#esp_id').val("2");
             let inputid = $('#inputid').val();
-            if (inputid !== '0'){
+            if (inputid !== '0') {
                 getmedicos(inputid);
             }
-            
+
         },
         error: function () {
             alert('error');
