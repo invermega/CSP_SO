@@ -652,6 +652,19 @@ function limitarInput(event, maxlength) {
   }
 }
 
+function mascaraDocumentoIdentidad(docID, numDocID) {
+  if ($(docID).val() === '07' || $(docID).val() === '00') {
+    $(numDocID).val('');
+    $(numDocID).inputmask("remove");
+  } else {
+    $(numDocID).inputmask("numeric", {
+      rightAlign: false,
+      placeholder: ''
+    });
+  }
+}
+
+
 //errorMessageElement = $('<span>').attr('id', errorMessageId).css('font-size', '9px').css('color','#dc3545').text(`(!) Ha excedido el límite de caracteres permitidos para ${valorData}`);
 
 /*function showErrorMessage(inputId, valorData) {

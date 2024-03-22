@@ -52,6 +52,32 @@ $(document).ready(function () {
             reader.readAsDataURL(file);
         }
     });
+
+    const docideSelect = $('#docide');
+    const numDocInput = $('#NumDoc');
+    mascaraDocumentoIdentidad(docideSelect, numDocInput);
+
+    $('#docide').on('change', function () {
+        mascaraDocumentoIdentidad(docideSelect, numDocInput);
+    }); 
+
+
+    $("#celular").inputmask("999 999 999", {
+        placeholder: "999 999 999",
+        rightAlign: false,
+    });
+    $("#telefono").inputmask("999 9999", {
+        placeholder: "999 9999",
+        rightAlign: false
+    });
+
+
+    document.getElementById("clientemodal").addEventListener("keyup", function (event) {
+        if (event.key === "Enter") {
+            getcliente();
+        }
+    });
+
 });
 
 function getPacienteCombos() {
@@ -79,19 +105,8 @@ function getPacienteCombos() {
     });
 }
 
-document.getElementById("clientemodal").addEventListener("keyup", function (event) {
-    if (event.key === "Enter") {
-        var parametro = this.value;
-        getcliente(parametro);
-    }
-});
-
-document.getElementById("searchCliente").addEventListener("click", function () {
-    var parametro = document.getElementById("clientemodal").value;
-    getcliente(parametro);
-});
-
-function getcliente(parametro) {
+function getcliente() {
+    var parametro = $("#clientemodal").val();
     mostrarDiv('carga');
     ocultarDiv('tablaclientemodal');
     $.ajax({
@@ -188,10 +203,10 @@ function guardarcliente() {
     let docide = $('#docide');
     let NumDoc = $('#NumDoc');
     let Direccion = $('#Direccion');
-    let telefono = $('#telefono');
+    let telefono = $('#telefono').inputmask('unmaskedvalue');
     let emailcon = $('#emailcon');
     let contacto = $('#contacto');
-    let celular = $('#celular');
+    let celular = $('#celular').inputmask('unmaskedvalue');
     let emailmedocu = $('#emailmedocu');
     let forpag_id = $('#forpag_id');
     let feccre = $('#feccre');
@@ -328,10 +343,10 @@ function guardarcliente() {
             docide: docide.val(),
             NumDoc: NumDoc.val(),
             Direccion: Direccion.val(),
-            telefono: telefono.val(),
+            telefono: telefono,
             emailcon: emailcon.val(),
             contacto: contacto.val(),
-            celular: celular.val(),
+            celular: celular,
             emailmedocu: emailmedocu.val(),
             forpag_id: forpag_id.val(),
             feccre: feccre.val(),
@@ -353,8 +368,8 @@ function guardarcliente() {
             piccli: piccli,
         },
         success: function (response) {
-            if(response[0].tipo === 'success'){
-                $('input[type="text"]').val("");
+            if(response[0].tipo === 'success'){              
+
                 mensaje(response[0].tipo, response[0].response, 1500);
             }else{
                 mensaje(response[0].tipo, response[0].response, 1500);

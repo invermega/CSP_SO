@@ -69,34 +69,51 @@
                                             </div>
 
                                             <div class="col-md-6"><label class="labels" for="NumDoc">N° de
-                                                    documento</label><input type="text" id="NumDoc"
-                                                    class="form-control btn-sm" placeholder="Número de documento"
-                                                    oninput="limitarCaracteresNumericos(this, 20)" value="" required>
+                                                    documento</label>
+                                                <div class="input-group">
+                                                    <input type="text" id="NumDoc" class="form-control btn-sm"
+                                                        placeholder="Número de documento"
+                                                        oninput="limitarInput(event,20);" data-nombre="N°documento"
+                                                        value="" required>
+                                                </div>
                                                 <div class="invalid-feedback">Este campo es obligatorio</div>
                                             </div>
 
                                         </div>
                                         <div class="row md-7">
                                             <div class="col-md-10">
-                                                <label class="labels" for="razsoc">Razon Social</label><input
-                                                    type="text" class="form-control form-control-sm" value=""
-                                                    id="razsoc" placeholder="Ingrese razon social" required>
+                                                <label class="labels" for="razsoc">Razon Social</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control form-control-sm" value=""
+                                                        id="razsoc" placeholder="Ingrese razon social"
+                                                        oninput="limitarInput(event,150);" data-nombre="Razon Social"
+                                                        required>
+                                                </div>
                                                 <div class="invalid-feedback">Este campo es obligatorio</div>
                                             </div>
 
                                             <div class="col-md-10">
-                                                <label class="labels" for="Direccion">Dirección</label><input
-                                                    type="text" class="form-control btn-sm" id="Direccion" value=""
-                                                    placeholder="Dirección" required>
+                                                <label class="labels" for="Direccion">Dirección</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control btn-sm" id="Direccion"
+                                                        value="" placeholder="Dirección"
+                                                        oninput="limitarInput(event,100);" data-nombre="Dirección"
+                                                        required>
+                                                </div>
                                                 <div class="invalid-feedback">Este campo es obligatorio</div>
 
 
                                             </div>
                                             <div class="col-md-10"><label class="labels"
-                                                    for="actividad_economica">Actividad
-                                                    Economica</label><input type="text"
-                                                    class="form-control form-control-sm" value=""
-                                                    id="actividad_economica" placeholder="Ingrese actividad economica">
+                                                    for="actividad_economica">Actividad Economica</label>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control form-control-sm" value=""
+                                                        id="actividad_economica"
+                                                        placeholder="Ingrese actividad economica" ç
+                                                        oninput="limitarInput(event,200);"
+                                                        data-nombre="Actividad Económica">
+                                                </div>
+
                                             </div>
                                             <div class="col-md-10"><label class="labels" for="forpag_id">Forma de
                                                     pago</label>
@@ -142,27 +159,33 @@
                                 </div>
 
                                 <div class="row mt-2">
-                                    <div class="col-md-12"><label class="labels" for="contacto">Contacto</label><input
-                                            type="text" id="contacto" class="form-control btn-sm"
-                                            placeholder="Contacto">
+                                    <div class="col-md-12"><label class="labels" for="contacto">Contacto</label>
+                                        <div class="input-group">
+                                            <input type="text" id="contacto" class="form-control btn-sm"
+                                                placeholder="Contacto" oninput="limitarInput(event,100);"
+                                                data-nombre="Contacto">
+                                        </div>
                                     </div>
 
-                                    <div class="col-md-12"><label class="labels" for="emailcon">Correo</label><input
-                                            type="text" id="emailcon" class="form-control btn-sm"
-                                            placeholder="correo@ejemplo.com">
+                                    <div class="col-md-12"><label class="labels" for="emailcon">Correo</label>
+                                        <div class="input-group">
+                                            <input type="text" id="emailcon" class="form-control btn-sm"
+                                                placeholder="correo@ejemplo.com" oninput="limitarInput(event,50);"
+                                                data-nombre="Correo">
+                                        </div>
+
                                     </div>
 
                                 </div>
                                 <div class="row mt-2">
                                     <div class="col-md-6"><label class="labels" for="celular">Celular</label><input
                                             type="text" id="celular" class="form-control btn-sm" value=""
-                                            placeholder="Número de celular"
-                                            oninput="limitarCaracteresNumericos(this, 30)" required>
+                                            placeholder="Número de celular" data-nombre="Celular" required>
                                     </div>
 
                                     <div class="col-md-6"><label class="labels" for="telefono">Telefono</label><input
                                             type="text" id="telefono" class="form-control btn-sm"
-                                            placeholder="Telefono fijo" oninput="limitarCaracteresNumericos(this, 50)">
+                                            placeholder="Telefono fijo" data-nombre="Telefono">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -173,10 +196,12 @@
 
                                 <div class="row mt-2">
 
-
-                                    <div class="col-md-12"><label class="labels" for="emailmedocu">Correo</label><input
-                                            type="text" id="emailmedocu" class="form-control btn-sm"
-                                            placeholder="correo@ejemplo.com">
+                                    <div class="col-md-12"><label class="labels" for="emailmedocu">Correo</label>
+                                        <div class="input-group">
+                                            <input type="text" id="emailmedocu" class="form-control btn-sm"
+                                                placeholder="correo@ejemplo.com" oninput="limitarInput(event,50);"
+                                                data-nombre="Correo">
+                                        </div>
                                     </div>
 
                                 </div>
@@ -304,7 +329,7 @@
                                 <label class="control-label input-group-text" for="clientemodal">CLIENTES</label>
                                 <input class="form-control form-control-sm " id="clientemodal"
                                     placeholder="Ingrese número de documento" required></input>
-                                <button type="button" class="btn input-group-text" id="searchCliente">
+                                <button type="button" class="btn input-group-text" id="searchCliente" onclick="getcliente()">
                                     <i class="fa-solid fa-magnifying-glass"></i></label>
                                 </button>
                             </div>
@@ -323,7 +348,7 @@
                                         <tbody id="bodycliente">
                                         </tbody>
 
-                                
+
 
                                     </table>
                                 </div>
