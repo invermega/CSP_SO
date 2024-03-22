@@ -1349,7 +1349,6 @@ function llenarfichas(soexa) {
             cita_id: cita_id,
         },
         success: function (result) {
-            console.log(result);
             if (soexa === '032') {
                 $('#conevapsico').val(result[0].conevapsico);
             } else if (soexa === '013') {

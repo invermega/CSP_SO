@@ -170,7 +170,7 @@ module.exports = {
     },
     /*Equipos*/
     async renderequipo(req, res) {
-        const parametro = "Eq";
+        const parametro = "EQ";
         permisos(parametro, 'entidades/equipos', req, res)
     },
     async renderequiposcreate(req, res) {
@@ -182,5 +182,19 @@ module.exports = {
         const parametro = "EQ";
         permisos(parametro, 'entidades/equiposCreate', req, res, id)
     },
-
+    /*Rangos */
+    async renderrangos(req, res) {
+        const parametro = "RG";
+        permisos(parametro, 'entidades/rangos', req, res)
+    },
+    async renderrangoscreate(req, res) {
+        const parametro = "RG";
+        permisos(parametro, 'entidades/rangosCreate', req, res, 0)
+    },
+    async renderrangosedit(req, res) {
+        const { id } = req.params;
+        const parametro = "RG";
+        permisos(parametro, 'entidades/rangosCreate', req, res, id)
+    },
+    
 };

@@ -88,6 +88,11 @@ router.get('/equiposedit/:id', isLoggedIn, controllerrender.renderequiposedit);
 router.delete('/equiposdel',isLoggedIn,controllerEn.deleteequipos);
 /******************************************/
 
+/**************Equipos****************/
+router.get('/rangos', isLoggedIn, controllerrender.renderrangos);
+
+
+/******************************************/
 
 
 module.exports = router;
