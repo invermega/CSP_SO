@@ -93,7 +93,6 @@ function llenarFormulario(id) {
 }
 
 function getexamenes(id) {
-  $("#mydatatable").DataTable().destroy();
   var btncerrar = document.getElementById(`cerrarprotocolo`);
   btncerrar.click();
   const ruta = (id === "0") ? '/examenes' : '/examenes/' + id;
@@ -139,7 +138,7 @@ function getexamenes(id) {
             `);
           activar(examen.soexa + '_' + examen.codpru_id);
         });
-        paginaciontabla('#mydatatable', 0, "desc");
+        
       } else {
         // Manejar el caso de que "examenes" no sea un array, tal vez mostrar un mensaje de error
         console.error('La respuesta no es un array de examenes.');
