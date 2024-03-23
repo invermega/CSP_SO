@@ -1,16 +1,15 @@
 $(document).ready(function () {
   ocultarDiv("cotiza_cant_pac");
-  document.querySelectorAll('input[name="estado"]').forEach(function (radio) {
-    radio.addEventListener('change', function () {
-      let estado = this.value;  // Asignar el valor actual del radio button a la variable estado
-      if (estado === 'C') {
-        mostrarDiv("cotiza_cant_pac");
-      }else{
-        ocultarDiv("cotiza_cant_pac");
-      }
-    });
-
+  
+  $('input[name="estado"]').change(function () {
+    let estado = $(this).val();  // Obtener el valor actual del radio button
+    if (estado === 'C') {
+      mostrarDiv("cotiza_cant_pac");
+    } else {
+      ocultarDiv("cotiza_cant_pac");
+    }
   });
+
 
   const id = document.getElementById("inputid").value;
   getexamenes(id);
@@ -45,16 +44,15 @@ function llenarFormulario(id) {
     comentarios: document.getElementById('comentarios'),
     tiemval_cermed: document.getElementById('tiemval_cermed'),
     fecvcto_cermed: document.getElementById('fecvcto_cermed'),
-    fec_emi:document.getElementById('fec_emi'),
-    cant_pac:document.getElementById('cant_pac'),
-    med_id:document.getElementById('med_id'),
-    medapmn:document.getElementById('medapmn'),
+    fec_emi: document.getElementById('fec_emi'),
+    cant_pac: document.getElementById('cant_pac'),
+    med_id: document.getElementById('med_id'),
+    medapmn: document.getElementById('medapmn'),
   };
 
   $.ajax({
     url: '/protocolodatos/' + id,
     success: function (datos) {
-      console.log(datos)
       var data = datos[0];
       formElements.codemp.value = data.codemp;
       formElements.nomempresa.value = data.razsoc;
@@ -84,12 +82,20 @@ function llenarFormulario(id) {
       formElements.cant_pac.value = data.cant_pac;
       formElements.med_id.value = data.med_id;
       formElements.medapmn.value = data.medapmn;
+
+      let estado = $('input[type="radio"][name="estado"]');
+      estado.filter('[value="C"]').trigger('change');
+
+
+
     },
     error: function (xhr, status, error) {
       console.error('Error en la solicitud AJAX:', status, error);
       alert('Error al cargar los datos');
     }
   });
+
+
 }
 
 function getexamenes(id) {
@@ -138,7 +144,7 @@ function getexamenes(id) {
             `);
           activar(examen.soexa + '_' + examen.codpru_id);
         });
-        
+
       } else {
         // Manejar el caso de que "examenes" no sea un array, tal vez mostrar un mensaje de error
         console.error('La respuesta no es un array de examenes.');
@@ -172,46 +178,46 @@ document.getElementById("empresamodal").addEventListener("keydown", function (ev
     buscarEmpresa();
   }
 });
-function buscarEmpresa(){
+function buscarEmpresa() {
   mostrarDiv('cargaempresamodal');
-    ocultarTabla('tableempresamodal');
-    let empresamodal = $('#empresamodal').val(); // Corregido: agregué el símbolo '#' para seleccionar el elemento por su ID
-    event.preventDefault();
-    $.ajax({
-      url: '/empresas',
-      method: "GET",
-      data: {
-        empresa: empresamodal,
-      },
-      success: function (lista) {
-        ocultarDiv('cargaempresamodal');
-        mostrarTabla('tableempresamodal');
-        let bodyempleadomodal = $('#bodyempresamodal');
-        bodyempleadomodal.html('');
-        if (lista.length === 0) {
-          bodyempleadomodal.append(`
+  ocultarTabla('tableempresamodal');
+  let empresamodal = $('#empresamodal').val(); // Corregido: agregué el símbolo '#' para seleccionar el elemento por su ID
+  event.preventDefault();
+  $.ajax({
+    url: '/empresas',
+    method: "GET",
+    data: {
+      empresa: empresamodal,
+    },
+    success: function (lista) {
+      ocultarDiv('cargaempresamodal');
+      mostrarTabla('tableempresamodal');
+      let bodyempleadomodal = $('#bodyempresamodal');
+      bodyempleadomodal.html('');
+      if (lista.length === 0) {
+        bodyempleadomodal.append(`
       <tr>
         <td colspan="3">No hay empresas con el nombre proporcionado</td>
       </tr>
     `);
-        } else {
+      } else {
 
-          lista.forEach(list => {
-            bodyempleadomodal.append(`
+        lista.forEach(list => {
+          bodyempleadomodal.append(`
         <tr>
           <td class="align-middle"><button class="btn btn-info btn-circle btn-sm" onclick="AgregarEmpresa(this)"><i class="fa-solid fa-plus"></i></button></td>
           <td style="vertical-align: middle;" class="text-left">${list.cli_id}</td>
           <td style="vertical-align: middle;" class="text-left asignado">${list.razsoc}</td>
         </tr>
       `);
-          });
-          mensaje(lista[0].icono, lista[0].mensaje, 1500);
-        }
-      },
-      error: function () { // Corregido: eliminé el parámetro "lista" innecesario
-        alert('error');
+        });
+        mensaje(lista[0].icono, lista[0].mensaje, 1500);
       }
-    });
+    },
+    error: function () { // Corregido: eliminé el parámetro "lista" innecesario
+      alert('error');
+    }
+  });
 }
 
 document.getElementById("protocolomodal").addEventListener("keydown", function (event) {
@@ -224,7 +230,7 @@ document.getElementById("protocolomodal").addEventListener("keydown", function (
       url: '/protocololistimport',
       method: "GET",
       data: {
-        protocolo: protocolomodal,        
+        protocolo: protocolomodal,
       },
       success: function (lista) {
         ocultarDiv('cargaprotocolomodal');
@@ -329,14 +335,14 @@ function Guardar() {
     var codpru_id = value.split('_')[1];
     var select = document.getElementById(`select_${soexa}_${codpru_id}`).value;
     var precio = document.getElementById(`precio_${soexa}_${codpru_id}`).value;
-    var comen = document.getElementById(`comen_${soexa}_${codpru_id}`).value;    
+    var comen = document.getElementById(`comen_${soexa}_${codpru_id}`).value;
     var rowData = {
       codpru_id: codpru_id,
       soexa: soexa,
       raneta_id: select,
       precio: precio,
       obs: comen
-      
+
     };
 
     if (checkboxes[0].checked) {
@@ -362,7 +368,7 @@ function Guardar() {
     let estado;
     //let cantidad_pacientes;
 
-   
+
     if (vigente.checked === true) {
       estado = vigente.value;
       //data_cantidad_pacientes = 0;
@@ -388,9 +394,9 @@ function Guardar() {
       comentarios: comentarios,
       tipexa_id: tipexa_id,
       estado: estado,
-      fec_emi : fec_emi,
-      cant_pac:cant_pac,
-      med_id:med_id,
+      fec_emi: fec_emi,
+      cant_pac: cant_pac,
+      med_id: med_id,
       tiemval_cermed: tiemval_cermed,
       fecvcto_cermed: fecvcto_cermed,
       id: id,
@@ -432,8 +438,8 @@ function Guardar() {
 
 document.getElementById("medicomodal").addEventListener("keyup", function (event) {
   if (event.key === "Enter") {
-      var parametro = this.value;
-      getmedico(parametro);
+    var parametro = this.value;
+    getmedico(parametro);
   }
 });
 
@@ -442,26 +448,26 @@ function getmedico(parametro1) {
   ocultarDiv('tablamedicomodal');
   let parametro = 0;
   $.ajax({
-      url: '/listarmedicos',
-      method: 'GET',
-      data: {
-          parametro: parametro,
-          parametro1: parametro1,
-      },
-      success: function (medicos) {
-          ocultarDiv('cargamedico');
-          mostrarDiv('tablamedicomodal');
-          const tbodymed = $('#bodymedicomodal');
-          tbodymed.empty();
-          if (medicos.length === 0) {
-              tbodymed.append(`
+    url: '/listarmedicos',
+    method: 'GET',
+    data: {
+      parametro: parametro,
+      parametro1: parametro1,
+    },
+    success: function (medicos) {
+      ocultarDiv('cargamedico');
+      mostrarDiv('tablamedicomodal');
+      const tbodymed = $('#bodymedicomodal');
+      tbodymed.empty();
+      if (medicos.length === 0) {
+        tbodymed.append(`
                   <tr>
                       <td colspan="2" class="text-center">No hay resultados disponibles </td>
                   </tr>
               `);
-          } else {
-              medicos.forEach(medico => {
-                  tbodymed.append(`
+      } else {
+        medicos.forEach(medico => {
+          tbodymed.append(`
                   <tr>
                   <td>
                   <button onclick="getmedicom('${medico.med_id}','${medico.medapmn}')" class="btn btn-circle btn-sm btn-info mr-1"><i class="fa-solid fa-plus"></i></button>                    
@@ -471,13 +477,13 @@ function getmedico(parametro1) {
                   
                 </tr>
               `);
-              });
-              mensaje(medicos[0].tipo, medicos[0].response, 1500);
-          }
-      },
-      error: function () {
-          alert('Error en la solicitud AJAX');
-      },
+        });
+        mensaje(medicos[0].tipo, medicos[0].response, 1500);
+      }
+    },
+    error: function () {
+      alert('Error en la solicitud AJAX');
+    },
   });
 }
 

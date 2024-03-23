@@ -104,7 +104,6 @@ function getPacienteCombos() {
                 }
             });
             valapt_id.val("6");
-            console.log(valapt_id.val());
 
 
             const id = document.getElementById("inputid").value;
