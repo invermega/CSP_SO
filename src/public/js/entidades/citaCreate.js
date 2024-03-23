@@ -10,13 +10,11 @@ $(document).ready(function () {
         i18n: {
             cancelButton: 'Abbrechen'
         },
-
-        onAdjust: function (newVal, oldVal) {
-            //...
+        onAdjust: function (newVal, oldVal) {            
         }
     });
-
 });
+
 function getcitas(id) {
     let fecini = '';//fecha inicio
     let fecfin = '';//fecha fin

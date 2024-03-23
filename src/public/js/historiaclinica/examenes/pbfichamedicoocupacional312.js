@@ -531,11 +531,13 @@ function poblarInfo() {
                         `);
                     });
                 }
-
+                ajustarTextArea(conevapsico);
+                ajustarTextArea(conradio);
+                ajustarTextArea(restricciones);                
             }
         },
-        error: function (Examenes) {
-            alert('error');
+        error: function (error) {
+            alert('error: '+ error);
         }
     });
 })();

@@ -4,7 +4,7 @@ $(document).ready(function () {
     const canvas = document.getElementById('canvas');
     const context = canvas.getContext('2d');
     const originalImage = new Image();
-    let originalImageSrc = '../img/cliente/default.webp'; // Almacena la URL de la imagen original
+    let originalImageSrc = '../img/fondo.png'; // Almacena la URL de la imagen original
 
     originalImage.onload = function () {
         drawImageOnCanvas(originalImage);

@@ -1,3 +1,9 @@
+$(document).ready(function () {
+
+    window.addEventListener('load', function () {
+
+    });
+});
 (function poblarcampos() {
     obtenerPsicologiaTest();
     let cita_id = document.getElementById('id').value;
@@ -71,13 +77,23 @@
                     $('#accid_enfer').val(registro.accid_enfer);
                     $('#habitos').val(registro.habitos);
                     $('#otras_observ').val(registro.otras_observ);
-                    console.log(registro.ant_empresas);
+
+                    ajustartextArea("mot_eva");
+                    ajustartextArea("prin_riesgos");
+                    ajustartextArea("med_seguridad");
+                    ajustartextArea("historia_familiar");
+                    ajustartextArea("accid_enfer");
+                    ajustartextArea("habitos");
+                    ajustartextArea("otras_observ");
+                    ajustartextArea("con_area_cognitiva");
+                    ajustartextArea("con_area_emocional");
+
                     let ant_empresas = registro.ant_empresas;
                     let filas = document.getElementById('tablaEmpresaAnt').getElementsByTagName('tr');
 
                     ant_empresas.forEach((empresa, index) => {
-                        let fila = filas[index + 1];                        
-                        let celdas = fila.getElementsByTagName('td');                    
+                        let fila = filas[index + 1];
+                        let celdas = fila.getElementsByTagName('td');
                         celdas[0].querySelector('input').value = empresa.fecha;
                         celdas[1].querySelector('input').value = empresa.nombemp;
                         celdas[2].querySelector('input').value = empresa.actiemp;
@@ -203,7 +219,7 @@ function Grabar() {
     let accid_enfer = $('#accid_enfer').val();
     let habitos = $('#habitos').val();
     let otras_observ = $('#otras_observ').val();
-    
+
     const datosCompletos = {
         cita_id: cita_id,
         nuncom: nuncom,
@@ -366,4 +382,3 @@ function obtenerPsicologiaTest() {
     });
 
 };
-

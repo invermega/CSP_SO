@@ -668,21 +668,17 @@ function mascaraDocumentoIdentidad(docID, numDocID) {
   }
 }
 
-
-//errorMessageElement = $('<span>').attr('id', errorMessageId).css('font-size', '9px').css('color','#dc3545').text(`(!) Ha excedido el límite de caracteres permitidos para ${valorData}`);
-
-/*function showErrorMessage(inputId, valorData) {
-  var errorMessageId = inputId + '-error';
-  var errorMessageElement = $('#' + errorMessageId);
-  if (errorMessageElement.length === 0) {
-    errorMessageElement = $('<span>').attr('id', errorMessageId).css('font-size', '7px').text(`(!) Ha excedido el límite de caracteres permitidos para ${valorData}`);
-    $('#' + inputId).before(errorMessageElement);
+function ajustarTextArea(textareaId) {
+  var textarea = document.getElementById(textareaId);
+  if (textarea) {
+      textarea.style.height = "auto";
+      var padding = textarea.scrollHeight - textarea.clientHeight;
+      var computedStyle = window.getComputedStyle(textarea);
+      var paddingTop = parseFloat(computedStyle.paddingTop);
+      var paddingBottom = parseFloat(computedStyle.paddingBottom);
+      padding += paddingTop + paddingBottom;
+      textarea.style.height = (textarea.scrollHeight - padding) + "px";
   }
 }
 
-function hideErrorMessage(inputId) {
-  var errorMessageId = inputId + '-error';
-  $('#' + errorMessageId).remove();
-}*/
-//(!) Ha excedido el límite de caracteres permitidos para ${valorData}
 
