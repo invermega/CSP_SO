@@ -1,3 +1,6 @@
+$(document).ready(function () {
+    cargarEquipo();//carga de equipo
+})
 function loadScript(url) {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');

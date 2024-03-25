@@ -190,18 +190,23 @@ window.addEventListener('DOMContentLoaded', event => {
 });
 
 function filtrosMostrarOcultar(btnId, divId) {
-  let isVisible = false;
+  try {
+    let isVisible = false;
 
-  document.getElementById(btnId).addEventListener("click", function () {
-    // Si está oculto, lo mostramos; si está visible, lo ocultamos
-    if (isVisible) {
-      ocultarDiv(divId);
-    } else {
-      mostrarDiv(divId);
-    }
-    // Cambiamos el estado de visibilidad
-    isVisible = !isVisible;
-  });
+    document.getElementById(btnId).addEventListener("click", function () {
+      // Si está oculto, lo mostramos; si está visible, lo ocultamos
+      if (isVisible) {
+        ocultarDiv(divId);
+      } else {
+        mostrarDiv(divId);
+      }
+      // Cambiamos el estado de visibilidad
+      isVisible = !isVisible;
+    });
+  } catch (error) {
+
+  }
+
 }
 
 
@@ -643,7 +648,7 @@ function limitarInput(event, maxlength) {
     var $errorMessageElement = $('#' + errorMessageId);
 
     if ($errorMessageElement.length === 0) {
-      $errorMessageElement = $('<span>').attr('id', errorMessageId).addClass('error-message').css('font-size', '10px').css('color','#dc3545').text(`(!) Ha llegado al límite de caracteres permitidos para ${valorData}`);
+      $errorMessageElement = $('<span>').attr('id', errorMessageId).addClass('error-message').css('font-size', '10px').css('color', '#dc3545').text(`(!) Ha llegado al límite de caracteres permitidos para ${valorData}`);
       $container.append($errorMessageElement);
     }
   } else {
@@ -671,13 +676,13 @@ function mascaraDocumentoIdentidad(docID, numDocID) {
 function ajustarTextArea(textareaId) {
   var textarea = document.getElementById(textareaId);
   if (textarea) {
-      textarea.style.height = "auto";
-      var padding = textarea.scrollHeight - textarea.clientHeight;
-      var computedStyle = window.getComputedStyle(textarea);
-      var paddingTop = parseFloat(computedStyle.paddingTop);
-      var paddingBottom = parseFloat(computedStyle.paddingBottom);
-      padding += paddingTop + paddingBottom;
-      textarea.style.height = (textarea.scrollHeight - padding) + "px";
+    textarea.style.height = "auto";
+    var padding = textarea.scrollHeight - textarea.clientHeight;
+    var computedStyle = window.getComputedStyle(textarea);
+    var paddingTop = parseFloat(computedStyle.paddingTop);
+    var paddingBottom = parseFloat(computedStyle.paddingBottom);
+    padding += paddingTop + paddingBottom;
+    textarea.style.height = (textarea.scrollHeight - padding) + "px";
   }
 }
 

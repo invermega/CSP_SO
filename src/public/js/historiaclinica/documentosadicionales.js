@@ -39,20 +39,22 @@ function mostrarMiniaturas() {
         const miniaturaDiv = document.createElement("div");
         miniaturaDiv.className = "archivo-item";
 
-        if (tipoArchivo === "application/pdf") {
+        if (tipoArchivo.startsWith("image/")) {
+            // Si el archivo es una imagen, convertirlo a PDF y crear un enlace para abrirlo en una nueva pestaña
+            const pdfUrl = URL.createObjectURL(archivo);
+            const pdfLink = document.createElement("a");
+            pdfLink.href = `mostrarImagenComoPDF.html?url=${encodeURIComponent(pdfUrl)}`;
+            pdfLink.target = "_blank"; // Abrir el enlace en una nueva pestaña
+            pdfLink.textContent = "Ver como PDF"; // Texto del enlace
+            miniaturaDiv.appendChild(pdfLink);
+        } else {
+            // Si no es una imagen, mostrar el ícono del PDF como antes
             const pdfIcon = document.createElement("a");
             pdfIcon.href = URL.createObjectURL(archivo);
-            pdfIcon.target = "_blank"; // Open link in a new tab
+            pdfIcon.target = "_blank"; // Abrir el enlace en una nueva pestaña
             pdfIcon.innerHTML = `<img src="/img/pdficono.webp" width="90" height="90">`;
             miniaturaDiv.appendChild(pdfIcon);
             miniaturasDict[archivo.name] = pdfIcon;
-        } else {
-            const imgIcon = document.createElement("a");
-            imgIcon.href = URL.createObjectURL(archivo);
-            imgIcon.target = "_blank";
-            imgIcon.innerHTML = `<img src="/img/imgicono.webp" width="90" height="90">`;
-            miniaturaDiv.appendChild(imgIcon);
-            miniaturasDict[archivo.name] = imgIcon;
         }
 
         const nombreArchivoParrafo = document.createElement("p");
@@ -62,6 +64,7 @@ function mostrarMiniaturas() {
         miniaturasDiv.appendChild(miniaturaDiv);
     }
 }
+
 
 function SubirDocumento() {
     const btnSubir = document.getElementById('btnSubir');

@@ -986,96 +986,6 @@ function obtenerRecomendaciones() {
     return data;
 }
 
-async function llenarmodalFormato(soexa) {
-    let titleMFormatos = document.getElementById('titleMFormatos');
-    if (soexa === '003') {
-        titleMFormatos.innerHTML = 'Formato de Audiometría';
-    } else if (soexa === '005') {
-        titleMFormatos.innerHTML = 'Formato de Espirometría';
-    } else if (soexa === '009') {
-        titleMFormatos.innerHTML = 'Formato de Laboratorio';
-    }
-    mostrarDiv('cargaFormato');
-    ocultarDiv('contenedorFormato');
-    let cita_id = document.getElementById('id').value;
-    let soexa1 = soexa;
-    $.ajax({
-        url: '/getdatosformatosficha312',
-        method: "GET",
-        data: {
-            cita_id: cita_id,
-            soexa: soexa1
-        },
-        success: function (result) {
-            let renderedHtml = result.renderedHtml;
-            let rutaArchivo = result.rutaArchivo;
-            let contenedor = document.getElementById("contenedorFormato");
-
-            if (soexa !== '009') {
-                //let contenedor = document.getElementById("contenedorFormato");
-                contenedor.innerHTML = renderedHtml;
-
-                if (soexa === '003') {
-                    inicializarGraficos();
-                }
-            } else {
-                //resultcrearMiniatura1(rutaArchivo, 'resultado.pdf')
-                var baseUrl = window.location.origin;
-                var pdfUrl = baseUrl + rutaArchivo + '#toolbar=0'
-                var embed = document.createElement('embed');
-                embed.src = pdfUrl;
-                embed.type = 'application/pdf';
-                embed.width = '100%';
-                embed.height = '100%';
-                embed.setAttribute('scrolling', 'auto');
-                contenedor.innerHTML = '';
-                contenedor.style.fontFamily = "Oswald, sans-serif";
-
-                contenedor.appendChild(embed);
-            }
-            contenedor.style.height = "auto";
-            var modalContentHeight = document.getElementById("modalFormatos").offsetHeight;
-            var windowHeight = window.innerHeight;
-            var minHeight = windowHeight * 0.6;
-            contenedor.style.minHeight = Math.min(modalContentHeight, minHeight) + "px";
-            mostrarDiv('contenedorFormato');
-            ocultarDiv('cargaFormato');
-        },
-        error: function (error) {
-            alert('error', error);
-        }
-    });
-}
-
-
-function resultcrearMiniatura1(ruta, nombreArchivo) {
-
-    let miniaturasDiv = document.getElementById("contenedorFormato");
-    miniaturasDiv.innerHTML = "";
-    miniaturasDiv.style.display = "block";
-
-
-    const miniaturaDiv = document.createElement("div");
-    miniaturaDiv.className = "archivo-item";
-    let imgIcon;
-    if (nombreArchivo.toLowerCase().endsWith('.pdf')) {
-        imgIcon = "pdficono";
-    } else {
-        imgIcon = "imgicono";
-    }
-
-    const pdfIcon = document.createElement("a");
-    pdfIcon.href = `${window.location.origin}${ruta}`;
-    pdfIcon.target = "_blank"; // Abrir el enlace en una nueva pestaña
-    pdfIcon.innerHTML = `<img src="/img/${imgIcon}.webp" width="90" height="90">`;
-    miniaturaDiv.appendChild(pdfIcon);
-
-    const nombreArchivoParrafo = document.createElement("p");
-    nombreArchivoParrafo.textContent = nombreArchivo;
-    miniaturaDiv.appendChild(nombreArchivoParrafo);
-
-    miniaturasDiv.appendChild(miniaturaDiv);
-}
 
 async function inicializarGraficos() {
     await od();
@@ -1341,6 +1251,13 @@ async function oi() {
 
 
 };
+function obtenerArray(dataJSON, propiedad) {
+    let resultado = "";
+    dataJSON.forEach((obj) => {
+        resultado = obj[propiedad];
+    });
+    return resultado;
+}
 
 function llenarfichas(soexa) {
     let cita_id = document.getElementById('id').value;
@@ -1362,10 +1279,101 @@ function llenarfichas(soexa) {
         }
     });
 }
-function obtenerArray(dataJSON, propiedad) {
-    let resultado = "";
-    dataJSON.forEach((obj) => {
-        resultado = obj[propiedad];
+
+async function llenarmodalFormato(soexa) {
+    let titleMFormatos = document.getElementById('titleMFormatos');
+    if (soexa === '032') {
+        titleMFormatos.innerHTML = 'Formato de Psicología';
+    } else if (soexa === '013') {
+        titleMFormatos.innerHTML = 'Formato de Diagnóstico por imágenes';
+    } else if (soexa === '009') {
+        titleMFormatos.innerHTML = 'Formato de Laboratorio';
+    } else if (soexa === '003') {
+        titleMFormatos.innerHTML = 'Formato de Audiometría';
+    } else if (soexa === '005') {
+        titleMFormatos.innerHTML = 'Formato de Espirometría';
+    } 
+      
+    mostrarDiv('cargaFormato');
+    ocultarDiv('contenedorFormato');
+    let cita_id = document.getElementById('id').value;
+    let soexa1 = soexa;
+    $.ajax({
+        url: '/getdatosformatosficha312',
+        method: "GET",
+        data: {
+            cita_id: cita_id,
+            soexa: soexa1
+        },
+        success: function (result) {
+            let renderedHtml = result.renderedHtml;
+            let rutaArchivo = result.rutaArchivo;
+            let contenedor = document.getElementById("contenedorFormato");
+
+            if (soexa !== '009') {
+                //let contenedor = document.getElementById("contenedorFormato");
+                contenedor.innerHTML = renderedHtml;
+
+                if (soexa === '003') {
+                    inicializarGraficos();
+                }
+            } else {
+                //resultcrearMiniatura1(rutaArchivo, 'resultado.pdf')
+                var baseUrl = window.location.origin;
+                var pdfUrl = baseUrl + rutaArchivo + '#toolbar=0'
+                var embed = document.createElement('embed');
+                embed.src = pdfUrl;
+                embed.type = 'application/pdf';
+                embed.width = '100%';
+                embed.height = '100%';
+                embed.setAttribute('scrolling', 'auto');
+                contenedor.innerHTML = '';
+                contenedor.style.fontFamily = "Oswald, sans-serif";
+
+                contenedor.appendChild(embed);
+            }
+            contenedor.style.height = "auto";
+            var modalContentHeight = document.getElementById("modalFormatos").offsetHeight;
+            var windowHeight = window.innerHeight;
+            var minHeight = windowHeight * 0.6;
+            contenedor.style.minHeight = Math.min(modalContentHeight, minHeight) + "px";
+            mostrarDiv('contenedorFormato');
+            ocultarDiv('cargaFormato');
+        },
+        error: function (error) {
+            alert('error', error);
+        }
     });
-    return resultado;
 }
+
+
+function resultcrearMiniatura1(ruta, nombreArchivo) {
+
+    let miniaturasDiv = document.getElementById("contenedorFormato");
+    miniaturasDiv.innerHTML = "";
+    miniaturasDiv.style.display = "block";
+
+
+    const miniaturaDiv = document.createElement("div");
+    miniaturaDiv.className = "archivo-item";
+    let imgIcon;
+    if (nombreArchivo.toLowerCase().endsWith('.pdf')) {
+        imgIcon = "pdficono";
+    } else {
+        imgIcon = "imgicono";
+    }
+
+    const pdfIcon = document.createElement("a");
+    pdfIcon.href = `${window.location.origin}${ruta}`;
+    pdfIcon.target = "_blank"; // Abrir el enlace en una nueva pestaña
+    pdfIcon.innerHTML = `<img src="/img/${imgIcon}.webp" width="90" height="90">`;
+    miniaturaDiv.appendChild(pdfIcon);
+
+    const nombreArchivoParrafo = document.createElement("p");
+    nombreArchivoParrafo.textContent = nombreArchivo;
+    miniaturaDiv.appendChild(nombreArchivoParrafo);
+
+    miniaturasDiv.appendChild(miniaturaDiv);
+}
+
+

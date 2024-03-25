@@ -259,13 +259,13 @@ module.exports = {
         res.json(response.recordset);
     },
     async postcita(req, res) {//agregar cita
-        const { inputid, cli_id, codpro_id, valapt_id, pachis, fecprocitaDate, fecprocitaTime, obscita, cargo_actual, fecing_cargo, area_actual, fecing_area, fecing_empresa, altilab_id, superf_id, tipseg_id, cond_vehiculo, ope_equipo_pesado, envresult_correo, com_info_medica, ent_result_fisico, usa_firma_formatos, res_lugar_trabajo } = req.body;
+        const { inputid, cli_id, codpro_id, pachis, fecprocitaDate, fecprocitaTime, obscita, cargo_actual, fecing_cargo, area_actual, fecing_area, fecing_empresa, altilab_id, superf_id, tipseg_id, cond_vehiculo, ope_equipo_pesado, envresult_correo, com_info_medica, ent_result_fisico, usa_firma_formatos, res_lugar_trabajo } = req.body;
         const usenam = req.user.usuario;
         const hostname = '';
         const codrolUser = req.user.codrol;
 
         const pool = await getConnection();
-        const response = await pool.query(`pa_InsCita '${pachis}', ${valapt_id}, ${cli_id}, ${codpro_id}, '${fecprocitaDate}','${fecprocitaTime}', '${area_actual.toUpperCase()}.', '${fecing_area}', '${cargo_actual.toUpperCase()}', '${fecing_cargo}', '${fecing_empresa}', '${ope_equipo_pesado}', '${cond_vehiculo}', '${envresult_correo}', '${com_info_medica}', '${ent_result_fisico}', '${usa_firma_formatos}', '${res_lugar_trabajo}', ${altilab_id}, ${superf_id}, ${tipseg_id}, '${obscita.toUpperCase()}', ${codrolUser}, '${usenam}', '${inputid}'`);
+        const response = await pool.query(`pa_InsCita '${pachis}', ${cli_id}, ${codpro_id}, '${fecprocitaDate}','${fecprocitaTime}', '${area_actual.toUpperCase()}.', '${fecing_area}', '${cargo_actual.toUpperCase()}', '${fecing_cargo}', '${fecing_empresa}', '${ope_equipo_pesado}', '${cond_vehiculo}', '${envresult_correo}', '${com_info_medica}', '${ent_result_fisico}', '${usa_firma_formatos}', '${res_lugar_trabajo}', ${altilab_id}, ${superf_id}, ${tipseg_id}, '${obscita.toUpperCase()}', ${codrolUser}, '${usenam}', '${inputid}'`);
         res.json(response.recordset);
     },
     async getListaCitas(req, res) {//listar las citas
@@ -277,7 +277,6 @@ module.exports = {
             }
 
             const pool = await getConnection();
-            console.log(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`)
             const response = await pool.query(`pa_selCitas '${fecini}','${fecfin}','${paciente}','${parametro3}','${parametro4}','${parametro5}','${parametro6}','${codrolUser}'`);
             res.json(response.recordset);
         } catch (error) {

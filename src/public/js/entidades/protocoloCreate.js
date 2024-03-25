@@ -53,6 +53,7 @@ function llenarFormulario(id) {
   $.ajax({
     url: '/protocolodatos/' + id,
     success: function (datos) {
+
       var data = datos[0];
       formElements.codemp.value = data.codemp;
       formElements.nomempresa.value = data.razsoc;

@@ -56,7 +56,6 @@ function getcitas(id) {
                 $('#altilab_id').val(citas[0].altilab_id);
                 $('#superf_id').val(citas[0].superf_id);
                 $('#tipseg_id').val(citas[0].tipseg_id);
-                $('#valapt_id').val(citas[0].valapt_id);
                 $('#cond_vehiculo').val(citas[0].cond_vehiculo);
                 $('#ope_equipo_pesado').val(citas[0].ope_equipo_pesado);
                 $('#envresult_correo').val(citas[0].envresult_correo);
@@ -83,11 +82,9 @@ function getPacienteCombos() {
             let altilab_id = $('#altilab_id'); // Selecionar el select de altitud
             let superf_id = $('#superf_id'); // Selecionar el select superficie
             let tipseg_id = $('#tipseg_id'); // Selecionar el select de tipo de seguro
-            let valapt_id = $('#valapt_id'); // Selecionar el select de aptitud            
             altilab_id.html('');
             superf_id.html('');
             tipseg_id.html('');
-            valapt_id.html('');
             lista.forEach(item => {
                 let option = `<option value="${item.id}">${item.descripcion}</option>`;//sirve para que liste todos los combo
                 if (item.tabla === 'altitud_labor') {
@@ -97,15 +94,11 @@ function getPacienteCombos() {
                     superf_id.append(option);
                 } else if (item.tabla === 'tipo_seguros') {
                     tipseg_id.append(option);
-                } else if (item.tabla === 'valoraptitud') {
-                    valapt_id.append(option);
-                }
+                } 
             });
-            valapt_id.val("6");
 
 
             const id = document.getElementById("inputid").value;
-            console.log(id);
             if (id === "0") {
                 var fecha = new Date().toISOString().slice(0, 10);
                 document.getElementById("fecprocitaDate").value = fecha;
@@ -183,7 +176,7 @@ function getpacientem(btn) {
 
 }
 document.getElementById("empresamodal").addEventListener("keydown", function (event) {
-    if (event.key) {
+    if (event.key === "Enter") {
         var parametro = $('#empresamodal').val();
         mostrarDiv('cargaEmpresa');
         ocultarDiv('tableEmpresamodal');
@@ -351,7 +344,6 @@ function Grabar() {
     let altilab_id = $('#altilab_id');
     let superf_id = $('#superf_id');
     let tipseg_id = $('#tipseg_id');
-    let valapt_id = $('#valapt_id');
     let cond_vehiculo = document.querySelector("input[name='cond_vehiculo']:checked").value;
     let ope_equipo_pesado = document.querySelector("input[name='ope_equipo_pesado']:checked").value;
     let envresult_correo = document.querySelector("input[name='envresult_correo']:checked").value;
@@ -384,7 +376,6 @@ function Grabar() {
             altilab_id: altilab_id.val(),
             superf_id: superf_id.val(),
             tipseg_id: tipseg_id.val(),
-            valapt_id: valapt_id.val(),
             cond_vehiculo: cond_vehiculo,
             ope_equipo_pesado: ope_equipo_pesado,
             envresult_correo: envresult_correo,
@@ -410,11 +401,11 @@ function Grabar() {
                 });
             } else {
                 btnCita.disabled = false;
-                mensaje(response[0].tipo, response[0].response, 1500);
+                mensaje(response[0].tipo, response[0].mensaje, 1500);
             }
         },
-        error: function () {
-            mensaje('error', 'Error al guardar, intente nuevamente', 1500);
+        error: function (error) {
+            mensaje('error', 'Error al guardar, intente nuevamente '+ error, 1500);
             btnCita.disabled = false;
             //$("#btnCita").prop("disabled", false);
         }

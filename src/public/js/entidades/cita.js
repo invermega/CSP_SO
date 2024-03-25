@@ -9,9 +9,9 @@ $(document).ready(function () {
     var fechaActual = new Date().toISOString().split('T')[0];
     $("#fecini").val(fechaActual);
     $("#fecfin").val(fechaActual);
-    
+
 });
-function getcitas() {    
+function getcitas() {
     ocultarDiv('mydatatable');
     mostrarDiv('carga');
     let fecini = $('#fecini');//fecha inicio
@@ -53,6 +53,27 @@ function getcitas() {
                 `);
             } else {
                 citas.forEach(cita => {
+                    let colorestado = '';
+                    let colorletra = '';
+                    if (cita.stacita === 'A') {
+                        colorestado = '#1FBDE2';
+                        colorletra = 'white';
+                    } else if (cita.stacita === 'C') {
+                        colorestado = '#2FC458';
+                        colorletra = 'white';
+                    } else if (cita.stacita === 'G') {
+                        colorestado = '#FFFFFF';
+                        colorletra = 'black'
+                    } else if (cita.stacita === 'N') {
+                        colorestado = '#FF1111';
+                        colorletra = 'white';
+                    } else if (cita.stacita === 'P') {
+                        colorestado = '#FF9E0D';
+                        colorletra = 'white';
+                    } else if (cita.stacita === 'X') {
+                        colorestado = '#8A8688';
+                        colorletra = 'white';
+                    }
                     const cert = cita.CERT === 'S' ? '<i class="fa-solid fa-circle-check text-success"></i>' : '<i class="fa-solid fa-circle-xmark text-danger"></i>';
                     tbody.append(`
                         <tr data-id="${cita.id}">
@@ -64,7 +85,7 @@ function getcitas() {
                             <td>${cita.appm_nom}</td>
                             <td>${cita.numdoc}</td>
                             <td>${cita.nompro}</td>
-                            <td>${cita.dessta}</td> 
+                            <td><span class="badge estado" style="background-color:${colorestado}; color:${colorletra}; font-size:90%" >${cita.dessta}</span></td> 
                             <td>${cita.des_result}</td>
                             <td>${cert}</td>
                             <td>${cert}</td>
@@ -171,7 +192,7 @@ function getprotocolo(parametro) {
                     let option = `<option value="${item.id}">${item.descripcion}</option>`;
                     codpro_id.append(option);
                 });
-                
+
             }
 
         },
@@ -185,7 +206,7 @@ document.getElementById("pacientemodal").addEventListener("keydown", function (e
 });
 function getPaciente() {
     if (event.key === "Enter") {
-        let parametro=0;
+        let parametro = 0;
         var parametro1 = $('#pacientemodal').val();
         mostrarDiv('cargaPaciente');
         ocultarDiv('tablapacientemodal');
@@ -234,11 +255,11 @@ function getpacientem(btn) {
     var filaorigen = $(btn).closest("tr");
     var appm_nom = filaorigen.find("td:eq(1)").text();
     var pachis = filaorigen.find("td:eq(2)").text();
-    
+
     $('#paciente').val(appm_nom);
     var btncerrar = document.getElementById(`cerrarPacienteModal`);
     btncerrar.click();
-    event.preventDefault();    
+    event.preventDefault();
 }
 
 function eliminar() {
@@ -566,16 +587,16 @@ function obtenerConsentimientoInf(cabeceraData) {
     // Agregar el título centrado
     var tituloCentrado = "<h4 style='text-align: center;'><strong>CONSENTIMIENTO INFORMADO PARA EXAMEN MÉDICO, AUTORIZACIÓN DE ENTREGA DE RESULTADOS Y DECLARACIÓN JURADA DE VERACIDAD DE INFORMACIÓN</strong></h4>";
     tituloCentrado += "<p style='text-align: right;margin-left:10px;margin-bottom:20px;'>" + cabeceraData.fecha + "</p>";
-    tituloCentrado += "<p style='text-align: justify;margin:10px;line-height: 1.5em;font-size:14px;'>Yo,&nbsp" + cabeceraData.appm_nom + ",  identificado con DNI N°"+cabeceraData.numdoc+", con ocupación laboral de:&nbsp"+cabeceraData.cargo_actual+"&nbspcertifico con este documento que he sido informado acerca de la naturaleza y propósito de los Exámenes Médicos-Ocupacionales y pruebas complementarias que la empresa:&nbsp"+cabeceraData.razsoc+"&nbspsolicita de acuerdo a los riesgos de mi puesto de trabajo y que todas mis dudas y preguntas han sido absueltas."  
+    tituloCentrado += "<p style='text-align: justify;margin:10px;line-height: 1.5em;font-size:14px;'>Yo,&nbsp" + cabeceraData.appm_nom + ",  identificado con DNI N°" + cabeceraData.numdoc + ", con ocupación laboral de:&nbsp" + cabeceraData.cargo_actual + "&nbspcertifico con este documento que he sido informado acerca de la naturaleza y propósito de los Exámenes Médicos-Ocupacionales y pruebas complementarias que la empresa:&nbsp" + cabeceraData.razsoc + "&nbspsolicita de acuerdo a los riesgos de mi puesto de trabajo y que todas mis dudas y preguntas han sido absueltas."
     "</p>";
-    tituloCentrado += "<p style='text-align: justify;margin:10px;padding-top:20px;line-height: 1.5em;font-size:14px;'>Por tanto de forma consciente y voluntaria otorgo mi consentimiento para que procedan a realizar los exámenes que me correspondan en&nbsp"+cabeceraData.empresa+"&nbspy así mismo autorizo que los resultados sean entregados al área de salud ocupacional de la empresa&nbsp"+cabeceraData.razsoc+", con la finalidad de realizar la vigilancia medica ocupacional ordenada por la Ley de Seguridad y Salud en el trabajo 29783 y su modificatoria Ley 30222. Además DECLARO BAJO JURAMENTO que toda información proporcionada a los profesionales médicos o funcionarios responsables es de carácter verídico, para el cargo correspondiente al que postulo."+"</p>";
-    tituloCentrado += "<div style='display: flex; justify-content: center; align-items: center;padding-top: 50px;font-size:14px;'><div style='overflow: hidden;text-align: center;'><hr style='width: 100%; margin: 0;'><p style='margin: 0;padding-top: 25px;'>" + cabeceraData.appm_nom +"</p><p style='margin: 0;'>DNI:&nbsp"+cabeceraData.numdoc+ "</p></div><div style='margin-left: 20px;'><img src='/img/cuadrado.png' alt='Cuadrado' style='width: 130px; height: 110px;'></div></div><p style='margin-top: 20px;'><strong>La presente autorización se ampara en lo dispuesto en los Artículos 5º segundo párrafo y Artículos 13°, 25, 27 y 29° tercer párrafo de la Ley General de Salud N° 26842.</strong></p>";
+    tituloCentrado += "<p style='text-align: justify;margin:10px;padding-top:20px;line-height: 1.5em;font-size:14px;'>Por tanto de forma consciente y voluntaria otorgo mi consentimiento para que procedan a realizar los exámenes que me correspondan en&nbsp" + cabeceraData.empresa + "&nbspy así mismo autorizo que los resultados sean entregados al área de salud ocupacional de la empresa&nbsp" + cabeceraData.razsoc + ", con la finalidad de realizar la vigilancia medica ocupacional ordenada por la Ley de Seguridad y Salud en el trabajo 29783 y su modificatoria Ley 30222. Además DECLARO BAJO JURAMENTO que toda información proporcionada a los profesionales médicos o funcionarios responsables es de carácter verídico, para el cargo correspondiente al que postulo." + "</p>";
+    tituloCentrado += "<div style='display: flex; justify-content: center; align-items: center;padding-top: 50px;font-size:14px;'><div style='overflow: hidden;text-align: center;'><hr style='width: 100%; margin: 0;'><p style='margin: 0;padding-top: 25px;'>" + cabeceraData.appm_nom + "</p><p style='margin: 0;'>DNI:&nbsp" + cabeceraData.numdoc + "</p></div><div style='margin-left: 20px;'><img src='/img/cuadrado.png' alt='Cuadrado' style='width: 130px; height: 110px;'></div></div><p style='margin-top: 20px;'><strong>La presente autorización se ampara en lo dispuesto en los Artículos 5º segundo párrafo y Artículos 13°, 25, 27 y 29° tercer párrafo de la Ley General de Salud N° 26842.</strong></p>";
     contenedorImagenTitulo += "</div>";
     // Construir el contenido final de la guía
     var contenidoGuia = "<div style='font-family: Arial, sans-serif;'>" +
         contenedorImagenTitulo +
         tituloCentrado
-        "</div>";
+    "</div>";
 
     // Retornar el contenido de la guía
     return contenidoGuia;
