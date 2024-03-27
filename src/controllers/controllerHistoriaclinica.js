@@ -896,7 +896,6 @@ module.exports = {
             const { cita_id, nuncom, soexa, codpru_id, doc_adic_id, usa_lentes,
                 ultima_act, agudeza_visual, Refraccion, oftalmologiaTest,
                 Reconoce_colores, hallazgos, antecedentes, datains, datainsrec } = req.body;
-            console.log(Refraccion);
             const detalleJsonagudeza_visual = JSON.stringify(agudeza_visual);
             const detalleJsonoftalmologiaTest = JSON.stringify(oftalmologiaTest);
             const detalleJsonRefraccion = JSON.stringify(Refraccion);

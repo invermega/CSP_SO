@@ -98,7 +98,7 @@ $(document).ready(function () {
                     });
 
                 }
-                if (result[0].psicodet) {
+                if (result[0].psicodet) {                    
                     let parametrosArray = JSON.parse(result[0].psicodet);
                     const tabla = document.getElementById('tablaPsicologiaTest');
                     parametrosArray.forEach(dato => {
@@ -335,6 +335,7 @@ function obtenerDataEmpresaAnt() {
     }
     return datainsrec;
 }
+
 function obtenerPsicologiaTest() {
     mostrarDiv('cargatabla');
     ocultarDiv('tablaPsicologiaTest');
@@ -375,5 +376,4 @@ function obtenerPsicologiaTest() {
             alert('error');
         }
     });
-
 };
