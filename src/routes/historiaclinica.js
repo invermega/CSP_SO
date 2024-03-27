@@ -90,4 +90,12 @@ router.post('/pbrayosx', isLoggedIn, controllerHI.postrayosx);
 /*************** Formato Salud Ocupacional *****************/
 router.get('/resultformatosaludocupacional', isLoggedIn, controllerHI.getresultformatosaludocupacional);
 
+
+/*****Oftalmologia******/
+router.get('/pboftalmologia', isLoggedIn, controllerrender.renderpboftalmologia);
+router.get('/resultoftalmologia', isLoggedIn, controllerHI.getresultoftalmologia);
+router.get('/tablaoftalmologiatest', isLoggedIn, controllerHI.getoftalmologiatest);
+router.post('/pboftalmologia', isLoggedIn, controllerHI.postoftalmologia);
+/***************/
+
 module.exports = router;

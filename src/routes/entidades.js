@@ -95,4 +95,5 @@ router.get('/rangos', isLoggedIn, controllerrender.renderrangos);
 /******************************************/
 
 
+
 module.exports = router;

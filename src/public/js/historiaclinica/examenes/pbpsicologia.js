@@ -1,9 +1,6 @@
 $(document).ready(function () {
-
     window.addEventListener('load', function () {
-
-    });
-});
+    });});
 (function poblarcampos() {
     obtenerPsicologiaTest();
     let cita_id = document.getElementById('id').value;
@@ -34,9 +31,7 @@ $(document).ready(function () {
             soexa: soexa
         },
         success: function (result) {
-            console.log(result);
             if (result[0].mensaje != 'sin datos') {
-
                 nuncom.value = result[0].nuncom;
                 doc_adic_id.value = result[0].doc_adic_id;
                 if (result[0].doc_adic_id != '0') {

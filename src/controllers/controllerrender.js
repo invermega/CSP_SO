@@ -87,6 +87,10 @@ module.exports = {
         const parametro = "IM";
         permisosprueba(parametro, 'historiaclinica/pruebas/pbrayosx', req, res);
     },
+    async renderpboftalmologia(req, res) {
+        const parametro = "OF";
+        permisos(parametro,'historiaclinica/pruebas/pboftalmologia', req, res,0)
+    },
     //entidades
     async renderprotocolo(req, res) {
         const parametro = "PT";

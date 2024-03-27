@@ -62,7 +62,7 @@ module.exports = {
     },
     async postdocumento(req, res) {
         try {
-            const { archivosBase64, cita_id, soexa, codpru_id,tipoExtension } = req.body;
+            const { archivosBase64, cita_id, soexa, codpru_id, tipoExtension } = req.body;
             const codrolUser = req.user.codrol;
             const pool = await getConnection();
             const newArchivo = {
@@ -186,7 +186,7 @@ module.exports = {
         res.json(pruebas.recordset);
     },
     async getparametros(req, res) {
-        let { codpru_id, nuncom,pachis } = req.query;
+        let { codpru_id, nuncom, pachis } = req.query;
         console.log(codpru_id, nuncom);
         const pool = await getConnection();
         const parametros = await pool.query(`pa_selparametroslab '${codpru_id}','${nuncom}',${pachis}`);
@@ -289,7 +289,7 @@ module.exports = {
     },
     async postfichamusculoesqueletica(req, res) {
         try {
-            const { cita_id, nuncom, soexa, codpru_id, aptitud_espalda, flex_fuerza, rangos_articulares, datains, doc_adic_id, datainsrec,conclusion } = req.body;
+            const { cita_id, nuncom, soexa, codpru_id, aptitud_espalda, flex_fuerza, rangos_articulares, datains, doc_adic_id, datainsrec, conclusion } = req.body;
 
             const usenam = req.user.usuario;
             const hostname = '';
@@ -667,25 +667,25 @@ module.exports = {
     },
     async getdatosformatosficha312(req, res) {
         try {
-            
+
             let { cita_id, soexa } = req.query;
             const pool = await getConnection();
             const result = await pool.query(`pa_SelExaFormatos '${cita_id}','${soexa}'`);
             //let response = JSON.stringify(result.recordset);
-            let renderedHtml="";
-            let rutaArchivo="";
-            
+            let renderedHtml = "";
+            let rutaArchivo = "";
+
             for (const objresponse of result.recordset) {
                 let paciente = JSON.parse(objresponse.paciente);
                 let { appm_nom, numdoc, fecnac, Edad, des_sexo, destipcon, cargo_actual, razsoc } = paciente[0];
                 let cie10 = [];
                 let recomendaciones = [];
                 if (soexa === '009' && objresponse.resultado !== 'N') {
-                    
+
                     const dataJSON = JSON.parse(objresponse.resultado);
                     let rutaArchivobd = dataJSON[0].rutarch;
-                    
-                    rutaArchivo=rutaArchivobd;
+
+                    rutaArchivo = rutaArchivobd;
                     if (dataJSON[0].diagnosticos && dataJSON[0].diagnosticos.length > 0) {
                         dataJSON[0].diagnosticos.forEach((objdiagnosticos) => {
                             let { diacod, diades } = objdiagnosticos;
@@ -851,9 +851,9 @@ module.exports = {
                 } else {
                     renderedHtml = 'No se ha registrado resultados para este examen';
                 }
-                const resultado ={
-                    renderedHtml:renderedHtml,
-                    rutaArchivo:rutaArchivo
+                const resultado = {
+                    renderedHtml: renderedHtml,
+                    rutaArchivo: rutaArchivo
                 }
 
                 res.json(resultado);
@@ -883,5 +883,66 @@ module.exports = {
         const result = await pool.query(`pa_SelExaFormatos'${cita_id}','${soexa}'`);
         res.json(result.recordset);
     },
+
+    /*************** Oftamologia *****************/
+    async getoftalmologiatest(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelTablaOftalmologiaTest '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+    async postoftalmologia(req, res) {
+        try {
+            const { cita_id, nuncom, soexa, codpru_id, doc_adic_id, usa_lentes,
+                ultima_act, agudeza_visual, Refraccion, oftalmologiaTest,
+                Reconoce_colores, hallazgos, antecedentes, datains, datainsrec } = req.body;
+            console.log(Refraccion);
+            const detalleJsonagudeza_visual = JSON.stringify(agudeza_visual);
+            const detalleJsonoftalmologiaTest = JSON.stringify(oftalmologiaTest);
+            const detalleJsonRefraccion = JSON.stringify(Refraccion);
+            const usenam = req.user.usuario;
+            const hostname = '';
+            const codrol = req.user.codrol;
+            const med_id = req.user.med_id;
+            const detalleJsoncie10 = JSON.stringify(datains);
+            const detalleJsonrecomen = JSON.stringify(datainsrec);
+            const pool = await getConnection();
+            const request = pool.request();
+            const PROCEDURE_NAME = 'pa_InsPbOftalmologia';
+            request.input('cita_id', sql.Int, cita_id);
+            request.input('nuncom', sql.Int, nuncom);
+            request.input('soexa', sql.VarChar(6), soexa);
+            request.input('codpru_id', sql.Int, codpru_id);
+            request.input('med_id', sql.Int, med_id);
+            request.input('doc_adic_id', sql.Int, doc_adic_id);
+            request.input('usenam', sql.VarChar(30), usenam);
+            request.input('hostname', sql.VarChar(20), hostname);
+            request.input('codrol', sql.Int, codrol);
+            request.input('usa_lentes', sql.Char(1), usa_lentes);
+            request.input('ultima_act', sql.VarChar(20), ultima_act);
+            request.input('agudeza_visual', sql.NVARCHAR(sql.MAX), detalleJsonagudeza_visual);
+            request.input('Refraccion', sql.VarChar(sql.MAX), detalleJsonRefraccion);
+            request.input('detalleJsonoftadet', sql.NVARCHAR(sql.MAX), detalleJsonoftalmologiaTest);
+            request.input('Reconoce_colores', sql.Char(1), Reconoce_colores);
+            request.input('hallazgos', sql.NVARCHAR(sql.MAX), hallazgos);
+            request.input('antecedentes', sql.NVARCHAR(sql.MAX), antecedentes);
+            request.input('detalleJsoncie10', sql.NVarChar(sql.MAX), detalleJsoncie10);
+            request.input('detalleJsonrecomen', sql.NVarChar(sql.MAX), detalleJsonrecomen);
+            const result = await request.execute(PROCEDURE_NAME);
+            pool.close();
+            res.json(result.recordset);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: error.message });
+        }
+    },
+    async getresultoftalmologia(req, res) {
+        let { cita_id, soexa } = req.query;
+        const pool = await getConnection();
+        const result = await pool.query(`pa_SelResultOftalmologia '${cita_id}','${soexa}'`);
+        res.json(result.recordset);
+    },
+
+    /*********************************************/
 
 };

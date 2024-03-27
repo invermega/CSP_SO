@@ -673,7 +673,7 @@ function mascaraDocumentoIdentidad(docID, numDocID) {
   }
 }
 
-function ajustarTextArea(textareaId) {
+function ajustartextArea(textareaId) {
   var textarea = document.getElementById(textareaId);
   if (textarea) {
     textarea.style.height = "auto";
